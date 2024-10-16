@@ -8,6 +8,7 @@ public class Interaction : MonoBehaviour
     public Transform GrabMask;  
     public bool Grabed = false; 
     private Transform grabbedObject;
+    public float forcelancer = 50f;
     private void Update()
     {
         RaycastHit hit;
@@ -26,7 +27,11 @@ public class Interaction : MonoBehaviour
                         grabbedObject.position = GrabMask.position; 
                         grabbedObject.SetParent(GrabMask); 
                         Grabed = true; 
-                        //rb.isKinematic = true;
+                        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+                        if (rb != null)
+                        {
+                            rb.isKinematic = true;
+                        }
                     }
                 }
             }
@@ -35,11 +40,31 @@ public class Interaction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E)) 
             {
+                Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.isKinematic = false;
+                }
+                
                 grabbedObject.SetParent(null); 
                 grabbedObject = null; 
                 Grabed = false; 
+                
 
-
+            }
+            else if (Input.GetKeyDown(KeyCode.F))
+            {
+                Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.isKinematic = false;
+                    rb.AddForce(transform.forward * forcelancer, ForceMode.Impulse);
+                }
+                
+                grabbedObject.SetParent(null);
+                grabbedObject = null; 
+                Grabed = false;
+                
             }
         }
     }
