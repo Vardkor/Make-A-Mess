@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    void OnTriggerEnter (Collider other)
-    {
-        Debug.Log ("A collider has entered the DoorObject trigger");
-    }
 
-    void OnTriggerStay (Collider other)
+    public Transform GrabMask;
+
+    public bool Grabed = false;
+
+    private void Update()
     {
-        Debug.Log ("A collider is inside the DoorObject trigger");
-    }
-    
-    void OnTriggerExit (Collider other)
-    {
-        Debug.Log ("A collider has exited the DoorObject trigger");
+        RaycastHit hit;
+
+        Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 10))
+        {
+            if (hit.collider.CompareTag("Grab"))
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    hit.transform.position = (GrabMask.position);
+                    Grabed = true;
+                    //Debug.Log("Tu as grab l'objet");
+                }
+
+            }
+           
+        }
     }
 }
