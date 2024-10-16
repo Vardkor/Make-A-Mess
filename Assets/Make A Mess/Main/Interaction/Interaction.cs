@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OnTriggerEnter (Collider other)
     {
-        
+        Debug.Log ("A collider has entered the DoorObject trigger");
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerStay (Collider other)
     {
-        
+        Debug.Log ("A collider is inside the DoorObject trigger");
+    }
+    
+    void OnTriggerExit (Collider other)
+    {
+        Debug.Log ("A collider has exited the DoorObject trigger");
     }
 }
