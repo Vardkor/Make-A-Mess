@@ -13,7 +13,7 @@ public class Interaction : MonoBehaviour
     {
         RaycastHit hit;
 
-        Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
+        //Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
 
         if (!Grabed) 
         {
