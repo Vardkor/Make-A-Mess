@@ -16,34 +16,35 @@ public class Alarme_Incendie : MonoBehaviour
     public bool alarmeActive = false;
 
 
-    void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if(other.gameObject == plante1)
-        {
-            feu1 = true;
+        RaycastHit hit;
 
-        }
-        else if(other.gameObject== plante2)
-        {
-            feu2 = true;
-
-        }
-        else if (other.gameObject== plante3)
-        {
-            feu3 = true;
-
-        }
-    }
-
-
-    void Update()
-    {
+        //Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
         
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 10))
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (hit.collider.CompareTag("Plante1"))
+                {
+                    feu1 = true;
+                }
+                else if (hit.collider.CompareTag("Plante2"))
+                {
+                    feu2 = true; 
+                }
+                else if (hit.collider.CompareTag("Plante3"))
+                {
+                    feu3 = true;
+                }
+            }
+        }
+    
         if (feu1 && feu2 && feu3 && !alarmeActive)
         {
             alarmeIncendie.Play();  
             alarmeActive = true;  
-        }
+        } 
     }
-
 }

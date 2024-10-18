@@ -6,6 +6,9 @@ TagManager:
   tags:
   - CinemachineTarget
   - Grab
+  - Plante1
+  - Plante2
+  - Plante3
   layers:
   - Default
   - TransparentFX
