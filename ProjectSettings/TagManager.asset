@@ -9,6 +9,11 @@ TagManager:
   - Plante1
   - Plante2
   - Plante3
+  - Key
+  - Key2
+  - Key3
+  - Key4
+  - Key5
   layers:
   - Default
   - TransparentFX
