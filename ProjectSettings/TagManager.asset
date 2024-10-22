@@ -14,6 +14,9 @@ TagManager:
   - Key3
   - Key4
   - Key5
+  - Speakers
+  - Button
+  - Extincteur
   layers:
   - Default
   - TransparentFX

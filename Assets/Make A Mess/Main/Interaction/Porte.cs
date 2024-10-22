@@ -59,7 +59,6 @@ public class Porte : MonoBehaviour
         }
         if (key1T && key2T && key3T && key4T && key5T && !porteOuverte)
         {
-
             OpenDoor();
         }
     }
