@@ -58,18 +58,16 @@ public class Interaction : MonoBehaviour
 
             if(Grabed == true && HasExtincteur == true)
             {
-                if(Input.GetKey(KeyCode.Mouse0))
+                if(Input.GetMouseButtonDown(0))
                 {
-                    if (!extincteurParticles.isPlaying)
-                    {
-                        extincteurParticles.Play();
-                        Grabed = true;
-                        HasExtincteur = true;
-                    }
-                    else if (extincteurParticles.isPlaying)
-                    {
-                        extincteurParticles.Stop();
-                    }
+                    extincteurParticles.Play();
+                    Grabed = true;
+                    HasExtincteur = true;
+                }
+
+                if(Input.GetMouseButtonUp(0))
+                {
+                    extincteurParticles.Stop();
                 }
             }
         }
