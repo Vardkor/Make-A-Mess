@@ -7,11 +7,16 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject extincteurA; 
     [SerializeField] private ParticleSystem extincteurParticles;
     [SerializeField] private GameObject extincteurPrefab;
+    [SerializeField] private Rigidbody rb;
     public Transform GrabMask;  
     public bool Grabed = false; 
     public bool HasExtincteur = false;
+    public bool isUsingExtincteur = false;
+    private bool canUseExtincteur = true;
     private Transform grabbedObject; 
     public float forcelancer = 50f; 
+
+    public float TimeExtincteur = 5f;
     
 
     void Start()
@@ -64,11 +69,14 @@ public class Interaction : MonoBehaviour
                     extincteurParticles.Play();
                     Grabed = true;
                     HasExtincteur = true;
+                    isUsingExtincteur = true;
+                    StartCoroutine(ExtincteurUsageTimer());
                 }
             }
             if(Input.GetMouseButtonUp(0))
             {
                 extincteurParticles.Stop();
+                isUsingExtincteur = false;
             }
             if(HasExtincteur == true && Grabed == true)
             {
@@ -76,7 +84,8 @@ public class Interaction : MonoBehaviour
                 {
                     HasExtincteur = false;
                     Grabed = false;
-
+                    extincteurA.SetActive(false);
+                    GameObject newExtincteur = Instantiate(extincteurPrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
                 }
             } 
         }
@@ -138,5 +147,19 @@ public class Interaction : MonoBehaviour
             grabbedObject = null; 
             Grabed = false; 
         }
+    }
+
+    private IEnumerator ExtincteurUsageTimer()
+    {
+        yield return new WaitForSeconds(TimeExtincteur);
+
+        if (extincteurParticles.isPlaying)
+        {
+            extincteurParticles.gameObject.SetActive(false);
+            //extincteurParticles.Stop();
+        }
+
+        isUsingExtincteur = false;
+        canUseExtincteur = false;
     }
 }

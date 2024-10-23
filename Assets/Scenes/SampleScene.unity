@@ -1568,7 +1568,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   extincteurA: {fileID: 1362355794}
   extincteurParticles: {fileID: 783229209}
-  extincteurPrefab: {fileID: 0}
+  extincteurPrefab: {fileID: 571182161}
+  rb: {fileID: 571182162}
   GrabMask: {fileID: 970523949}
   Grabed: 0
   HasExtincteur: 0
