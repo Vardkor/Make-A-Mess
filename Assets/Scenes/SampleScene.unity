@@ -1568,6 +1568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   extincteurA: {fileID: 1362355794}
   extincteurParticles: {fileID: 783229209}
+  extincteurPrefab: {fileID: 0}
   GrabMask: {fileID: 970523949}
   Grabed: 0
   HasExtincteur: 0
@@ -1848,7 +1849,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 91abf9a7b38908b4d8bd5cb3495a3ba8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 87.33369
+      value: 80.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 91abf9a7b38908b4d8bd5cb3495a3ba8,
         type: 3}

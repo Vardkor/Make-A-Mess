@@ -6,6 +6,7 @@ public class Interaction : MonoBehaviour
 {
     [SerializeField] private GameObject extincteurA; 
     [SerializeField] private ParticleSystem extincteurParticles;
+    [SerializeField] private GameObject extincteurPrefab;
     public Transform GrabMask;  
     public bool Grabed = false; 
     public bool HasExtincteur = false;
@@ -69,6 +70,15 @@ public class Interaction : MonoBehaviour
             {
                 extincteurParticles.Stop();
             }
+            if(HasExtincteur == true && Grabed == true)
+            {
+                if(Input.GetKeyDown(KeyCode.E))
+                {
+                    HasExtincteur = false;
+                    Grabed = false;
+
+                }
+            } 
         }
     }
 
@@ -90,7 +100,7 @@ public class Interaction : MonoBehaviour
     
     private void GrabExtincteur(GameObject extincteur)
     {
-        Destroy(extincteur); 
+        extincteur.transform.position = new Vector3(-2.03685141f,3.82893682f,75.0999985f);
         extincteurA.SetActive(true); 
         Grabed = true; 
         HasExtincteur = true;
@@ -127,17 +137,6 @@ public class Interaction : MonoBehaviour
             grabbedObject.SetParent(null); 
             grabbedObject = null; 
             Grabed = false; 
-        }
-    }
-
-    void ShootExtincteur()
-    {
-        if(Grabed == true && HasExtincteur == true)
-        {
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                Debug.Log("Objet Attraper en main");
-            }
         }
     }
 }
