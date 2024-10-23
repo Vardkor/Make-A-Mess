@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3241,8 +3241,8 @@ ParticleSystem:
   m_GameObject: {fileID: 783229207}
   serializedVersion: 8
   lengthInSec: 5
-  simulationSpeed: 10
-  stopAction: 1
+  simulationSpeed: 7
+  stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -3305,7 +3305,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -3368,7 +3368,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 6.776782
+      scalar: 56.74301
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -3803,7 +3803,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 100000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -3864,10 +3864,10 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 38.506355
+    angle: 15.98001
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.18424308
+    radiusThickness: 0
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -3950,7 +3950,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.9754111
       mode: 0
       spread: 0
       speed:
@@ -7963,7 +7963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783229207}
   m_LocalRotation: {x: -0.022345243, y: 0.7067542, z: -0.02234332, w: -0.70675313}
-  m_LocalPosition: {x: 0.028200004, y: 0.0038999435, z: 0.0065900013}
+  m_LocalPosition: {x: 0.0494, y: 0.0039, z: 0.0065900013}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
