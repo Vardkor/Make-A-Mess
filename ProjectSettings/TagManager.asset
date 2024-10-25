@@ -17,6 +17,7 @@ TagManager:
   - Speakers
   - Button
   - Extincteur
+  - briquet
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,7 @@ public class Alarme_Incendie : MonoBehaviour
     public bool feu2 = false;
     public bool feu3 = false;
     public bool alarmeActive = false;
+    public bool briquetmain = false;
 
 
     private void Update()
@@ -28,15 +29,24 @@ public class Alarme_Incendie : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Plante1"))
                 {
-                    feu1 = true;
+                    if(briquetmain == true) 
+                    {
+                        feu1 = true;
+                    }      
                 }
                 else if (hit.collider.CompareTag("Plante2"))
                 {
-                    feu2 = true; 
+                    if(briquetmain == true)
+                    {
+                        feu2 = true; 
+                    } 
                 }
                 else if (hit.collider.CompareTag("Plante3"))
                 {
-                    feu3 = true;
+                    if(briquetmain == true)
+                    {
+                        feu3 = true; 
+                    }
                 }
             }
         }

@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    [SerializeField] private GameObject extincteurA; 
+    [SerializeField] private GameObject extincteurA;
+    [SerializeField] private GameObject briquetA;
+    [SerializeField] private GameObject briquet;
     [SerializeField] private ParticleSystem extincteurParticles;
     [SerializeField] private GameObject extincteurPrefab;
+    [SerializeField] private GameObject BriquetPrefab;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] public Alarme_Incendie alarmeincendie;
     public Transform GrabMask;  
     public bool Grabed = false; 
     public bool HasExtincteur = false;
+    public bool HasBriquet = false;
     public bool isUsingExtincteur = false;
     private bool canUseExtincteur = true;
     private Transform grabbedObject; 
-    public float forcelancer = 50f; 
-
+    public float forcelancer = 50f;
     public float TimeExtincteur = 5f;
     
 
     void Start()
     {
-        extincteurA.SetActive(false); 
+        extincteurA.SetActive(false);
+        briquetA.SetActive(false); 
     }
 
     private void Update()
@@ -48,6 +53,26 @@ public class Interaction : MonoBehaviour
                         GrabExtincteur(hit.collider.gameObject);
                     }
                 }
+                else if (hit.collider.CompareTag("briquet"))
+                {
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        briquet.transform.position = new Vector3(-2.03685141f,3.82893682f,75.0999985f);
+                        briquetA.SetActive(true);
+                        Grabed = true;
+                        HasBriquet = true;
+                        alarmeincendie.briquetmain = true; 
+                    }
+                    else if (HasBriquet == true && Grabed == true)
+                    {
+                        if(Input.GetKeyDown(KeyCode.E))
+                        {
+                            Grabed = false;
+                            briquetA.SetActive(false);
+                            GameObject newBriquet = Instantiate(BriquetPrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
+                        }
+                    }
+                }    
             }
         }
         else
