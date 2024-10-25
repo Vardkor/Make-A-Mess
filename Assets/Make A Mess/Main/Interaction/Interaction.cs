@@ -57,22 +57,24 @@ public class Interaction : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        briquet.transform.position = new Vector3(-2.03685141f,3.82893682f,75.0999985f);
-                        briquetA.SetActive(true);
-                        Grabed = true;
-                        HasBriquet = true;
-                        alarmeincendie.briquetmain = true; 
-                    }
-                    else if (HasBriquet == true && Grabed == true)
-                    {
-                        if(Input.GetKeyDown(KeyCode.E))
+                        if (!Grabed && !HasBriquet) 
+                        {
+                            briquet.transform.position = new Vector3(-2.03685141f, 3.82893682f, 75.0999985f);
+                            briquetA.SetActive(true);
+                            Grabed = true;
+                            HasBriquet = true;
+                            alarmeincendie.briquetmain = true;
+                            Debug.Log("Briquet ramassé");
+                        }
+                        else if (Grabed && HasBriquet)
                         {
                             Grabed = false;
+                            HasBriquet = false;
                             briquetA.SetActive(false);
-                            GameObject newBriquet = Instantiate(BriquetPrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
+                            Debug.Log("Briquet posé");
                         }
-                    }
-                }    
+                    }   
+                }
             }
         }
         else
