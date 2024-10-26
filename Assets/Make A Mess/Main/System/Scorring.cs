@@ -6,7 +6,7 @@ public class Scorring : MonoBehaviour
 {
 
     public int Score = 0;
-    public static ScoreManager instance;
+    //public static ScoreManager instance;
 
     void Update()
     {
