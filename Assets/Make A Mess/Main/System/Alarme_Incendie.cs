@@ -25,7 +25,7 @@ public class Alarme_Incendie : MonoBehaviour
         
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetMouseButtonDown(0))
             {
                 if (hit.collider.CompareTag("Plante1"))
                 {

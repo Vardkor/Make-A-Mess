@@ -22,11 +22,15 @@ public class Interaction : MonoBehaviour
     public float forcelancer = 50f;
     public float TimeExtincteur = 5f;
     
+    //Partie Conduite Voiture \\
+    [SerializeField] public CharacterController charactercontrollerperso;
+    [SerializeField] public CharacterController charactercontrollervoiture;
+    public bool entryvoiture = false; 
 
     void Start()
     {
         extincteurA.SetActive(false);
-        briquetA.SetActive(false); 
+        briquetA.SetActive(false);
     }
 
     private void Update()
@@ -55,25 +59,20 @@ public class Interaction : MonoBehaviour
                 }
                 else if (hit.collider.CompareTag("briquet"))
                 {
-                    if (Input.GetKeyDown(KeyCode.E))
+                    if(Input.GetKeyDown(KeyCode.E))
                     {
-                        if (!Grabed && !HasBriquet) 
-                        {
-                            briquet.transform.position = new Vector3(-2.03685141f, 3.82893682f, 75.0999985f);
-                            briquetA.SetActive(true);
-                            Grabed = true;
-                            HasBriquet = true;
-                            alarmeincendie.briquetmain = true;
-                            Debug.Log("Briquet ramassé");
-                        }
-                        else if (Grabed && HasBriquet)
-                        {
-                            Grabed = false;
-                            HasBriquet = false;
-                            briquetA.SetActive(false);
-                            Debug.Log("Briquet posé");
-                        }
-                    }   
+                        GrabBriquet(hit.collider.gameObject);
+                    }    
+                }
+                else if(hit.collider.CompareTag("Voiture"))
+                {
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        Debug.Log("Entrée dans la voiture");
+                        charactercontrollerperso.gameObject.SetActive(false);
+                        entryvoiture = true;
+                        charactercontrollervoiture.gameObject.SetActive(true);
+                    }
                 }
             }
         }
@@ -113,6 +112,16 @@ public class Interaction : MonoBehaviour
                     Grabed = false;
                     extincteurA.SetActive(false);
                     GameObject newExtincteur = Instantiate(extincteurPrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
+                }
+            }
+            else if (Grabed && HasBriquet)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    briquetA.SetActive(false);
+                    Grabed = false;
+                    HasBriquet = false;
+                    GameObject newBriquet = Instantiate(BriquetPrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
                 }
             } 
         }
@@ -188,5 +197,20 @@ public class Interaction : MonoBehaviour
 
         isUsingExtincteur = false;
         canUseExtincteur = false;
+    }
+
+    private void GrabBriquet(GameObject briquet)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!Grabed && !HasBriquet) 
+            {
+                briquet.transform.position = new Vector3(-2.03685141f, 3.82893682f, 75.0999985f);
+                briquetA.SetActive(true);
+                Grabed = true;
+                HasBriquet = true;
+                alarmeincendie.briquetmain = true;
+            }
+        }
     }
 }

@@ -18,6 +18,7 @@ TagManager:
   - Button
   - Extincteur
   - briquet
+  - Voiture
   layers:
   - Default
   - TransparentFX
