@@ -5,11 +5,18 @@ using UnityEngine;
 public class Scorring : MonoBehaviour
 {
 
+    //[SerializeField] public Interaction interaction1;
     public int Score = 0;
-    //public static ScoreManager instance;
+    int layerIndex = 7;
 
     void Update()
     {
-        Debug.Log("Le score est de : " + Score);
+        //if(interaction1.hit)
+        //{
+        //    if(gameObject.layer == layerIndex)
+        //    {
+                //Debug.Log("Le score est de : " + Score);
+        //    }
+        //}
     }
 }
