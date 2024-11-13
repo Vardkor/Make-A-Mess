@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class Musique_dans_musee : MonoBehaviour
 {
-    [SerializeField] public AudioSource Speakers1;
-    [SerializeField] public AudioSource Speakers2;
-    [SerializeField] public AudioSource Speakers3;
-    [SerializeField] public AudioSource Speakers4;
-
+    [SerializeField] public AudioSource[] speakers;
     [SerializeField] public AudioClip musicClip;
 
     private bool MusicPlaying = false;
@@ -39,20 +35,21 @@ public class Musique_dans_musee : MonoBehaviour
 
     void PlayMusic()
     {
-        Speakers1.Play();
-        Speakers2.Play();
-        Speakers3.Play();
-        Speakers4.Play();
+        foreach (var speaker in speakers)
+        {
+            speaker.clip = musicClip;
+            speaker.Play();
+        }
         MusicPlaying = true; 
     }
 
     void StopMusic()
     {
-        Speakers1.Stop();
-        Speakers2.Stop();
-        Speakers3.Stop();
-        Speakers4.Stop();
-        MusicPlaying = false; 
+        foreach (var speaker in speakers)
+        {
+            speaker.Stop();
+        }
+        MusicPlaying = false;
     }
 
 }
