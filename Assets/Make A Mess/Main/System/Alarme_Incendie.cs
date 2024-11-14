@@ -16,45 +16,109 @@ public class Alarme_Incendie : MonoBehaviour
     public bool alarmeActive = false;
     public bool briquetmain = false;
 
+    //Couleur 
 
+    [SerializeField] private bool isColorChanged = false;
+    [SerializeField] private Color newColor = Color.red;
+    public Renderer objectRenderer;
+    private Color originalColor;
+
+
+        
     private void Update()
     {
         RaycastHit hit;
 
-        //Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
-        
         if (Physics.Raycast(transform.position, transform.forward, out hit, 10))
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.CompareTag("Plante1"))
+                if (briquetmain) 
                 {
-                    if(briquetmain == true) 
+                    Renderer objectRenderer = hit.collider.GetComponent<Renderer>();
+
+                    if (objectRenderer != null)
                     {
-                        feu1 = true;
-                    }      
-                }
-                else if (hit.collider.CompareTag("Plante2"))
-                {
-                    if(briquetmain == true)
-                    {
-                        feu2 = true; 
-                    } 
-                }
-                else if (hit.collider.CompareTag("Plante3"))
-                {
-                    if(briquetmain == true)
-                    {
-                        feu3 = true; 
+                        if (hit.collider.CompareTag("Plante1"))
+                        {
+                            feu1 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante2"))
+                        {
+                            feu2 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante3"))
+                        {
+                            feu3 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante4"))
+                        {
+                            feu4 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante5"))
+                        {
+                            feu5 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante6"))
+                        {
+                            feu6 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante7"))
+                        {
+                            feu7 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante8"))
+                        {
+                            feu8 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante9"))
+                        {
+                            feu9 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante10"))
+                        {
+                            feu10 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante11"))
+                        {
+                            feu11 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
+                        else if (hit.collider.CompareTag("Plante12"))
+                        {
+                            feu12 = true;
+                            isColorChanged = true;
+                            objectRenderer.material.color = newColor;
+                        }
                     }
                 }
             }
         }
-    
-        if (feu1 && feu2 && feu3 && !alarmeActive)
-        {
-            alarmeIncendie.Play();  
-            alarmeActive = true;  
-        } 
-    }
+            if (feu1 && feu2 && feu3 && feu4 && feu5 && feu6 && feu7 && feu8 && feu9 && feu10 && feu11 && feu12 && !alarmeActive)
+            {
+                alarmeIncendie.Play();
+                alarmeActive = true;
+            }
+        }
 }
