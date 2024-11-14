@@ -13,6 +13,15 @@ public class Alarme_Incendie : MonoBehaviour
     public bool feu1 = false;
     public bool feu2 = false;
     public bool feu3 = false;
+    public bool feu4 = false;
+    public bool feu5 = false;
+    public bool feu6 = false;
+    public bool feu7 = false;
+    public bool feu8 = false;
+    public bool feu9 = false;
+    public bool feu10 = false;
+    public bool feu11 = false;
+
     public bool alarmeActive = false;
     public bool briquetmain = false;
 
@@ -105,17 +114,11 @@ public class Alarme_Incendie : MonoBehaviour
                             isColorChanged = true;
                             objectRenderer.material.color = newColor;
                         }
-                        else if (hit.collider.CompareTag("Plante12"))
-                        {
-                            feu12 = true;
-                            isColorChanged = true;
-                            objectRenderer.material.color = newColor;
-                        }
                     }
                 }
             }
         }
-            if (feu1 && feu2 && feu3 && feu4 && feu5 && feu6 && feu7 && feu8 && feu9 && feu10 && feu11 && feu12 && !alarmeActive)
+            if (feu1 && feu2 && feu3 && feu4 && feu5 && feu6 && feu7 && feu8 && feu9 && feu10 && feu11 && !alarmeActive)
             {
                 alarmeIncendie.Play();
                 alarmeActive = true;
