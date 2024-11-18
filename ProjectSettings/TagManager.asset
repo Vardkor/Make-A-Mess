@@ -28,6 +28,8 @@ TagManager:
   - Plante10
   - Plante11
   - Plante12
+  - Score
+  - Scrore100
   layers:
   - Default
   - TransparentFX

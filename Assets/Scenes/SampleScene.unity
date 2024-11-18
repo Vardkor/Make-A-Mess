@@ -1841,6 +1841,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: 0
+  objets:
+  - {fileID: 1602605221}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Cible: Dinosaures (7)
 --- !u!1 &377252761 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1809120286772788696, guid: 197f39907654e4c498bd023be09a76b1,
@@ -3260,7 +3272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732585531}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.2, y: 11.18, z: -43.7}
+  m_LocalPosition: {x: -45.14, y: 1.95, z: -4.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8564,7 +8576,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e335e89d70b14c04bb63b4f38f1859f0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.87
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8573,7 +8585,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 9.528481
+  MaxDistance: 116.17134
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -10858,6 +10870,12 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5428243983063349662, guid: 2fdd7280424b3af488373fd7359e58b9, type: 3}
+--- !u!1 &1602605221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3544336338757686875, guid: 197f39907654e4c498bd023be09a76b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6120990452292865257}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1613595909 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -768187580003593661, guid: 2fdd7280424b3af488373fd7359e58b9,
@@ -14558,6 +14576,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Grab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3544336338757686875, guid: 197f39907654e4c498bd023be09a76b1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Scrore100
       objectReference: {fileID: 0}
     - target: {fileID: 3683714071104233569, guid: 197f39907654e4c498bd023be09a76b1,
         type: 3}
