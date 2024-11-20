@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Alarme_Incendie : MonoBehaviour
 {
-
-    [SerializeField] GameObject plante1;
-    [SerializeField] GameObject plante2;
-    [SerializeField] GameObject plante3;
     [SerializeField] GameObject Alarme;
     [SerializeField] AudioSource alarmeIncendie;
     public bool feu1 = false;
