@@ -7,7 +7,6 @@ public class Vitre : MonoBehaviour
     [SerializeField] GameObject vitrepascasser;
     [SerializeField] GameObject vitrecasser;
     BoxCollider bc;
-
     [SerializeField] Scorring scorring;
 
     public bool casser = false;
@@ -26,15 +25,20 @@ public class Vitre : MonoBehaviour
     {
         Break();
         casser = true;
-        scorring.CurrentScore += 100;
     }
 
     private void Break()
     {
         vitrepascasser.SetActive(false);
         vitrecasser.SetActive(true);
-
+        
         bc.enabled = false;
     }
- 
+    
+    private void Scorring()
+    {
+        
+        scorring.CurrentScore =+ scorring.ScoreVitre;
+    }
 }
+    
