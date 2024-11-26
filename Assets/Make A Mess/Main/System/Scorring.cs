@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.UIElements;
+using TMPro;
 
 public class Scorring : MonoBehaviour
 {
-
+    [SerializeField] TMP_Text Score;
     public int CurrentScore = 0;
     public int ScoreVitre = 100;
 
     void Update()
     {
-        Debug.Log("Score :" + CurrentScore);
+        Score.text = CurrentScore.ToString();
     }
 }

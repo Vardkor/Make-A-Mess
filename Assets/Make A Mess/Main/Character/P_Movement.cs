@@ -22,10 +22,18 @@ public class P_Movement : MonoBehaviour
             velocity.y = -2f;
         }
 
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log("Ca sprint");
+        }
+
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpheight * -2f * gravity);
         }
+
+        
 
        float x = Input.GetAxis("Horizontal");
        float z = Input.GetAxis("Vertical");
