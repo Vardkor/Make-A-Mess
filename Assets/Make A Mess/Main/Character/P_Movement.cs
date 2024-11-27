@@ -7,7 +7,7 @@ public class P_Movement : MonoBehaviour
     public CharacterController controller;
     public float jumpheight = 12f;
     public float gravity = -9.81f;
-    public float speed = 12f;
+    public float speed = 6.5f;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
@@ -23,10 +23,15 @@ public class P_Movement : MonoBehaviour
         }
 
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log("Ca sprint");
+            speed = 12f;
         }
+        else
+        {
+            speed = 6.5f;
+        }
+
 
         if(Input.GetButtonDown("Jump") && isGrounded)
         {

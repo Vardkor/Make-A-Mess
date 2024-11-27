@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
+    [SerializeField] private GameObject HacheA;
+    [SerializeField] private GameObject Hache;
     [SerializeField] private GameObject extincteurA;
     [SerializeField] private GameObject briquetA;
     [SerializeField] private GameObject briquet;
     [SerializeField] private ParticleSystem extincteurParticles;
     [SerializeField] private GameObject extincteurPrefab;
     [SerializeField] private GameObject BriquetPrefab;
+    [SerializeField] private GameObject HachePrefab;
     [SerializeField] private Rigidbody rb;
     [SerializeField] public Alarme_Incendie alarmeincendie;
     public Transform GrabMask;  
     public bool Grabed = false; 
     public bool HasExtincteur = false;
     public bool HasBriquet = false;
+    public bool HasHache = false;
     public bool isUsingExtincteur = false;
     private bool canUseExtincteur = true;
     private Transform grabbedObject; 
@@ -31,6 +35,7 @@ public class Interaction : MonoBehaviour
     {
         extincteurA.SetActive(false);
         briquetA.SetActive(false);
+        HacheA.SetActive(false);
     }
 
     private void Update()
@@ -64,14 +69,11 @@ public class Interaction : MonoBehaviour
                         GrabBriquet(hit.collider.gameObject);
                     }    
                 }
-                else if(hit.collider.CompareTag("Voiture"))
+                else if(hit.collider.CompareTag("hache"))
                 {
                     if(Input.GetKeyDown(KeyCode.E))
                     {
-                        Debug.Log("Entrée dans la voiture");
-                        charactercontrollerperso.gameObject.SetActive(false);
-                        entryvoiture = true;
-                        charactercontrollervoiture.gameObject.SetActive(true);
+                        GrabHache(hit.collider.gameObject);
                     }
                 }
             }
@@ -122,6 +124,16 @@ public class Interaction : MonoBehaviour
                     Grabed = false;
                     HasBriquet = false;
                     GameObject newBriquet = Instantiate(BriquetPrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
+                }
+            }
+            else if (Grabed && HasHache)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    HacheA.SetActive(false);
+                    Grabed = false;
+                    HasHache = false;
+                    GameObject newHache = Instantiate(HachePrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
                 }
             } 
         }
@@ -210,6 +222,20 @@ public class Interaction : MonoBehaviour
                 Grabed = true;
                 HasBriquet = true;
                 alarmeincendie.briquetmain = true;
+            }
+        }
+    }
+
+    private void GrabHache(GameObject Hache)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!Grabed && !HasHache) 
+            {
+                Hache.transform.position = new Vector3(-2.03685141f, 3.82893682f, 75.0999985f);
+                HacheA.SetActive(true);
+                Grabed = true;
+                HasHache = true;
             }
         }
     }
