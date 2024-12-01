@@ -25,6 +25,12 @@ public class Interaction : MonoBehaviour
     private Transform grabbedObject; 
     public float forcelancer = 50f;
     public float TimeExtincteur = 5f;
+
+    //Casser les Objets\\
+
+    public bool BreakObjectYes = false;
+    [SerializeField] private BoxCollider boxColliderHache;
+    [SerializeField] public Objet objet;
     
     //Partie Conduite Voiture \\
     [SerializeField] public CharacterController charactercontrollerperso;
@@ -36,6 +42,8 @@ public class Interaction : MonoBehaviour
         extincteurA.SetActive(false);
         briquetA.SetActive(false);
         HacheA.SetActive(false);
+
+        boxColliderHache = HacheA.GetComponent<BoxCollider>();
     }
 
     private void Update()
@@ -236,7 +244,36 @@ public class Interaction : MonoBehaviour
                 HacheA.SetActive(true);
                 Grabed = true;
                 HasHache = true;
+                BreakObjectYes = true;
             }
+            if(BreakObjectYes == true)
+            {
+                BreakObject(Hache);
+            }
+        }
+    }
+
+    private void BreakObject(GameObject Hache)
+    {
+         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other == boxColliderHache)
+        {
+            if(objet.Cassable == true)
+            {
+                if(Input.GetMouseButtonUp(0))
+                {
+                    Debug.Log("Ca touche la + je tape ");
+                }   
+            }
+        }
+        
+        else
+        {
+            Debug.Log("ca touche mais break est pas actif");
         }
     }
 }

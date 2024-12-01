@@ -10,7 +10,7 @@ public class Objet : MonoBehaviour
     //Script\\
 
     [SerializeField] Interaction interaction;
-    [SerializeField] Alarme_Incendie alarme;
+    [SerializeField] Alarme_Incendie alarme; 
     
     //Bool\\
     public bool collisionEnter;
