@@ -6,6 +6,8 @@ public class Interaction : MonoBehaviour
 {
     [SerializeField] public GameObject HacheA;
     [SerializeField] public GameObject Hache;
+    [SerializeField] public GameObject BombePeintureA;
+    [SerializeField] public GameObject BombePeinture;
     [SerializeField] private GameObject extincteurA;
     [SerializeField] private GameObject briquetA;
     [SerializeField] private GameObject briquet;
@@ -13,6 +15,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject extincteurPrefab;
     [SerializeField] private GameObject BriquetPrefab;
     [SerializeField] private GameObject HachePrefab;
+    [SerializeField] private GameObject BombePeinturePrefab;
     [SerializeField] private Rigidbody rb;
     [SerializeField] public Alarme_Incendie alarmeincendie;
 
@@ -23,6 +26,7 @@ public class Interaction : MonoBehaviour
     public bool HasExtincteur = false;
     public bool HasBriquet = false;
     public bool HasHache = false;
+    public bool HasPeinture = false;
     public bool isUsingExtincteur = false;
     private bool canUseExtincteur = true;
     private Transform grabbedObject; 
@@ -45,16 +49,16 @@ public class Interaction : MonoBehaviour
     public bool casser = false;
     public bool pascasser = false;
     
-    //Partie Conduite Voiture \\
-    [SerializeField] public CharacterController charactercontrollerperso;
-    [SerializeField] public CharacterController charactercontrollervoiture;
-    public bool entryvoiture = false; 
+    //Peinture\\
+
+    public float VieBombePeinture = 100f; 
 
     void Start()
     {
         extincteurA.SetActive(false);
         briquetA.SetActive(false);
         HacheA.SetActive(false);
+        BombePeintureA.SetActive(false);
 
         boxColliderHache = HacheA.GetComponent<BoxCollider>();
     }
@@ -66,8 +70,7 @@ public class Interaction : MonoBehaviour
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, 10))
-            {
-                
+            { 
                 if (hit.collider.CompareTag("Grab"))
                 {
                     if (Input.GetKeyDown(KeyCode.E)) 
@@ -75,7 +78,6 @@ public class Interaction : MonoBehaviour
                         GrabObject(hit.transform);
                     }
                 }
-                
                 else if (hit.collider.CompareTag("Extincteur"))
                 {
                     if (Input.GetKeyDown(KeyCode.E))
@@ -95,6 +97,13 @@ public class Interaction : MonoBehaviour
                     if(Input.GetKeyDown(KeyCode.E))
                     {
                         GrabHache(hit.collider.gameObject);
+                    }
+                }
+                else if(hit.collider.CompareTag("BombePeinture"))
+                {
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        GrabPeinture(hit.collider.gameObject);
                     }
                 }
             }
@@ -155,6 +164,16 @@ public class Interaction : MonoBehaviour
                     Grabed = false;
                     HasHache = false;
                     GameObject newHache = Instantiate(HachePrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
+                }
+            }
+            else if (Grabed && HasPeinture)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    BombePeintureA.SetActive(false);
+                    Grabed = false;
+                    HasPeinture = false;
+                    GameObject newBombePeinture = Instantiate(BombePeinturePrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
                 }
             } 
         }
@@ -281,5 +300,21 @@ public class Interaction : MonoBehaviour
         murpascasser.SetActive(false);
         murcasser.SetActive(true);
         bc.enabled = false;
+    }
+
+
+
+    public void GrabPeinture(GameObject BombePeinture)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!Grabed && !HasPeinture) 
+            {
+                BombePeinture.transform.position = new Vector3(-2.03685141f, 3.82893682f, 75.0999985f);
+                BombePeintureA.SetActive(true);
+                Grabed = true;
+                HasPeinture = true;
+            }
+        }
     }
 }
