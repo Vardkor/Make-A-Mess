@@ -266,7 +266,6 @@ public class Interaction : MonoBehaviour
     {
         Break();
         casser = true;
-        Debug.Log("Ca se casse");
     }
 
     private void Awake()

@@ -40,10 +40,6 @@ public class Objet : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         collisionEnter = true;
-
-        
-
-        Debug.Log($"Trigger détecté avec : {other.gameObject.name}");
     }
 
     void OnTriggerExit(Collider other)
