@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Interaction : MonoBehaviour
 {
-    [SerializeField] private GameObject HacheA;
-    [SerializeField] private GameObject Hache;
+    [SerializeField] public GameObject HacheA;
+    [SerializeField] public GameObject Hache;
     [SerializeField] private GameObject extincteurA;
     [SerializeField] private GameObject briquetA;
     [SerializeField] private GameObject briquet;
@@ -15,6 +15,9 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject HachePrefab;
     [SerializeField] private Rigidbody rb;
     [SerializeField] public Alarme_Incendie alarmeincendie;
+
+
+
     public Transform GrabMask;  
     public bool Grabed = false; 
     public bool HasExtincteur = false;
@@ -31,6 +34,16 @@ public class Interaction : MonoBehaviour
     public bool BreakObjectYes = false;
     [SerializeField] private BoxCollider boxColliderHache;
     [SerializeField] public Objet objet;
+
+
+    //Bool et game object pour cassage\\
+
+    [SerializeField] GameObject murpascasser;
+    [SerializeField] GameObject murcasser;
+    BoxCollider bc;
+
+    public bool casser = false;
+    public bool pascasser = false;
     
     //Partie Conduite Voiture \\
     [SerializeField] public CharacterController charactercontrollerperso;
@@ -246,34 +259,28 @@ public class Interaction : MonoBehaviour
                 HasHache = true;
                 BreakObjectYes = true;
             }
-            if(BreakObjectYes == true)
-            {
-                BreakObject(Hache);
-            }
         }
     }
 
-    private void BreakObject(GameObject Hache)
+    public void BreakObject(GameObject Hache)
     {
-         
+        Break();
+        casser = true;
+        Debug.Log("Ca se casse");
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if(other == boxColliderHache)
-        {
-            if(objet.Cassable == true)
-            {
-                if(Input.GetMouseButtonUp(0))
-                {
-                    Debug.Log("Ca touche la + je tape ");
-                }   
-            }
-        }
-        
-        else
-        {
-            Debug.Log("ca touche mais break est pas actif");
-        }
+        murpascasser.SetActive(true);
+        murcasser.SetActive(false);
+
+        bc = GetComponent<BoxCollider>();
+    }
+
+    private void Break()
+    {
+        murpascasser.SetActive(false);
+        murcasser.SetActive(true);
+        bc.enabled = false;
     }
 }
