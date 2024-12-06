@@ -12,6 +12,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject briquetA;
     [SerializeField] private GameObject briquet;
     [SerializeField] private ParticleSystem extincteurParticles;
+    [SerializeField] private ParticleSystem PeintureParticles;
     [SerializeField] private GameObject extincteurPrefab;
     [SerializeField] private GameObject BriquetPrefab;
     [SerializeField] private GameObject HachePrefab;
@@ -29,6 +30,8 @@ public class Interaction : MonoBehaviour
     public bool HasPeinture = false;
     public bool isUsingExtincteur = false;
     private bool canUseExtincteur = true;
+    private bool isUsingPeinture = false;
+
     private Transform grabbedObject; 
     public float forcelancer = 50f;
     public float TimeExtincteur = 5f;
@@ -175,7 +178,23 @@ public class Interaction : MonoBehaviour
                     HasPeinture = false;
                     GameObject newBombePeinture = Instantiate(BombePeinturePrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
                 }
-            } 
+            }
+
+            if(Grabed == true && HasPeinture == true)
+            {
+                if(Input.GetMouseButtonDown(0))
+                {
+                    PeintureParticles.Play();
+                    Grabed = true;
+                    HasPeinture = true;
+                    isUsingPeinture = true;
+                }
+            }
+            if(Input.GetMouseButtonUp(0))
+            {
+                PeintureParticles.Stop();
+                isUsingPeinture = false;
+            }
         }
     }
 
@@ -244,7 +263,6 @@ public class Interaction : MonoBehaviour
         if (extincteurParticles.isPlaying)
         {
             extincteurParticles.gameObject.SetActive(false);
-            //extincteurParticles.Stop();
         }
 
         isUsingExtincteur = false;
@@ -316,5 +334,15 @@ public class Interaction : MonoBehaviour
                 HasPeinture = true;
             }
         }
+    }
+
+
+    public void Peindre()
+    {
+        RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 10))
+            {
+                Debug.Log("Mes couilles ca touche");
+            }
     }
 }

@@ -18,6 +18,7 @@ public class Objet : MonoBehaviour
     public bool collisionEnter;
     public bool Cassable; 
     public bool PeutetreBruler;
+    public bool PeutetrePeint;
 
     void Update()
     {   
@@ -31,9 +32,14 @@ public class Objet : MonoBehaviour
             }
         }
 
-        if(collisionEnter && Input.GetMouseButtonDown(0))  
+        if(collisionEnter && Input.GetMouseButtonDown(0) && Cassable)  
         {
             interaction.BreakObject(hache);
+        }
+
+        if(collisionEnter && Input.GetMouseButtonDown(0) && PeutetrePeint)
+        {
+            Debug.Log("Ca paint");
         }
     }
 
@@ -46,6 +52,4 @@ public class Objet : MonoBehaviour
     {
         collisionEnter = false;
     }
-
-    
 }
