@@ -40,7 +40,6 @@ public class Interaction : MonoBehaviour
 
     public bool BreakObjectYes = false;
     [SerializeField] private BoxCollider boxColliderHache;
-    [SerializeField] public BoxCollider boxColliderPeinture;
     [SerializeField] public Objet objet;
 
 
