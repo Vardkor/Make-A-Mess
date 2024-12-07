@@ -326,8 +326,11 @@ MonoBehaviour:
   alarme: {fileID: 0}
   boxColliderHache: {fileID: 0}
   hache_main: {fileID: 0}
+  peinture: {fileID: 8364056543321199267}
+  boxColliderPeinture: {fileID: 3469287837375076103}
+  spawnPeinture: {x: 0, y: 0, z: 0}
   collisionEnter: 0
-  Cassable: 1
+  Cassable: 0
   PeutetreBruler: 0
   PeutetrePeint: 1
 --- !u!65 &687491184
@@ -10605,12 +10608,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 543450653525809312}
   - {fileID: 6220574675143530217}
   - {fileID: 1229769170006144993}
   - {fileID: 5912313768978483227}
   - {fileID: 1667449368704059155}
   - {fileID: 2667771326748484668}
-  - {fileID: 543450653525809312}
   m_Father: {fileID: 13002081079299838}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11615,7 +11618,6 @@ GameObject:
   - component: {fileID: 2197002515239079643}
   - component: {fileID: 1496320912577290229}
   - component: {fileID: 31006409374885527}
-  - component: {fileID: 8678311568608127098}
   m_Layer: 3
   m_Name: Key2
   m_TagString: Key2
@@ -25334,6 +25336,7 @@ MonoBehaviour:
   TimeExtincteur: 5
   BreakObjectYes: 0
   boxColliderHache: {fileID: 2831443504774426623}
+  boxColliderPeinture: {fileID: 3469287837375076103}
   objet: {fileID: 8578123730272178300}
   murpascasser: {fileID: 8578123730272178299}
   murcasser: {fileID: 687491182}
@@ -31160,7 +31163,7 @@ GameObject:
   - component: {fileID: 3244444561186359701}
   m_Layer: 3
   m_Name: Key1
-  m_TagString: Key
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31514,6 +31517,9 @@ MonoBehaviour:
   alarme: {fileID: 0}
   boxColliderHache: {fileID: 0}
   hache_main: {fileID: 0}
+  peinture: {fileID: 8364056543321199267}
+  boxColliderPeinture: {fileID: 3469287837375076103}
+  spawnPeinture: {x: 0, y: 0, z: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
@@ -31859,33 +31865,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!54 &8678311568608127098
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2413865089849491318}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!33 &8679187450270054998
 MeshFilter:
   m_ObjectHideFlags: 0

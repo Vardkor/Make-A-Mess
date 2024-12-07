@@ -9,10 +9,15 @@ public class Objet : MonoBehaviour
     [SerializeField] Interaction interaction;
     [SerializeField] Alarme_Incendie alarme;
 
+
     //GameObject\\
 
     [SerializeField] private Rigidbody boxColliderHache;
     [SerializeField] private GameObject hache_main;
+    [SerializeField] private GameObject peinture;
+    [SerializeField] public BoxCollider boxColliderPeinture;
+    
+    public Vector3 spawnPeinture = Vector3.zero;
     
     //Bool\\
     public bool collisionEnter;
@@ -40,6 +45,10 @@ public class Objet : MonoBehaviour
         if(collisionEnter && Input.GetMouseButtonDown(0) && PeutetrePeint)
         {
             Debug.Log("Ca paint");
+            
+            Vector3 spawnPosition = boxColliderPeinture.transform.position + spawnPeinture;
+
+            Instantiate(peinture, spawnPosition, Quaternion.identity); 
         }
     }
 
