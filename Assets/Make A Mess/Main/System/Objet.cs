@@ -13,12 +13,7 @@ public class Objet : MonoBehaviour
 
     //GameObject\\
 
-    [SerializeField] private Rigidbody boxColliderHache;
     [SerializeField] private GameObject hache_main;
-    [SerializeField] private GameObject peinture;
-    [SerializeField] public BoxCollider boxColliderPeinture;
-
-    public Vector3 spawnPeinture = Vector3.zero;
     
     //Bool\\
     public bool collisionEnter;
@@ -43,14 +38,9 @@ public class Objet : MonoBehaviour
             interaction.BreakObject(hache);
         }
 
-        if(collisionEnter && Input.GetMouseButtonDown(0) && PeutetrePeint)
-        {
-            
+        if(collisionEnter && Input.GetMouseButton(0) && PeutetrePeint)
+        { 
             interaction.Peindre();
-
-            //Vector3 spawnPosition = boxColliderPeinture.transform.position + spawnPeinture;
-
-            //Instantiate(peinture, spawnPosition, Quaternion.identity); 
         }
     }
 

@@ -573,11 +573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 0}
   alarme: {fileID: 0}
-  boxColliderHache: {fileID: 0}
   hache_main: {fileID: 0}
-  peinture: {fileID: 8364056543321199267}
-  boxColliderPeinture: {fileID: 3469287837375076103}
-  spawnPeinture: {x: 0, y: 0, z: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
@@ -668,62 +664,6 @@ Transform:
   m_Father: {fileID: 4968485872023510047}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1 &725194460
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 725194462}
-  - component: {fileID: 725194461}
-  m_Layer: 0
-  m_Name: Decal Projector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &725194461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725194460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 31d0dcc6f2dd4e4408d18036a2c93862, type: 2}
-  m_DrawDistance: 1000
-  m_FadeScale: 0.9
-  m_StartAngleFade: 180
-  m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 1}
-  m_UVBias: {x: 0, y: 0}
-  m_DecalLayerMask: 4294967295
-  m_ScaleMode: 0
-  m_Offset: {x: 0, y: 0, z: 0.5}
-  m_Size: {x: 1, y: 1, z: 1}
-  m_FadeFactor: 1
---- !u!4 &725194462
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725194460}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.27957413, y: 3.19, z: 91.476}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4968485872023510047}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &770410980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,7 +1043,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376622814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0708, y: -0, z: 0.0133}
+  m_LocalPosition: {x: -0.0562, y: -0, z: 0.0133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9784,6 +9724,30 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6690634620250380488, guid: 2fdd7280424b3af488373fd7359e58b9, type: 3}
+--- !u!114 &1402323848137933054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782906628348634510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 31d0dcc6f2dd4e4408d18036a2c93862, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_DecalLayerMask: 4294967295
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 0.5}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_FadeFactor: 1
 --- !u!64 &1414061561350043013
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9940,6 +9904,7 @@ MonoBehaviour:
   Score: {fileID: 7676784734350726070}
   CurrentScore: 0
   ScoreVitre: 100
+  ScorePeinture: 2
 --- !u!23 &1496320912577290229
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10396,8 +10361,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8578123730272178299}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 10.87, y: 3.1, z: 79.13}
-  m_LocalScale: {x: 0.26072282, y: 1.8142964, z: 10.94509}
+  m_LocalPosition: {x: 10.87, y: 4.22, z: 79.13}
+  m_LocalScale: {x: 0.26072282, y: 4.2674065, z: 10.94509}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4968485872023510047}
@@ -23677,7 +23642,6 @@ Transform:
   - {fileID: 770410981}
   - {fileID: 43233808}
   - {fileID: 980070142}
-  - {fileID: 725194462}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26164,8 +26128,10 @@ MonoBehaviour:
   BombePeinturePrefab: {fileID: 919132149118602267}
   rb: {fileID: 8868420502290915140}
   alarmeincendie: {fileID: 6819538525883134225}
-  decalProjector: {fileID: 725194461}
-  decalPosition: {fileID: 1376622814}
+  score: {fileID: 1491017097299918197}
+  decalProjector: {fileID: 3321653087349408526, guid: 3e59aa3bdc677164e832bb72975424cc,
+    type: 3}
+  decalPosition: {fileID: 1376622815}
   GrabMask: {fileID: 1229769170006144993}
   Grabed: 0
   HasExtincteur: 0
@@ -26177,12 +26143,11 @@ MonoBehaviour:
   TimeExtincteur: 5
   BreakObjectYes: 0
   boxColliderHache: {fileID: 2831443504774426623}
-  objet: {fileID: 8578123730272178300}
+  objetscript: {fileID: 687491183}
   murpascasser: {fileID: 8578123730272178299}
   murcasser: {fileID: 687491182}
   casser: 0
   pascasser: 0
-  VieBombePeinture: 100
 --- !u!23 &5970154190144347828
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -27839,6 +27804,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2926942048297632113, guid: 2fdd7280424b3af488373fd7359e58b9, type: 3}
+--- !u!4 &6724725815880814896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782906628348634510}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 8.255008, y: 3.19, z: 111.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6726014773276998997
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32355,11 +32335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 5967744164117566159}
   alarme: {fileID: 0}
-  boxColliderHache: {fileID: 0}
   hache_main: {fileID: 0}
-  peinture: {fileID: 8364056543321199267}
-  boxColliderPeinture: {fileID: 3469287837375076103}
-  spawnPeinture: {x: 0, y: 0, z: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
@@ -32880,6 +32856,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &8782906628348634510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6724725815880814896}
+  - component: {fileID: 1402323848137933054}
+  m_Layer: 0
+  m_Name: Decal Projector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!64 &8783169195889369869
 MeshCollider:
   m_ObjectHideFlags: 0

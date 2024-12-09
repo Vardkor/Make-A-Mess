@@ -20,9 +20,9 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject BombePeinturePrefab;
     [SerializeField] private Rigidbody rb;
     [SerializeField] public Alarme_Incendie alarmeincendie;
-
-    [SerializeField] public DecalProjector decalProjector;
-    [SerializeField] public GameObject decalPosition;
+    [SerializeField] public Scorring score;
+    [SerializeField] private DecalProjector decalProjector; 
+    [SerializeField] private Transform decalPosition; 
 
 
 
@@ -44,7 +44,7 @@ public class Interaction : MonoBehaviour
 
     public bool BreakObjectYes = false;
     [SerializeField] private BoxCollider boxColliderHache;
-    [SerializeField] public Objet objet;
+    [SerializeField] public Objet objetscript;
 
 
     //Bool et game object pour cassage\\
@@ -55,10 +55,6 @@ public class Interaction : MonoBehaviour
 
     public bool casser = false;
     public bool pascasser = false;
-    
-    //Peinture\\
-
-    public float VieBombePeinture = 100f; 
 
     void Start()
     {
@@ -343,10 +339,14 @@ public class Interaction : MonoBehaviour
 
     public void Peindre()
     {
-        Debug.Log("Interaction");
+        DecalProjector newDecal = Instantiate(decalProjector, decalPosition.position, decalPosition.rotation);
+        newDecal.size = new Vector3(0.2f, 0.2f, 0.2f); 
+        ScorePeinture();
+    }
 
-        decalProjector.transform.position = decalPosition.position;
-        //decal
 
+    public void ScorePeinture()
+    {
+        score.CurrentScore += score.ScorePeinture;
     }
 }
