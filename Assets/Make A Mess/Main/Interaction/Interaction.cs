@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Interaction : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject BombePeinturePrefab;
     [SerializeField] private Rigidbody rb;
     [SerializeField] public Alarme_Incendie alarmeincendie;
+
+    [SerializeField] public DecalProjector decalProjector;
+    [SerializeField] public GameObject decalPosition;
 
 
 
@@ -339,10 +343,10 @@ public class Interaction : MonoBehaviour
 
     public void Peindre()
     {
-        RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 10))
-            {
-                Debug.Log("Mes couilles ca touche");
-            }
+        Debug.Log("Interaction");
+
+        decalProjector.transform.position = decalPosition.position;
+        //decal
+
     }
 }

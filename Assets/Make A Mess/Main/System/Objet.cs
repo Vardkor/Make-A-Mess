@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Objet : MonoBehaviour
 {
     //Script\\
@@ -16,7 +17,7 @@ public class Objet : MonoBehaviour
     [SerializeField] private GameObject hache_main;
     [SerializeField] private GameObject peinture;
     [SerializeField] public BoxCollider boxColliderPeinture;
-    
+
     public Vector3 spawnPeinture = Vector3.zero;
     
     //Bool\\
@@ -44,11 +45,12 @@ public class Objet : MonoBehaviour
 
         if(collisionEnter && Input.GetMouseButtonDown(0) && PeutetrePeint)
         {
-            Debug.Log("Ca paint");
             
-            Vector3 spawnPosition = boxColliderPeinture.transform.position + spawnPeinture;
+            interaction.Peindre();
 
-            Instantiate(peinture, spawnPosition, Quaternion.identity); 
+            //Vector3 spawnPosition = boxColliderPeinture.transform.position + spawnPeinture;
+
+            //Instantiate(peinture, spawnPosition, Quaternion.identity); 
         }
     }
 
