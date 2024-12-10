@@ -9,7 +9,7 @@ public class Objet : MonoBehaviour
 
     [SerializeField] Interaction interaction;
     [SerializeField] Alarme_Incendie alarme;
-
+    [SerializeField] BombePeinture bombepeinture;
 
     //GameObject\\
 
@@ -33,14 +33,14 @@ public class Objet : MonoBehaviour
             }
         }
 
-        if(collisionEnter && Input.GetMouseButtonDown(0) && Cassable)  
+        if(collisionEnter && Input.GetMouseButton(0) && Cassable)  
         {
             interaction.BreakObject(hache);
         }
 
         if(collisionEnter && Input.GetMouseButton(0) && PeutetrePeint)
         { 
-            interaction.Peindre();
+            bombepeinture.Peindre();
         }
     }
 

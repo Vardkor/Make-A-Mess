@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.421
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.07505329, g: 0.09397445, b: 0.12851593, a: 0.421}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.421}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -573,6 +573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 0}
   alarme: {fileID: 0}
+  bombepeinture: {fileID: 0}
   hache_main: {fileID: 0}
   collisionEnter: 0
   Cassable: 0
@@ -1043,7 +1044,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376622814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0562, y: -0, z: 0.0133}
+  m_LocalPosition: {x: -0.0565, y: 0.0368, z: 0.0094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7661,7 +7662,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149118602267}
   m_LocalRotation: {x: 0.011583929, y: -0.7070119, z: -0.7070119, w: -0.011583927}
-  m_LocalPosition: {x: -36.222, y: 3.29, z: 72.725}
+  m_LocalPosition: {x: -0.59, y: 3.25, z: 88.1}
   m_LocalScale: {x: 18.439552, y: 18.439552, z: 45.049324}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8575,6 +8576,7 @@ GameObject:
   - component: {fileID: 1711813855728100303}
   - component: {fileID: 3469287837375076103}
   - component: {fileID: 3469287837375076102}
+  - component: {fileID: 3469287837375076104}
   m_Layer: 0
   m_Name: BombePeinture_main
   m_TagString: Untagged
@@ -11310,7 +11312,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729162905263327714}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -36.43, y: 2.818, z: 70.524}
+  m_LocalPosition: {x: -0.7980013, y: 2.778, z: 85.899}
   m_LocalScale: {x: -12.066023, y: -12.066027, z: -35.384674}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13399,8 +13401,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1203038, y: 1, z: 1}
-  m_Center: {x: -0.060151927, y: 0, z: -6.357854e-18}
+  m_Size: {x: 1.649203, y: 1, z: 1.0169848}
+  m_Center: {x: 0.0016845355, y: 0, z: -0.0041107205}
 --- !u!33 &2832676279125753281
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -14959,6 +14961,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.057492767, y: 0.013892531, z: 0.0051051658}
   m_Center: {x: -0.04535323, y: -0.00017629449, z: 0.012854157}
+--- !u!114 &3469287837375076104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149337834010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1efed6b811aaf0b44b9584ae0e99b40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decalProjector: {fileID: 1402323848137933054}
+  decalPosition: {fileID: 1376622815}
+  score: {fileID: 1491017097299918197}
 --- !u!33 &3469287837560756484
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -20903,7 +20920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4408460225411096895}
   m_LocalRotation: {x: -0, y: -0.7069834, z: -0.7072302, w: 0}
-  m_LocalPosition: {x: -36.22, y: 3.18, z: 71.87088}
+  m_LocalPosition: {x: -0.5880022, y: 3.14, z: 87.24588}
   m_LocalScale: {x: 10.500799, y: 9.308477, z: 55.71981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26128,10 +26145,6 @@ MonoBehaviour:
   BombePeinturePrefab: {fileID: 919132149118602267}
   rb: {fileID: 8868420502290915140}
   alarmeincendie: {fileID: 6819538525883134225}
-  score: {fileID: 1491017097299918197}
-  decalProjector: {fileID: 3321653087349408526, guid: 3e59aa3bdc677164e832bb72975424cc,
-    type: 3}
-  decalPosition: {fileID: 1376622815}
   GrabMask: {fileID: 1229769170006144993}
   Grabed: 0
   HasExtincteur: 0
@@ -26767,7 +26780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6729044161053661097}
   m_LocalRotation: {x: -0.43456143, y: 0.43456143, z: 0.55781394, w: 0.55781394}
-  m_LocalPosition: {x: -36.57, y: 2.849, z: 69.11}
+  m_LocalPosition: {x: -0.9380007, y: 2.809, z: 84.485}
   m_LocalScale: {x: 10.807549, y: 39.010998, z: 39.011}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32335,6 +32348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 5967744164117566159}
   alarme: {fileID: 0}
+  bombepeinture: {fileID: 3469287837375076104}
   hache_main: {fileID: 0}
   collisionEnter: 0
   Cassable: 0

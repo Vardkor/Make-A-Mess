@@ -20,9 +20,8 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject BombePeinturePrefab;
     [SerializeField] private Rigidbody rb;
     [SerializeField] public Alarme_Incendie alarmeincendie;
-    [SerializeField] public Scorring score;
-    [SerializeField] private DecalProjector decalProjector; 
-    [SerializeField] private Transform decalPosition; 
+
+ 
 
 
 
@@ -334,19 +333,5 @@ public class Interaction : MonoBehaviour
                 HasPeinture = true;
             }
         }
-    }
-
-
-    public void Peindre()
-    {
-        DecalProjector newDecal = Instantiate(decalProjector, decalPosition.position, decalPosition.rotation);
-        newDecal.size = new Vector3(0.2f, 0.2f, 0.2f); 
-        ScorePeinture();
-    }
-
-
-    public void ScorePeinture()
-    {
-        score.CurrentScore += score.ScorePeinture;
     }
 }
