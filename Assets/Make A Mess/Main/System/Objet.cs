@@ -14,13 +14,20 @@ public class Objet : MonoBehaviour
     //GameObject\\
 
     [SerializeField] private GameObject hache_main;
+    [SerializeField] private Light LightTuto;
     
     //Bool\\
     public bool collisionEnter;
     public bool Cassable; 
     public bool PeutetreBruler;
     public bool PeutetrePeint;
+    public bool Boutton;
 
+
+    void start()
+    {
+        LightTuto.intensity = 0f;
+    }
     void Update()
     {   
         GameObject hache = hache_main.gameObject;
@@ -41,6 +48,11 @@ public class Objet : MonoBehaviour
         if(collisionEnter && Input.GetMouseButton(0) && PeutetrePeint)
         { 
             bombepeinture.Peindre();
+        }
+
+        if(collisionEnter && Boutton)
+        { 
+            LightTuto.intensity = 50f;
         }
     }
 
