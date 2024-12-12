@@ -33,6 +33,7 @@ TagManager:
   - Dino
   - hache
   - BombePeinture
+  - dynamite
   layers:
   - Default
   - TransparentFX

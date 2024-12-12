@@ -20,6 +20,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] private GameObject BombePeinturePrefab;
     [SerializeField] private Rigidbody rb;
     [SerializeField] public Alarme_Incendie alarmeincendie;
+    [SerializeField] public dynamite Dynamite;
 
  
 
@@ -30,6 +31,7 @@ public class Interaction : MonoBehaviour
     public bool HasExtincteur = false;
     public bool HasBriquet = false;
     public bool HasHache = false;
+    public bool HasDynamite = false;
     public bool HasPeinture = false;
     public bool isUsingExtincteur = false;
     private bool canUseExtincteur = true;
@@ -107,6 +109,13 @@ public class Interaction : MonoBehaviour
                     {
                         GrabPeinture(hit.collider.gameObject);
                     }
+                }
+                else if(hit.collider.CompareTag("dynamite"))
+                {
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        Grabdynamite(hit.transform);
+                    } 
                 }
             }
         }
@@ -212,6 +221,20 @@ public class Interaction : MonoBehaviour
         }
     }
 
+    private void Grabdynamite(Transform objectToGrab)
+    {
+        grabbedObject = objectToGrab;
+        grabbedObject.position = GrabMask.position; 
+        grabbedObject.SetParent(GrabMask); 
+        Grabed = true; 
+
+        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true; 
+        }
+    }
+
     
     private void GrabExtincteur(GameObject extincteur)
     {
@@ -239,6 +262,23 @@ public class Interaction : MonoBehaviour
 
     
     private void LaunchObject()
+    {
+        if (grabbedObject != null)
+        {
+            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false; 
+                rb.AddForce(transform.forward * forcelancer, ForceMode.Impulse); 
+            }
+
+            grabbedObject.SetParent(null); 
+            grabbedObject = null; 
+            Grabed = false; 
+        }
+    }
+
+    private void LaunchDynamite()
     {
         if (grabbedObject != null)
         {
@@ -318,8 +358,6 @@ public class Interaction : MonoBehaviour
         murcasser.SetActive(true);
         bc.enabled = false;
     }
-
-
 
     public void GrabPeinture(GameObject BombePeinture)
     {

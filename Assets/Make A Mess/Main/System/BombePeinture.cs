@@ -14,7 +14,7 @@ public class BombePeinture : MonoBehaviour
     {
         DecalProjector newDecal = Instantiate(decalProjector, decalPosition.position, decalPosition.rotation);
         newDecal.size = new Vector3(0.2f, 0.2f, 0.2f); 
-        ScorePeinture();
+        //ScorePeinture();
     }
 
     public void ScorePeinture()

@@ -10,6 +10,7 @@ public class Objet : MonoBehaviour
     [SerializeField] Interaction interaction;
     [SerializeField] Alarme_Incendie alarme;
     [SerializeField] BombePeinture bombepeinture;
+    [SerializeField] Clim climscript;
 
     //GameObject\\
 
@@ -21,7 +22,8 @@ public class Objet : MonoBehaviour
     public bool Cassable; 
     public bool PeutetreBruler;
     public bool PeutetrePeint;
-    public bool Boutton;
+    public bool BouttonTuto;
+    public bool BouttonClim;
 
 
     void start()
@@ -50,9 +52,14 @@ public class Objet : MonoBehaviour
             bombepeinture.Peindre();
         }
 
-        if(collisionEnter && Boutton)
+        if(collisionEnter && BouttonTuto)
         { 
             LightTuto.intensity = 50f;
+        }
+
+        if(collisionEnter && BouttonClim)
+        { 
+            climscript.SoundUp();
         }
     }
 
