@@ -27378,7 +27378,7 @@ MonoBehaviour:
   BombePeinturePrefab: {fileID: 919132149118602267}
   rb: {fileID: 8868420502290915140}
   alarmeincendie: {fileID: 6819538525883134225}
-  Dynamite: {fileID: 0}
+  Dynamite: {fileID: 9040286552794819977}
   GrabMask: {fileID: 1229769170006144993}
   Grabed: 0
   HasExtincteur: 0
@@ -34774,7 +34774,7 @@ MonoBehaviour:
   delay: 10
   countdown: 0
   timer: 0
-  hasexplose: 0
+  hasexplosed: 0
 --- !u!33 &9041509717156325754
 MeshFilter:
   m_ObjectHideFlags: 0

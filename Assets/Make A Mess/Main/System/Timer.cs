@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour
         remainingTime -= Time.deltaTime;
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
-        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        int centseconds = Mathf.FloorToInt(remainingTime % 100); //Ajout de centième de seconde, pas encore testé !!\\
+        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds, centseconds);
     }
 }

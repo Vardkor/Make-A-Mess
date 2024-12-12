@@ -115,6 +115,7 @@ public class Interaction : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         Grabdynamite(hit.transform);
+                        HasDynamite = true;
                     } 
                 }
             }
@@ -129,6 +130,11 @@ public class Interaction : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.F))
             {
                 LaunchObject();
+                if(HasDynamite = true)
+                {
+                    LaunchDynamite();
+                    //Debug.Log("Dyna");
+                }
             }
 
             if(Grabed == true && HasExtincteur == true)
@@ -224,9 +230,10 @@ public class Interaction : MonoBehaviour
     private void Grabdynamite(Transform objectToGrab)
     {
         grabbedObject = objectToGrab;
-        grabbedObject.position = GrabMask.position; 
+        grabbedObject.position = GrabMask.position;
         grabbedObject.SetParent(GrabMask); 
-        Grabed = true; 
+        Grabed = true;
+        HasDynamite = true;
 
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         if (rb != null)
@@ -274,11 +281,12 @@ public class Interaction : MonoBehaviour
 
             grabbedObject.SetParent(null); 
             grabbedObject = null; 
-            Grabed = false; 
+            Grabed = false;
+
         }
     }
 
-    private void LaunchDynamite()
+        private void LaunchDynamite()
     {
         if (grabbedObject != null)
         {
@@ -291,7 +299,11 @@ public class Interaction : MonoBehaviour
 
             grabbedObject.SetParent(null); 
             grabbedObject = null; 
-            Grabed = false; 
+            Grabed = false;
+            Debug.Log("Ouba");
+            Dynamite.countdown = Dynamite.delay;
+            Dynamite.timer = true;
+
         }
     }
 

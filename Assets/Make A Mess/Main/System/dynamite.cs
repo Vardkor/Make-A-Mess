@@ -14,26 +14,28 @@ public class dynamite : MonoBehaviour
     [SerializeField] public AudioSource[] speakers;
     // Delay\\
 
-    public float delay = 10f;
+    public float delay = 3f;
     public float countdown;
 
     //Bool\\
     
     public bool timer;
-    public bool hasexplose;
+    public bool hasexplosed;
+
     public void Update()
     {
         countdown -= Time.deltaTime;
-        if(countdown <= 0f && !hasexplose)
+        if(countdown <= 0f && !hasexplosed)
         {
             Explode();
         }
     }
-    public void DelayDynamite()
-    {
-        countdown = delay;
-        timer = true;
-    }
+    //public void DelayDynamite()
+    //{
+        //countdown = delay;
+        //timer = true;
+        //Debug.Log("Dynamite");
+    //}
 
 
 
@@ -41,6 +43,8 @@ public class dynamite : MonoBehaviour
     {
         if(timer == true)
         {
+            
+            hasexplosed = true;
             Vector3 explositionPosition = transform.position;
 
             Collider[] colliders = Physics.OverlapSphere(explositionPosition, explosionRadius);
