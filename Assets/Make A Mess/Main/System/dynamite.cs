@@ -20,28 +20,36 @@ public class dynamite : MonoBehaviour
     //Bool\\
     
     public bool timer;
+    public bool timerend;
     public bool hasexplosed;
 
     public void Update()
     {
-        countdown -= Time.deltaTime;
-        if(countdown <= 0f && !hasexplosed)
+        if(timer == true)
         {
-            Explode();
+            countdown -= Time.deltaTime;
+            if(countdown <= 0f && !hasexplosed)
+            {
+                Explode();
+                timerend = true;
+            }
         }
     }
-    //public void DelayDynamite()
-    //{
-        //countdown = delay;
-        //timer = true;
-        //Debug.Log("Dynamite");
-    //}
+    public void DelayDynamite()
+    {
+        timer = true;
+        PlayMusic();
+    }
 
+    void Start()
+    {
+        countdown = delay;
+    }
 
 
     public void Explode()
     {
-        if(timer == true)
+        if(timerend == true)
         {
             
             hasexplosed = true;
@@ -58,6 +66,16 @@ public class dynamite : MonoBehaviour
                     rb.AddExplosionForce(explosionForce, explositionPosition, explosionRadius, upwardsModifier, ForceMode.Impulse);
                 }
             }
+        }
+    }
+
+
+    void PlayMusic()
+    {
+        foreach (var speaker in speakers)
+        {
+            speaker.clip = musicClip;
+            speaker.Play();
         }
     }
 }

@@ -24238,7 +24238,7 @@ GameObject:
   - component: {fileID: 9040286552794819975}
   - component: {fileID: 2166649607405143066}
   - component: {fileID: 5804398964979374102}
-  - component: {fileID: 9040286552794819976}
+  - component: {fileID: 9040286552794819978}
   - component: {fileID: 9040286552794819977}
   m_Layer: 3
   m_Name: Dynamite
@@ -34657,7 +34657,30 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!82 &9040286552794819976
+--- !u!114 &9040286552794819977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744825167129365669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b74813ee335c14fa3c70cffbd4ab87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionForce: 1000
+  explosionRadius: 5
+  upwardsModifier: 1
+  musicClip: {fileID: 8300000, guid: 39462d92044ac274fa888bb956d2399a, type: 3}
+  speakers:
+  - {fileID: 9040286552794819978}
+  delay: 10
+  countdown: 0
+  timer: 0
+  timerend: 0
+  hasexplosed: 0
+--- !u!82 &9040286552794819978
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34713,7 +34736,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -34753,28 +34776,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &9040286552794819977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4744825167129365669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0b74813ee335c14fa3c70cffbd4ab87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionForce: 1000
-  explosionRadius: 5
-  upwardsModifier: 1
-  musicClip: {fileID: 8300000, guid: 39462d92044ac274fa888bb956d2399a, type: 3}
-  speakers:
-  - {fileID: 9040286552794819976}
-  delay: 10
-  countdown: 0
-  timer: 0
-  hasexplosed: 0
 --- !u!33 &9041509717156325754
 MeshFilter:
   m_ObjectHideFlags: 0
