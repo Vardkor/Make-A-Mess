@@ -12,6 +12,7 @@ public class dynamite : MonoBehaviour
 
     [SerializeField] public AudioClip musicClip;
     [SerializeField] public AudioSource[] speakers;
+
     // Delay\\
 
     public float delay = 3f;
@@ -22,6 +23,14 @@ public class dynamite : MonoBehaviour
     public bool timer;
     public bool timerend;
     public bool hasexplosed;
+
+    //Script\\
+
+    [SerializeField] public Interaction interaction;
+
+
+
+
 
     public void Update()
     {
@@ -37,8 +46,12 @@ public class dynamite : MonoBehaviour
     }
     public void DelayDynamite()
     {
-        timer = true;
-        PlayMusic();
+        if(interaction.HasDynamite == true)
+        {
+            timer = true;
+            PlayMusic();
+        }
+
     }
 
     void Start()

@@ -117,6 +117,13 @@ public class Interaction : MonoBehaviour
                         Grabdynamite(hit.transform);
                     } 
                 }
+                else if(hit.collider.CompareTag("flechettes"))
+                {
+                   if(Input.GetKeyDown(KeyCode.E))
+                   {
+                        GrabObject(hit.transform);
+                   } 
+                }
             }
         }
         else
@@ -286,36 +293,25 @@ public class Interaction : MonoBehaviour
         }
     }
 
-        private void LaunchDynamite()
+    private void LaunchDynamite()
     {
         if (grabbedObject != null)
         {
-            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-            if (rb != null)
+            if(HasDynamite)
             {
-                rb.isKinematic = false; 
-                rb.AddForce(transform.forward * forcelancer, ForceMode.Impulse); 
+                Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.isKinematic = false; 
+                    rb.AddForce(transform.forward * forcelancer, ForceMode.Impulse); 
+                }
+
+                grabbedObject.SetParent(null); 
+                grabbedObject = null; 
+                Grabed = false;
+                Dynamite.DelayDynamite();
             }
-
-            grabbedObject.SetParent(null); 
-            grabbedObject = null; 
-            Grabed = false;
-            Dynamite.DelayDynamite();
-
         }
-    }
-
-    private IEnumerator ExtincteurUsageTimer()
-    {
-        yield return new WaitForSeconds(TimeExtincteur);
-
-        if (extincteurParticles.isPlaying)
-        {
-            extincteurParticles.gameObject.SetActive(false);
-        }
-
-        isUsingExtincteur = false;
-        canUseExtincteur = false;
     }
 
     private void GrabBriquet(GameObject briquet)
@@ -348,6 +344,36 @@ public class Interaction : MonoBehaviour
         }
     }
 
+    
+
+    public void GrabPeinture(GameObject BombePeinture)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!Grabed && !HasPeinture) 
+            {
+                BombePeinture.transform.position = new Vector3(-2.03685141f, 3.82893682f, 75.0999985f);
+                BombePeintureA.SetActive(true);
+                Grabed = true;
+                HasPeinture = true;
+            }
+        }
+    }
+
+
+    private IEnumerator ExtincteurUsageTimer()
+    {
+        yield return new WaitForSeconds(TimeExtincteur);
+
+        if (extincteurParticles.isPlaying)
+        {
+            extincteurParticles.gameObject.SetActive(false);
+        }
+
+        isUsingExtincteur = false;
+        canUseExtincteur = false;
+    }
+
     public void BreakObject(GameObject Hache)
     {
         Break();
@@ -367,19 +393,5 @@ public class Interaction : MonoBehaviour
         murpascasser.SetActive(false);
         murcasser.SetActive(true);
         bc.enabled = false;
-    }
-
-    public void GrabPeinture(GameObject BombePeinture)
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (!Grabed && !HasPeinture) 
-            {
-                BombePeinture.transform.position = new Vector3(-2.03685141f, 3.82893682f, 75.0999985f);
-                BombePeintureA.SetActive(true);
-                Grabed = true;
-                HasPeinture = true;
-            }
-        }
     }
 }

@@ -34,6 +34,7 @@ TagManager:
   - hache
   - BombePeinture
   - dynamite
+  - flechettes
   layers:
   - Default
   - TransparentFX
