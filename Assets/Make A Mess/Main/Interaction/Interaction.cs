@@ -135,7 +135,7 @@ public class Interaction : MonoBehaviour
             
             else if (Input.GetKeyDown(KeyCode.F))
             {
-                if(HasDynamite = true)
+                if(HasDynamite == true)
                 {
                     LaunchDynamite();
                 }
