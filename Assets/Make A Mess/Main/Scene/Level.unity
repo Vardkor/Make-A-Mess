@@ -1841,6 +1841,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!54 &82369936
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9245,6 +9246,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!54 &328412775
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12700,6 +12702,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!1 &512113850 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8287793789159973316, guid: 2fdd7280424b3af488373fd7359e58b9,
@@ -13881,6 +13884,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87c08245e31880b4b91c605db64f31d6,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.70633334
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 87c08245e31880b4b91c605db64f31d6,
         type: 3}
@@ -15531,6 +15539,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!1 &619826521
 GameObject:
   m_ObjectHideFlags: 0
@@ -15604,6 +15613,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!1 &620477092 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2995828229661691052, guid: 2fdd7280424b3af488373fd7359e58b9,
@@ -16515,6 +16525,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!1 &662417938 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4906978144932614280, guid: 2fdd7280424b3af488373fd7359e58b9,
@@ -27055,6 +27066,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!1 &936991917 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8753310052613211765, guid: 2fdd7280424b3af488373fd7359e58b9,
@@ -39399,6 +39411,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!54 &1270044502
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41089,6 +41102,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!1 &1354828216 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2fdd7280424b3af488373fd7359e58b9,
@@ -48884,6 +48898,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!54 &1643179138
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49570,6 +49585,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!54 &1670532934
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -59775,6 +59791,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!54 &1947936956
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -68044,6 +68061,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!54 &2096799569
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -68686,6 +68704,7 @@ MonoBehaviour:
   scorring: {fileID: 533289842}
   casser: 0
   pascasser: 0
+  vitrebreak: 0
 --- !u!54 &2116104594
 Rigidbody:
   m_ObjectHideFlags: 0
