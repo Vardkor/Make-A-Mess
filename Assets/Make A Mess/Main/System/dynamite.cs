@@ -50,6 +50,7 @@ public class dynamite : MonoBehaviour
         {
             timer = true;
             PlayMusic();
+            interaction.HasDynamite = false;
         }
 
     }

@@ -11,6 +11,7 @@ public class Vitre : MonoBehaviour
 
     public bool casser = false;
     public bool pascasser = false;
+    public bool vitrebreak = false;
 
 
     private void Awake()
@@ -33,6 +34,7 @@ public class Vitre : MonoBehaviour
         vitrecasser.SetActive(true);
         Scorring();
         bc.enabled = false;
+        vitrebreak = true;
     }
     
     private void Scorring()

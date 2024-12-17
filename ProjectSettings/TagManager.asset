@@ -35,6 +35,7 @@ TagManager:
   - BombePeinture
   - dynamite
   - flechettes
+  - Alarme
   layers:
   - Default
   - TransparentFX

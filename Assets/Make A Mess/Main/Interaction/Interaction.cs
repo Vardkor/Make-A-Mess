@@ -21,6 +21,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] public Alarme_Incendie alarmeincendie;
     [SerializeField] public dynamite Dynamite;
+    [SerializeField] public Alarme_Securite alarme_Securite;
 
  
 
@@ -123,6 +124,13 @@ public class Interaction : MonoBehaviour
                    {
                         GrabObject(hit.transform);
                    } 
+                }
+                else if(hit.collider.CompareTag("Alarme"))
+                {
+                    if(Input.GetKeyDown(KeyCode.E))
+                   {
+                        alarme_Securite.ActiveAlarme();
+                   }
                 }
             }
         }
@@ -227,7 +235,7 @@ public class Interaction : MonoBehaviour
         grabbedObject.position = GrabMask.position; 
         grabbedObject.SetParent(GrabMask); 
         Grabed = true; 
-
+ 
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
