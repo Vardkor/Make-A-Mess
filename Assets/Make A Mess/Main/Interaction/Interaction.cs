@@ -22,12 +22,13 @@ public class Interaction : MonoBehaviour
     [SerializeField] public Alarme_Incendie alarmeincendie;
     [SerializeField] public dynamite Dynamite;
     [SerializeField] public Alarme_Securite alarme_Securite;
-
+    [SerializeField] public flechettes flechettescript;
  
 
 
 
     public Transform GrabMask;  
+    public Transform GrabMaskFlechettes; 
     public bool Grabed = false; 
     public bool HasExtincteur = false;
     public bool HasBriquet = false;
@@ -122,7 +123,7 @@ public class Interaction : MonoBehaviour
                 {
                    if(Input.GetKeyDown(KeyCode.E))
                    {
-                        GrabObject(hit.transform);
+                        GrabFlechettes(hit.transform);
                    } 
                 }
                 else if(hit.collider.CompareTag("Alarme"))
@@ -258,6 +259,24 @@ public class Interaction : MonoBehaviour
         }
     }
 
+
+    private void GrabFlechettes(Transform objectToGrab)
+    {
+        grabbedObject = objectToGrab;
+        grabbedObject.position = GrabMaskFlechettes.position; 
+        grabbedObject.rotation = Quaternion.Euler(GrabMaskFlechettes.eulerAngles.z, 90f , 0f);
+
+        grabbedObject.SetParent(GrabMaskFlechettes); 
+        Grabed = true;
+
+        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true; 
+        }
+
+        flechettescript.lancer();
+    }
     
     private void GrabExtincteur(GameObject extincteur)
     {
