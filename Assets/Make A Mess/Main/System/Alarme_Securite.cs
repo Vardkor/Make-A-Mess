@@ -20,10 +20,10 @@ public class Alarme_Securite : MonoBehaviour
                 Debug.Log("Alarme Active");
             }      
         }
-       else if(!AlarmeActiv)
-       {
+        else if(!AlarmeActiv)
+        {
             Debug.Log("Alarme Desactiver");
-       }
+        }
     }
 
 

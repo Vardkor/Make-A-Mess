@@ -24,12 +24,13 @@ public class Interaction : MonoBehaviour
     [SerializeField] public Alarme_Securite alarme_Securite;
     [SerializeField] public flechettes flechettescript;
 
-    public bool HasFlechette;
+    
  
 
 
 
     public Transform GrabMask;  
+    public bool HasFlechette;
     public Transform GrabMaskFlechettes; 
     public bool Grabed = false; 
     public bool HasExtincteur = false;
@@ -134,6 +135,13 @@ public class Interaction : MonoBehaviour
                    {
                         alarme_Securite.ActiveAlarme();
                    }
+                }
+                else if(hit.collider.CompareTag("Interupteur"))
+                {
+                    if(!Input.GetKeyDown(KeyCode.E))
+                    {
+
+                    }
                 }
             }
         }
