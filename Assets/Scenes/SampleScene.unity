@@ -14521,14 +14521,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2870722322607576512}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.26, y: 3.312, z: 98.68}
-  m_LocalScale: {x: 0.89526314, y: 0.5462016, z: 1.0277265}
+  m_LocalRotation: {x: -0.70710665, y: -0, z: -0, w: 0.70710695}
+  m_LocalPosition: {x: -4.69, y: 3.042, z: 99.66}
+  m_LocalScale: {x: 1.6893332, y: 2.0929716, z: 1.9392874}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4968485872023510047}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &2336998151135874465
 GameObject:
   m_ObjectHideFlags: 0
@@ -24642,8 +24642,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.68988055, y: 0.5489338, z: 0.7981167}
+  m_Center: {x: -0.034290362, y: 0.26347342, z: -0.04034876}
 --- !u!23 &4541729992322058330
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -27078,7 +27078,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2b5c98084e7fe624b90988b7bc45ae07, type: 2}
+  - {fileID: 2100000, guid: 5814112e6caeeee49985fa076495d356, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -27614,7 +27614,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: dc36944a6e191504396ab344b3a45e28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30761,7 +30761,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2870722322607576512}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 1226723149311242300, guid: 9ec35410aace9034ab4cce280dd2d982, type: 3}
 --- !u!64 &6966570577235669432
 MeshCollider:
   m_ObjectHideFlags: 0
