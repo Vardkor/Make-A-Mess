@@ -7,31 +7,17 @@ public class flechettes : MonoBehaviour
     public bool collisionenter;
     public BoxCollider boxCollider;
 
-    void Start()
-    {
-        boxCollider = GetComponent<BoxCollider>();
-
-        if (boxCollider == null)
-        {
-            boxCollider.isTrigger = false;
-        }
-    }
-
-    void Update()
+    public void lancer()
     {
         if(collisionenter)
         {
-            lancer();
-        } 
-    }
-
-    public void lancer()
-    {
-       Debug.Log("Toucher");
+            Debug.Log("Ca touche qq choses");
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
+        other = boxCollider;
         collisionenter = true;
     }
 }

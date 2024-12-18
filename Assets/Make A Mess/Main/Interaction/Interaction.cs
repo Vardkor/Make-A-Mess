@@ -23,6 +23,8 @@ public class Interaction : MonoBehaviour
     [SerializeField] public dynamite Dynamite;
     [SerializeField] public Alarme_Securite alarme_Securite;
     [SerializeField] public flechettes flechettescript;
+
+    public bool HasFlechette;
  
 
 
@@ -230,63 +232,9 @@ public class Interaction : MonoBehaviour
     }
 
     
-    private void GrabObject(Transform objectToGrab)
-    {
-        grabbedObject = objectToGrab;
-        grabbedObject.position = GrabMask.position; 
-        grabbedObject.SetParent(GrabMask); 
-        Grabed = true; 
- 
-        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true; 
-        }
-    }
-
-    private void Grabdynamite(Transform objectToGrab)
-    {
-        grabbedObject = objectToGrab;
-        grabbedObject.position = GrabMask.position;
-        grabbedObject.SetParent(GrabMask); 
-        Grabed = true;
-        HasDynamite = true;
-
-        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true; 
-        }
-    }
-
-
-    private void GrabFlechettes(Transform objectToGrab)
-    {
-        grabbedObject = objectToGrab;
-        grabbedObject.position = GrabMaskFlechettes.position; 
-        grabbedObject.rotation = Quaternion.Euler(GrabMaskFlechettes.eulerAngles.z, 90f , 0f);
-
-        grabbedObject.SetParent(GrabMaskFlechettes); 
-        Grabed = true;
-
-        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true; 
-        }
-
-        flechettescript.lancer();
-    }
     
-    private void GrabExtincteur(GameObject extincteur)
-    {
-        extincteur.transform.position = new Vector3(-2.03685141f,3.82893682f,75.0999985f);
-        extincteurA.SetActive(true); 
-        Grabed = true; 
-        HasExtincteur = true;
-    }
 
-        private void ReleaseObject()
+    private void ReleaseObject()
     {
         if (grabbedObject != null)
         {
@@ -302,7 +250,10 @@ public class Interaction : MonoBehaviour
         }
     }
 
+
+    //LAUNCH\\
     
+
     private void LaunchObject()
     {
         if (grabbedObject != null)
@@ -341,6 +292,31 @@ public class Interaction : MonoBehaviour
         }
     }
 
+    private void Launchflechettes()
+    {
+        if (grabbedObject != null)
+        {
+            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false; 
+                rb.AddForce(transform.forward * forcelancer, ForceMode.Impulse); 
+            }
+
+            grabbedObject.SetParent(null); 
+            grabbedObject = null; 
+            Grabed = false;
+            HasFlechette = true;
+
+            if(HasFlechette == true)
+            {
+                flechettescript.lancer();
+            }
+        }
+    }
+
+
+    //GRAB\\
     private void GrabBriquet(GameObject briquet)
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -387,7 +363,62 @@ public class Interaction : MonoBehaviour
         }
     }
 
+    private void GrabObject(Transform objectToGrab)
+    {
+        grabbedObject = objectToGrab;
+        grabbedObject.position = GrabMask.position; 
+        grabbedObject.SetParent(GrabMask); 
+        Grabed = true; 
+ 
+        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true; 
+        }
+    }
 
+    private void Grabdynamite(Transform objectToGrab)
+    {
+        grabbedObject = objectToGrab;
+        grabbedObject.position = GrabMask.position;
+        grabbedObject.SetParent(GrabMask); 
+        Grabed = true;
+        HasDynamite = true;
+
+        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true; 
+        }
+    }
+
+
+    private void GrabFlechettes(Transform objectToGrab)
+    {
+        grabbedObject = objectToGrab;
+        grabbedObject.position = GrabMaskFlechettes.position; 
+        grabbedObject.rotation = Quaternion.Euler(GrabMaskFlechettes.eulerAngles.z, 90f , 0f);
+
+        grabbedObject.SetParent(GrabMaskFlechettes); 
+        Grabed = true;
+
+        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true; 
+        }
+    }
+    
+    private void GrabExtincteur(GameObject extincteur)
+    {
+        extincteur.transform.position = new Vector3(-2.03685141f,3.82893682f,75.0999985f);
+        extincteurA.SetActive(true); 
+        Grabed = true; 
+        HasExtincteur = true;
+    }
+
+
+    //OTHER\\
     private IEnumerator ExtincteurUsageTimer()
     {
         yield return new WaitForSeconds(TimeExtincteur);

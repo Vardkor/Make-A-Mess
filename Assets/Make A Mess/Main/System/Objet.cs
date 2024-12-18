@@ -26,10 +26,15 @@ public class Objet : MonoBehaviour
     public bool BouttonClim;
 
 
+    private Rigidbody rb;
+
+
     void start()
     {
         LightTuto.intensity = 0f;
     }
+
+
     void Update()
     {   
         GameObject hache = hache_main.gameObject;
@@ -65,7 +70,20 @@ public class Objet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        collisionEnter = true;
+
+        if(other.CompareTag("flechettes"))
+        {
+           Debug.Log("Flechettes");
+           Rigidbody rb = other.GetComponent<Rigidbody>();
+           rb.isKinematic = true;
+    
+           //rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+        else
+        {
+            collisionEnter = true;
+        }
+        
     }
 
     void OnTriggerExit(Collider other)
