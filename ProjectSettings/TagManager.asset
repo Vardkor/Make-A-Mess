@@ -10,8 +10,6 @@ TagManager:
   - Plante2
   - Plante3
   - Key
-  - Key3
-  - Key4
   - Speakers
   - Button
   - Extincteur
@@ -37,6 +35,7 @@ TagManager:
   - Interupteur
   - Key5
   - Key2
+  - PDB
   layers:
   - Default
   - TransparentFX

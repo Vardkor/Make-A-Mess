@@ -7,6 +7,9 @@ public class Interaction : MonoBehaviour
 {
     [SerializeField] public GameObject HacheA;
     [SerializeField] public GameObject Hache;
+    [SerializeField] public GameObject PDBA;
+    [SerializeField] public GameObject PDB;
+    [SerializeField] private GameObject PDBPrefab;
     [SerializeField] public GameObject BombePeintureA;
     [SerializeField] public GameObject BombePeinture;
     [SerializeField] private GameObject extincteurA;
@@ -38,6 +41,7 @@ public class Interaction : MonoBehaviour
     public bool HasHache = false;
     public bool HasDynamite = false;
     public bool HasPeinture = false;
+    public bool HasPDB = false;
     public bool isUsingExtincteur = false;
     private bool canUseExtincteur = true;
     private bool isUsingPeinture = false;
@@ -68,6 +72,7 @@ public class Interaction : MonoBehaviour
         briquetA.SetActive(false);
         HacheA.SetActive(false);
         BombePeintureA.SetActive(false);
+        PDBA.SetActive(false);
 
         boxColliderHache = HacheA.GetComponent<BoxCollider>();
     }
@@ -138,9 +143,16 @@ public class Interaction : MonoBehaviour
                 }
                 else if(hit.collider.CompareTag("Interupteur"))
                 {
-                    if(!Input.GetKeyDown(KeyCode.E))
+                    if(Input.GetKeyDown(KeyCode.E))
                     {
 
+                    }
+                }
+                else if(hit.collider.CompareTag("PDB"))
+                {
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        GrabPDB(hit.collider.gameObject);
                     }
                 }
             }
@@ -220,17 +232,27 @@ public class Interaction : MonoBehaviour
                     GameObject newBombePeinture = Instantiate(BombePeinturePrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
                 }
             }
-
-            if(Grabed == true && HasPeinture == true)
+            else if (Grabed && HasPeinture)
             {
-                if(Input.GetMouseButtonDown(0))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
-                    PeintureParticles.Play();
-                    Grabed = true;
-                    HasPeinture = true;
-                    isUsingPeinture = true;
+                    BombePeintureA.SetActive(false);
+                    Grabed = false;
+                    HasPeinture = false;
+                    GameObject newBombePeinture = Instantiate(BombePeinturePrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
                 }
             }
+            else if (Grabed && HasPDB)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    PDBA.SetActive(false);
+                    Grabed = false;
+                    HasPDB = false;
+                    GameObject newBombePeinture = Instantiate(PDBPrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
+                }
+            }
+
             if(Input.GetMouseButtonUp(0))
             {
                 PeintureParticles.Stop();
@@ -423,6 +445,14 @@ public class Interaction : MonoBehaviour
         extincteurA.SetActive(true); 
         Grabed = true; 
         HasExtincteur = true;
+    }
+
+    private void GrabPDB(GameObject PDB)
+    {
+        PDB.transform.position = new Vector3(-2.03685141f,3.82893682f,75.0999985f);
+        PDBA.SetActive(true); 
+        Grabed = true; 
+        HasPDB = true;
     }
 
 

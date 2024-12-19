@@ -5,16 +5,10 @@ using UnityEngine;
 public class Porte : MonoBehaviour
 {
 
-    [SerializeField] GameObject key1;
-    [SerializeField] GameObject key2;
-    [SerializeField] GameObject key3;
-    [SerializeField] GameObject key4;
-    [SerializeField] GameObject key5;
+    [SerializeField] GameObject key;
     [SerializeField] GameObject Door;
 
-    public bool key1T = false;
-    public bool key3T = false;
-    public bool key4T = false;
+    public bool keyT = false;
 
     public bool porteOuverte = false;
     
@@ -30,22 +24,13 @@ public class Porte : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Key"))
                 {
-                    key1T = true;
-                    Destroy(hit.collider.gameObject);
-                }
-                else if (hit.collider.CompareTag("Key3"))
-                {
-                    key3T = true;
-                    Destroy(hit.collider.gameObject);
-                }
-                else if (hit.collider.CompareTag("Key4"))
-                {
-                    key4T = true;
+                    keyT = true;
                     Destroy(hit.collider.gameObject);
                 }
             }
         }
-        if (key1T && key3T && key4T && !porteOuverte)
+
+        if (keyT && !porteOuverte)
         {
             OpenDoor();
         }
