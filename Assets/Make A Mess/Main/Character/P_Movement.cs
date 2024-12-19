@@ -13,8 +13,12 @@ public class P_Movement : MonoBehaviour
     public LayerMask groundMask;
     Vector3 velocity;
     bool isGrounded;
+
+    public bool Sprinting = false;
+    
     public void Update()
     {
+        
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if(isGrounded && velocity.y < 0)
@@ -26,10 +30,12 @@ public class P_Movement : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift))
         {
             speed = 12f;
+            Sprinting = true;
         }
         else
         {
             speed = 6.5f;
+            Sprinting = false;
         }
 
 

@@ -31904,6 +31904,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  Sprinting: 0
 --- !u!54 &7392130066095150438
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34570,7 +34571,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -34585,7 +34586,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -34887,6 +34888,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensity: 400
   playerBody: {fileID: 13002081079299838}
+  PlayerMovement: {fileID: 7390039062045810692}
+  playerCamera: {fileID: 8497995252372160063}
 --- !u!114 &8640513482231863758
 MonoBehaviour:
   m_ObjectHideFlags: 0
