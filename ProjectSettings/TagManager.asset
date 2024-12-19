@@ -10,10 +10,8 @@ TagManager:
   - Plante2
   - Plante3
   - Key
-  - Key2
   - Key3
   - Key4
-  - Key5
   - Speakers
   - Button
   - Extincteur
@@ -37,6 +35,8 @@ TagManager:
   - flechettes
   - Alarme
   - Interupteur
+  - Key5
+  - Key2
   layers:
   - Default
   - TransparentFX
