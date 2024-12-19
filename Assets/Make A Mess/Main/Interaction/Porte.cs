@@ -13,10 +13,8 @@ public class Porte : MonoBehaviour
     [SerializeField] GameObject Door;
 
     public bool key1T = false;
-    public bool key2T = false;
     public bool key3T = false;
     public bool key4T = false;
-    public bool key5T = false;
 
     public bool porteOuverte = false;
     
@@ -35,11 +33,6 @@ public class Porte : MonoBehaviour
                     key1T = true;
                     Destroy(hit.collider.gameObject);
                 }
-                else if (hit.collider.CompareTag("Key2"))
-                {
-                    key2T = true; 
-                    Destroy(hit.collider.gameObject);
-                }
                 else if (hit.collider.CompareTag("Key3"))
                 {
                     key3T = true;
@@ -50,14 +43,9 @@ public class Porte : MonoBehaviour
                     key4T = true;
                     Destroy(hit.collider.gameObject);
                 }
-                else if (hit.collider.CompareTag("Key5"))
-                {
-                    key5T = true;
-                    Destroy(hit.collider.gameObject);
-                }
             }
         }
-        if (key1T && key2T && key3T && key4T && key5T && !porteOuverte)
+        if (key1T && key3T && key4T && !porteOuverte)
         {
             OpenDoor();
         }

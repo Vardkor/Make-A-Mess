@@ -12,6 +12,7 @@ public class flechettes : MonoBehaviour
         if(collisionenter)
         {
             Debug.Log("Ca touche qq choses");
+            //Freeze rigidbody
         }
     }
 
