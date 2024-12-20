@@ -11,8 +11,8 @@ public class P_Movement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-    Vector3 velocity;
-    bool isGrounded;
+    public Vector3 velocity;
+    public bool isGrounded;
 
     public bool Sprinting = false;
     

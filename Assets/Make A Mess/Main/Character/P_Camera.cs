@@ -16,7 +16,6 @@ public class P_Camera : MonoBehaviour
 
     private float m_FieldOfView;
 
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
