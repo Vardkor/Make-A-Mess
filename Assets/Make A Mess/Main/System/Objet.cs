@@ -16,6 +16,8 @@ public class Objet : MonoBehaviour
 
     [SerializeField] private GameObject hache_main;
     [SerializeField] private Light LightTuto;
+    [SerializeField] GameObject key;
+    [SerializeField] GameObject Door;
     
     //Bool\\
     public bool collisionEnter;
@@ -24,6 +26,7 @@ public class Objet : MonoBehaviour
     public bool PeutetrePeint;
     public bool BouttonTuto;
     public bool BouttonClim;
+    public bool PorteOuverte;
 
 
     private Rigidbody rb;
@@ -89,5 +92,14 @@ public class Objet : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         collisionEnter = false;
+    }
+
+    public void PortePatron()
+    {
+        if(!PorteOuverte)
+        {
+            PorteOuverte = true;
+            Door.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        }
     }
 }

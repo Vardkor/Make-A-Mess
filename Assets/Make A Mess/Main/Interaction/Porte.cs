@@ -9,7 +9,6 @@ public class Porte : MonoBehaviour
     [SerializeField] GameObject Door;
 
     public bool keyT = false;
-
     public bool porteOuverte = false;
     
     void Update()
@@ -22,23 +21,25 @@ public class Porte : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (hit.collider.CompareTag("Key"))
-                {
-                    keyT = true;
-                    Destroy(hit.collider.gameObject);
-                }
+                //if (hit.collider.CompareTag("Key"))
+                //{
+                    //keyT = true;
+                    //Destroy(hit.collider.gameObject);
+                    //Door.transform.Rotate(0, 90f, 0);
+                //}
             }
         }
 
         if (keyT && !porteOuverte)
         {
-            OpenDoor();
+            
+            //OpenDoor();
         }
     }
 
     void OpenDoor()
     {
         porteOuverte = true;
-        Door.transform.Rotate(0, 90f, 0);
+        //Door.transform.Rotate(0, 90f, 0);
     }
 }

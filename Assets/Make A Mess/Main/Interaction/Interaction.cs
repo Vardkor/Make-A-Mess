@@ -155,6 +155,14 @@ public class Interaction : MonoBehaviour
                         GrabPDB(hit.collider.gameObject);
                     }
                 }
+                else if(hit.collider.CompareTag("Key"))
+                {
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        objetscript.PortePatron();
+                        Destroy(hit.collider.gameObject);
+                    }
+                }
             }
         }
         else
