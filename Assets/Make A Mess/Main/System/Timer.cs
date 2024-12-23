@@ -13,7 +13,14 @@ public class Timer : MonoBehaviour
         remainingTime -= Time.deltaTime;
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
-        int centseconds = Mathf.FloorToInt(remainingTime % 100); //Ajout de centième de seconde, pas encore testé !!\\
-        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds, centseconds);
+        int centiseconds = Mathf.FloorToInt((remainingTime - Mathf.Floor(remainingTime)) * 100);
+        timer.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, centiseconds);
+
+        if(minutes == 8)
+        {
+            Debug.Log("8  MINUTES");
+        }
     }
+
+
 }

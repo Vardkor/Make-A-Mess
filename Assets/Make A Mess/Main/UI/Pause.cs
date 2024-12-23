@@ -9,7 +9,10 @@ public class Pause : MonoBehaviour
     public static bool GameIsPaused = false;
     [SerializeField] GameObject MenuPause;
 
-
+    void Start ()
+    {
+        MenuPause.SetActive(false);
+    }
     public void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -26,18 +29,23 @@ public class Pause : MonoBehaviour
         
     }
 
-    void Resume()
+    public void Resume()
     {
+        Debug.Log("Resume button pressed");
         MenuPause.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
-    void Menu()
+    public void Menu()
     {
         MenuPause.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
     
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
