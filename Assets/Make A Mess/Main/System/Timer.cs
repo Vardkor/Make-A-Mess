@@ -37,5 +37,9 @@ public class Timer : MonoBehaviour
         {
             Debug.Log("1  MINUTES");
         }
+        if(minutes == 0)
+        {
+            Application.Quit();
+        }
     }
 }
