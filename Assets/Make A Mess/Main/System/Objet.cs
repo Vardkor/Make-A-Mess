@@ -79,8 +79,6 @@ public class Objet : MonoBehaviour
            Debug.Log("Flechettes");
            Rigidbody rb = other.GetComponent<Rigidbody>();
            rb.isKinematic = true;
-    
-           //rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         else
         {

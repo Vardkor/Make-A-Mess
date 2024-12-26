@@ -134,20 +134,6 @@ public class Interaction : MonoBehaviour
                         GrabFlechettes(hit.transform);
                    } 
                 }
-                else if(hit.collider.CompareTag("Alarme"))
-                {
-                    if(Input.GetKeyDown(KeyCode.E))
-                   {
-                        alarme_Securite.ActiveAlarme();
-                   }
-                }
-                else if(hit.collider.CompareTag("Interupteur"))
-                {
-                    if(Input.GetKeyDown(KeyCode.E))
-                    {
-
-                    }
-                }
                 else if(hit.collider.CompareTag("PDB"))
                 {
                     if(Input.GetKeyDown(KeyCode.E))
