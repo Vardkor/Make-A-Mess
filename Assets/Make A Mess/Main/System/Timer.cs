@@ -6,8 +6,22 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timer;
-    [SerializeField]  float remainingTime;
-
+    [SerializeField] float remainingTime;
+    [SerializeField] GameObject Menu930;
+    [SerializeField] GameObject Menu8;
+    [SerializeField] GameObject Menu6;
+    [SerializeField] GameObject Menu3;
+    [SerializeField] GameObject Menu1;
+    
+    public void Start()
+    {
+        Menu930.SetActive(false);
+        Menu8.SetActive(false);
+        Menu6.SetActive(false);
+        Menu3.SetActive(false);
+        Menu1.SetActive(false);
+    }
+    
     void Update()
     {
         remainingTime -= Time.deltaTime;
@@ -15,31 +29,42 @@ public class Timer : MonoBehaviour
         int seconds = Mathf.FloorToInt(remainingTime % 60);
         int centiseconds = Mathf.FloorToInt((remainingTime - Mathf.Floor(remainingTime)) * 100);
         timer.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, centiseconds);
-
-        
-        if(minutes == 9.30)
+ 
+        if(minutes == 9 && seconds == 30)
         {
-            Debug.Log("9.30  MINUTES");
+           Menu930.SetActive(true);
         }
-        if(minutes == 8)
+        if(minutes == 9 && seconds == 0)
         {
-            Debug.Log("8  MINUTES");
+           Menu930.SetActive(false); 
         }
-        if(minutes == 6)
+        if(minutes == 8 && seconds == 0)
         {
-            Debug.Log("6  MINUTES");
+            Menu8.SetActive(true);
         }
-        if(minutes == 3)
+        if(minutes == 7 && seconds == 30)
         {
-            Debug.Log("3  MINUTES");
+           Menu8.SetActive(false); 
         }
-        if(minutes == 1)
+        if(minutes == 6 && seconds == 0)
         {
-            Debug.Log("1  MINUTES");
+            Menu6.SetActive(true);
         }
-        if(minutes == 0)
+        if(minutes == 5 && seconds == 30)
         {
-            Application.Quit();
+           Menu6.SetActive(false); 
+        }
+        if(minutes == 3 && seconds == 0)
+        {
+            Menu3.SetActive(true);
+        }
+        if(minutes == 2 && seconds == 30)
+        {
+           Menu3.SetActive(false); 
+        }
+        if(minutes == 1 && seconds == 0)
+        {
+            Menu1.SetActive(true);
         }
     }
 }
