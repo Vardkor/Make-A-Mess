@@ -11,7 +11,6 @@ public class Alarme_Securite : MonoBehaviour
     public void Start()
     {
         AlarmeActiv = true;
-        Debug.Log("Activation Alarme");
     }
     void Update()
     {

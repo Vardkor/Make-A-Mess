@@ -563,24 +563,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210f19bcbaa53454a8fb7025abbcdb55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Alarme: {fileID: 5634892341847026914}
-  alarmeIncendie: {fileID: 7784368484748197261}
-  feu1: 0
-  feu2: 0
-  feu3: 0
-  feu4: 0
-  feu5: 0
-  feu6: 0
-  feu7: 0
-  feu8: 0
-  feu9: 0
-  feu10: 0
-  feu11: 0
-  alarmeActive: 0
-  briquetmain: 0
-  isColorChanged: 0
-  newColor: {r: 1, g: 0, b: 0, a: 1}
-  objectRenderer: {fileID: 3884319303594675528}
 --- !u!1 &78009557254200473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,20 +989,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5428243983063349662, guid: 2fdd7280424b3af488373fd7359e58b9, type: 3}
---- !u!114 &204338306461315315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4538481750784940193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b495edb9274874f95ed936b40d8ca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surveillanceCamera: {fileID: 4050629604962658057}
-  cameraRender: {fileID: 8400000, guid: f0a45a56077ce004cb2be07fb8cb1baf, type: 2}
 --- !u!33 &205003582804821210
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10756,20 +10724,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3307959125241134380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6035544772677276136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b495edb9274874f95ed936b40d8ca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surveillanceCamera: {fileID: 3438932649892637822}
-  cameraRender: {fileID: 8400000, guid: 046d0790601cc1545b24b5ccb90a97ff, type: 2}
 --- !u!64 &3318900791570671820
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19336,7 +19290,7 @@ GameObject:
   - component: {fileID: 236698203236982411}
   - component: {fileID: 4050629604962658057}
   - component: {fileID: 2870607669492858057}
-  - component: {fileID: 204338306461315315}
+  - component: {fileID: 4538481750784940194}
   m_Layer: 0
   m_Name: Camera_Surveillance
   m_TagString: Untagged
@@ -19344,6 +19298,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4538481750784940194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538481750784940193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3abc22c319124e740a2a77c61d02b420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surveillanceCamera: {fileID: 4050629604962658057}
+  cameraRender: {fileID: 8400000, guid: f0a45a56077ce004cb2be07fb8cb1baf, type: 2}
 --- !u!4 &4542366828074101886
 Transform:
   m_ObjectHideFlags: 0
@@ -20654,7 +20622,7 @@ GameObject:
   - component: {fileID: 3641234795351951935}
   - component: {fileID: 6639331506093935845}
   - component: {fileID: 1047220103654608112}
-  - component: {fileID: 8594011219213105025}
+  - component: {fileID: 6639331506093935846}
   m_Layer: 0
   m_Name: Camera_Surveillance (2)
   m_TagString: Untagged
@@ -23334,7 +23302,7 @@ GameObject:
   - component: {fileID: 1871497394961769391}
   - component: {fileID: 3438932649892637822}
   - component: {fileID: 8438856418853330175}
-  - component: {fileID: 3307959125241134380}
+  - component: {fileID: 8438856418853330176}
   m_Layer: 0
   m_Name: Camera_Surveillance (1)
   m_TagString: Untagged
@@ -25214,6 +25182,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &6639331506093935846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5008988306618979561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3abc22c319124e740a2a77c61d02b420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surveillanceCamera: {fileID: 6639331506093935845}
+  cameraRender: {fileID: 8400000, guid: 120ce1f4022b7f04cbb816f2f90331d4, type: 2}
 --- !u!1 &6643589298984615959
 GameObject:
   m_ObjectHideFlags: 0
@@ -31333,6 +31315,20 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &8438856418853330176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6035544772677276136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3abc22c319124e740a2a77c61d02b420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surveillanceCamera: {fileID: 3438932649892637822}
+  cameraRender: {fileID: 8400000, guid: 046d0790601cc1545b24b5ccb90a97ff, type: 2}
 --- !u!23 &8451781653067097681
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36456,20 +36452,6 @@ Transform:
   m_Father: {fileID: 1520479157471812591}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8594011219213105025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5008988306618979561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b495edb9274874f95ed936b40d8ca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surveillanceCamera: {fileID: 6639331506093935845}
-  cameraRender: {fileID: 8400000, guid: 120ce1f4022b7f04cbb816f2f90331d4, type: 2}
 --- !u!4 &8597735799353488647
 Transform:
   m_ObjectHideFlags: 0
@@ -37036,7 +37018,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 12.95554
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -37142,7 +37124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8733035708711919777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb86ba20e3a55e40881237e7634f648, type: 3}
+  m_Script: {fileID: 11500000, guid: 998b9c77afbd6d942a094ab8426f4529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   vitre: {fileID: 819321664558383476}
