@@ -6,7 +6,9 @@ public class Alarme_Securite : MonoBehaviour
 {
     [SerializeField] public Vitre vitre;
     [SerializeField] public AudioSource Alarme;
+    [SerializeField] public GameObject Grille;
     public bool AlarmeActiv = false;
+    public bool card = false;
 
     public void Start()
     {
@@ -25,7 +27,10 @@ public class Alarme_Securite : MonoBehaviour
         {
             if(Alarme.isPlaying)
             {
-                Alarme.Stop();
+                if(card)
+                {
+                    Alarme.Stop();
+                }
             }
         }
     }
@@ -33,9 +38,20 @@ public class Alarme_Securite : MonoBehaviour
     {
         if (other.CompareTag("Grab")) 
         {
-            AlarmeActiv = false;
+            if(card)
+            {
+                AlarmeActiv = false;
+                Grille.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+            }
+            else 
+            {
+                Debug.Log("Va checher la carte d'acces dans le bureau du patron");
+            }
         }
     }
 
-    
+    public void Card()
+    {
+        card = true;
+    }   
 }

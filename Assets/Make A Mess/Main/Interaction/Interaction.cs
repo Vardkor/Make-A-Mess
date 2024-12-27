@@ -27,6 +27,8 @@ public class Interaction : MonoBehaviour
     [SerializeField] public Alarme_Securite alarme_Securite;
     [SerializeField] public flechettes flechettescript;
 
+    [SerializeField] public Alarme_Securite alarmesecurite;
+
     
  
 
@@ -147,6 +149,13 @@ public class Interaction : MonoBehaviour
                     {
                         objetscript.PortePatron();
                         Destroy(hit.collider.gameObject);
+                    }
+                }
+                else if(hit.collider.CompareTag("carteacces"))
+                {
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        alarmesecurite.Card();
                     }
                 }
             }
