@@ -12,6 +12,7 @@ public class Timer : MonoBehaviour
     [SerializeField] GameObject Menu6;
     [SerializeField] GameObject Menu3;
     [SerializeField] GameObject Menu1;
+    [SerializeField] public AudioSource Notif;
     
     public void Start()
     {
@@ -33,38 +34,47 @@ public class Timer : MonoBehaviour
         if(minutes == 9 && seconds == 30)
         {
            Menu930.SetActive(true);
+           Notif.Play();
         }
         if(minutes == 9 && seconds == 0)
         {
-           Menu930.SetActive(false); 
+           Menu930.SetActive(false);
+           Notif.Stop(); 
         }
         if(minutes == 8 && seconds == 0)
         {
             Menu8.SetActive(true);
+            Notif.Play();
         }
         if(minutes == 7 && seconds == 30)
         {
-           Menu8.SetActive(false); 
+           Menu8.SetActive(false);
+           Notif.Stop(); 
         }
         if(minutes == 6 && seconds == 0)
         {
             Menu6.SetActive(true);
+            Notif.Play();
         }
         if(minutes == 5 && seconds == 30)
         {
-           Menu6.SetActive(false); 
+           Menu6.SetActive(false);
+           Notif.Stop(); 
         }
         if(minutes == 3 && seconds == 0)
         {
             Menu3.SetActive(true);
+            Notif.Play();
         }
         if(minutes == 2 && seconds == 30)
         {
-           Menu3.SetActive(false); 
+           Menu3.SetActive(false);
+           Notif.Stop(); 
         }
         if(minutes == 1 && seconds == 0)
         {
             Menu1.SetActive(true);
+            Notif.Play();
         }
     }
 }
