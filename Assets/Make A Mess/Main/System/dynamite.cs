@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class dynamite : MonoBehaviour
 {
-    [SerializeField] private float explosionForce = 1000f;  // Force de l'explosion
-    [SerializeField] private float explosionRadius = 5f;   // Rayon d'effet
-    [SerializeField] private float upwardsModifier = 1f;   // Souffle vers le haut
+    [SerializeField] private float explosionForce = 100f;  // Force de l'explosion
+    [SerializeField] private float explosionRadius = 2f;   // Rayon d'effet
+    [SerializeField] private float upwardsModifier = 0.2f;   // Souffle vers le haut
 
     //Sound\\
 

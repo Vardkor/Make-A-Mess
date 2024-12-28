@@ -15,7 +15,6 @@ public class Objet : MonoBehaviour
     //GameObject\\
 
     [SerializeField] private GameObject hache_main;
-    [SerializeField] private Light LightTuto;
     [SerializeField] GameObject key;
     [SerializeField] GameObject Door;
     
@@ -24,19 +23,11 @@ public class Objet : MonoBehaviour
     public bool Cassable; 
     public bool PeutetreBruler;
     public bool PeutetrePeint;
-    public bool BouttonTuto;
     public bool BouttonClim;
     public bool PorteOuverte;
 
 
     private Rigidbody rb;
-
-
-    void start()
-    {
-        LightTuto.intensity = 0f;
-    }
-
 
     void Update()
     {   
@@ -58,11 +49,6 @@ public class Objet : MonoBehaviour
         if(collisionEnter && Input.GetMouseButton(0) && PeutetrePeint)
         { 
             bombepeinture.Peindre();
-        }
-
-        if(collisionEnter && BouttonTuto)
-        { 
-            LightTuto.intensity = 50f;
         }
 
         if(collisionEnter && BouttonClim)
@@ -87,10 +73,7 @@ public class Objet : MonoBehaviour
         
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        collisionEnter = false;
-    }
+
 
     public void PortePatron()
     {

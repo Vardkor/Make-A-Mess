@@ -37,6 +37,7 @@ TagManager:
   - Key2
   - PDB
   - carteacces
+  - BoxTutoHautDesMarches
   layers:
   - Default
   - TransparentFX
