@@ -11,6 +11,7 @@ public class Objet : MonoBehaviour
     [SerializeField] Alarme_Incendie alarme;
     [SerializeField] BombePeinture bombepeinture;
     [SerializeField] Clim climscript;
+    [SerializeField] Tutorial_Manager tutorialscript;
 
     //GameObject\\
 
@@ -59,20 +60,16 @@ public class Objet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-
         if(other.CompareTag("flechettes"))
         {
-           Debug.Log("Flechettes");
            Rigidbody rb = other.GetComponent<Rigidbody>();
            rb.isKinematic = true;
         }
-        else
+        else 
         {
             collisionEnter = true;
         }
-        
     }
-
 
 
     public void PortePatron()
