@@ -12,6 +12,7 @@ public class Objet : MonoBehaviour
     [SerializeField] BombePeinture bombepeinture;
     [SerializeField] Clim climscript;
     [SerializeField] Tutorial_Manager tutorialscript;
+    [SerializeField] Timer timerscript;
 
     //GameObject\\
 
@@ -26,6 +27,7 @@ public class Objet : MonoBehaviour
     public bool PeutetrePeint;
     public bool BouttonClim;
     public bool PorteOuverte;
+    public bool boxTimer;
 
 
     private Rigidbody rb;
@@ -65,7 +67,11 @@ public class Objet : MonoBehaviour
            Rigidbody rb = other.GetComponent<Rigidbody>();
            rb.isKinematic = true;
         }
-        else 
+        else if(boxTimer)
+        {
+            timerscript.StartingTimer();
+        }
+        else
         {
             collisionEnter = true;
         }

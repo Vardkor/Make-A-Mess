@@ -7,6 +7,7 @@ public class Tutorial_Manager : MonoBehaviour
 {
     [SerializeField] private Light Light;
     [SerializeField] public TextMeshProUGUI textMeshPro;
+
     public bool Boutton;
     public bool collisionEnter;
 
@@ -36,4 +37,7 @@ public class Tutorial_Manager : MonoBehaviour
     {
         collisionEnter = false;
     }
+
+
+
 }

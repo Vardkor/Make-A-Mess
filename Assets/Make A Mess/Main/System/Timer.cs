@@ -13,6 +13,8 @@ public class Timer : MonoBehaviour
     [SerializeField] GameObject Menu3;
     [SerializeField] GameObject Menu1;
     [SerializeField] public AudioSource Notif;
+    [SerializeField] public AudioSource soundTimer;
+    public bool StartTimer;
     
     public void Start()
     {
@@ -25,56 +27,65 @@ public class Timer : MonoBehaviour
     
     void Update()
     {
-        remainingTime -= Time.deltaTime;
-        int minutes = Mathf.FloorToInt(remainingTime / 60);
-        int seconds = Mathf.FloorToInt(remainingTime % 60);
-        int centiseconds = Mathf.FloorToInt((remainingTime - Mathf.Floor(remainingTime)) * 100);
-        timer.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, centiseconds);
- 
-        if(minutes == 9 && seconds == 30)
+        if(StartTimer)
         {
-           Menu930.SetActive(true);
-           Notif.Play();
+            remainingTime -= Time.deltaTime;
+            int minutes = Mathf.FloorToInt(remainingTime / 60);
+            int seconds = Mathf.FloorToInt(remainingTime % 60);
+            int centiseconds = Mathf.FloorToInt((remainingTime - Mathf.Floor(remainingTime)) * 100);
+            timer.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, centiseconds);
+    
+            if(minutes == 9 && seconds == 30)
+            {
+                Menu930.SetActive(true);
+                Notif.Play();
+            }
+            if(minutes == 9 && seconds == 0)
+            {
+                Menu930.SetActive(false);
+                Notif.Stop(); 
+            }
+            if(minutes == 8 && seconds == 0)
+            {
+                Menu8.SetActive(true);
+                Notif.Play();
+            }
+            if(minutes == 7 && seconds == 30)
+            {
+                Menu8.SetActive(false);
+                Notif.Stop(); 
+            }
+            if(minutes == 6 && seconds == 0)
+            {
+                Menu6.SetActive(true);
+                Notif.Play();
+            }
+            if(minutes == 5 && seconds == 30)
+            {
+                Menu6.SetActive(false);
+                Notif.Stop(); 
+            }
+            if(minutes == 3 && seconds == 0)
+            {
+                Menu3.SetActive(true);
+                Notif.Play();
+            }
+            if(minutes == 2 && seconds == 30)
+            {
+                Menu3.SetActive(false);
+                Notif.Stop(); 
+            }
+            if(minutes == 1 && seconds == 0)
+            {
+                Menu1.SetActive(true);
+                Notif.Play();
+            }
         }
-        if(minutes == 9 && seconds == 0)
-        {
-           Menu930.SetActive(false);
-           Notif.Stop(); 
-        }
-        if(minutes == 8 && seconds == 0)
-        {
-            Menu8.SetActive(true);
-            Notif.Play();
-        }
-        if(minutes == 7 && seconds == 30)
-        {
-           Menu8.SetActive(false);
-           Notif.Stop(); 
-        }
-        if(minutes == 6 && seconds == 0)
-        {
-            Menu6.SetActive(true);
-            Notif.Play();
-        }
-        if(minutes == 5 && seconds == 30)
-        {
-           Menu6.SetActive(false);
-           Notif.Stop(); 
-        }
-        if(minutes == 3 && seconds == 0)
-        {
-            Menu3.SetActive(true);
-            Notif.Play();
-        }
-        if(minutes == 2 && seconds == 30)
-        {
-           Menu3.SetActive(false);
-           Notif.Stop(); 
-        }
-        if(minutes == 1 && seconds == 0)
-        {
-            Menu1.SetActive(true);
-            Notif.Play();
-        }
+    }
+
+    public void StartingTimer()
+    {
+        StartTimer = true;
+        soundTimer.Play();
     }
 }
