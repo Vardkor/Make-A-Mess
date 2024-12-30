@@ -34,6 +34,7 @@ public class Objet : MonoBehaviour
     //Timer\\
     [SerializeField] float remainingTime;
     public bool StartTimer;
+    public bool timerStarter;
     
 
 
@@ -49,14 +50,15 @@ public class Objet : MonoBehaviour
         {
             if (GetComponent<Collider>().CompareTag("Plante1"))
             {
-                if(alarmeincendie.feu1)
+                if(alarmeincendie.feu1 && !StartTimer)
                 {
                     StartTimer = true;
+                    timerStarter = true;  
+                }
 
-                    if(StartTimer)
-                    {
-                        TimeFire();
-                    }
+                if(timerStarter)
+                {
+                    TimeFire();
                 }
             }
         }
@@ -95,6 +97,12 @@ public class Objet : MonoBehaviour
         }
     }
 
+    void OnTriggerExit(Collider other)
+    {
+        collisionEnter = false;
+    }
+    
+
     public void OnTriggerStay(Collider other)
     {
         if(other.GetComponent<Collider>().CompareTag("ballegolf"))
@@ -116,12 +124,9 @@ public class Objet : MonoBehaviour
     public void TimeFire()
     {
         remainingTime -= Time.deltaTime;
-        int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
-        int centiseconds = Mathf.FloorToInt((remainingTime - Mathf.Floor(remainingTime)) * 100);
 
-
-        if(seconds == 0)
+        if(remainingTime > 0f)
         {
             Debug.Log("En feu le type");
         }
