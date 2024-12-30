@@ -17,6 +17,7 @@ public class Objet : MonoBehaviour
     //GameObject\\
 
     [SerializeField] private GameObject hache_main;
+    [SerializeField] private GameObject Pieds_De_Biche_Main;
     [SerializeField] GameObject key;
     [SerializeField] GameObject Door;
     
@@ -35,6 +36,7 @@ public class Objet : MonoBehaviour
     void Update()
     {   
         GameObject hache = hache_main.gameObject;
+        GameObject PDB = Pieds_De_Biche_Main.gameObject;
         
         if (collisionEnter)
         {
@@ -46,7 +48,8 @@ public class Objet : MonoBehaviour
 
         if(collisionEnter && Input.GetMouseButton(0) && Cassable)  
         {
-            interaction.BreakObject(hache);
+            interaction.BreakObjectHache(hache);
+            interaction.BreakObjectPDB(PDB);
         }
 
         if(collisionEnter && Input.GetMouseButton(0) && PeutetrePeint)
@@ -74,6 +77,14 @@ public class Objet : MonoBehaviour
         else
         {
             collisionEnter = true;
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if(other.GetComponent<Collider>().CompareTag("ballegolf"))
+        {
+            Debug.Log("In the trou");
         }
     }
 

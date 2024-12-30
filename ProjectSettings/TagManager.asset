@@ -38,6 +38,7 @@ TagManager:
   - PDB
   - carteacces
   - BoxTutoHautDesMarches
+  - ballegolf
   layers:
   - Default
   - TransparentFX

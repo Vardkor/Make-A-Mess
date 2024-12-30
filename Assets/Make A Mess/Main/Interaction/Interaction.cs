@@ -473,7 +473,12 @@ public class Interaction : MonoBehaviour
         canUseExtincteur = false;
     }
 
-    public void BreakObject(GameObject Hache)
+    public void BreakObjectHache(GameObject Hache)
+    {
+        Break();
+        casser = true;
+    }
+    public void BreakObjectPDB(GameObject PDB)
     {
         Break();
         casser = true;
