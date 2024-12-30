@@ -8,7 +8,7 @@ public class Objet : MonoBehaviour
     //Script\\
 
     [SerializeField] Interaction interaction;
-    [SerializeField] Alarme_Incendie alarme;
+    [SerializeField] Alarme_Incendie alarmeincendie;
     [SerializeField] BombePeinture bombepeinture;
     [SerializeField] Clim climscript;
     [SerializeField] Tutorial_Manager tutorialscript;
@@ -31,6 +31,13 @@ public class Objet : MonoBehaviour
     public bool boxTimer;
 
 
+    //Timer\\
+    [SerializeField] float remainingTime;
+    public bool StartTimer;
+    
+
+
+
     private Rigidbody rb;
 
     void Update()
@@ -42,7 +49,15 @@ public class Objet : MonoBehaviour
         {
             if (GetComponent<Collider>().CompareTag("Plante1"))
             {
-                Debug.Log("Plante est la ");
+                if(alarmeincendie.feu1)
+                {
+                    StartTimer = true;
+
+                    if(StartTimer)
+                    {
+                        TimeFire();
+                    }
+                }
             }
         }
 
@@ -95,6 +110,20 @@ public class Objet : MonoBehaviour
         {
             PorteOuverte = true;
             Door.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        }
+    }
+
+    public void TimeFire()
+    {
+        remainingTime -= Time.deltaTime;
+        int minutes = Mathf.FloorToInt(remainingTime / 60);
+        int seconds = Mathf.FloorToInt(remainingTime % 60);
+        int centiseconds = Mathf.FloorToInt((remainingTime - Mathf.Floor(remainingTime)) * 100);
+
+
+        if(seconds == 0)
+        {
+            Debug.Log("En feu le type");
         }
     }
 }
