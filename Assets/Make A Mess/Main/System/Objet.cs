@@ -20,6 +20,7 @@ public class Objet : MonoBehaviour
     [SerializeField] private GameObject Pieds_De_Biche_Main;
     [SerializeField] GameObject key;
     [SerializeField] GameObject Door;
+    [SerializeField] public ParticleSystem FireParticle;
     
     //Bool\\
     public bool collisionEnter;
@@ -46,22 +47,6 @@ public class Objet : MonoBehaviour
         GameObject hache = hache_main.gameObject;
         GameObject PDB = Pieds_De_Biche_Main.gameObject;
         
-        if (collisionEnter)
-        {
-            if (GetComponent<Collider>().CompareTag("Plante1"))
-            {
-                if(alarmeincendie.feu1 && !StartTimer)
-                {
-                    StartTimer = true;
-                    timerStarter = true;  
-                }
-
-                if(timerStarter)
-                {
-                    TimeFire();
-                }
-            }
-        }
 
         if(collisionEnter && Input.GetMouseButton(0) && Cassable)  
         {
@@ -78,6 +63,11 @@ public class Objet : MonoBehaviour
         { 
             climscript.SoundUp();
         }
+
+        if(StartTimer)
+        {
+            TimeFire();
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -90,6 +80,13 @@ public class Objet : MonoBehaviour
         else if(boxTimer)
         {
             timerscript.StartingTimer();
+        }
+        else if(other.CompareTag("Plante1"))
+        {
+            if(alarmeincendie.feu1 && PeutetreBruler)
+            {
+                StartTimer = true;
+            }
         }
         else
         {
@@ -126,9 +123,9 @@ public class Objet : MonoBehaviour
         remainingTime -= Time.deltaTime;
         int seconds = Mathf.FloorToInt(remainingTime % 60);
 
-        if(remainingTime > 0f)
+        if(seconds == 0.000)
         {
-            Debug.Log("En feu le type");
+            FireParticle.Play();
         }
     }
 }
