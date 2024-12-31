@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour
 {
 
-    public static bool GameIsPaused = false;
+    public static bool IsPaused = false;
     [SerializeField] GameObject MenuPause;
 
     void Start ()
@@ -17,7 +17,7 @@ public class Pause : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused)
+            if (IsPaused)
             {
                 Resume();
             }
@@ -31,17 +31,16 @@ public class Pause : MonoBehaviour
 
     public void Resume()
     {
-        Debug.Log("Resume button pressed");
         MenuPause.SetActive(false);
         Time.timeScale = 1f;
-        GameIsPaused = false;
+        IsPaused = false;
     }
 
     public void Menu()
     {
         MenuPause.SetActive(true);
         Time.timeScale = 0f;
-        GameIsPaused = true;
+        IsPaused = true;
     }
     
     public void Quit()
