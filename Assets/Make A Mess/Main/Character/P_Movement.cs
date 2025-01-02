@@ -15,7 +15,10 @@ public class P_Movement : MonoBehaviour
     public bool isGrounded;
 
     public bool Sprinting = false;
-    
+
+    [SerializeField] Tuto_Text tutomoov;
+
+
     public void Update()
     {
         
@@ -44,17 +47,18 @@ public class P_Movement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpheight * -2f * gravity);
         }
 
-        
+        if(tutomoov.ControlActif)
+        {
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
 
-       float x = Input.GetAxis("Horizontal");
-       float z = Input.GetAxis("Vertical");
+            Vector3 move = transform.right * x + transform.forward * z;
 
-       Vector3 move = transform.right * x + transform.forward * z;
+            velocity.y += gravity * Time.deltaTime;
 
-       velocity.y += gravity * Time.deltaTime;
+            controller.Move(move * speed * Time.deltaTime);
 
-       controller.Move(move * speed * Time.deltaTime);
-
-       controller.Move(velocity * Time.deltaTime);
+            controller.Move(velocity * Time.deltaTime);
+        }
     }
 }

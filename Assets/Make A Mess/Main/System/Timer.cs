@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
     [SerializeField] GameObject Menu1;
     [SerializeField] public AudioSource Notif;
     [SerializeField] public AudioSource soundTimer;
+    [SerializeField] Tuto_Text tutoText;
     public bool StartTimer;
     
     public void Start()
@@ -87,5 +88,6 @@ public class Timer : MonoBehaviour
     {
         StartTimer = true;
         soundTimer.Play();
+        tutoText.StartTimerEnd = true;
     }
 }

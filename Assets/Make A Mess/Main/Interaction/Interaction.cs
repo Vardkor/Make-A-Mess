@@ -26,7 +26,6 @@ public class Interaction : MonoBehaviour
     [SerializeField] public dynamite Dynamite;
     [SerializeField] public Alarme_Securite alarme_Securite;
     [SerializeField] public flechettes flechettescript;
-
     [SerializeField] public Alarme_Securite alarmesecurite;
 
     
@@ -85,8 +84,8 @@ public class Interaction : MonoBehaviour
         if (!Grabed)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 10))
-            { 
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 10f))
+            {
                 if (hit.collider.CompareTag("Grab"))
                 {
                     if (Input.GetKeyDown(KeyCode.E)) 
