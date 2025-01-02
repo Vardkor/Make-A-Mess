@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
     [SerializeField] public AudioSource Notif;
     [SerializeField] public AudioSource soundTimer;
     [SerializeField] Tuto_Text tutoText;
+    [SerializeField] Objet scriptobjet;
     public bool StartTimer;
     
     public void Start()
@@ -57,7 +58,7 @@ public class Timer : MonoBehaviour
             }
             if(minutes == 3 && seconds == 0)
             {
-                UpdateTextContent("Bien. Tu voulais de l’attention ? Tu l’as. J’ai appelé les flics, et ils seront là dans 3 minutes. Rappelle-toi de cette sensation : être complètement dépassé. Ça t’était déjà familier quand je t’ai viré, non ? Mais cette fois, ce ne sera pas un carton de tes affaires qu’on emportera, ce sera toi, menotté.");
+                UpdateTextContent("Écoute... arrête ça. Sors tant que tu peux. Je te le demande, ne fais pas pire. Pars maintenant, s’il te plaît.");
                 Notif.Play();
             }
             if(minutes == 2 && seconds == 30)
@@ -66,9 +67,13 @@ public class Timer : MonoBehaviour
             }
             if(minutes == 1 && seconds == 0)
             {
-                UpdateTextContent("Il te reste 1 minute. Une minute pour éviter d’ajouter 'criminel raté' à ton CV déjà pathétique. Mais non, tu vas rester, n’est-ce pas ? Parce que tu es trop stupide pour comprendre quand tu as perdu. Rappelle-toi juste : tout ce que tu fais ici aujourd’hui, c’est confirmer que j’ai eu raison de te virer.");
+                UpdateTextContent("Il te reste 1 minute. Ça suffit, s’il te plaît, pars maintenant. Tu ne veux pas finir en prison, et moi, je ne veux pas ça sur la conscience. Sois raisonnable, je t’en supplie.");
                 Notif.Play();
             }
+        }
+        else if(scriptobjet.TimeExit)
+        {
+            Debug.Log("Tu sort avant perdu !");
         }
     }
 
@@ -82,5 +87,10 @@ public class Timer : MonoBehaviour
     public void UpdateTextContent(string newText)
     {
         Text.text = newText;
+    }
+
+    public void TimeExit()
+    {
+        scriptobjet.TimeExit = true;
     }
 }

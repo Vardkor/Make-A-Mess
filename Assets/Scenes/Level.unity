@@ -17494,6 +17494,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 1
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -40884,6 +40885,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -55486,6 +55488,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -72335,6 +72338,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -78299,6 +78303,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -84338,6 +84343,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -89030,6 +89036,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -89511,6 +89518,7 @@ MonoBehaviour:
   BouttonClim: 1
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -104206,7 +104214,7 @@ MonoBehaviour:
   bombepeinture: {fileID: 0}
   climscript: {fileID: 0}
   tutorialscript: {fileID: 0}
-  timerscript: {fileID: 0}
+  timerscript: {fileID: 8980500143561091975}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
   key: {fileID: 0}
@@ -104219,6 +104227,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 2
   StartTimer: 0
   timerStarter: 0
@@ -108690,6 +108699,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -110471,6 +110481,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 1
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -113574,6 +113585,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -118193,7 +118205,7 @@ MonoBehaviour:
   bombepeinture: {fileID: 0}
   climscript: {fileID: 0}
   tutorialscript: {fileID: 0}
-  timerscript: {fileID: 0}
+  timerscript: {fileID: 8980500143561091975}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
   key: {fileID: 0}
@@ -118206,6 +118218,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 2
   StartTimer: 0
   timerStarter: 0
@@ -130862,6 +130875,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -131858,6 +131872,7 @@ MonoBehaviour:
   Notif: {fileID: 3434817555994970990}
   soundTimer: {fileID: 3410441471783872551}
   tutoText: {fileID: 8980158173185799354}
+  scriptobjet: {fileID: 994809548961313184}
   StartTimer: 0
 --- !u!33 &8982515139962362759
 MeshFilter:
@@ -133566,6 +133581,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0

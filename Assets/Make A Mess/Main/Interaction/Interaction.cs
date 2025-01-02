@@ -429,7 +429,7 @@ public class Interaction : MonoBehaviour
     {
         grabbedObject = objectToGrab;
         grabbedObject.position = GrabMaskFlechettes.position; 
-        grabbedObject.rotation = Quaternion.Euler(GrabMaskFlechettes.eulerAngles.z, 90f , 0f);
+        grabbedObject.rotation = GrabMaskFlechettes.rotation;
 
         grabbedObject.SetParent(GrabMaskFlechettes); 
         Grabed = true;

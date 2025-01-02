@@ -30,6 +30,7 @@ public class Objet : MonoBehaviour
     public bool BouttonClim;
     public bool PorteOuverte;
     public bool boxTimer;
+    public bool TimeExit;
 
 
     //Timer\\
@@ -80,6 +81,8 @@ public class Objet : MonoBehaviour
         else if(boxTimer)
         {
             timerscript.StartingTimer();
+            boxTimer = false;
+            
         }
         else if(other.CompareTag("Plante1"))
         {
@@ -88,10 +91,15 @@ public class Objet : MonoBehaviour
                 StartTimer = true;
             }
         }
+        else if(!boxTimer)
+        {
+            TimeExit = true;
+            timerscript.TimeExit();
+        }
         else
         {
             collisionEnter = true;
-        }
+        } 
     }
 
     void OnTriggerExit(Collider other)
