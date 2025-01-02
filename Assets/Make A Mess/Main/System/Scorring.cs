@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.UIElements;
 using TMPro;
 
 public class Scorring : MonoBehaviour
