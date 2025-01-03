@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class End : MonoBehaviour
 {
+    [SerializeField] GameObject FinUI;
     public bool BoxEnd;
     void OnTriggerEnter(Collider other)
     {
         BoxEnd = true;
+        FinUI.SetActive(true);
+    }
+
+    void Start()
+    {
+        FinUI.SetActive(false);
     }
 }
