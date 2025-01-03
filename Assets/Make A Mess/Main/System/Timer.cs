@@ -28,7 +28,8 @@ public class Timer : MonoBehaviour
             int seconds = Mathf.FloorToInt(remainingTime % 60);
             int centiseconds = Mathf.FloorToInt((remainingTime - Mathf.Floor(remainingTime)) * 100);
             timer.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, centiseconds);
-    
+
+            
             if(minutes == 9 && seconds == 30)
             {
                 UpdateTextContent("C’est toi ?! T’as vraiment osé revenir dans MON musée après avoir été viré comme une merde ? Tu crois que tu vas réparer ton ego en détruisant ce que je possède ? Tu étais inutile alors, et tu l’es toujours. Prends tes affaires et dégage avant que je ne te traîne devant les tribunaux.");
@@ -71,17 +72,12 @@ public class Timer : MonoBehaviour
                 Notif.Play();
             }
         }
-        else if(scriptobjet.TimeExit)
-        {
-            Debug.Log("Tu sort avant perdu !");
-        }
     }
 
     public void StartingTimer()
     {
         StartTimer = true;
         soundTimer.Play();
-        tutoText.StartTimerEnd = true;
     }
 
     public void UpdateTextContent(string newText)

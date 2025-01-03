@@ -7,12 +7,16 @@ using TMPro;
 public class Tuto_Text : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI Text;
+    [SerializeField] P_Movement p_Movement;
+    [SerializeField] public GameObject TutoGuizmo;
+    [SerializeField] public GameObject FinTunnelGuizmo;
     public bool Box1;
     public bool Box2;
     public bool Box3;
     public bool Box4;
     public bool Box5;
     public bool BoxText;
+    public bool TutoFini;
 
 
     public bool ControlActif = true;
@@ -32,30 +36,19 @@ public class Tuto_Text : MonoBehaviour
         if(StartTimerBloc)
         {
             remainingTimeBloc -= Time.deltaTime;
-            int seconds = Mathf.FloorToInt(remainingTimeBloc % 60);
+            int secondsBLOC = Mathf.FloorToInt(remainingTimeBloc % 60);
 
-            if(seconds == 0f)
+            if(secondsBLOC == 0f)
             {
                 ControlActif = true;
-            }
-        }
-        if(StartTimerEnd)
-        {
-            remainingTimeEnd -= Time.deltaTime;
-            int seconds = Mathf.FloorToInt(remainingTimeEnd % 60);
-
-            if(seconds == 0f)
-            {
-                UpdateTextContent("");
             }
         }
     }
 
 
-
     public void OnTriggerEnter(Collider other)
     {
-        if(Box1 && BoxText)
+        if(Box1)
         {
             if(other.GetComponent<Collider>().CompareTag("Player"))
             {
@@ -63,7 +56,7 @@ public class Tuto_Text : MonoBehaviour
                 Box1 = false;
             }
         }
-        else if(Box2 && !Box1 && BoxText)
+        else if(Box2 && !Box1)
         {
             if(other.GetComponent<Collider>().CompareTag("Player"))
             {
@@ -71,7 +64,7 @@ public class Tuto_Text : MonoBehaviour
                 Box2 = false;
             }
         }
-        else if(Box2 && !Box1 && BoxText)
+        else if(Box2 && !Box1)
         {
             if(other.GetComponent<Collider>().CompareTag("Player"))
             {
@@ -79,7 +72,7 @@ public class Tuto_Text : MonoBehaviour
                 Box2 = false;
             }
         }
-        else if(Box3 && !Box2 && BoxText)
+        else if(Box3 && !Box2)
         {
             if(other.GetComponent <Collider>().CompareTag("Player"))
             {
@@ -87,7 +80,7 @@ public class Tuto_Text : MonoBehaviour
                 Box3 = false;
             }
         }
-        else if(Box4 && !Box3 && BoxText)
+        else if(Box4 && !Box3)
         {
             if(other.GetComponent <Collider>().CompareTag("Player"))
             {
@@ -95,7 +88,7 @@ public class Tuto_Text : MonoBehaviour
                 Box4 = false;
             }
         }
-        else if(Box5 && !Box4 && BoxText)
+        else if(Box5 && !Box4)
         {
             if(other.GetComponent <Collider>().CompareTag("Player"))
             {
@@ -103,18 +96,21 @@ public class Tuto_Text : MonoBehaviour
                 Box5 = false;
                 StartTimerBloc = true;
                 ControlActif = false;
+                TutoFini = true;
             }
+        }
+        else if(TutoFini)
+        {
+            TutoGuizmo.transform.position = new Vector3(6.19f, 4.38f, -13f);
+            FinTunnelGuizmo.transform.position = new Vector3(-72.16f, 7.89f, 1.25f);
         }
     }
 
 
-
-    //Update Text\\
-
+      //Update Text\\
+ 
     public void UpdateTextContent(string newText)
     {
         Text.text = newText;
     }
-
-
 }

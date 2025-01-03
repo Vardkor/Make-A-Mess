@@ -38,6 +38,4 @@ public class Tutorial_Manager : MonoBehaviour
         collisionEnter = false;
     }
 
-
-
 }

@@ -1632,6 +1632,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -6947,6 +6948,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -14476,11 +14478,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 6251101581926399120}
+  p_Movement: {fileID: 0}
   Box1: 0
   Box2: 0
   Box3: 0
   Box4: 1
   Box5: 0
+  BoxText: 1
   ControlActif: 0
   StartTimerBloc: 0
   StartTimerEnd: 0
@@ -16689,6 +16693,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 1
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -28196,11 +28201,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 6251101581926399120}
+  p_Movement: {fileID: 0}
   Box1: 0
   Box2: 0
   Box3: 1
   Box4: 0
   Box5: 0
+  BoxText: 1
   ControlActif: 0
   StartTimerBloc: 0
   StartTimerEnd: 0
@@ -28423,6 +28430,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -35912,11 +35920,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 6251101581926399120}
+  p_Movement: {fileID: 0}
   Box1: 0
   Box2: 1
   Box3: 0
   Box4: 0
   Box5: 0
+  BoxText: 1
   ControlActif: 0
   StartTimerBloc: 0
   StartTimerEnd: 0
@@ -36150,7 +36160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9177487103287464183}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.2, y: 3.34, z: 93.4}
+  m_LocalPosition: {x: 52.3, y: 3.34, z: 153.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46408,11 +46418,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 6251101581926399120}
+  p_Movement: {fileID: 0}
   Box1: 1
   Box2: 0
   Box3: 0
   Box4: 0
   Box5: 0
+  BoxText: 1
   ControlActif: 0
   StartTimerBloc: 0
   StartTimerEnd: 0
@@ -47614,6 +47626,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -50000,6 +50013,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -51005,11 +51019,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 6251101581926399120}
+  p_Movement: {fileID: 0}
   Box1: 0
   Box2: 0
   Box3: 0
   Box4: 0
   Box5: 0
+  BoxText: 0
   ControlActif: 0
   StartTimerBloc: 0
   StartTimerEnd: 0
@@ -51670,6 +51686,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -52354,11 +52371,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 6251101581926399120}
+  p_Movement: {fileID: 0}
   Box1: 0
   Box2: 0
   Box3: 0
   Box4: 0
   Box5: 1
+  BoxText: 0
   ControlActif: 0
   StartTimerBloc: 0
   StartTimerEnd: 0
@@ -52408,6 +52427,7 @@ MonoBehaviour:
   Notif: {fileID: 63501160836759631}
   soundTimer: {fileID: 8769521253556998}
   tutoText: {fileID: 6040624394375823259}
+  scriptobjet: {fileID: 2487451156626438785}
   StartTimer: 0
 --- !u!1 &6056163167835461902
 GameObject:
@@ -52850,6 +52870,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -60620,8 +60641,8 @@ MonoBehaviour:
   alarmeincendie: {fileID: 3195700533983313670}
   bombepeinture: {fileID: 0}
   climscript: {fileID: 0}
-  tutorialscript: {fileID: 0}
-  timerscript: {fileID: 0}
+  tutorialscript: {fileID: 2527894195968802173}
+  timerscript: {fileID: 6046734417825013926}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
   key: {fileID: 0}
@@ -60634,6 +60655,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 2
   StartTimer: 0
   timerStarter: 0
@@ -62423,6 +62445,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -62456,6 +62479,7 @@ MonoBehaviour:
   BouttonClim: 1
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -64858,6 +64882,7 @@ MonoBehaviour:
   BouttonClim: 0
   PorteOuverte: 0
   boxTimer: 0
+  TimeExit: 0
   remainingTime: 0
   StartTimer: 0
   timerStarter: 0
@@ -65193,11 +65218,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 6251101581926399120}
+  p_Movement: {fileID: 0}
   Box1: 0
   Box2: 1
   Box3: 0
   Box4: 0
   Box5: 0
+  BoxText: 0
   ControlActif: 0
   StartTimerBloc: 0
   StartTimerEnd: 0
