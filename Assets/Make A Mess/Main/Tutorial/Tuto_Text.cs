@@ -12,6 +12,8 @@ public class Tuto_Text : MonoBehaviour
     public bool Box3;
     public bool Box4;
     public bool Box5;
+    public bool BoxText;
+
 
     public bool ControlActif = true;
     public bool StartTimerBloc;
@@ -53,7 +55,7 @@ public class Tuto_Text : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(Box1)
+        if(Box1 && BoxText)
         {
             if(other.GetComponent<Collider>().CompareTag("Player"))
             {
@@ -61,7 +63,7 @@ public class Tuto_Text : MonoBehaviour
                 Box1 = false;
             }
         }
-        else if(Box2 && !Box1)
+        else if(Box2 && !Box1 && BoxText)
         {
             if(other.GetComponent<Collider>().CompareTag("Player"))
             {
@@ -69,7 +71,7 @@ public class Tuto_Text : MonoBehaviour
                 Box2 = false;
             }
         }
-        else if(Box2 && !Box1)
+        else if(Box2 && !Box1 && BoxText)
         {
             if(other.GetComponent<Collider>().CompareTag("Player"))
             {
@@ -77,7 +79,7 @@ public class Tuto_Text : MonoBehaviour
                 Box2 = false;
             }
         }
-        else if(Box3 && !Box2)
+        else if(Box3 && !Box2 && BoxText)
         {
             if(other.GetComponent <Collider>().CompareTag("Player"))
             {
@@ -85,7 +87,7 @@ public class Tuto_Text : MonoBehaviour
                 Box3 = false;
             }
         }
-        else if(Box4 && !Box3)
+        else if(Box4 && !Box3 && BoxText)
         {
             if(other.GetComponent <Collider>().CompareTag("Player"))
             {
@@ -93,7 +95,7 @@ public class Tuto_Text : MonoBehaviour
                 Box4 = false;
             }
         }
-        else if(Box5 && !Box4)
+        else if(Box5 && !Box4 && BoxText)
         {
             if(other.GetComponent <Collider>().CompareTag("Player"))
             {
