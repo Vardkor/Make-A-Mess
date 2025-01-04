@@ -21,9 +21,7 @@ public class Tuto_Text : MonoBehaviour
 
     public bool ControlActif = true;
     public bool StartTimerBloc;
-    public bool StartTimerEnd;
     [SerializeField] float remainingTimeBloc;
-    [SerializeField] float remainingTimeEnd;
 
     void Start()
     {

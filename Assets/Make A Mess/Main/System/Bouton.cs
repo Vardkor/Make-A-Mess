@@ -5,92 +5,34 @@ using UnityEngine.Events;
 
 public class Bouton : MonoBehaviour
 {
-    public Transform ButtonTop;
-    public Transform ButtonLowerLimit;
-    public Transform ButtonUperLimit;
-    
-    public float threshHold = 0.5f;
-    private float UpperLowerDiff;
-    public float Force = 10f;
+    public bool isPressed = false;
+    public Rigidbody rb;
+    private Vector3 initialPosition;
+    public float pressForce = 10f;
+    public float resetSpeed = 5f;
 
-    public bool IsPressed;
-    private bool prevPressedState;
-
-    //public AudioSource PressedSound;
-
-    public UnityEvent OnPressed;
-    public UnityEvent OnReleased;
-    
-    
-    // Start is called before the first frame update
     void Start()
     {
-        IsPressed = false;
-        Physics.IgnoreCollision(GetComponent<Collider>(),ButtonTop.GetComponent<Collider>());
-            if(transform.eulerAngles != Vector3.zero)
-            {
-                Vector3 savedAngle = transform.eulerAngles;
-                transform.eulerAngles = Vector3.zero;
-                UpperLowerDiff = ButtonUperLimit.position.y - ButtonLowerLimit.position.y;
-                transform.eulerAngles = savedAngle;
-            }
-            else
-            {
-                UpperLowerDiff = ButtonUperLimit.position.y - ButtonLowerLimit.position.y;
-            }
+        initialPosition = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        ButtonTop.transform.localPosition = new Vector3(0, ButtonTop.transform.localPosition.y, 0);
-        ButtonTop.transform.localEulerAngles = new Vector3(0,0,0);
-
-        if(ButtonTop.localPosition.y >= 0) //UperLimit
+        if(isPressed)
         {
-            ButtonTop.transform.position = new Vector3(ButtonUperLimit.position.x, ButtonUperLimit.position.y, ButtonUperLimit.position.z);
-        }
-        else
-        {
-            ButtonTop.GetComponent<Rigidbody>().AddForce(ButtonTop.transform.up * Force * Time.fixedDeltaTime);
-        }
-
-        if(ButtonTop.localPosition.y <= ButtonLowerLimit.position.y) //LowerLimit
-        {
-            ButtonTop.transform.position = new Vector3(ButtonLowerLimit.position.x, ButtonLowerLimit.position.y, ButtonLowerLimit.position.z);
-        }
-
-        if(Vector3.Distance(ButtonTop.position, ButtonLowerLimit.position) <= UpperLowerDiff * threshHold)
-        {
-            IsPressed = true;
-        }
-        else
-        {
-            IsPressed = false;
-        }
-
-        if(IsPressed && prevPressedState != IsPressed)
-        {
-            Pressed();
-        }
-
-        if(!IsPressed && prevPressedState != IsPressed)
-        {
-            Released();
+            Vector3 directionToInitial = (initialPosition - transform.position).normalized;
+            rb.AddForce(Vector3.down * pressForce, ForceMode.Impulse);
         }
     }
 
-    public void Pressed()
+    void OnTriggerEnter(Collider other)
     {
-        prevPressedState = IsPressed;
-        //PressedSound.ptich = 1;
-        //PressedSound.Play();
-        OnPressed.Invoke();
+        isPressed = true;
+        rb.AddForce(Vector3.down * pressForce, ForceMode.Impulse);
     }
 
-    public void Released()
+    void OnTriggerExit(Collider other)
     {
-        prevPressedState = IsPressed;
-        OnReleased.Invoke();
+        isPressed = false;
     }
 }

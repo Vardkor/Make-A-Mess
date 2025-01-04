@@ -34,4 +34,9 @@ public class Clim : MonoBehaviour
         }
         MusicPlaying = true; 
     }
+
+    void OnTriggerEnter(Collider other) 
+    {
+        SoundUp();
+    }
 }

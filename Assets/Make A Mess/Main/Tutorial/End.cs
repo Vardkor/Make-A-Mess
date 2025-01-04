@@ -9,7 +9,7 @@ public class End : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         BoxEnd = true;
-        FinUI.SetActive(true);
+        //FinUI.SetActive(false);
     }
 
     void Start()

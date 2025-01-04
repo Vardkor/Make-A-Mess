@@ -10,7 +10,6 @@ public class Objet : MonoBehaviour
     [SerializeField] Interaction interaction;
     [SerializeField] Alarme_Incendie alarmeincendie;
     [SerializeField] BombePeinture bombepeinture;
-    [SerializeField] Clim climscript;
     [SerializeField] Tutorial_Manager tutorialscript;
     [SerializeField] Timer timerscript;
 
@@ -27,7 +26,6 @@ public class Objet : MonoBehaviour
     public bool Cassable; 
     public bool PeutetreBruler;
     public bool PeutetrePeint;
-    public bool BouttonClim;
     public bool PorteOuverte;
     public bool boxTimer;
     public bool TimeExit;
@@ -54,15 +52,9 @@ public class Objet : MonoBehaviour
             interaction.BreakObjectHache(hache);
             interaction.BreakObjectPDB(PDB);
         }
-
         if(collisionEnter && Input.GetMouseButton(0) && PeutetrePeint)
         { 
             bombepeinture.Peindre();
-        }
-
-        if(collisionEnter && BouttonClim)
-        { 
-            climscript.SoundUp();
         }
 
         if(StartTimer)
@@ -94,7 +86,7 @@ public class Objet : MonoBehaviour
         else if(!boxTimer)
         {
             TimeExit = true;
-            timerscript.TimeExit();
+            //timerscript.TimeExit();
         }
         else
         {
