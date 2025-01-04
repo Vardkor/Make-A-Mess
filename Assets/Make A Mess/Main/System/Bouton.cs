@@ -25,18 +25,19 @@ public class Bouton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        IsPressed = false;
         Physics.IgnoreCollision(GetComponent<Collider>(),ButtonTop.GetComponent<Collider>());
-        if(transform.eulerAngles != Vector3.zero)
-        {
-            Vector3 savedAngle = transform.eulerAngles;
-            transform.eulerAngles = Vector3.zero;
-            UpperLowerDiff = ButtonUperLimit.position.y - ButtonLowerLimit.position.y;
-            transform.eulerAngles = savedAngle;
-        }
-        else
-        {
-            UpperLowerDiff = ButtonUperLimit.position.y - ButtonLowerLimit.position.y;
-        }
+            if(transform.eulerAngles != Vector3.zero)
+            {
+                Vector3 savedAngle = transform.eulerAngles;
+                transform.eulerAngles = Vector3.zero;
+                UpperLowerDiff = ButtonUperLimit.position.y - ButtonLowerLimit.position.y;
+                transform.eulerAngles = savedAngle;
+            }
+            else
+            {
+                UpperLowerDiff = ButtonUperLimit.position.y - ButtonLowerLimit.position.y;
+            }
     }
 
     // Update is called once per frame
