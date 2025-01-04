@@ -67,6 +67,9 @@ public class Interaction : MonoBehaviour
     public bool casser = false;
     public bool pascasser = false;
 
+    public Camera cam;
+    public LayerMask paintableLayer;
+
     void Start()
     {
         extincteurA.SetActive(false);
@@ -242,6 +245,7 @@ public class Interaction : MonoBehaviour
                     Grabed = false;
                     HasPeinture = false;
                     GameObject newBombePeinture = Instantiate(BombePeinturePrefab, transform.position + transform.forward * 1.0f, Quaternion.identity);
+                    Peinturing();
                 }
             }
             else if (Grabed && HasPDB)
@@ -497,4 +501,21 @@ public class Interaction : MonoBehaviour
         murcasser.SetActive(true);
         bc.enabled = false;
     }
+    
+    void Peinturing()
+    {
+        if (Input.GetMouseButton(0)) // Clic gauche
+        {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, 5f, paintableLayer))
+            {
+                TexturePainter painter = hit.collider.GetComponent<TexturePainter>();
+                if (painter != null)
+                {
+                    painter.Paint(hit.textureCoord);
+                }
+            }
+        }
+    }
+
 }
