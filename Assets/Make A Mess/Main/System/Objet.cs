@@ -17,8 +17,7 @@ public class Objet : MonoBehaviour
 
     [SerializeField] private GameObject hache_main;
     [SerializeField] private GameObject Pieds_De_Biche_Main;
-    [SerializeField] GameObject key;
-    [SerializeField] GameObject Door;
+
     [SerializeField] public ParticleSystem FireParticle;
     
     //Bool\\
@@ -26,7 +25,7 @@ public class Objet : MonoBehaviour
     public bool Cassable; 
     public bool PeutetreBruler;
     public bool PeutetrePeint;
-    public bool PorteOuverte;
+
     public bool boxTimer;
     public bool TimeExit;
 
@@ -105,16 +104,6 @@ public class Objet : MonoBehaviour
         if(other.GetComponent<Collider>().CompareTag("ballegolf"))
         {
             Debug.Log("In the trou");
-        }
-    }
-
-
-    public void PortePatron()
-    {
-        if(!PorteOuverte)
-        {
-            PorteOuverte = true;
-            Destroy(Door.gameObject);
         }
     }
 

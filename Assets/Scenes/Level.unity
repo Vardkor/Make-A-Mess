@@ -1846,7 +1846,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270903299}
-  - component: {fileID: 270903298}
+  - component: {fileID: 270903300}
   m_Layer: 0
   m_Name: Porte_Patron_Manager
   m_TagString: Untagged
@@ -1854,38 +1854,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &270903298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270903297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f80542c6ba2034e42a924bc584b66d8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interaction: {fileID: 0}
-  alarmeincendie: {fileID: 0}
-  bombepeinture: {fileID: 0}
-  tutorialscript: {fileID: 0}
-  timerscript: {fileID: 0}
-  hache_main: {fileID: 0}
-  Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 919132147797050980}
-  Door: {fileID: 2384781234903189746}
-  FireParticle: {fileID: 0}
-  collisionEnter: 0
-  Cassable: 0
-  PeutetreBruler: 0
-  PeutetrePeint: 0
-  PorteOuverte: 0
-  boxTimer: 0
-  TimeExit: 0
-  remainingTime: 0
-  StartTimer: 0
-  timerStarter: 0
 --- !u!4 &270903299
 Transform:
   m_ObjectHideFlags: 0
@@ -1903,6 +1871,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &270903300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270903297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e45c83436db1943a29db11e1b12dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: {fileID: 919132147797050980}
+  Door: {fileID: 2384781234903189746}
+  PorteOuverte: 0
 --- !u!1 &283727996
 GameObject:
   m_ObjectHideFlags: 0
@@ -14587,8 +14570,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8854321083718590146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0, y: 0.5, z: -0.22}
+  m_LocalScale: {x: 1, y: 0.91229, z: 0.9738077}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8705417496449015162}
@@ -15609,14 +15592,11 @@ MonoBehaviour:
   timerscript: {fileID: 0}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
   PeutetrePeint: 0
-  PorteOuverte: 0
   boxTimer: 0
   TimeExit: 0
   remainingTime: 0
@@ -18104,8 +18084,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3036514362472971898}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.02, y: 0, z: 0}
-  m_LocalScale: {x: -0.09446488, y: -20.12043, z: -6.908992}
+  m_LocalPosition: {x: -0.02, y: 1.12, z: -0.205}
+  m_LocalScale: {x: -0.09446488, y: -19.460094, z: -6.9684105}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1107310044704827442}
@@ -21592,7 +21572,7 @@ GameObject:
   - component: {fileID: 74483592677471590}
   - component: {fileID: 7512386958117982921}
   m_Layer: 0
-  m_Name: Vitre (1)
+  m_Name: Vitre1
   m_TagString: Grab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24696,8 +24676,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2461543362081538397}
   m_LocalRotation: {x: 0.49999988, y: 0.5000001, z: 0.49999988, w: 0.5000001}
-  m_LocalPosition: {x: -22.026443, y: -5.9331903, z: 1.0560607}
-  m_LocalScale: {x: 0.24203579, y: 0.14467993, z: 0.4262036}
+  m_LocalPosition: {x: -22.026443, y: -6.33, z: 1.06}
+  m_LocalScale: {x: 0.24203579, y: 0.14467993, z: 0.44201574}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 211596903037354421}
@@ -32059,14 +32039,11 @@ MonoBehaviour:
   timerscript: {fileID: 0}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
   PeutetrePeint: 1
-  PorteOuverte: 0
   boxTimer: 0
   TimeExit: 0
   remainingTime: 0
@@ -40233,14 +40210,11 @@ MonoBehaviour:
   timerscript: {fileID: 3062274488759107662}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 7123997915863595878}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 1
   PeutetrePeint: 0
-  PorteOuverte: 0
   boxTimer: 0
   TimeExit: 0
   remainingTime: 2
@@ -52648,7 +52622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4042799668379454895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 21.72, y: 69.01, z: 3.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -89137,14 +89111,11 @@ MonoBehaviour:
   timerscript: {fileID: 0}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
   PeutetrePeint: 0
-  PorteOuverte: 0
   boxTimer: 0
   TimeExit: 0
   remainingTime: 0
@@ -97135,14 +97106,11 @@ MonoBehaviour:
   timerscript: {fileID: 0}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
   PeutetrePeint: 1
-  PorteOuverte: 0
   boxTimer: 0
   TimeExit: 0
   remainingTime: 0
@@ -104714,14 +104682,11 @@ MonoBehaviour:
   timerscript: {fileID: 3062274488759107662}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 4853523054019466990}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 1
   PeutetrePeint: 0
-  PorteOuverte: 0
   boxTimer: 0
   TimeExit: 0
   remainingTime: 2
@@ -106342,14 +106307,11 @@ MonoBehaviour:
   timerscript: {fileID: 0}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
   PeutetrePeint: 1
-  PorteOuverte: 0
   boxTimer: 0
   TimeExit: 0
   remainingTime: 0
@@ -115851,14 +115813,11 @@ MonoBehaviour:
   timerscript: {fileID: 0}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
   PeutetrePeint: 1
-  PorteOuverte: 0
   boxTimer: 0
   TimeExit: 0
   remainingTime: 0
@@ -118215,14 +118174,11 @@ MonoBehaviour:
   timerscript: {fileID: 0}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
   PeutetrePeint: 0
-  PorteOuverte: 0
   boxTimer: 0
   TimeExit: 0
   remainingTime: 0
@@ -119905,6 +119861,7 @@ MonoBehaviour:
   alarme_Securite: {fileID: 0}
   flechettescript: {fileID: 0}
   alarmesecurite: {fileID: 6772950916437473208}
+  portepatronscript: {fileID: 270903300}
   GrabMask: {fileID: 6707111516340642864}
   HasFlechette: 0
   GrabMaskFlechettes: {fileID: 1528956125001629382}
@@ -122853,14 +122810,11 @@ MonoBehaviour:
   timerscript: {fileID: 3062274488759107662}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
   PeutetrePeint: 0
-  PorteOuverte: 0
   boxTimer: 1
   TimeExit: 0
   remainingTime: 0
@@ -130602,14 +130556,11 @@ MonoBehaviour:
   timerscript: {fileID: 0}
   hache_main: {fileID: 0}
   Pieds_De_Biche_Main: {fileID: 0}
-  key: {fileID: 0}
-  Door: {fileID: 0}
   FireParticle: {fileID: 0}
   collisionEnter: 0
   Cassable: 0
   PeutetreBruler: 0
   PeutetrePeint: 1
-  PorteOuverte: 0
   boxTimer: 0
   TimeExit: 0
   remainingTime: 0

@@ -27,6 +27,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] public Alarme_Securite alarme_Securite;
     [SerializeField] public flechettes flechettescript;
     [SerializeField] public Alarme_Securite alarmesecurite;
+    [SerializeField] public PortePatron portepatronscript;
 
     
  
@@ -149,7 +150,7 @@ public class Interaction : MonoBehaviour
                 {
                     if(Input.GetKeyDown(KeyCode.E))
                     {
-                        objetscript.PortePatron();
+                        portepatronscript.PortePatronfunction();
                         Destroy(hit.collider.gameObject);
                     }
                 }
