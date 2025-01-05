@@ -10,6 +10,7 @@ public class Tuto_Text : MonoBehaviour
     [SerializeField] P_Movement p_Movement;
     [SerializeField] public GameObject TutoGuizmo;
     [SerializeField] public GameObject FinTunnelGuizmo;
+
     public bool Box1;
     public bool Box2;
     public bool Box3;

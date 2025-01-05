@@ -28,6 +28,7 @@ public class Interaction : MonoBehaviour
     [SerializeField] public flechettes flechettescript;
     [SerializeField] public Alarme_Securite alarmesecurite;
     [SerializeField] public PortePatron portepatronscript;
+    [SerializeField] public Grille _G_rille;
 
     
  
@@ -158,7 +159,8 @@ public class Interaction : MonoBehaviour
                 {
                     if(Input.GetKeyDown(KeyCode.E))
                     {
-                        alarmesecurite.Card();
+                        _G_rille.Card();
+                        Destroy(hit.collider.gameObject);
                     }
                 }
             }
