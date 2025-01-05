@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Alarme_Securite : MonoBehaviour
 {
-    [SerializeField] public Vitre vitre;
+    [SerializeField] public List<Vitre> vitres;
     [SerializeField] public AudioSource Alarme;
     [SerializeField] public GameObject Grille;
+    [SerializeField] public GameObject carte;
     public bool AlarmeActiv = false;
     public bool card = false;
 
@@ -16,21 +17,28 @@ public class Alarme_Securite : MonoBehaviour
     }
     void Update()
     {
-        if(AlarmeActiv && vitre.vitrebreak)
+        bool vitreCassée = false;
+
+        foreach (Vitre vitre in vitres)
         {
-            if(!Alarme.isPlaying)
+            if (vitre.vitrebreak) 
+            {
+                vitreCassée = true;
+                break;
+            }
+        }
+        if (AlarmeActiv && vitreCassée)
+        {
+            if (!Alarme.isPlaying)
             {
                 Alarme.Play();
             }
         }
-        else if(!AlarmeActiv)
+        else if (!AlarmeActiv)
         {
-            if(Alarme.isPlaying)
+            if (Alarme.isPlaying && card)
             {
-                if(card)
-                {
-                    Alarme.Stop();
-                }
+                Alarme.Stop();
             }
         }
     }
@@ -41,7 +49,7 @@ public class Alarme_Securite : MonoBehaviour
             if(card)
             {
                 AlarmeActiv = false;
-                Grille.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+                Destroy(Grille.gameObject);
             }
             else 
             {
@@ -53,5 +61,6 @@ public class Alarme_Securite : MonoBehaviour
     public void Card()
     {
         card = true;
+        Destroy(carte.gameObject);
     }   
 }

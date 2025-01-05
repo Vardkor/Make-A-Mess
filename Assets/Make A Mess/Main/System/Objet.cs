@@ -114,7 +114,7 @@ public class Objet : MonoBehaviour
         if(!PorteOuverte)
         {
             PorteOuverte = true;
-            Door.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+            Destroy(Door.gameObject);
         }
     }
 
