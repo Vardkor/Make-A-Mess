@@ -21,6 +21,14 @@ public class Alarme_Incendie : MonoBehaviour
     [SerializeField] public ParticleSystem Fire1;
     [SerializeField] public ParticleSystem Fire2;
     [SerializeField] public ParticleSystem Fire3;
+    [SerializeField] public ParticleSystem Fire4;
+    [SerializeField] public ParticleSystem Fire5;
+    [SerializeField] public ParticleSystem Fire6;
+    [SerializeField] public ParticleSystem Fire7;
+    [SerializeField] public ParticleSystem Fire8;
+    [SerializeField] public ParticleSystem Fire9;
+    [SerializeField] public ParticleSystem Fire10;
+    [SerializeField] public ParticleSystem Fire11;
 
     public bool alarmeActive = false;
     public bool briquetmain = false;
@@ -57,40 +65,48 @@ public class Alarme_Incendie : MonoBehaviour
                         else if (hit.collider.CompareTag("Plante4"))
                         {
                             feu4 = true;
+                            Fire4.Play();
 
                         }
                         else if (hit.collider.CompareTag("Plante5"))
                         {
                             feu5 = true;
+                            Fire5.Play();
 
                         }
                         else if (hit.collider.CompareTag("Plante6"))
                         {
                             feu6 = true;
+                            Fire6.Play();
 
                         }
                         else if (hit.collider.CompareTag("Plante7"))
                         {
                             feu7 = true;
+                            Fire7.Play();
 
                         }
                         else if (hit.collider.CompareTag("Plante8"))
                         {
                             feu8 = true;
+                            Fire8.Play();
 
                         }
                         else if (hit.collider.CompareTag("Plante9"))
                         {
                             feu9 = true;
+                            Fire9.Play();
 
                         }
                         else if (hit.collider.CompareTag("Plante10"))
                         {
                             feu10 = true;
+                            Fire10.Play();
                         }
                         else if (hit.collider.CompareTag("Plante11"))
                         {
                             feu11 = true;
+                            Fire11.Play();
 
                         }
                     }
@@ -105,8 +121,10 @@ public class Alarme_Incendie : MonoBehaviour
     }
 
 
-    public void Fireparticle()
+    void OnTriggerEnter(Collider other)
     {
-
+        alarmeActive = false;
+        alarmeIncendie.Stop();
+        feu1 = false;
     }
 }

@@ -20,17 +20,5 @@ public class Grille : MonoBehaviour
         {
             Destroy(_Grille.gameObject);
         }
-        else 
-        {
-            Debug.Log("Va checher la carte d'acces dans le bureau du patron");
-        }
     }
-
-    /*public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Grab"))
-        {
-
-        }
-    }*/
 }

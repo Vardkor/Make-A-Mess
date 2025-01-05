@@ -40,4 +40,12 @@ public class Alarme_Securite : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if(AlarmeActiv)
+        {
+            AlarmeActiv = false;
+        }
+    }
+
 }
