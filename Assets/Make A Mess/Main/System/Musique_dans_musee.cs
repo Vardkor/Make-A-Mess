@@ -35,7 +35,6 @@ public class Musique_dans_musee : MonoBehaviour
         if(!MusicPlaying)
         {
             PlayMusic();
-            Debug.Log("Oui");
             MainMusic.Music.Stop();
         }
     }
