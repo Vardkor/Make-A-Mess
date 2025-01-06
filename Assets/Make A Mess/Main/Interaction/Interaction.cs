@@ -29,7 +29,6 @@ public class Interaction : MonoBehaviour
     [SerializeField] public Alarme_Securite alarmesecurite;
     [SerializeField] public PortePatron portepatronscript;
     [SerializeField] public Grille _G_rille;
-    [SerializeField] public GameObject Outline;
 
     
  
@@ -145,11 +144,17 @@ public class Interaction : MonoBehaviour
                 }
                 else if(hit.collider.CompareTag("PDB"))
                 {
+                    PDB = hit.transform.gameObject;
                     PDB.GetComponent<Outline>().enabled = true;
 
-                    /*if(Input.GetKeyDown(KeyCode.E))
+                    if(Input.GetKeyDown(KeyCode.E))
                     {
                         GrabPDB(hit.collider.gameObject);
+                    }
+                    /*else
+                    {
+                        PDB.GetComponent<Outline>().enabled = false;
+                        PDB = null;
                     }*/
                 }
                 else if(hit.collider.CompareTag("Key"))
