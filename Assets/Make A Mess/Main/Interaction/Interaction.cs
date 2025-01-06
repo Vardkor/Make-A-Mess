@@ -91,7 +91,7 @@ public class Interaction : MonoBehaviour
         if (!Grabed)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 10f))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 5f))
             {
                 if (hit.collider.CompareTag("Grab"))
                 {
@@ -144,6 +144,12 @@ public class Interaction : MonoBehaviour
                 }
                 else if(hit.collider.CompareTag("PDB"))
                 {
+                    /*PDB.GetComponent<Outline>().enabled = true;
+                    /*else
+                    {
+                        PDB.GetComponent<Outline>().enabled = false;
+                    }*/
+
                     if(Input.GetKeyDown(KeyCode.E))
                     {
                         GrabPDB(hit.collider.gameObject);
