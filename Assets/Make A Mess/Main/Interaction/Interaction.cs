@@ -144,8 +144,8 @@ public class Interaction : MonoBehaviour
                 }
                 else if(hit.collider.CompareTag("PDB"))
                 {
-                    PDB = hit.transform.gameObject;
-                    PDB.GetComponent<Outline>().enabled = true;
+                    /*PDB = hit.transform.gameObject;
+                    PDB.GetComponent<Outline>().enabled = true;*/
 
                     if(Input.GetKeyDown(KeyCode.E))
                     {
