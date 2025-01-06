@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Musique_dans_musee : MonoBehaviour
 {
-    [SerializeField] public AudioSource[] speakers;
-    [SerializeField] public AudioClip musicClip;
+    [SerializeField] public AudioSource speaker;
+    public MusiquePrinciStart MainMusic;
 
     private bool MusicPlaying = false;
+    private bool Collision = false;
 
-    void Update()
+    /*void Update()
     {
         RaycastHit hit;
 
@@ -17,39 +18,46 @@ public class Musique_dans_musee : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && !MusicPlaying)
             {
-                if (hit.collider.CompareTag("Button"))
-                {
-                    PlayMusic();
-                    
-                }
+
             }
             else if (Input.GetKeyDown(KeyCode.E) && MusicPlaying)
             {
                 if (hit.collider.CompareTag("Button"))
                 {
-                    StopMusic();
+                    
                 }
             }
+        }
+    }*/
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(!MusicPlaying)
+        {
+            PlayMusic();
+            Debug.Log("Oui");
+            MainMusic.Music.Stop();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(MusicPlaying)
+        {
+            StopMusic();
+            Debug.Log("Non");
         }
     }
 
     void PlayMusic()
     {
-        foreach (var speaker in speakers)
-        {
-            speaker.clip = musicClip;
-            speaker.Play();
-        }
+        speaker.Play();
         MusicPlaying = true; 
     }
 
     void StopMusic()
     {
-        foreach (var speaker in speakers)
-        {
-            speaker.Stop();
-        }
+        speaker.Stop();
         MusicPlaying = false;
     }
-
 }

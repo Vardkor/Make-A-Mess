@@ -72,6 +72,8 @@ public class Interaction : MonoBehaviour
     public Camera cam;
     public LayerMask paintableLayer;
 
+    public AudioSource KeySound;
+
     void Start()
     {
         extincteurA.SetActive(false);
@@ -153,6 +155,7 @@ public class Interaction : MonoBehaviour
                     {
                         portepatronscript.PortePatronfunction();
                         Destroy(hit.collider.gameObject);
+                        KeySound.Play();
                     }
                 }
                 else if(hit.collider.CompareTag("carteacces"))

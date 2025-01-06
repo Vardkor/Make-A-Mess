@@ -6,7 +6,9 @@ public class Grille : MonoBehaviour
 {
     [SerializeField] public GameObject _Grille;
     [SerializeField] public GameObject carte;
+    
     public bool card = false;
+    public AudioSource Key_Sound;
 
     public void Card()
     {
@@ -19,6 +21,7 @@ public class Grille : MonoBehaviour
         if(card)
         {
             Destroy(_Grille.gameObject);
+            Key_Sound.Play();
         }
     }
 }
