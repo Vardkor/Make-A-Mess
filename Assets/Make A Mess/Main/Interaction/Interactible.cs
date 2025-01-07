@@ -15,8 +15,10 @@ public class Interactible : MonoBehaviour
     private float forcelancer = 50f;
 
     //Vector\\
-    private Vector3 screenPosition;
-    private Vector3 worldPosition;
+    /*private Vector3 screenPosition;
+    private Vector3 worldPosition;*/
+
+    /*public Camera mainCamera;*/
 
     public void Interact(Transform trsPlayerGuizmo = null)
     {
@@ -39,16 +41,21 @@ public class Interactible : MonoBehaviour
 
     public void Update()
     {
-        screenPosition = Input.mousePosition;
-        worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+        /*screenPosition = Input.mousePosition;
+        worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);*/
 
+        /*Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray, out RaycastHit raycastHit))
+        {
+            transform.position = raycastHit.point;
+        }*/
 
         if(Input.GetKeyDown(KeyCode.E) && Grabed)
         {
             ReleaseObject();
         }
         
-        if(Input.GetMouseButton(0) && Grabed)
+        if(Input.GetMouseButton(0) && Grabed /*&& !SpecialItem*/)
         {
             LaunchObject();
         }
@@ -90,11 +97,11 @@ public class Interactible : MonoBehaviour
         if (rb != null)
         {
             rb.isKinematic = false;
-            rb.AddForce(worldPosition * forcelancer, ForceMode.Impulse); 
+            rb.AddForce(transform.position * forcelancer);
         }
 
-        grabbedObject.SetParent(null); 
-        grabbedObject = null; 
+        grabbedObject.SetParent(null);
+        grabbedObject = null;
         Grabed = false;
     }
 }
