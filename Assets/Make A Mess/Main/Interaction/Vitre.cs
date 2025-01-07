@@ -32,13 +32,8 @@ public class Vitre : MonoBehaviour
     {
         vitrepascasser.SetActive(false);
         vitrecasser.SetActive(true);
-        Scorring();
         bc.enabled = false;
         vitrebreak = true;
-    }
-    
-    private void Scorring()
-    {
-        scorring.CurrentScore += scorring.ScoreVitre;
+        scorring.UpdateScore();
     }
 }    
