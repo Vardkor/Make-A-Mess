@@ -9,7 +9,14 @@ public class Interactible : MonoBehaviour
 
     //Grab\\
     private Transform grabbedObject;
-    public bool Grabed = false;
+    public bool Grabed;
+
+    //Float\\
+    private float forcelancer = 50f;
+
+    //Vector\\
+    private Vector3 screenPosition;
+    private Vector3 worldPosition;
 
     public void Interact(Transform trsPlayerGuizmo = null)
     {
@@ -30,17 +37,64 @@ public class Interactible : MonoBehaviour
     }
 
 
+    public void Update()
+    {
+        screenPosition = Input.mousePosition;
+        worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+
+
+        if(Input.GetKeyDown(KeyCode.E) && Grabed)
+        {
+            ReleaseObject();
+        }
+        
+        if(Input.GetMouseButton(0) && Grabed)
+        {
+            LaunchObject();
+        }
+    }
+
     private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo)
     {
         grabbedObject = objectToGrab;
         grabbedObject.position = trsPlayerGuizmo.position;
         grabbedObject.SetParent(trsPlayerGuizmo);
-        Grabed = true; 
+        Grabed = true;
 
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.isKinematic = true;
         }
+    }
+
+    private void ReleaseObject()
+    {
+        if (grabbedObject != null)
+        {
+            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+            }
+
+            grabbedObject.SetParent(null); 
+            grabbedObject = null; 
+            Grabed = false; 
+        }
+    }
+    
+    private void LaunchObject()
+    {
+        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.AddForce(worldPosition * forcelancer, ForceMode.Impulse); 
+        }
+
+        grabbedObject.SetParent(null); 
+        grabbedObject = null; 
+        Grabed = false;
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Interaction2 : MonoBehaviour
 {
     public Transform trsPlayerGuizmo;
+
+
     public void Update()
     {
         RaycastHit hit;
