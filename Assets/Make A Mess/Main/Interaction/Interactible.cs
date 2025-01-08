@@ -25,10 +25,12 @@ public class Interactible : MonoBehaviour
 
     //Section PDB\\
 
-    public float attackcooldown = 2f;
-    public float attackdistance = 5f;
+    private float attackcooldown = 2f;
+    private float attackDistance = 5f;
+    private float attackSpeed = 1f;
     public bool canAttack = true;
     public bool Attacking;
+    public LayerMask attackLayer;
 
 
 
@@ -75,6 +77,7 @@ public class Interactible : MonoBehaviour
 
             if (itemType == eItemtype.PDB)
             {
+                Debug.Log("PDB");
                 PDBInteractible();
             }
 
@@ -134,16 +137,31 @@ public class Interactible : MonoBehaviour
 
     public void PDBInteractible()
     {
-        if(!canAttack || Attacking) return;
+        //if(!canAttack || Attacking) return;
+        SpecialObject = true;
         canAttack = false;
         Attacking = true;
-        SpecialObject = true;
-        Invoke(nameof(AttackRayCast, attackcooldown));
+        
+        Invoke(nameof(ResetAttack), attackSpeed);
+        Invoke(nameof(AttackRayCast), attackcooldown);
     }
 
     void AttackRayCast()
     {
-        Debug.Log("MESCOUILLES " + canAttack);
+        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+        {
+            HitTarget(hit.point);
+        }
+    }
+    void ResetAttack()
+    {
+        Debug.Log("Attack");
         canAttack = true;
+        Attacking = false;
+    }
+
+    void HitTarget(Vector3 pos)
+    {
+        Debug.Log("Destroy Object");
     }
 }
