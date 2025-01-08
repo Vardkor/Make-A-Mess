@@ -26,6 +26,7 @@ public class Interactible : MonoBehaviour
     //Section PDB\\
 
     public float attackcooldown = 2f;
+    public float attackdistance = 5f;
     public bool canAttack = true;
     public bool Attacking;
 
@@ -71,11 +72,13 @@ public class Interactible : MonoBehaviour
             {
                 Debug.Log("OUE");
             }
-            if (itemType == eItemtype.PDB && canAttack)
+
+            if (itemType == eItemtype.PDB)
             {
                 PDBInteractible();
             }
-            else
+
+            if(!SpecialObject)
             {
                 LaunchObject();
             }
@@ -131,13 +134,16 @@ public class Interactible : MonoBehaviour
 
     public void PDBInteractible()
     {
+        if(!canAttack || Attacking) return;
         canAttack = false;
+        Attacking = true;
         SpecialObject = true;
-        Invoke(nameof(ResetAttack), attackcooldown);
+        Invoke(nameof(AttackRayCast, attackcooldown));
     }
 
-    void ResetAttack()
+    void AttackRayCast()
     {
+        Debug.Log("MESCOUILLES " + canAttack);
         canAttack = true;
     }
 }
