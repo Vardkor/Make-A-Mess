@@ -13,7 +13,7 @@ public class Interaction2 : MonoBehaviour
     
         if(Input.GetKeyDown(KeyCode.E))
         {
-            if(Physics.Raycast(transform.position, transform.forward, out hit, 5f))
+            if(Physics.Raycast(transform.position, transform.forward, out hit, 2.5f))
             {
                 if(hit.collider.tag == "Grab")
                 {

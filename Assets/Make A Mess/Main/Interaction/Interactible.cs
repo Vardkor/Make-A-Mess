@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Interactible : MonoBehaviour
 {
-    public enum eItemtype { Objet, Extincteur, Briquet};
+    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache};
     public eItemtype itemType;
 
     //Grab\\
     private Transform grabbedObject;
-    public bool Grabed;
+    
 
     //Float\\
     private float forcelancer = 50f;
@@ -17,6 +17,19 @@ public class Interactible : MonoBehaviour
     //Vector\\
     private Vector3 screenPosition;
     private Vector3 cursorPosition;
+
+    //Bool\\
+
+    public bool Grabed;
+    public bool SpecialObject;
+
+    //Section PDB\\
+
+    public float attackcooldown = 2f;
+    public bool canAttack = true;
+    public bool Attacking;
+
+
 
     public void Interact(Transform trsPlayerGuizmo = null)
     {
@@ -27,11 +40,19 @@ public class Interactible : MonoBehaviour
             break;
 
             case eItemtype.Extincteur:
-                Debug.Log("Attraper extincteur");
+                GrabObject(transform, trsPlayerGuizmo);
             break;
 
             case eItemtype.Briquet:
-                Debug.Log("Attraper Briquet");
+                GrabObject(transform, trsPlayerGuizmo);
+            break;
+
+            case eItemtype.PDB:
+                GrabObject(transform, trsPlayerGuizmo);
+            break;
+
+            case eItemtype.Hache:
+                GrabObject(transform, trsPlayerGuizmo);
             break;
         }
     }
@@ -39,23 +60,25 @@ public class Interactible : MonoBehaviour
 
     public void Update()
     {
-        /*screenPosition = Input.mousePosition;
-        cursorPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out RaycastHit raycastHit))
-        {
-            transform.position = raycastHit.point;
-        }*/
-
         if(Input.GetKeyDown(KeyCode.E) && Grabed)
         {
             ReleaseObject();
         }
         
-        if(Input.GetMouseButton(0) && Grabed /*&& !SpecialItem*/)
+        if(Input.GetMouseButton(0) && Grabed && !SpecialObject)
         {
-            LaunchObject();
+            if(itemType == eItemtype.Extincteur)
+            {
+                Debug.Log("OUE");
+            }
+            if (itemType == eItemtype.PDB && canAttack)
+            {
+                PDBInteractible();
+            }
+            else
+            {
+                LaunchObject();
+            }
         }
     }
 
@@ -63,6 +86,7 @@ public class Interactible : MonoBehaviour
     {
         grabbedObject = objectToGrab;
         grabbedObject.position = trsPlayerGuizmo.position;
+        grabbedObject.rotation = trsPlayerGuizmo.rotation;
         grabbedObject.SetParent(trsPlayerGuizmo);
         Grabed = true;
 
@@ -95,12 +119,25 @@ public class Interactible : MonoBehaviour
         if (rb != null)
         {
             rb.isKinematic = false;
-            rb.AddForce(cursorPosition * forcelancer, ForceMode.Impulse);
+            rb.AddForce(transform.forward * forcelancer, ForceMode.Impulse);
         }
         
-
         grabbedObject.SetParent(null);
         grabbedObject = null;
         Grabed = false;
+    }
+
+    //Object Specials\\
+
+    public void PDBInteractible()
+    {
+        canAttack = false;
+        SpecialObject = true;
+        Invoke(nameof(ResetAttack), attackcooldown);
+    }
+
+    void ResetAttack()
+    {
+        canAttack = true;
     }
 }
