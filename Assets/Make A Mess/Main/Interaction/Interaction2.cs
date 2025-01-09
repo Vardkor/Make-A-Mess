@@ -6,6 +6,8 @@ public class Interaction2 : MonoBehaviour
 {
     public Transform trsPlayerGuizmo;
 
+    private float attackDistance = 5f;
+    public LayerMask attackLayer;
 
     public void Update()
     {
@@ -20,6 +22,14 @@ public class Interaction2 : MonoBehaviour
                     hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerGuizmo);
                 }
             }
+        }
+    }
+
+    public void AttackRaycastCam()
+    {
+        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+        {
+            gameObject.GetComponent<Interactible>().HitTarget(hit.point);
         }
     }
 }

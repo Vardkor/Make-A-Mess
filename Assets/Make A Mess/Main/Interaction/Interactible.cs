@@ -23,7 +23,7 @@ public class Interactible : MonoBehaviour
     public bool Grabed;
     public bool SpecialObject;
 
-    //Section PDB\\
+    //Section Attack Event\\
 
     private float attackcooldown = 1f;
     private float attackDistance = 5f;
@@ -31,6 +31,9 @@ public class Interactible : MonoBehaviour
     public bool Attacking = false;
     public LayerMask attackLayer;
 
+    /*public GameObject hitEffect;
+    public AudioClip ItemSwing;
+    public AudioClip hitSound;*/
 
 
     public void Interact(Transform trsPlayerGuizmo = null)
@@ -82,7 +85,8 @@ public class Interactible : MonoBehaviour
 
             if (itemType == eItemtype.PDB && canAttack)
             {
-                PDBInteractible();
+                AttackItem();
+                //SetAnimations();
             }
 
             if(!SpecialObject)
@@ -139,19 +143,19 @@ public class Interactible : MonoBehaviour
 
     //Object Specials\\
 
-    public void PDBInteractible()
+    public void AttackItem()
     {
         SpecialObject = true;
         canAttack = false;
         AttackRayCast();
+        
+        //audioSource.pitch = Random.Range(0.9f, 1.1f);
+        //audioSource.PlayOneShot(AttackSwing);
     }
 
     void AttackRayCast()
     {
-        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, attackDistance, attackLayer))
-        {
-            HitTarget(hit.point);
-        }
+        gameObject.GetComponent<Interaction2>().AttackRaycastCam();
     }
     void ResetAttack()
     {
@@ -160,9 +164,16 @@ public class Interactible : MonoBehaviour
         Attacking = false;
     }
 
-    void HitTarget(Vector3 pos)
+    public void HitTarget(Vector3 pos)
     {
         Debug.Log("Destroy Object");
+        
+        /*audioSource.pitch = 1;
+        audioSource.PlayOneShot(hitSound);
+
+        GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
+        Destroy(GO, 20);*/
+        
         canAttack = false;
         Attacking = true;
         Invoke(nameof(ResetAttack), attackcooldown);
