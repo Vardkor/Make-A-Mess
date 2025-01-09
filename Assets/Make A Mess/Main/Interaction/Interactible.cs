@@ -36,6 +36,11 @@ public class Interactible : MonoBehaviour
     public AudioClip hitSound;*/
 
 
+    //DEBUG\\
+
+
+
+
     public void Interact(Transform trsPlayerGuizmo = null)
     {
         switch(itemType)
@@ -155,8 +160,18 @@ public class Interactible : MonoBehaviour
 
     void AttackRayCast()
     {
-        gameObject.GetComponent<Interaction2>().AttackRaycastCam();
-    }
+        Vector3 start = transform.position;
+
+        Vector3 end = transform.position + transform.forward * attackDistance;
+
+        Debug.DrawLine(start, end, Color.red, 1f);
+
+        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+        {
+            HitTarget(hit.point);
+        }
+    }   
+        //gameObject.GetComponent<Interaction2>().AttackRaycastCam();
     void ResetAttack()
     {
         Debug.Log("Reset Attack Called");

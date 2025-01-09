@@ -25,11 +25,11 @@ public class Interaction2 : MonoBehaviour
         }
     }
 
-    public void AttackRaycastCam()
+    /*public void AttackRaycastCam()
     {
         if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, attackDistance, attackLayer))
         {
             gameObject.GetComponent<Interactible>().HitTarget(hit.point);
         }
-    }
+    }*/
 }
