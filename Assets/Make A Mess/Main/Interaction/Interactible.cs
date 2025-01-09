@@ -25,11 +25,10 @@ public class Interactible : MonoBehaviour
 
     //Section PDB\\
 
-    private float attackcooldown = 2f;
+    private float attackcooldown = 1f;
     private float attackDistance = 5f;
-    private float attackSpeed = 1f;
-    public bool canAttack;
-    public bool Attacking;
+    public bool canAttack = true;
+    public bool Attacking = false;
     public LayerMask attackLayer;
 
 
@@ -60,22 +59,28 @@ public class Interactible : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        canAttack = true;
+    }
+
 
     public void Update()
     {
+
         if(Input.GetKeyDown(KeyCode.E) && Grabed)
         {
             ReleaseObject();
         }
         
-        if(Input.GetMouseButton(0) && Grabed && !SpecialObject)
+        if(Input.GetMouseButton(0) && Grabed)
         {
             if(itemType == eItemtype.Extincteur)
             {
                 Debug.Log("OUE");
             }
 
-            if (itemType == eItemtype.PDB)
+            if (itemType == eItemtype.PDB && canAttack)
             {
                 PDBInteractible();
             }
@@ -100,9 +105,6 @@ public class Interactible : MonoBehaviour
         {
             rb.isKinematic = true;
         }
-
-        canAttack = true;
-        Attacking = false;
     }
 
     private void ReleaseObject()
@@ -119,10 +121,6 @@ public class Interactible : MonoBehaviour
             grabbedObject = null; 
             Grabed = false; 
         }
-
-        canAttack = false;
-        Attacking = false;
-        SpecialObject = false ;
     }
     
     private void LaunchObject()
@@ -143,14 +141,9 @@ public class Interactible : MonoBehaviour
 
     public void PDBInteractible()
     {
-        //if(!canAttack || Attacking) return;
         SpecialObject = true;
         canAttack = false;
-        Attacking = true;
-        
-        Invoke(nameof(ResetAttack), attackSpeed);
         AttackRayCast();
-        //Invoke(nameof(AttackRayCast), attackcooldown);
     }
 
     void AttackRayCast()
@@ -170,5 +163,8 @@ public class Interactible : MonoBehaviour
     void HitTarget(Vector3 pos)
     {
         Debug.Log("Destroy Object");
+        canAttack = false;
+        Attacking = true;
+        Invoke(nameof(ResetAttack), attackcooldown);
     }
 }
