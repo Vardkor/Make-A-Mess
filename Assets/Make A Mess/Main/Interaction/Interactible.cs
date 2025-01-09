@@ -28,7 +28,7 @@ public class Interactible : MonoBehaviour
     private float attackcooldown = 2f;
     private float attackDistance = 5f;
     private float attackSpeed = 1f;
-    public bool canAttack = true;
+    public bool canAttack;
     public bool Attacking;
     public LayerMask attackLayer;
 
@@ -77,7 +77,6 @@ public class Interactible : MonoBehaviour
 
             if (itemType == eItemtype.PDB)
             {
-                Debug.Log("PDB");
                 PDBInteractible();
             }
 
@@ -101,6 +100,9 @@ public class Interactible : MonoBehaviour
         {
             rb.isKinematic = true;
         }
+
+        canAttack = true;
+        Attacking = false;
     }
 
     private void ReleaseObject()
@@ -117,6 +119,10 @@ public class Interactible : MonoBehaviour
             grabbedObject = null; 
             Grabed = false; 
         }
+
+        canAttack = false;
+        Attacking = false;
+        SpecialObject = false ;
     }
     
     private void LaunchObject()
@@ -143,7 +149,8 @@ public class Interactible : MonoBehaviour
         Attacking = true;
         
         Invoke(nameof(ResetAttack), attackSpeed);
-        Invoke(nameof(AttackRayCast), attackcooldown);
+        AttackRayCast();
+        //Invoke(nameof(AttackRayCast), attackcooldown);
     }
 
     void AttackRayCast()
@@ -155,7 +162,7 @@ public class Interactible : MonoBehaviour
     }
     void ResetAttack()
     {
-        Debug.Log("Attack");
+        Debug.Log("Reset Attack Called");
         canAttack = true;
         Attacking = false;
     }
