@@ -32,8 +32,8 @@ public class Interactible : MonoBehaviour
     public LayerMask attackLayer;
 
     /*public GameObject hitEffect;
-    public AudioClip ItemSwing;
     public AudioClip hitSound;*/
+    private AudioSource AttackSwing;
 
 
     //DEBUG\\
@@ -91,7 +91,6 @@ public class Interactible : MonoBehaviour
             if (itemType == eItemtype.PDB && canAttack)
             {
                 AttackItem();
-                //SetAnimations();
             }
 
             if(!SpecialObject)
@@ -138,7 +137,7 @@ public class Interactible : MonoBehaviour
         if (rb != null)
         {
             rb.isKinematic = false;
-            rb.AddForce(transform.forward * forcelancer, ForceMode.Impulse);
+            rb.AddForce(Camera.main.transform.forward * forcelancer, ForceMode.Impulse);
         }
         
         grabbedObject.SetParent(null);
@@ -146,32 +145,27 @@ public class Interactible : MonoBehaviour
         Grabed = false;
     }
 
-    //Object Specials\\
+    //---[Object Specials]---\\
 
     public void AttackItem()
     {
         SpecialObject = true;
         canAttack = false;
         AttackRayCast();
+        AttackSound();
+        //AttackAnimation();
         
-        //audioSource.pitch = Random.Range(0.9f, 1.1f);
-        //audioSource.PlayOneShot(AttackSwing);
+
     }
 
     void AttackRayCast()
     {
-        Vector3 start = transform.position;
 
-        Vector3 end = transform.position + transform.forward * attackDistance;
-
-        Debug.DrawLine(start, end, Color.red, 1f);
-
-        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
         {
             HitTarget(hit.point);
         }
-    }   
-        //gameObject.GetComponent<Interaction2>().AttackRaycastCam();
+    }
     void ResetAttack()
     {
         Debug.Log("Reset Attack Called");
@@ -193,4 +187,31 @@ public class Interactible : MonoBehaviour
         Attacking = true;
         Invoke(nameof(ResetAttack), attackcooldown);
     }
+
+    //---[SFX de l'attaque]---\\
+
+    void AttackSound()
+    {
+        if(Attacking == true)
+        {
+            AttackSwing = grabbedObject.GetComponent<AudioSource>();
+            AttackSwing.pitch = Random.Range(0.9f, 1.1f);
+            AttackSwing.Play();
+        }
+    }
+
+    //---[Animation de l'attaque]---\\
+
+    /*void AttackAnimation()
+    {
+        if(Attacking == true)
+        {
+            AnimationAttack = grabbedObject.GetComponent<Animator>();
+            AnimationAttack.Play();
+        }
+        else
+        {
+            return;
+        }
+    }*/
 }
