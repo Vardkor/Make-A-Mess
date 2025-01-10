@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactible : MonoBehaviour
 {
-    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache};
+    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable};
     public eItemtype itemType;
 
     //Grab\\
@@ -22,6 +22,7 @@ public class Interactible : MonoBehaviour
 
     public bool Grabed;
     public bool SpecialObject;
+    public bool ObjectCassable;
 
     //Section Attack Event\\
 
@@ -63,6 +64,10 @@ public class Interactible : MonoBehaviour
 
             case eItemtype.Hache:
                 GrabObject(transform, trsPlayerGuizmo);
+            break;
+
+            case eItemtype.ObjectCassable:
+                GrabObjectBreak(transform, trsPlayerGuizmo);
             break;
         }
     }
@@ -143,6 +148,14 @@ public class Interactible : MonoBehaviour
         grabbedObject.SetParent(null);
         grabbedObject = null;
         Grabed = false;
+
+        if(ObjectCassable)
+        {
+           if(rb.mass == 50f)
+            {
+                Debug.Log("OuE");
+            }
+        }
     }
 
     //---[Object Specials]---\\
@@ -154,8 +167,6 @@ public class Interactible : MonoBehaviour
         AttackRayCast();
         AttackSound();
         //AttackAnimation();
-        
-
     }
 
     void AttackRayCast()
@@ -164,6 +175,12 @@ public class Interactible : MonoBehaviour
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
         {
             HitTarget(hit.point);
+        }
+        else
+        {
+            canAttack = true;
+            Attacking = false;
+            Invoke(nameof(ResetAttack), attackcooldown);
         }
     }
     void ResetAttack()
@@ -186,6 +203,24 @@ public class Interactible : MonoBehaviour
         canAttack = false;
         Attacking = true;
         Invoke(nameof(ResetAttack), attackcooldown);
+    }
+
+
+    //---[Grab Objet Cassable]---\\
+    private void GrabObjectBreak(Transform objectToGrab, Transform trsPlayerGuizmo)
+    {
+        grabbedObject = objectToGrab;
+        grabbedObject.position = trsPlayerGuizmo.position;
+        grabbedObject.rotation = trsPlayerGuizmo.rotation;
+        grabbedObject.SetParent(trsPlayerGuizmo);
+        Grabed = true;
+        ObjectCassable = true;
+
+        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+        }
     }
 
     //---[SFX de l'attaque]---\\
