@@ -14,15 +14,12 @@ public class Interactible : MonoBehaviour
     //Float\\
     private float forcelancer = 50f;
 
-    //Vector\\
-    private Vector3 screenPosition;
-    private Vector3 cursorPosition;
-
     //Bool\\
 
     public bool Grabed;
     public bool SpecialObject;
-    public bool ObjectCassable;
+    public bool bObjectCassable;
+    private bool Launched;
 
     //Section Attack Event\\
 
@@ -35,6 +32,9 @@ public class Interactible : MonoBehaviour
     /*public GameObject hitEffect;
     public AudioClip hitSound;*/
     private AudioSource AttackSwing;
+
+    //Section Break Object Event\\
+    private bool impactDetected = false;
 
 
     //DEBUG\\
@@ -67,7 +67,7 @@ public class Interactible : MonoBehaviour
             break;
 
             case eItemtype.ObjectCassable:
-                GrabObjectBreak(transform, trsPlayerGuizmo);
+                GrabObject(transform, trsPlayerGuizmo);
             break;
         }
     }
@@ -118,6 +118,10 @@ public class Interactible : MonoBehaviour
         {
             rb.isKinematic = true;
         }
+        if(itemType == eItemtype.ObjectCassable)
+        {
+            bObjectCassable = true;
+        }
     }
 
     private void ReleaseObject()
@@ -130,9 +134,9 @@ public class Interactible : MonoBehaviour
                 rb.isKinematic = false;
             }
 
-            grabbedObject.SetParent(null); 
+            grabbedObject.SetParent(null);
             grabbedObject = null; 
-            Grabed = false; 
+            Grabed = false;
         }
     }
     
@@ -148,14 +152,7 @@ public class Interactible : MonoBehaviour
         grabbedObject.SetParent(null);
         grabbedObject = null;
         Grabed = false;
-
-        if(ObjectCassable)
-        {
-           if(rb.mass == 50f)
-            {
-                Debug.Log("OuE");
-            }
-        }
+        Launched = true;
     }
 
     //---[Object Specials]---\\
@@ -192,7 +189,7 @@ public class Interactible : MonoBehaviour
 
     public void HitTarget(Vector3 pos)
     {
-        Debug.Log("Destroy Object");
+        BreakObject();
         
         /*audioSource.pitch = 1;
         audioSource.PlayOneShot(hitSound);
@@ -203,24 +200,6 @@ public class Interactible : MonoBehaviour
         canAttack = false;
         Attacking = true;
         Invoke(nameof(ResetAttack), attackcooldown);
-    }
-
-
-    //---[Grab Objet Cassable]---\\
-    private void GrabObjectBreak(Transform objectToGrab, Transform trsPlayerGuizmo)
-    {
-        grabbedObject = objectToGrab;
-        grabbedObject.position = trsPlayerGuizmo.position;
-        grabbedObject.rotation = trsPlayerGuizmo.rotation;
-        grabbedObject.SetParent(trsPlayerGuizmo);
-        Grabed = true;
-        ObjectCassable = true;
-
-        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-        }
     }
 
     //---[SFX de l'attaque]---\\
@@ -249,4 +228,26 @@ public class Interactible : MonoBehaviour
             return;
         }
     }*/
+
+    void BreakObject()
+    {
+        Debug.Log("Cassé");
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall"))
+        {
+            if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true)
+            {
+                /*Rigidbody rbgrabbedObject = grabbedObject.GetComponent<Rigidbody>();
+                float impactForce = rbgrabbedObject.mass * rbgrabbedObject.velocity.magnitude;
+                if(impactForce >= forcelancer)
+                {*/
+                    impactDetected = true;
+                    BreakObject();
+                //}
+            }
+        }
+    }
 }

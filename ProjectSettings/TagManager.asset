@@ -39,6 +39,8 @@ TagManager:
   - carteacces
   - BoxTutoHautDesMarches
   - ballegolf
+  - Ground
+  - Wall
   layers:
   - Default
   - TransparentFX
