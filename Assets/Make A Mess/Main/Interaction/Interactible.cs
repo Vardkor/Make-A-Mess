@@ -79,7 +79,8 @@ public class Interactible : MonoBehaviour
 
     public void Update()
     {
-
+        
+        
         if(Input.GetKeyDown(KeyCode.E) && Grabed)
         {
             ReleaseObject();
@@ -154,19 +155,24 @@ public class Interactible : MonoBehaviour
         
         if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true)
         {
-            if(impactForce >= forcelancer)
+            if(impactForce > 10f)
             {
+                Debug.Log("La force : " + impactForce);
                 impactDetected = true;
                 CanBeBreak = true;
             }
-            else if(impactForce <= forcelancer)
+            else if(impactForce < 5f)
             {
                 Debug.Log("Pas assez de force");
+                CanBeBreak = false; 
                 return;
+            }
+            else
+            {
                 CanBeBreak = false;
             }
         }
-        
+
         grabbedObject.SetParent(null);
         grabbedObject = null;
         Grabed = false;
