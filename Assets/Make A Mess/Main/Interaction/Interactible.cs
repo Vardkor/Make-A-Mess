@@ -12,13 +12,14 @@ public class Interactible : MonoBehaviour
     
 
     //Float\\
-    private float forcelancer = 50f;
+    private float forcelancer = 10f;
 
     //Bool\\
 
     public bool Grabed;
     public bool SpecialObject;
     public bool bObjectCassable;
+    private bool CanBeBreak = false;
     private bool Launched;
 
     //Section Attack Event\\
@@ -35,7 +36,6 @@ public class Interactible : MonoBehaviour
 
     //Section Break Object Event\\
     private bool impactDetected = false;
-    public LayerMask BreakLayer;
 
 
     //DEBUG\\
@@ -74,7 +74,6 @@ public class Interactible : MonoBehaviour
     void Start()
     {
         canAttack = true;
-        Rigidbody rb = GetComponent<Rigidbody>();
     }
 
 
@@ -148,11 +147,29 @@ public class Interactible : MonoBehaviour
             rb.isKinematic = false;
             rb.AddForce(Camera.main.transform.forward * forcelancer, ForceMode.Impulse);
         }
+
+        Launched = true;
+
+        float impactForce = rb.mass * rb.velocity.magnitude;
+        
+        if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true)
+        {
+            if(impactForce >= forcelancer)
+            {
+                impactDetected = true;
+                CanBeBreak = true;
+            }
+            else if(impactForce <= forcelancer)
+            {
+                Debug.Log("Pas assez de force");
+                return;
+                CanBeBreak = false;
+            }
+        }
         
         grabbedObject.SetParent(null);
         grabbedObject = null;
         Grabed = false;
-        Launched = true;
     }
 
     //---[Object Specials]---\\
@@ -231,29 +248,26 @@ public class Interactible : MonoBehaviour
 
     void BreakObject()
     {
-        Debug.Log("Cassé");
+        if(CanBeBreak == true)
+        {
+            Debug.Log("Cassé");
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        //if(BreakLayer)
-        //{
-            if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true)
+        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Grab"))
+        {
+            if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true && CanBeBreak == true)
             {
-                Rigidbody rb = grabbedObject?.GetComponent<Rigidbody>();
-                if (rb == null)
+                BreakObject();
+                /*if (rb == null)
                 {
                     Debug.LogError("Rigidbody manquant sur l'objet en collision !");
                     return;
-                }
-
-                float impactForce = rb.mass * rb.velocity.magnitude;
-                if(impactForce >= forcelancer)
-                {
-                    impactDetected = true;
-                    BreakObject();
-                }
+                }*/
+                //BreakObject();
             }   
-        //} 
+        }
     }
 }
