@@ -35,11 +35,10 @@ public class Interactible : MonoBehaviour
 
     //Section Break Object Event\\
     private bool impactDetected = false;
+    public LayerMask BreakLayer;
 
 
     //DEBUG\\
-
-
 
 
     public void Interact(Transform trsPlayerGuizmo = null)
@@ -75,6 +74,7 @@ public class Interactible : MonoBehaviour
     void Start()
     {
         canAttack = true;
+        Rigidbody rb = GetComponent<Rigidbody>();
     }
 
 
@@ -236,18 +236,24 @@ public class Interactible : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall"))
-        {
+        //if(BreakLayer)
+        //{
             if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true)
             {
-                /*Rigidbody rbgrabbedObject = grabbedObject.GetComponent<Rigidbody>();
-                float impactForce = rbgrabbedObject.mass * rbgrabbedObject.velocity.magnitude;
+                Rigidbody rb = grabbedObject?.GetComponent<Rigidbody>();
+                if (rb == null)
+                {
+                    Debug.LogError("Rigidbody manquant sur l'objet en collision !");
+                    return;
+                }
+
+                float impactForce = rb.mass * rb.velocity.magnitude;
                 if(impactForce >= forcelancer)
-                {*/
+                {
                     impactDetected = true;
                     BreakObject();
-                //}
-            }
-        }
+                }
+            }   
+        //} 
     }
 }
