@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactible : MonoBehaviour
 {
-    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable};
+    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable, ObjetTirrable};
     public eItemtype itemType;
 
     //Grab\\
@@ -36,6 +36,7 @@ public class Interactible : MonoBehaviour
 
     //Section Break Object Event\\
     private bool impactDetected = false;
+    private bool dejabreak = false;
 
 
     //DEBUG\\
@@ -67,6 +68,10 @@ public class Interactible : MonoBehaviour
 
             case eItemtype.ObjectCassable:
                 GrabObject(transform, trsPlayerGuizmo);
+            break;
+
+            case eItemtype.ObjetTirrable:
+                Debug.Log("Je tire");
             break;
         }
     }
@@ -113,6 +118,12 @@ public class Interactible : MonoBehaviour
         grabbedObject.SetParent(trsPlayerGuizmo);
         Grabed = true;
 
+        /*Transform child = GetChildOfGrabbedObject();
+        if(child != null)
+        {
+            Debug.Log($"Enfant trouver : {child.name}");
+        }*/
+
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -150,27 +161,10 @@ public class Interactible : MonoBehaviour
         }
 
         Launched = true;
-
-        float impactForce = rb.mass * rb.velocity.magnitude;
         
         if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true)
         {
-            if(impactForce > 10f)
-            {
-                Debug.Log("La force : " + impactForce);
-                impactDetected = true;
-                CanBeBreak = true;
-            }
-            else if(impactForce < 5f)
-            {
-                Debug.Log("Pas assez de force");
-                CanBeBreak = false; 
-                return;
-            }
-            else
-            {
-                CanBeBreak = false;
-            }
+            CanBeBreak = true;
         }
 
         grabbedObject.SetParent(null);
@@ -254,11 +248,28 @@ public class Interactible : MonoBehaviour
 
     void BreakObject()
     {
-        if(CanBeBreak == true)
+        if(CanBeBreak)
         {
-            Debug.Log("Cassé");
+            if(!dejabreak)
+            {
+                Debug.Log("Cassé");
+                grabbedObject.gameObject.SetActive(false);
+                dejabreak = true;
+            }
         }
     }
+
+    //---[Recherche d'enfant -> BreakObject]---\\
+
+    /*private Tran  sform GetChildOfGrabbedObject()
+    {
+        if(grabbedObject != null && grabbedObject.childCount > 0)
+        {
+            return grabbedObject.GetChild(0);
+        }
+
+        Debug.Log("L'objet n'a pas d'enfant");
+    }*/
 
     void OnCollisionEnter(Collision collision)
     {
@@ -267,12 +278,6 @@ public class Interactible : MonoBehaviour
             if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true && CanBeBreak == true)
             {
                 BreakObject();
-                /*if (rb == null)
-                {
-                    Debug.LogError("Rigidbody manquant sur l'objet en collision !");
-                    return;
-                }*/
-                //BreakObject();
             }   
         }
     }
