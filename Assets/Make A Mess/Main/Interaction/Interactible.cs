@@ -36,7 +36,7 @@ public class Interactible : MonoBehaviour
 
     //Section Break Object Event\\
     private bool impactDetected = false;
-    private bool dejabreak = false;
+    private bool Isbreak = false;
 
 
     //DEBUG\\
@@ -250,11 +250,11 @@ public class Interactible : MonoBehaviour
     {
         if(CanBeBreak)
         {
-            if(!dejabreak)
+            if(!Isbreak)
             {
                 Debug.Log("Cassé");
-                grabbedObject.gameObject.SetActive(false);
-                dejabreak = true;
+                gameObject.SetActive(false);
+                Isbreak = true;
             }
         }
     }
