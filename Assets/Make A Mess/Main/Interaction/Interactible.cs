@@ -7,6 +7,9 @@ public class Interactible : MonoBehaviour
     public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable, ObjetTirrable};
     public eItemtype itemType;
 
+    public enum eTypeFlame {Inflamable};
+    public eTypeFlame itemflame;
+
     //Grab\\
     private Transform grabbedObject;
     
@@ -74,6 +77,7 @@ public class Interactible : MonoBehaviour
                 Debug.Log("Je tire");
             break;
         }
+
     }
 
     void Start()
@@ -101,6 +105,10 @@ public class Interactible : MonoBehaviour
             if (itemType == eItemtype.PDB && canAttack)
             {
                 AttackItem();
+            }
+            if(itemType == eItemtype.Briquet)
+            {
+                Debug.Log("Oue");
             }
 
             if(!SpecialObject)
