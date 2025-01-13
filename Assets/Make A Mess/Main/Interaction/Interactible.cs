@@ -12,7 +12,7 @@ public class Interactible : MonoBehaviour
 
     //Grab\\
     private Transform grabbedObject;
-    
+    private Transform launchedObject;
 
     //Float\\
     private float forcelancer = 10f;
@@ -40,6 +40,7 @@ public class Interactible : MonoBehaviour
     //Section Break Object Event\\
     private bool impactDetected = false;
     private bool Isbreak = false;
+
 
 
     //DEBUG\\
@@ -169,11 +170,13 @@ public class Interactible : MonoBehaviour
         }
 
         Launched = true;
-        
-        if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true)
+
+        if (itemType == eItemtype.ObjectCassable && bObjectCassable && Launched)
         {
             CanBeBreak = true;
         }
+
+        launchedObject = grabbedObject;
 
         grabbedObject.SetParent(null);
         grabbedObject = null;
@@ -256,30 +259,20 @@ public class Interactible : MonoBehaviour
 
     void BreakObject()
     {
-        if(CanBeBreak)
+        if (CanBeBreak)
         {
-            if(!Isbreak)
+            if (!Isbreak)
             {
                 Debug.Log("Cassé");
-                //gameObject.SetActive(false);
                 Isbreak = true;
-                //Transform child = grabbedObject.GetChild(0);
-                //Debug.Log($"Enfant trouvé : {child.name}");
+                
+                Transform child = launchedObject.GetChild(0);
+                Debug.Log($"Enfant trouvé : {child.name}");
+
+                //launchedObject.gameObject.SetActive(false);
             }
         }
     }
-
-    //---[Recherche d'enfant -> BreakObject]---\\
-
-    /*private Tran  sform GetChildOfGrabbedObject()
-    {
-        if(grabbedObject != null && grabbedObject.childCount > 0)
-        {
-            return grabbedObject.GetChild(0);
-        }
-
-        Debug.Log("L'objet n'a pas d'enfant");
-    }*/
 
     void OnCollisionEnter(Collision collision)
     {
