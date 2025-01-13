@@ -253,8 +253,10 @@ public class Interactible : MonoBehaviour
             if(!Isbreak)
             {
                 Debug.Log("Cassé");
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
                 Isbreak = true;
+                //Transform child = grabbedObject.GetChild(0);
+                //Debug.Log($"Enfant trouvé : {child.name}");
             }
         }
     }
