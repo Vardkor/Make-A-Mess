@@ -5,18 +5,19 @@ using UnityEngine;
 public class P_Movement : MonoBehaviour
 {
     public CharacterController controller;
+
     public float jumpheight = 12f;
     public float gravity = -9.81f;
     public float speed = 6.5f;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
+
     public LayerMask groundMask;
     public Vector3 velocity;
     public bool isGrounded;
 
+    public bool isMoving = false;
     public bool Sprinting = false;
-
-    [SerializeField] Tuto_Text tutomoov;
 
 
     public void Update()
@@ -47,18 +48,24 @@ public class P_Movement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpheight * -2f * gravity);
         }
 
-        if(tutomoov.ControlActif)
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * x + transform.forward * z;
+
+        velocity.y += gravity * Time.deltaTime;
+
+        controller.Move(move * speed * Time.deltaTime);
+
+        controller.Move(velocity * Time.deltaTime);
+        
+        if(z<=0)
         {
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-
-            Vector3 move = transform.right * x + transform.forward * z;
-
-            velocity.y += gravity * Time.deltaTime;
-
-            controller.Move(move * speed * Time.deltaTime);
-
-            controller.Move(velocity * Time.deltaTime);
+            isMoving = false;
+        }
+        else
+        {
+            isMoving = true;
         }
     }
 }

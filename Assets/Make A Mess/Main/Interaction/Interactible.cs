@@ -16,6 +16,7 @@ public class Interactible : MonoBehaviour
 
     //Float\\
     private float forcelancer = 10f;
+    private float grabetime = 5.0f;
 
     //Bool\\
 
@@ -122,6 +123,7 @@ public class Interactible : MonoBehaviour
     private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo)
     {
         grabbedObject = objectToGrab;
+        grabbedObject.position = new Vector3(Mathf.Lerp(-1, grabetime,1 * Time.deltaTime),0,0);
         grabbedObject.position = trsPlayerGuizmo.position;
         grabbedObject.rotation = trsPlayerGuizmo.rotation;
         grabbedObject.SetParent(trsPlayerGuizmo);

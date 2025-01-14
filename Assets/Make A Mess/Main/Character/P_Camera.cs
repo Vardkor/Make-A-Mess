@@ -37,7 +37,7 @@ public class P_Camera : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
 
-        if(PlayerMovement.Sprinting==true)
+        if(PlayerMovement.Sprinting==true && PlayerMovement.isMoving==true)
         {
             m_FieldOfView = Mathf.Lerp(m_FieldOfView, 85, 10f * Time.deltaTime);
         }
