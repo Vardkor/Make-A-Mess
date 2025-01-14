@@ -85,13 +85,12 @@ public class Interactible : MonoBehaviour
     void Start()
     {
         canAttack = true;
+        Isbreak = false;
     }
 
 
     public void Update()
     {
-        
-        
         if(Input.GetKeyDown(KeyCode.E) && Grabed)
         {
             ReleaseObject();
@@ -263,15 +262,19 @@ public class Interactible : MonoBehaviour
     {
         if (CanBeBreak)
         {
-            if (!Isbreak)
+            if(!Isbreak)
             {
-                Debug.Log("Cassé");
-                Isbreak = true;
-                
-                Transform child = launchedObject.GetChild(0);
-                Debug.Log($"Enfant trouvé : {child.name}");
+                if(launchedObject.childCount > 0)
+                {
+                    Transform child = launchedObject.GetChild(0);
 
-                //launchedObject.gameObject.SetActive(false);
+                    child.SetParent(null);
+
+                    child.position = launchedObject.position;
+                    child.rotation = launchedObject.rotation;
+                    launchedObject.gameObject.SetActive(false);
+                    Isbreak = true;
+                }
             }
         }
     }
@@ -282,7 +285,10 @@ public class Interactible : MonoBehaviour
         {
             if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true && CanBeBreak == true)
             {
-                BreakObject();
+                if(!Isbreak)
+                {
+                    BreakObject();
+                }
             }   
         }
     }
