@@ -13,10 +13,13 @@ public class Interactible : MonoBehaviour
     //Grab\\
     private Transform grabbedObject;
     private Transform launchedObject;
+    private Transform trsPlayerGuizmo;
 
     //Float\\
     private float forcelancer = 10f;
     private float grabetime = 5.0f;
+
+    private float durationGrabObjectMoov = 0.07f;
 
     //Bool\\
 
@@ -117,22 +120,19 @@ public class Interactible : MonoBehaviour
                 LaunchObject();
             }
         }
+
+        if (Grabed == true && trsPlayerGuizmo != null)
+        {
+            LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
+        }
     }
 
     private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo)
     {
         grabbedObject = objectToGrab;
-        grabbedObject.position = new Vector3(Mathf.Lerp(-1, grabetime,1 * Time.deltaTime),0,0);
-        grabbedObject.position = trsPlayerGuizmo.position;
-        grabbedObject.rotation = trsPlayerGuizmo.rotation;
-        grabbedObject.SetParent(trsPlayerGuizmo);
         Grabed = true;
 
-        /*Transform child = GetChildOfGrabbedObject();
-        if(child != null)
-        {
-            Debug.Log($"Enfant trouver : {child.name}");
-        }*/
+        grabbedObject.SetParent(trsPlayerGuizmo);
 
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         if (rb != null)
@@ -143,6 +143,10 @@ public class Interactible : MonoBehaviour
         {
             bObjectCassable = true;
         }
+
+        LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
+        LeanTween.rotate(grabbedObject.gameObject, trsPlayerGuizmo.rotation.eulerAngles, durationGrabObjectMoov);
+
     }
 
     private void ReleaseObject()
