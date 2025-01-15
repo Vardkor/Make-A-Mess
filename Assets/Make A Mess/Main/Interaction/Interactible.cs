@@ -267,9 +267,14 @@ public class Interactible : MonoBehaviour
                 if(launchedObject.childCount > 0)
                 {
                     Transform child = launchedObject.GetChild(0);
+                    Rigidbody rb = child.GetComponent<Rigidbody>();
+                    if(rb != null)
+                    {
+                        rb.isKinematic = false;
+                    }
+
 
                     child.SetParent(null);
-
                     child.position = launchedObject.position;
                     child.rotation = launchedObject.rotation;
                     launchedObject.gameObject.SetActive(false);
