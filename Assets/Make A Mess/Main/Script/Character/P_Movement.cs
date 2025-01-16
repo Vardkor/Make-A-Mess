@@ -18,6 +18,11 @@ public class P_Movement : MonoBehaviour
 
     public bool isMoving = false;
     public bool Sprinting = false;
+    private bool AsJumped = false;
+
+    public ParticleSystem jumpPraticles;
+    public ParticleSystem ReboundPraticles;
+    public AudioSource JumpSFX;
 
 
     public void Update()
@@ -46,7 +51,16 @@ public class P_Movement : MonoBehaviour
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpheight * -2f * gravity);
+            JumpSFX.pitch = Random.Range(0.9f, 1.1f);
+            jumpPraticles.Play();
+            JumpSFX.Play();
+            AsJumped = true;
         }
+        if(AsJumped && isGrounded==false)
+        {
+            ReboundPraticles.Play();
+        }
+
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
