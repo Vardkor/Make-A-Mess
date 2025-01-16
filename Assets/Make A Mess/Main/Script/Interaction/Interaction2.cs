@@ -6,13 +6,29 @@ using TMPro;
 public class Interaction2 : MonoBehaviour
 {
     public Transform trsPlayerGuizmo;
+
     public GameObject go;
 
     public GameObject GrabUI;
 
+    public ParticleSystem PeeParticle;
+    private bool Peeing = false;
+
     public void Update()
     {
         RaycastHit hit;
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            if(Peeing==false)
+            {
+                PeeParticle.Play();
+            }
+            else
+            {
+                Peeing = true;
+            }
+        }
 
         if(Physics.Raycast(transform.position, transform.forward, out hit, 2.5f))
         {
@@ -27,14 +43,13 @@ public class Interaction2 : MonoBehaviour
                 {
                     hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerGuizmo);
                 }
+                else
+                {
+                    go.GetComponent<Outline>().enabled = false;
+                    go = null;
 
-            }
-            else
-            {
-                go.GetComponent<Outline>().enabled = false;
-                go = null;
-
-                GrabUI.SetActive(false);
+                    GrabUI.SetActive(false);
+                }
             }
         }
     }

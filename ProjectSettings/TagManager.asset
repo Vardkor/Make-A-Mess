@@ -41,6 +41,7 @@ TagManager:
   - ballegolf
   - Ground
   - Wall
+  - Grab2
   layers:
   - Default
   - TransparentFX
