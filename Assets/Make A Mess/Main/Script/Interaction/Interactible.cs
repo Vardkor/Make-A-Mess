@@ -268,17 +268,20 @@ public class Interactible : MonoBehaviour
         {
             if(!Isbreak)
             {
-                if(launchedObject.childCount > 0)
+                if (launchedObject.childCount > 0)
                 {
                     Transform child = launchedObject.GetChild(0);
-                    Rigidbody rb = child.GetComponent<Rigidbody>();
-                    if(rb != null)
+
+                    List<Transform> allChildren = GetAllChildren(child);
+
+                    foreach (Transform grandChild in allChildren)
                     {
-                        rb.isKinematic = false;
+                        Rigidbody rb = grandChild.GetComponent<Rigidbody>();
+                        if (rb != null)
+                        {
+                            rb.isKinematic = false;
+                        }
                     }
-                    Debug.Log("Cassé!");
-
-
                     child.SetParent(null);
                     child.position = launchedObject.position;
                     child.rotation = launchedObject.rotation;
@@ -301,5 +304,18 @@ public class Interactible : MonoBehaviour
                 }
             }   
         }
+    }
+
+    private List<Transform> GetAllChildren(Transform parent)
+    {
+        List<Transform> children = new List<Transform>();
+
+        foreach (Transform child in parent)
+        {
+            children.Add(child);
+            children.AddRange(GetAllChildren(child));
+        }
+
+        return children;
     }
 }

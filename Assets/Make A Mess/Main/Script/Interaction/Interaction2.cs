@@ -19,8 +19,8 @@ public class Interaction2 : MonoBehaviour
         {
             if(hit.transform.gameObject.tag == "Grab")
             {
-                /*go = hit.transform.gameObject;
-                go.GetComponent<Outline>().enabled = true;*/
+                go = hit.transform.gameObject;
+                go.GetComponent<Outline>().enabled = true;
 
                 GrabUI.SetActive(true);
 
@@ -29,15 +29,24 @@ public class Interaction2 : MonoBehaviour
                     hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerGuizmo);
                     GrabUI.SetActive(false);
                 }
-                /*else
-                {
-                    go.GetComponent<Outline>().enabled = false;
-                    go = null;
-                }*/
             }
             else
             {
                 GrabUI.SetActive(false);
+                if(go != null)
+                {
+                    go.GetComponent<Outline>().enabled = false;
+                    go = null;
+                }
+            }
+        }
+        else 
+        {
+            GrabUI.SetActive(false);
+            if(go != null)
+            {
+                go.GetComponent<Outline>().enabled = false;
+                go = null;
             }
         }
     }
