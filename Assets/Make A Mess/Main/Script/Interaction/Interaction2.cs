@@ -11,45 +11,33 @@ public class Interaction2 : MonoBehaviour
 
     public GameObject GrabUI;
 
-    public ParticleSystem PeeParticle;
-    private bool Peeing = false;
-
     public void Update()
     {
         RaycastHit hit;
-
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            if(Peeing==false)
-            {
-                PeeParticle.Play();
-            }
-            else
-            {
-                Peeing = true;
-            }
-        }
 
         if(Physics.Raycast(transform.position, transform.forward, out hit, 2.5f))
         {
             if(hit.transform.gameObject.tag == "Grab")
             {
-                go = hit.transform.gameObject;
-                go.GetComponent<Outline>().enabled = true;
+                /*go = hit.transform.gameObject;
+                go.GetComponent<Outline>().enabled = true;*/
 
                 GrabUI.SetActive(true);
 
                 if(Input.GetKeyDown(KeyCode.E))
                 {
                     hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerGuizmo);
+                    GrabUI.SetActive(false);
                 }
-                else
+                /*else
                 {
                     go.GetComponent<Outline>().enabled = false;
                     go = null;
-
-                    GrabUI.SetActive(false);
-                }
+                }*/
+            }
+            else
+            {
+                GrabUI.SetActive(false);
             }
         }
     }
