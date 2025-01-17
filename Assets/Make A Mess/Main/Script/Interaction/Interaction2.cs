@@ -39,6 +39,13 @@ public class Interaction2 : MonoBehaviour
                     go = null;
                 }
             }
+            if(hit.transform.gameObject.tag == "Bouton")
+            {
+                if(Input.GetKeyDown(KeyCode.E))
+                {
+                    hit.collider.gameObject.GetComponent<BoutonScript>().Bouton();
+                }
+            }
         }
         else 
         {

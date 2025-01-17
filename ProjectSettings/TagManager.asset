@@ -42,6 +42,7 @@ TagManager:
   - Ground
   - Wall
   - Grab2
+  - Bouton
   layers:
   - Default
   - TransparentFX

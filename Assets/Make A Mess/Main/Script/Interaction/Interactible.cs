@@ -7,7 +7,7 @@ public class Interactible : MonoBehaviour
     public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable, ObjetTirrable};
     public eItemtype itemType;
 
-    public enum eTypeFlame {Inflamable};
+    public enum eTypeFlame {Inflamable, NoInflamable};
     public eTypeFlame itemflame;
 
     //Grab\\
@@ -40,6 +40,7 @@ public class Interactible : MonoBehaviour
     /*public GameObject hitEffect;
     public AudioClip hitSound;*/
     private AudioSource AttackSwing;
+    //private Animator AnimationAttack;
 
     //Section Break Object Event\\
     private bool impactDetected = false;
@@ -195,7 +196,6 @@ public class Interactible : MonoBehaviour
         SpecialObject = true;
         canAttack = false;
         AttackRayCast();
-        AttackSound();
         //AttackAnimation();
     }
 
@@ -208,6 +208,7 @@ public class Interactible : MonoBehaviour
         }
         else
         {
+            AttackSound();
             canAttack = true;
             Attacking = false;
             Invoke(nameof(ResetAttack), attackcooldown);
@@ -254,11 +255,14 @@ public class Interactible : MonoBehaviour
         if(Attacking == true)
         {
             AnimationAttack = grabbedObject.GetComponent<Animator>();
-            AnimationAttack.Play();
+            AnimationAttack.Play("PDBAnim");
         }
         else
         {
-            return;
+            if(AnimationAttack != null)
+            {
+                AnimationAttack = null;
+            }
         }
     }*/
 
