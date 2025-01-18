@@ -11,6 +11,10 @@ public class Interaction2 : MonoBehaviour
 
     public GameObject GrabUI;
 
+    public GameObject HitUI;
+
+    public Interactible InteractibleScript;
+
     public void Update()
     {
         RaycastHit hit;
@@ -22,7 +26,15 @@ public class Interaction2 : MonoBehaviour
                 go = hit.transform.gameObject;
                 go.GetComponent<Outline>().enabled = true;
 
-                GrabUI.SetActive(true);
+                if(InteractibleScript.SpecialObject == false)
+                {
+                    GrabUI.SetActive(true);
+                    HitUI.SetActive(false);
+                }
+                if(InteractibleScript.SpecialObject == true)
+                {
+                    HitUI.SetActive(true);
+                }
 
                 if(Input.GetKeyDown(KeyCode.E))
                 {
@@ -33,6 +45,8 @@ public class Interaction2 : MonoBehaviour
             else
             {
                 GrabUI.SetActive(false);
+                HitUI.SetActive(false);
+
                 if(go != null)
                 {
                     go.GetComponent<Outline>().enabled = false;
@@ -50,6 +64,8 @@ public class Interaction2 : MonoBehaviour
         else 
         {
             GrabUI.SetActive(false);
+            HitUI.SetActive(false);
+
             if(go != null)
             {
                 go.GetComponent<Outline>().enabled = false;

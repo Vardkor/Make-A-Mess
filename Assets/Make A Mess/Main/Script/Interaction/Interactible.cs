@@ -37,8 +37,8 @@ public class Interactible : MonoBehaviour
     public bool Attacking = false;
     public LayerMask attackLayer;
 
-    /*public GameObject hitEffect;
-    public AudioClip hitSound;*/
+    //public GameObject hitEffect;
+    public AudioSource hitSound;
     private AudioSource AttackSwing;
     //private Animator AnimationAttack;
 
@@ -144,6 +144,10 @@ public class Interactible : MonoBehaviour
         {
             bObjectCassable = true;
         }
+        if(itemType == eItemtype.PDB)
+        {
+            SpecialObject = true;
+        }
 
         LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
         LeanTween.rotate(grabbedObject.gameObject, trsPlayerGuizmo.rotation.eulerAngles, durationGrabObjectMoov);
@@ -161,8 +165,9 @@ public class Interactible : MonoBehaviour
             }
 
             grabbedObject.SetParent(null);
-            grabbedObject = null; 
+            grabbedObject = null;
             Grabed = false;
+            SpecialObject = false;
         }
     }
     
@@ -195,6 +200,7 @@ public class Interactible : MonoBehaviour
     {
         SpecialObject = true;
         canAttack = false;
+        Attacking = true;
         AttackRayCast();
         //AttackAnimation();
     }
@@ -209,8 +215,8 @@ public class Interactible : MonoBehaviour
         else
         {
             AttackSound();
-            canAttack = true;
-            Attacking = false;
+            canAttack = false;
+            Attacking = true;
             Invoke(nameof(ResetAttack), attackcooldown);
         }
     }
@@ -225,10 +231,10 @@ public class Interactible : MonoBehaviour
     {
         BreakObject();
         
-        /*audioSource.pitch = 1;
-        audioSource.PlayOneShot(hitSound);
+        hitSound.pitch = 1;
+        hitSound.Play();
 
-        GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
+        /*GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
         Destroy(GO, 20);*/
         
         canAttack = false;
@@ -240,7 +246,7 @@ public class Interactible : MonoBehaviour
 
     void AttackSound()
     {
-        if(Attacking == true)
+        if(Attacking == true && canAttack == false)
         {
             AttackSwing = grabbedObject.GetComponent<AudioSource>();
             AttackSwing.pitch = Random.Range(0.9f, 1.1f);
