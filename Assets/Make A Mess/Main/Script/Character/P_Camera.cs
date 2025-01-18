@@ -14,6 +14,8 @@ public class P_Camera : MonoBehaviour
 
     public Camera playerCamera;
 
+    public AudioSource SprintSFX;
+
     private float m_FieldOfView;
 
     void Start()
@@ -40,6 +42,8 @@ public class P_Camera : MonoBehaviour
         if(PlayerMovement.Sprinting==true && PlayerMovement.isMoving==true)
         {
             m_FieldOfView = Mathf.Lerp(m_FieldOfView, 85, 10f * Time.deltaTime);
+            SprintSFX.pitch = 0.9f;
+            SprintSFX.Play();
         }
         else
         {
