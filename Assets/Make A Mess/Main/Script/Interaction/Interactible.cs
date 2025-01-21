@@ -28,6 +28,7 @@ public class Interactible : MonoBehaviour
     public bool bObjectCassable;
     private bool CanBeBreak = false;
     private bool Launched;
+    private bool AttackBreak = false;
 
     //Section Attack Event\\
 
@@ -222,15 +223,16 @@ public class Interactible : MonoBehaviour
     }
     void ResetAttack()
     {
-        Debug.Log("Reset Attack Called");
         canAttack = true;
         Attacking = false;
     }
 
     public void HitTarget(Vector3 pos)
     {
+        CanBeBreak = true;
+        AttackBreak = true; 
         BreakObject();
-        
+
         hitSound.pitch = 1;
         hitSound.Play();
 
@@ -280,23 +282,48 @@ public class Interactible : MonoBehaviour
             {
                 if (launchedObject.childCount > 0)
                 {
-                    Transform child = launchedObject.GetChild(0);
-
-                    List<Transform> allChildren = GetAllChildren(child);
-
-                    foreach (Transform grandChild in allChildren)
+                    if(AttackBreak)
                     {
-                        Rigidbody rb = grandChild.GetComponent<Rigidbody>();
-                        if (rb != null)
+                       Debug.Log("CA tape en else");
+                        Transform child = launchedObject.GetChild(0);
+
+                        List<Transform> allChildren = GetAllChildren(child);
+
+                        foreach (Transform grandChild in allChildren)
                         {
-                            rb.isKinematic = false;
+                            Rigidbody rb = grandChild.GetComponent<Rigidbody>();
+                            if (rb != null)
+                            {
+                                rb.isKinematic = false;
+                            }
                         }
+                        child.SetParent(null);
+                        child.position = launchedObject.position;
+                        child.rotation = launchedObject.rotation;
+                        launchedObject.gameObject.SetActive(false);
+                        Isbreak = true;
                     }
-                    child.SetParent(null);
-                    child.position = launchedObject.position;
-                    child.rotation = launchedObject.rotation;
-                    launchedObject.gameObject.SetActive(false);
-                    Isbreak = true;
+                    else
+                    {
+                        Debug.Log("CA tape en else");
+                        Transform child = launchedObject.GetChild(0);
+
+                        List<Transform> allChildren = GetAllChildren(child);
+
+                        foreach (Transform grandChild in allChildren)
+                        {
+                            Rigidbody rb = grandChild.GetComponent<Rigidbody>();
+                            if (rb != null)
+                            {
+                                rb.isKinematic = false;
+                            }
+                        }
+                        child.SetParent(null);
+                        child.position = launchedObject.position;
+                        child.rotation = launchedObject.rotation;
+                        launchedObject.gameObject.SetActive(false);
+                        Isbreak = true;
+                    }
                 }
             }
         }
