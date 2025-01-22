@@ -7,6 +7,11 @@ public class SPhoneManager : MonoBehaviour
     [SerializeField] GameObject PauseMenu;
     //[SerializeField] GameObject SettingsMenu;
     [SerializeField] GameObject MailMenu;
+    [SerializeField] GameObject NotifUIPC;
+
+    [SerializeField] public GameObject PcPrefab;
+    [SerializeField] Transform SpawnPoint;
+    private GameObject currentCube;
 
     //public GameObject NotifPc;
 
@@ -48,7 +53,7 @@ public class SPhoneManager : MonoBehaviour
         OpenPcSFX.pitch = 1.1f;
         OpenPcSFX.Play();
 
-        //NotifPc.SetActive(false);
+        InstantiatePrefab();
     }
 
     public void Menu()
@@ -59,6 +64,9 @@ public class SPhoneManager : MonoBehaviour
 
         OpenPcSFX.pitch = 0.9f;
         OpenPcSFX.Play();
+
+        NotifUIPC.SetActive(false);
+        
     }
 
     /*public void SettingsActivation()
@@ -85,6 +93,31 @@ public class SPhoneManager : MonoBehaviour
     {
 
     }*/
+
+    void InstantiatePrefab()
+    {
+        if(PcPrefab != null && SpawnPoint != null)
+        {
+            if(currentCube!=null)
+            {
+                Destroy(currentCube);
+            }
+            currentCube = Instantiate(PcPrefab, SpawnPoint.position, SpawnPoint.rotation);
+        }
+        else
+        {
+            PcPrefab = null;
+        }
+    }
+
+    void DestroyCurrentPrefab()
+    {
+        if(currentCube!=null)
+        {
+            Destroy(currentCube);
+            currentCube = null;
+        }
+    }
 
     public void Quit()
     {

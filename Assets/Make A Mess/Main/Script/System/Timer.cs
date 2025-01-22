@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
     public GameObject Message5;
     public GameObject Message6;
     public GameObject Message7;
-    public GameObject NotifUIsPhone;
+    public GameObject NotifUIPC;
     
     public void Start()
     {
@@ -40,49 +40,49 @@ public class Timer : MonoBehaviour
             if(minutes == 9 && seconds == 30)
             {
                 Message1.SetActive(true);
-                NotifUIsPhone.SetActive(true);
+                NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 8 && seconds == 0)
             {
                 Message2.SetActive(true);
                 Message1.SetActive(false);
-                NotifUIsPhone.SetActive(true);
+                NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 6 && seconds == 0)
             {
                 Message3.SetActive(true);
                 Message2.SetActive(false);
-                NotifUIsPhone.SetActive(true);
+                NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 3 && seconds == 0)
             {
                 Message4.SetActive(true);
                 Message3.SetActive(false);
-                NotifUIsPhone.SetActive(true);
+                NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 1 && seconds == 30)
             {
                 Message5.SetActive(true);
                 Message4.SetActive(false);
-                NotifUIsPhone.SetActive(true);
+                NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 1 && seconds == 00)
             {
                 Message6.SetActive(true);
                 Message5.SetActive(false);
-                NotifUIsPhone.SetActive(true);
+                NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 0 && seconds == 45)
             {
                 Message7.SetActive(true);
                 Message6.SetActive(false);
-                NotifUIsPhone.SetActive(true);
+                NotifUIPC.SetActive(true);
                 Notif.Play();
             }
         }

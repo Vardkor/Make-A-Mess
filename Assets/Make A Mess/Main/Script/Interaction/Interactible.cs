@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Interactible : MonoBehaviour
 {
-    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable, ObjetTirrable};
+    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable, ObjetTirrable, PcPortablePrefab};
     public eItemtype itemType;
 
     public enum eTypeFlame {Inflamable, NoInflamable};
@@ -85,6 +85,10 @@ public class Interactible : MonoBehaviour
             case eItemtype.ObjetTirrable:
                 Debug.Log("Je tire");
             break;
+
+            case eItemtype.PcPortablePrefab:
+                DestroyObject();
+            break;
         }
 
     }
@@ -103,25 +107,32 @@ public class Interactible : MonoBehaviour
             ReleaseObject();
         }
         
-        if(Input.GetMouseButton(0) && Grabed)
+        if(Input.GetMouseButton(0))
         {
-            if(itemType == eItemtype.Extincteur)
+            if(Grabed)
             {
-                Debug.Log("OUE");
+                if(itemType == eItemtype.Extincteur)
+                {
+                    Debug.Log("OUE");
+                }
+
+                if (itemType == eItemtype.PDB && canAttack)
+                {
+                    AttackItem();
+                }
+                if(itemType == eItemtype.Briquet)
+                {
+                    Debug.Log("Oue");
+                }
+                if(!SpecialObject)
+                {
+                    LaunchObject();
+                }
             }
 
-            if (itemType == eItemtype.PDB && canAttack)
+            if(itemType == eItemtype.PcPortablePrefab)
             {
-                AttackItem();
-            }
-            if(itemType == eItemtype.Briquet)
-            {
-                Debug.Log("Oue");
-            }
-
-            if(!SpecialObject)
-            {
-                LaunchObject();
+                DestroyObject();
             }
         }
 
@@ -155,6 +166,11 @@ public class Interactible : MonoBehaviour
         LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
         LeanTween.rotate(grabbedObject.gameObject, trsPlayerGuizmo.rotation.eulerAngles, durationGrabObjectMoov);
 
+    }
+
+    private void DestroyObject()
+    {
+        Destroy(this.gameObject);
     }
 
     private void ReleaseObject()
