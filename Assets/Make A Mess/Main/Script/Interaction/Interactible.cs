@@ -17,6 +17,7 @@ public class Interactible : MonoBehaviour
 
     //Float\\
     private float forcelancer = 10f;
+    private float forcebreak = 20f;
     private float grabetime = 5.0f;
 
     private float durationGrabObjectMoov = 0.07f;
@@ -263,7 +264,7 @@ public class Interactible : MonoBehaviour
 
     //---[Animation de l'attaque]---\\
 
-    void AttackAnimation()
+    /*void AttackAnimation()
     {
         if(Attacking == true)
         {
@@ -277,7 +278,7 @@ public class Interactible : MonoBehaviour
                 AnimationAttack = null;
             }
         }
-    }
+    }*/
 
     void BreakObject(GameObject hitObject)
     {
@@ -297,6 +298,7 @@ public class Interactible : MonoBehaviour
                         if (rb != null)
                         {
                             rb.isKinematic = false;
+                            rb.AddForce(Camera.main.transform.forward * forcebreak, ForceMode.Impulse);
                         }
                     }
                     child.SetParent(null);
