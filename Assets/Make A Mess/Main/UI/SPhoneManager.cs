@@ -4,46 +4,90 @@ using UnityEngine;
 
 public class SPhoneManager : MonoBehaviour
 {
-    [SerializeField] GameObject SphoneUI;
-    public GameObject NotifUISPhone;
-    public AudioSource OpenSPhoneSFX;
+    [SerializeField] GameObject PauseMenu;
+    //[SerializeField] GameObject SettingsMenu;
+    [SerializeField] GameObject MailMenu;
+
+    //public GameObject NotifPc;
+
+    public AudioSource OpenPcSFX;
+    //public AudioSource PhockSFXSong;
+
     private bool OpenUI=false;
 
     void Start()
     {
-        SphoneUI.SetActive(false);
-        NotifUISPhone.SetActive(false);
+        //SettingsMenu.SetActive(false);
+        MailMenu.SetActive(false);
+
+        PauseMenu.SetActive(false);
+        //NotifPc.SetActive(false);
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(OpenUI==true)
             {
-                Close();
+                Resume();
             }
             else
             {
-                Open();
+                Menu();
             }
         }
     }
 
-    void Open()
+    public void Resume()
     {
-        SphoneUI.SetActive(true);
-        OpenUI = true;
-        OpenSPhoneSFX.pitch = 1.1f;
-        OpenSPhoneSFX.Play();
-        NotifUISPhone.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        PauseMenu.SetActive(false);
+        OpenUI = false;
+
+        OpenPcSFX.pitch = 1.1f;
+        OpenPcSFX.Play();
+
+        //NotifPc.SetActive(false);
     }
 
-    void Close()
+    public void Menu()
     {
-        SphoneUI.SetActive(false);
-        OpenUI = false;
-        OpenSPhoneSFX.pitch = 0.9f;
-        OpenSPhoneSFX.Play();
+        Cursor.lockState = CursorLockMode.None;
+        PauseMenu.SetActive(true);
+        OpenUI = true;
+
+        OpenPcSFX.pitch = 0.9f;
+        OpenPcSFX.Play();
+    }
+
+    /*public void SettingsActivation()
+    {
+        SettingsMenu.SetActive(true);
+    }
+
+    public void SettingsFalse()
+    {
+        SettingsMenu.SetActive(false);
+    }*/
+
+    public void MailActivation()
+    {
+        MailMenu.SetActive(true);
+    }
+
+    public void MailFalse()
+    {
+        MailMenu.SetActive(false);
+    }
+
+    /*public void PhockSong()
+    {
+
+    }*/
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
