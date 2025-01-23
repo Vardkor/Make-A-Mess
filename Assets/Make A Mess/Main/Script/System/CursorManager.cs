@@ -7,6 +7,7 @@ public class CursorManager : MonoBehaviour
 {
     [SerializeField] private Texture2D cursorTexture;
     [SerializeField] private Texture2D cursorHoverTexture;
+    
     //[SerializeField] private SPhoneManager PauseMenu;
     //public AudioSource ClicSong;
 

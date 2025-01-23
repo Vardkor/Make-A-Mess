@@ -5,8 +5,6 @@ using UnityEngine;
 public class SPhoneManager : MonoBehaviour
 {
     [SerializeField] GameObject PauseMenu;
-    //[SerializeField] GameObject SettingsMenu;
-    [SerializeField] GameObject MailMenu;
     [SerializeField] GameObject NotifUIPC;
 
     [SerializeField] public GameObject PcPrefab;
@@ -22,8 +20,6 @@ public class SPhoneManager : MonoBehaviour
 
     void Start()
     {
-        //SettingsMenu.SetActive(false);
-        MailMenu.SetActive(false);
         PauseMenu.SetActive(false);
     }
 
@@ -67,26 +63,6 @@ public class SPhoneManager : MonoBehaviour
 
         NotifUIPC.SetActive(false);
         
-    }
-
-    /*public void SettingsActivation()
-    {
-        SettingsMenu.SetActive(true);
-    }
-
-    public void SettingsFalse()
-    {
-        SettingsMenu.SetActive(false);
-    }*/
-
-    public void MailActivation()
-    {
-        MailMenu.SetActive(true);
-    }
-
-    public void MailFalse()
-    {
-        MailMenu.SetActive(false);
     }
 
     /*public void PhockSong()
