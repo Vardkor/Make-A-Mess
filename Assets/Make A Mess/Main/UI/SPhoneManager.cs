@@ -24,9 +24,7 @@ public class SPhoneManager : MonoBehaviour
     {
         //SettingsMenu.SetActive(false);
         MailMenu.SetActive(false);
-
         PauseMenu.SetActive(false);
-        //NotifPc.SetActive(false);
     }
 
     void Update()
@@ -47,6 +45,7 @@ public class SPhoneManager : MonoBehaviour
     public void Resume()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
         PauseMenu.SetActive(false);
         OpenUI = false;
 
@@ -59,6 +58,7 @@ public class SPhoneManager : MonoBehaviour
     public void Menu()
     {
         Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0f;
         PauseMenu.SetActive(true);
         OpenUI = true;
 

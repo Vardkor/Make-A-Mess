@@ -21,7 +21,6 @@ public class P_Camera : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-
         m_FieldOfView = 70f;
     }
 
@@ -41,7 +40,7 @@ public class P_Camera : MonoBehaviour
 
         if(PlayerMovement.Sprinting==true && PlayerMovement.isMoving==true)
         {
-            m_FieldOfView = Mathf.Lerp(m_FieldOfView, 85, 10f * Time.deltaTime);
+            m_FieldOfView = Mathf.Lerp(m_FieldOfView, 80, 10f * Time.deltaTime);
             SprintSFX.pitch = 0.9f;
             SprintSFX.Play();
         }
@@ -49,5 +48,10 @@ public class P_Camera : MonoBehaviour
         {
             m_FieldOfView = Mathf.Lerp(m_FieldOfView, 70, 10f * Time.deltaTime);
         }
+    }
+
+    public void SetMouse(float newSensitivity)
+    {
+        mouseSensity = newSensitivity;
     }
 }

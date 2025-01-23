@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 792911659796796851}
   - component: {fileID: 6245279439396854841}
   - component: {fileID: 788807294890468616}
-  - component: {fileID: -1862661620605342900}
+  - component: {fileID: -7968888014997991959}
   m_Layer: 3
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Pcprefabtag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-1862661620605342900
+--- !u!114 &-7968888014997991959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
