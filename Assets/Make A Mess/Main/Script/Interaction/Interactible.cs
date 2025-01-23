@@ -18,6 +18,7 @@ public class Interactible : MonoBehaviour
     //Float\\
     private float forcelancer = 10f;
     private float forcebreak = 20f;
+    private float forcebreaklaunch = 50f;
     private float grabetime = 5.0f;
 
     private float durationGrabObjectMoov = 0.07f;
@@ -48,6 +49,10 @@ public class Interactible : MonoBehaviour
     private bool impactDetected = false;
     private bool Isbreak = false;
     GameObject hitObject;
+
+    //Anim Attack\\
+    //private Vector3 rotationAngle = new Vector3(90, 0, 0);
+    //private float duration = 0.5f;
 
 
 
@@ -233,6 +238,12 @@ public class Interactible : MonoBehaviour
             if(hitObject.layer == LayerMask.NameToLayer("Object"))
             {
                 HitTarget(hitObject);
+                AttackAnimation();
+            }
+            else 
+            {
+                ResetAttack();
+                AttackAnimation();
             }
         }
         else
@@ -240,6 +251,7 @@ public class Interactible : MonoBehaviour
             AttackSound();
             canAttack = false;
             Attacking = true;
+            AttackAnimation();
             Invoke(nameof(ResetAttack), attackcooldown);
         }
     }
@@ -259,7 +271,7 @@ public class Interactible : MonoBehaviour
         hitSound.Play();
 
         /*GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
-        Destroy(GO, 20);*/
+        Destroy(GO, 20);*/ //POUR LE COUP SUR LE MUR COMME SUR VALO\\
         
         canAttack = false;
         Attacking = true;
@@ -280,21 +292,23 @@ public class Interactible : MonoBehaviour
 
     //---[Animation de l'attaque]---\\
 
-    /*void AttackAnimation()
+    void AttackAnimation()
     {
         if(Attacking == true)
         {
-            AnimationAttack = grabbedObject.GetComponent<Animator>();
-            AnimationAttack.Play("PDBAnim");
+            Debug.Log("Attack");
+            /*Quaternion initialRotation = transform.rotation;
+
+
+            LeanTween.rotate(transform.gameObject, transform.rotation.eulerAngles + rotationAngle, duration)
+                .setEase(LeanTweenType.easeInOutSine)
+                .setOnComplete(() =>
+                {
+                    LeanTween.rotate(transform.gameObject, initialRotation.eulerAngles, duration)
+                    .setEase(LeanTweenType.easeInOutSine);
+                });*/
         }
-        else
-        {
-            if(AnimationAttack != null)
-            {
-                AnimationAttack = null;
-            }
-        }
-    }*/
+    }
 
     void BreakObject(GameObject hitObject)
     {
@@ -323,7 +337,11 @@ public class Interactible : MonoBehaviour
                     hitObject.gameObject.SetActive(false);
                     Isbreak = true;
                     AttackBreak = false;
-                    ResetAttack();
+
+                    if(Isbreak)
+                    {
+                        ResetAttack();
+                    }
                 }    
                 else if (launchedObject.childCount > 0)
                 {
@@ -336,6 +354,7 @@ public class Interactible : MonoBehaviour
                         Rigidbody rb = grandChild.GetComponent<Rigidbody>();
                         if (rb != null)
                         {
+                            rb.AddForce(launchedObject.transform.forward * forcebreaklaunch, ForceMode.Acceleration);
                             rb.isKinematic = false;
                         }
                     }
@@ -344,6 +363,11 @@ public class Interactible : MonoBehaviour
                     child.rotation = launchedObject.rotation;
                     launchedObject.gameObject.SetActive(false);
                     Isbreak = true;
+
+                    if(Isbreak)
+                    {
+                        ResetAttack();
+                    }
                 }
             }
         }
@@ -351,7 +375,7 @@ public class Interactible : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Grab"))
+        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Grab") || collision.gameObject.CompareTag("Player"))
         {
             if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true && CanBeBreak == true)
             {
