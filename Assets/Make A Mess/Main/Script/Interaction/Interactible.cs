@@ -55,10 +55,6 @@ public class Interactible : MonoBehaviour
     //private float duration = 0.5f;
 
 
-
-    //DEBUG\\
-
-
     public void Interact(Transform trsPlayerGuizmo = null)
     {
         switch(itemType)
