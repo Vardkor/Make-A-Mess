@@ -18,6 +18,8 @@ public class P_Camera : MonoBehaviour
 
     private float m_FieldOfView;
 
+    public Transform CrouchPos;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;

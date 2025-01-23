@@ -43,7 +43,7 @@ public class Interactible : MonoBehaviour
     //public GameObject hitEffect;
     public AudioSource hitSound;
     private AudioSource AttackSwing;
-    private Animator AnimationAttack;
+    //public Animator AnimationAttackPDB;
 
     //Section Break Object Event\\
     private bool impactDetected = false;
@@ -256,6 +256,7 @@ public class Interactible : MonoBehaviour
         canAttack = true;
         Attacking = false;
     }
+
     public void HitTarget(GameObject hitObject)
     {
         CanBeBreak = true;
@@ -292,6 +293,11 @@ public class Interactible : MonoBehaviour
     {
         if(Attacking == true)
         {
+            /*if(AnimationAttackPDB !=null )
+            {
+                AnimationAttackPDB.SetTrigger("Attack");
+            }*/
+
             Debug.Log("Attack");
             /*Quaternion initialRotation = transform.rotation;
 

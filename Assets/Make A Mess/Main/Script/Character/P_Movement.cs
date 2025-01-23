@@ -12,6 +12,8 @@ public class P_Movement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
 
+    public float currentSpeed;
+
     public LayerMask groundMask;
     public Vector3 velocity;
     public bool isGrounded;
@@ -19,10 +21,19 @@ public class P_Movement : MonoBehaviour
     public bool isMoving = false;
     public bool Sprinting = false;
     private bool AsJumped = false;
+    public bool Crouching = false;
 
     public ParticleSystem jumpPraticles;
     public ParticleSystem ReboundPraticles;
     public AudioSource JumpSFX;
+
+    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
+    private Vector3 PlayerScale = new Vector3(1, 1f, 1);
+
+    void Start()
+    {
+        currentSpeed = speed;
+    }
 
 
     public void Update()
@@ -35,17 +46,43 @@ public class P_Movement : MonoBehaviour
             velocity.y = -2f;
         }
 
-
-        if(Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.C))
         {
-            speed = 12f;
-            Sprinting = true;
+            Crouch();
+            transform.localScale = crouchScale;
+            transform.position = new Vector3 (transform.position.x, transform.position.y -0.5f,transform.position.z) * Time.deltaTime;
         }
         else
         {
-            speed = 6.5f;
+            transform.localScale = PlayerScale;
+            transform.position = new Vector3 (transform.position.x, transform.position.y +0.5f,transform.position.z) * Time.deltaTime;
+
+            currentSpeed = 6.5f;
+            Crouching = false;
+        }
+
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            Sprint();
+        }
+        else
+        {
+            currentSpeed = 6.5f;
             Sprinting = false;
         }
+
+
+        if(Crouching==true)
+        {
+            currentSpeed = 4f;
+        }
+
+        if(Sprinting==true)
+        {
+            currentSpeed = 12f;
+        }
+
+
 
 
         if(Input.GetButtonDown("Jump") && isGrounded)
@@ -69,7 +106,7 @@ public class P_Movement : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(move * currentSpeed * Time.deltaTime);
 
         controller.Move(velocity * Time.deltaTime);
         
@@ -81,5 +118,15 @@ public class P_Movement : MonoBehaviour
         {
             isMoving = true;
         }
+    }
+
+    public void Sprint()
+    {
+        Sprinting = true;
+    }
+
+    public void Crouch()
+    {
+        Crouching = true;
     }
 }
