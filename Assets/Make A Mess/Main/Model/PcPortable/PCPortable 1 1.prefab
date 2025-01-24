@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4937983718088596212}
   - component: {fileID: 8982563310655748550}
   - component: {fileID: 6080478890000446608}
-  - component: {fileID: -7683920988916764762}
   m_Layer: 0
   m_Name: PCPortable 1 1
   m_TagString: Pcprefabtag
@@ -136,29 +135,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2232952877369940510, guid: 939ec6ebe73c99148ac906ef7f66a597, type: 3}
---- !u!114 &-7683920988916764762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2456579612440150167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed7f9d1a3a0ed9498d826e6c65bae5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: 7
-  itemflame: 1
-  Grabed: 0
-  SpecialObject: 0
-  bObjectCassable: 0
-  canAttack: 1
-  Attacking: 0
-  attackLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  hitSound: {fileID: 0}
 --- !u!1 &5731543149119098891
 GameObject:
   m_ObjectHideFlags: 0

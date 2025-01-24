@@ -115,6 +115,7 @@ public class Interactible : MonoBehaviour
         {
             GrabItemSound = audioSources[0];
             ThrowItemSound = audioSources[1];
+            hitSound = audioSources[2];
             //LA FAUT RAJOUTER UN TRUC JE PENSE 
         }
         else

@@ -58,6 +58,7 @@ public class Interaction2 : MonoBehaviour
                     go = null;
                 }
             }
+            
             if(hit.transform.gameObject.tag == "Bouton")
             {
                 if(Input.GetKeyDown(KeyCode.E))
@@ -65,6 +66,18 @@ public class Interaction2 : MonoBehaviour
                     hit.collider.gameObject.GetComponent<BoutonScript>().Bouton();
                 }
             }
+
+            if(hit.transform.gameObject.tag == "PcPrefabtag")
+            {
+                HitUI.SetActive(true);
+
+                if(Input.GetMouseButton(0))
+                {
+                    hit.collider.gameObject.GetComponent<Interactible>().Interact();
+                    HitUI.SetActive(false);
+                }
+            }
+
         }
         else 
         {
