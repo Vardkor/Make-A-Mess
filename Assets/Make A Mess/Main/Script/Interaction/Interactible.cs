@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class Interactible : MonoBehaviour
 {
@@ -53,6 +55,11 @@ public class Interactible : MonoBehaviour
     //Anim Attack\\
     //private Vector3 rotationAngle = new Vector3(90, 0, 0);
     //private float duration = 0.5f;
+
+    //Section Score\\
+
+    private float CurrentScore = 0f;
+    public float ScorePerObject = 0f;
 
 
     public void Interact(Transform trsPlayerGuizmo = null)
@@ -236,10 +243,13 @@ public class Interactible : MonoBehaviour
                 HitTarget(hitObject);
                 AttackAnimation();
             }
-            else 
+            else
             {
-                ResetAttack();
+                AttackSound();
+                canAttack = false;
+                Attacking = true;
                 AttackAnimation();
+                Invoke(nameof(ResetAttack), attackcooldown);
             }
         }
         else
@@ -298,7 +308,7 @@ public class Interactible : MonoBehaviour
                 AnimationAttackPDB.SetTrigger("Attack");
             }*/
 
-            Debug.Log("Attack");
+            Debug.Log("Anim Attack");
             /*Quaternion initialRotation = transform.rotation;
 
 
@@ -342,6 +352,7 @@ public class Interactible : MonoBehaviour
 
                     if(Isbreak)
                     {
+                        Score();
                         ResetAttack();
                     }
                 }    
@@ -368,6 +379,7 @@ public class Interactible : MonoBehaviour
 
                     if(Isbreak)
                     {
+                        Score();
                         ResetAttack();
                     }
                 }
@@ -401,5 +413,16 @@ public class Interactible : MonoBehaviour
         }
 
         return children;
+    }
+
+    //---[Score]---\\
+
+    public void Score()
+    {
+        GameObject scoreObject = GameObject.Find("ScoreText");
+
+        CurrentScore += ScorePerObject;
+
+        Debug.Log("Score : " + CurrentScore);
     }
 }
