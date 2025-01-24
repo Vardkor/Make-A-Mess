@@ -108,10 +108,18 @@ public class Interactible : MonoBehaviour
     {
         canAttack = true;
         Isbreak = false;
-        if(GrabItemSound == null || ThrowItemSound == null)
+        
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+
+        if(audioSources.Length >= 3)
         {
-            GrabItemSound = GetComponent<AudioSource>();
-            ThrowItemSound = GetComponent<AudioSource>();
+            GrabItemSound = audioSources[0];
+            ThrowItemSound = audioSources[1];
+            //LA FAUT RAJOUTER UN TRUC JE PENSE 
+        }
+        else
+        {
+            Debug.Log("Pas assez d'audio source : " + gameObject.name);
         }
     }
 
