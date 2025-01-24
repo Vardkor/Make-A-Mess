@@ -108,8 +108,11 @@ public class Interactible : MonoBehaviour
     {
         canAttack = true;
         Isbreak = false;
-        GrabItemSound = GetComponent<AudioSource>();
-        ThrowItemSound = GetComponent<AudioSource>();
+        if(GrabItemSound == null || ThrowItemSound == null)
+        {
+            GrabItemSound = GetComponent<AudioSource>();
+            ThrowItemSound = GetComponent<AudioSource>();
+        }
     }
 
 

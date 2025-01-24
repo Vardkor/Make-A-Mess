@@ -15,6 +15,11 @@ public class Interaction2 : MonoBehaviour
 
     public Interactible InteractibleScript;
 
+    /*void Start()
+    {
+        InteractibleScript = GetComponent<Interactible>();
+    }*/
+
     public void Update()
     {
         RaycastHit hit;
