@@ -22,10 +22,13 @@ public class P_Movement : MonoBehaviour
     public bool Sprinting = false;
     private bool AsJumped = false;
     public bool Crouching = false;
+    private bool AsCrouched = false;
 
     public ParticleSystem jumpPraticles;
     public ParticleSystem ReboundPraticles;
     public AudioSource JumpSFX;
+
+    public AudioSource CrouchSFX;
 
     private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
     private Vector3 PlayerScale = new Vector3(1, 1f, 1);
@@ -46,19 +49,20 @@ public class P_Movement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        if(Input.GetKey(KeyCode.C))
+        if(Input.GetKeyDown(KeyCode.C))
         {
             Crouch();
             transform.localScale = crouchScale;
             transform.position = new Vector3 (transform.position.x, transform.position.y -0.5f,transform.position.z) * Time.deltaTime;
+            PlayCrouchSound();
         }
-        else
+        if(Input.GetKeyUp(KeyCode.C))
         {
             transform.localScale = PlayerScale;
             transform.position = new Vector3 (transform.position.x, transform.position.y +0.5f,transform.position.z) * Time.deltaTime;
-
             currentSpeed = 6.5f;
             Crouching = false;
+            PlayCrouchSound();
         }
 
         if(Input.GetKey(KeyCode.LeftShift))
@@ -128,5 +132,20 @@ public class P_Movement : MonoBehaviour
     public void Crouch()
     {
         Crouching = true;
+        AsCrouched = true;
+    }
+
+    void PlayCrouchSound()
+    {
+        if(Crouching==true)
+        {
+            CrouchSFX.pitch = 1f;
+            CrouchSFX.Play();
+        }
+        if(Crouching==false && AsCrouched == true)
+        {
+            CrouchSFX.pitch = 0.9f;
+            CrouchSFX.Play();
+        }
     }
 }

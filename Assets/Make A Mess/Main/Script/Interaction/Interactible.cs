@@ -47,6 +47,9 @@ public class Interactible : MonoBehaviour
     private AudioSource AttackSwing;
     //public Animator AnimationAttackPDB;
 
+    public AudioSource GrabItemSound;
+    public AudioSource ThrowItemSound;
+
     //Section Break Object Event\\
     private bool impactDetected = false;
     private bool Isbreak = false;
@@ -105,6 +108,8 @@ public class Interactible : MonoBehaviour
     {
         canAttack = true;
         Isbreak = false;
+        GrabItemSound = GetComponent<AudioSource>();
+        ThrowItemSound = GetComponent<AudioSource>();
     }
 
 
@@ -152,6 +157,8 @@ public class Interactible : MonoBehaviour
 
     private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo)
     {
+        GrabItemSound.pitch = 1f;
+        GrabItemSound.Play();
         grabbedObject = objectToGrab;
         Grabed = true;
 
@@ -191,6 +198,9 @@ public class Interactible : MonoBehaviour
                 rb.isKinematic = false;
             }
 
+            GrabItemSound.pitch = 0.9f;
+            GrabItemSound.Play();
+
             grabbedObject.SetParent(null);
             grabbedObject = null;
             Grabed = false;
@@ -215,6 +225,8 @@ public class Interactible : MonoBehaviour
         }
 
         launchedObject = grabbedObject;
+
+        ThrowItemSound.Play();
 
         grabbedObject.SetParent(null);
         grabbedObject = null;
