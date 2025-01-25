@@ -14,9 +14,9 @@ public class SPhoneManager : MonoBehaviour
     //public GameObject NotifPc;
 
     public AudioSource OpenPcSFX;
-    //public AudioSource PhockSFXSong;
+    public AudioSource PhockSFXSong;
 
-    private bool OpenUI=false;
+    public bool OpenUI=false;
 
     void Start()
     {
@@ -65,10 +65,11 @@ public class SPhoneManager : MonoBehaviour
         
     }
 
-    /*public void PhockSong()
+    public void PhockSong()
     {
-
-    }*/
+        PhockSFXSong.pitch = Random.Range(0.9f,1.1f);
+        PhockSFXSong.Play();
+    }
 
     void InstantiatePrefab()
     {

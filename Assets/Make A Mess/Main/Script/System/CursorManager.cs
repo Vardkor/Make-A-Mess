@@ -8,8 +8,8 @@ public class CursorManager : MonoBehaviour
     [SerializeField] private Texture2D cursorTexture;
     [SerializeField] private Texture2D cursorHoverTexture;
     
-    //[SerializeField] private SPhoneManager PauseMenu;
-    //public AudioSource ClicSong;
+    [SerializeField] private SPhoneManager PauseMenu;
+    public AudioSource ClicSong;
 
 
     public void Start()
@@ -17,16 +17,17 @@ public class CursorManager : MonoBehaviour
         Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
     }
 
-    /*void Update()
+    void Update()
     {
         if(Input.GetMouseButton(0))
         {
             if(PauseMenu.OpenUI == true)
             {
+                ClicSong.pitch = Random.Range(0.9f, 1.1f);
                 ClicSong.Play();
             }
         }
-    }*/
+    }
 
     public void SwitchCursor()
     {
