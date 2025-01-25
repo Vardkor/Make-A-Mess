@@ -6,11 +6,11 @@ public class P_Movement : MonoBehaviour
 {
     public CharacterController controller;
 
-    public float jumpheight = 12f;
-    public float gravity = -9.81f;
+    public float jumpheight = 2f;
+    public float gravity = -20f;
     public float speed = 6.5f;
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundDistance = 0.2f;
 
     public float currentSpeed;
 
@@ -46,7 +46,7 @@ public class P_Movement : MonoBehaviour
 
         if(isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f;
+            velocity.y = -10f;
         }
 
         if(Input.GetKeyDown(KeyCode.C))

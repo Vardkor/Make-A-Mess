@@ -6,7 +6,7 @@ using TMPro;
 
 public class Interactible : MonoBehaviour
 {
-    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable, ObjetTirrable, PcPortablePrefab};
+    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable, ObjetTirrable, Collectible};
     public eItemtype itemType;
 
     public enum eTypeFlame {Inflamable, NoInflamable};
@@ -64,6 +64,9 @@ public class Interactible : MonoBehaviour
     private float CurrentScore = 0f;
     public float ScorePerObject = 0f;
 
+    //Temporaire
+    public bool CollectibleCollected = false;
+
 
     public void Interact(Transform trsPlayerGuizmo = null)
     {
@@ -97,7 +100,7 @@ public class Interactible : MonoBehaviour
                 Debug.Log("Je tire");
             break;
 
-            case eItemtype.PcPortablePrefab:
+            case eItemtype.Collectible:
                 DestroyObject();
             break;
         }
@@ -108,6 +111,7 @@ public class Interactible : MonoBehaviour
     {
         canAttack = true;
         Isbreak = false;
+        CollectibleCollected = false;
         
         AudioSource[] audioSources = GetComponents<AudioSource>();
 
@@ -155,8 +159,9 @@ public class Interactible : MonoBehaviour
                 }
             }
 
-            if(itemType == eItemtype.PcPortablePrefab)
+            if(itemType == eItemtype.Collectible && CollectibleCollected == false)
             {
+                CollectibleCollected = true;
                 DestroyObject();
             }
         }
