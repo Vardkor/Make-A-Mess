@@ -26,6 +26,5 @@ public class Scorring : MonoBehaviour
     {
         CurrentScore += ScoreVitre;
         animator.SetTrigger("Change");
-        
     }
 }

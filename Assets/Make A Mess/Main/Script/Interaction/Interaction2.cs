@@ -67,13 +67,12 @@ public class Interaction2 : MonoBehaviour
                 }
             }
 
-            if(hit.transform.gameObject.tag == "PcPrefabtag")
+            if(hit.transform.gameObject.tag == "Pcprefabtag")
             {
                 HitUI.SetActive(true);
-
                 if(Input.GetMouseButton(0))
                 {
-                    hit.collider.gameObject.GetComponent<Interactible>().Interact();
+                    Destroy(hit.transform.gameObject);
                     HitUI.SetActive(false);
                 }
             }

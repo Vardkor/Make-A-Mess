@@ -60,7 +60,7 @@ public class P_Movement : MonoBehaviour
         {
             transform.localScale = PlayerScale;
             transform.position = new Vector3 (transform.position.x, transform.position.y +0.5f,transform.position.z) * Time.deltaTime;
-            currentSpeed = 6.5f;
+            currentSpeed = speed;
             Crouching = false;
             PlayCrouchSound();
         }
@@ -71,7 +71,7 @@ public class P_Movement : MonoBehaviour
         }
         else
         {
-            currentSpeed = 6.5f;
+            currentSpeed = speed;
             Sprinting = false;
         }
 
@@ -83,7 +83,7 @@ public class P_Movement : MonoBehaviour
 
         if(Sprinting==true)
         {
-            currentSpeed = 12f;
+            currentSpeed = 15f;
         }
 
 

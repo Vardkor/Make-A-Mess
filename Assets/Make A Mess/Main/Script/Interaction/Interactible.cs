@@ -64,7 +64,7 @@ public class Interactible : MonoBehaviour
     public int CurrentScore = 0;
     public int scorePerObject = 0;
     private bool UpdateScore = false;
-    private TMP_Text scoreObjectScore;
+    private TextMeshProUGUI scoreObjectScore;
 
     //Temporaire
     public bool CollectibleCollected = false;
@@ -111,8 +111,7 @@ public class Interactible : MonoBehaviour
 
     void Start()
     {
-        scoreObjectScore = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
-
+        scoreObjectScore = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
         canAttack = true;
         Isbreak = false;
         CollectibleCollected = false;
@@ -136,6 +135,10 @@ public class Interactible : MonoBehaviour
 
     public void Update()
     {
+        if(Isbreak)
+        {
+            Score();
+        }
         if(Input.GetKeyDown(KeyCode.E) && Grabed)
         {
             ReleaseObject();
@@ -169,9 +172,7 @@ public class Interactible : MonoBehaviour
                 CollectibleCollected = true;
                 DestroyObject();
             }
-
         }
-
         if (Grabed == true && trsPlayerGuizmo != null)
         {
             LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
@@ -455,7 +456,7 @@ public class Interactible : MonoBehaviour
     public void Score()
     {
         CurrentScore += scorePerObject;
-        scoreObjectScore.text = CurrentScore.ToString() + "$";
+        scoreObjectScore.text = "Score : " + CurrentScore + "$";
         UpdateScore = false;
         Debug.Log("Score ajouté : " + scorePerObject + " | Score total : " + CurrentScore);
     }
