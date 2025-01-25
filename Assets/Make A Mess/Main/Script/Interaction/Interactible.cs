@@ -65,6 +65,8 @@ public class Interactible : MonoBehaviour
     public int scorePerObject = 0;
     private bool UpdateScore = false;
     private TextMeshProUGUI scoreObjectScore;
+    private ScorringManager scorringManager;
+    private bool ScoreManagerGo = false;
 
     //Temporaire
     public bool CollectibleCollected = false;
@@ -193,19 +195,28 @@ public class Interactible : MonoBehaviour
         {
             rb.isKinematic = true;
         }
-        if(itemType == eItemtype.ObjectCassable)
+
+        ScorringManager scorringManagerInstance = trsPlayerGuizmo.GetComponentInChildren<ScorringManager>();
+        if (scorringManagerInstance != null)
+        {
+            scorringManager = scorringManagerInstance;
+            ScoreManagerGo = true;
+        }
+
+        if (itemType == eItemtype.ObjectCassable)
         {
             bObjectCassable = true;
         }
-        if(itemType == eItemtype.PDB)
+        if (itemType == eItemtype.PDB)
         {
             SpecialObject = true;
         }
 
+        // Animation de l'objet
         LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
         LeanTween.rotate(grabbedObject.gameObject, trsPlayerGuizmo.rotation.eulerAngles, durationGrabObjectMoov);
-
     }
+
 
     private void DestroyObject()
     {
@@ -299,6 +310,7 @@ public class Interactible : MonoBehaviour
     }
     void ResetAttack()
     {
+        Isbreak = false;
         canAttack = true;
         Attacking = false;
     }
@@ -386,7 +398,7 @@ public class Interactible : MonoBehaviour
                     Isbreak = true;
                     AttackBreak = false;
 
-                    if(Isbreak)
+                    if(Isbreak && ScoreManagerGo)
                     {
                         Score();
                         ResetAttack();
@@ -413,7 +425,7 @@ public class Interactible : MonoBehaviour
                     launchedObject.gameObject.SetActive(false);
                     Isbreak = true;
 
-                    if(Isbreak)
+                    if(Isbreak && ScoreManagerGo)
                     {
                         Score();
                         ResetAttack();
@@ -455,9 +467,7 @@ public class Interactible : MonoBehaviour
 
     public void Score()
     {
-        CurrentScore += scorePerObject;
-        scoreObjectScore.text = "Score : " + CurrentScore + "$";
-        UpdateScore = false;
-        Debug.Log("Score ajouté : " + scorePerObject + " | Score total : " + CurrentScore);
+        Debug.Log("Score à ajouter : " + scorePerObject);
+        scorringManager.AddScore(scorePerObject);
     }
 }

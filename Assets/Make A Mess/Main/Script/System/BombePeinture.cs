@@ -8,7 +8,7 @@ public class BombePeinture : MonoBehaviour
 
     [SerializeField] private DecalProjector decalProjector; 
     [SerializeField] private Transform decalPosition;
-    [SerializeField] public Scorring score;
+    //[SerializeField] public Scorring score;
 
     public void Peindre()
     {
@@ -19,6 +19,6 @@ public class BombePeinture : MonoBehaviour
 
     public void ScorePeinture()
     {
-        score.CurrentScore += score.ScorePeinture;
+        //score.CurrentScore += score.ScorePeinture;
     }
 }
