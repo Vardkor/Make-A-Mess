@@ -415,7 +415,7 @@ public class Interactible : MonoBehaviour
                         Rigidbody rb = grandChild.GetComponent<Rigidbody>();
                         if (rb != null)
                         {
-                            rb.AddForce(launchedObject.transform.forward * forcebreaklaunch, ForceMode.Acceleration);
+                            rb.AddForce(launchedObject.transform.forward * forcebreaklaunch, ForceMode.Impulse);
                             rb.isKinematic = false;
                         }
                     }
@@ -467,7 +467,7 @@ public class Interactible : MonoBehaviour
 
     public void Score()
     {
-        Debug.Log("Score à ajouter : " + scorePerObject);
+        //Debug.Log("Score à ajouter : " + scorePerObject);
         scorringManager.AddScore(scorePerObject);
     }
 }
