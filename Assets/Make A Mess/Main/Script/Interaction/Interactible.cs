@@ -53,6 +53,7 @@ public class Interactible : MonoBehaviour
     //Section Break Object Event\\
     private bool impactDetected = false;
     private bool Isbreak = false;
+    public GameObject hitObject;
 
     //Anim Attack\\
     //private Vector3 rotationAngle = new Vector3(90, 0, 0);
