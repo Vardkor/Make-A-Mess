@@ -24,7 +24,7 @@ public class Interaction2 : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position, transform.forward, out hit, 2.5f))
+        if(Physics.Raycast(transform.position, transform.forward, out hit, 6f))
         {
             if(hit.transform.gameObject.tag == "Grab")
             {

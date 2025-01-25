@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 
 public class Interactible : MonoBehaviour
@@ -61,8 +61,10 @@ public class Interactible : MonoBehaviour
 
     //Section Score\\
 
-    private float CurrentScore = 0f;
-    public float ScorePerObject = 0f;
+    public int CurrentScore = 0;
+    public int scorePerObject = 0;
+    private bool UpdateScore = false;
+    private TMP_Text scoreObjectScore;
 
     //Temporaire
     public bool CollectibleCollected = false;
@@ -109,11 +111,14 @@ public class Interactible : MonoBehaviour
 
     void Start()
     {
+        scoreObjectScore = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
+
         canAttack = true;
         Isbreak = false;
         CollectibleCollected = false;
-        
-        AudioSource[] audioSources = GetComponents<AudioSource>();
+
+
+        /*AudioSource[] audioSources = GetComponents<AudioSource>();
 
         if(audioSources.Length >= 3)
         {
@@ -125,7 +130,7 @@ public class Interactible : MonoBehaviour
         else
         {
             Debug.Log("Pas assez d'audio source : " + gameObject.name);
-        }
+        }*/
     }
 
 
@@ -164,6 +169,7 @@ public class Interactible : MonoBehaviour
                 CollectibleCollected = true;
                 DestroyObject();
             }
+
         }
 
         if (Grabed == true && trsPlayerGuizmo != null)
@@ -448,10 +454,9 @@ public class Interactible : MonoBehaviour
 
     public void Score()
     {
-        GameObject scoreObject = GameObject.Find("ScoreText");
-
-        CurrentScore += ScorePerObject;
-
-        Debug.Log("Score : " + CurrentScore);
+        CurrentScore += scorePerObject;
+        scoreObjectScore.text = CurrentScore.ToString() + "$";
+        UpdateScore = false;
+        Debug.Log("Score ajouté : " + scorePerObject + " | Score total : " + CurrentScore);
     }
 }
