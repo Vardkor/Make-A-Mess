@@ -74,6 +74,7 @@ public class Interactible : MonoBehaviour
     //Temporaire
     public bool CollectibleCollected = false;
     
+    
     private Vector3 InitialeScale;
 
 
@@ -168,11 +169,11 @@ public class Interactible : MonoBehaviour
     {
         /*GrabItemSound.pitch = 1f;
         GrabItemSound.Play();*/
-        AudioManager.Instance.PlaySoundByIndex(soundIndex = 7);
+        /*AudioManager.Instance.PlaySoundByIndex(soundIndex = 7);
 
         if (objectToGrab == null){Debug.LogError("objectToGrab is null!");return;}
 
-        if (trsPlayerGuizmo == null){Debug.LogError("trsPlayerGuizmo is null!");return;}
+        if (trsPlayerGuizmo == null){Debug.LogError("trsPlayerGuizmo is null!");return;}*/
 
         ScorringManager scorringManagerInstance = trsPlayerGuizmo.GetComponentInChildren<ScorringManager>();
         if (scorringManagerInstance != null)
@@ -180,7 +181,6 @@ public class Interactible : MonoBehaviour
             scorringManager = scorringManagerInstance;
             ScoreManagerGo = true;
         }
-        else{Debug.LogWarning("ScorringManager is not found on trsPlayerGuizmo.");}
 
         grabbedObject = objectToGrab;
         Grabed = true;
