@@ -55,7 +55,7 @@ TagManager:
   - AddScore
   - Wall
   - Object
-  - 
+  - BreakableObject
   - 
   - 
   - 

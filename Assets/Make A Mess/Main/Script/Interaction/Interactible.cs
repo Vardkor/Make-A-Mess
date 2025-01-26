@@ -47,8 +47,11 @@ public class Interactible : MonoBehaviour
     private AudioSource AttackSwing;
     //public Animator AnimationAttackPDB;
 
-    public AudioSource GrabItemSound;
+    //public AudioSource GrabItemSound;
     public AudioSource ThrowItemSound;
+
+    public int soundIndex;
+    public string ThrowItemSFX;
 
     //Section Break Object Event\\
     private bool impactDetected = false;
@@ -70,6 +73,8 @@ public class Interactible : MonoBehaviour
 
     //Temporaire
     public bool CollectibleCollected = false;
+    
+    private Vector3 InitialeScale;
 
 
     public void Interact(Transform trsPlayerGuizmo = null)
@@ -77,25 +82,10 @@ public class Interactible : MonoBehaviour
         switch(itemType)
         {
             case eItemtype.Objet:
-                GrabObject(transform, trsPlayerGuizmo);
-            break;
-
             case eItemtype.Extincteur:
-                GrabObject(transform, trsPlayerGuizmo);
-            break;
-
             case eItemtype.Briquet:
-                GrabObject(transform, trsPlayerGuizmo);
-            break;
-
             case eItemtype.PDB:
-                GrabObject(transform, trsPlayerGuizmo);
-            break;
-
             case eItemtype.Hache:
-                GrabObject(transform, trsPlayerGuizmo);
-            break;
-
             case eItemtype.ObjectCassable:
                 GrabObject(transform, trsPlayerGuizmo);
             break;
@@ -118,22 +108,16 @@ public class Interactible : MonoBehaviour
         Isbreak = false;
         CollectibleCollected = false;
 
+        InitialeScale = transform.localScale;
 
-        /*AudioSource[] audioSources = GetComponents<AudioSource>();
+        trsPlayerGuizmo = GameObject.Find("Grab")?.transform;
 
-        if(audioSources.Length >= 3)
-        {
-            GrabItemSound = audioSources[0];
-            ThrowItemSound = audioSources[1];
-            hitSound = audioSources[2];
-            //LA FAUT RAJOUTER UN TRUC JE PENSE 
-        }
-        else
-        {
-            Debug.Log("Pas assez d'audio source : " + gameObject.name);
-        }*/
+        if (trsPlayerGuizmo == null){Debug.LogError("trsPlayerGuizmo is not assigned. Ensure the GameObject 'PlayerGuizmo' exists in the scene."); return;}
     }
 
+    public void ResetScale(){transform.localScale = InitialeScale; Debug.Log("Reset Scale");} // Pour reset la scale quand on s'accroupit
+
+    void LateUpdate(){transform.localScale = InitialeScale;} // Reset la scale après avoir lâché l'objet
 
     public void Update()
     {
@@ -180,11 +164,24 @@ public class Interactible : MonoBehaviour
             LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
         }
     }
-
     private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo)
     {
-        GrabItemSound.pitch = 1f;
-        GrabItemSound.Play();
+        /*GrabItemSound.pitch = 1f;
+        GrabItemSound.Play();*/
+        AudioManager.Instance.PlaySoundByIndex(soundIndex = 7);
+
+        if (objectToGrab == null){Debug.LogError("objectToGrab is null!");return;}
+
+        if (trsPlayerGuizmo == null){Debug.LogError("trsPlayerGuizmo is null!");return;}
+
+        ScorringManager scorringManagerInstance = trsPlayerGuizmo.GetComponentInChildren<ScorringManager>();
+        if (scorringManagerInstance != null)
+        {
+            scorringManager = scorringManagerInstance;
+            ScoreManagerGo = true;
+        }
+        else{Debug.LogWarning("ScorringManager is not found on trsPlayerGuizmo.");}
+
         grabbedObject = objectToGrab;
         Grabed = true;
 
@@ -194,13 +191,6 @@ public class Interactible : MonoBehaviour
         if (rb != null)
         {
             rb.isKinematic = true;
-        }
-
-        ScorringManager scorringManagerInstance = trsPlayerGuizmo.GetComponentInChildren<ScorringManager>();
-        if (scorringManagerInstance != null)
-        {
-            scorringManager = scorringManagerInstance;
-            ScoreManagerGo = true;
         }
 
         if (itemType == eItemtype.ObjectCassable)
@@ -233,8 +223,8 @@ public class Interactible : MonoBehaviour
                 rb.isKinematic = false;
             }
 
-            GrabItemSound.pitch = 0.9f;
-            GrabItemSound.Play();
+            /*GrabItemSound.pitch = 0.9f;
+            GrabItemSound.Play();*/
 
             grabbedObject.SetParent(null);
             grabbedObject = null;
@@ -285,7 +275,7 @@ public class Interactible : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
 
-            if(hitObject.layer == LayerMask.NameToLayer("Object"))
+            if(hitObject.layer == LayerMask.NameToLayer("BreakableObject"))
             {
                 HitTarget(hitObject);
                 AttackAnimation();

@@ -33,6 +33,9 @@ public class P_Movement : MonoBehaviour
     private Vector3 crouchScale = new Vector3(1, 0.2f, 1);
     private Vector3 PlayerScale = new Vector3(1, 0.653995f, 1);
 
+    private Interactible ObjectGrabbed;
+    private Vector3 grabbedObjectOriginalScale;
+
     void Start()
     {
         currentSpeed = speed;
@@ -46,11 +49,13 @@ public class P_Movement : MonoBehaviour
 
         if(isGrounded && velocity.y < 0)
         {
-            velocity.y = -10f;
+            velocity.y = -8f;
         }
 
         if(Input.GetKeyDown(KeyCode.C))
         {
+            if(ObjectGrabbed != null){ObjectGrabbed.ResetScale();}
+            SetObjectGrabbed();
             Crouch();
             transform.localScale = crouchScale;
             transform.position = new Vector3 (transform.position.x, transform.position.y -0.5f,transform.position.z) * Time.deltaTime;
@@ -58,6 +63,8 @@ public class P_Movement : MonoBehaviour
         }
         if(Input.GetKeyUp(KeyCode.C))
         {
+            if(ObjectGrabbed != null){ObjectGrabbed.ResetScale();}
+            SetObjectGrabbed();
             transform.localScale = PlayerScale;
             transform.position = new Vector3 (transform.position.x, transform.position.y +0.5f,transform.position.z) * Time.deltaTime;
             currentSpeed = speed;
@@ -86,9 +93,6 @@ public class P_Movement : MonoBehaviour
             currentSpeed = 15f;
         }
 
-
-
-
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpheight * -2f * gravity);
@@ -101,7 +105,6 @@ public class P_Movement : MonoBehaviour
         {
             ReboundPraticles.Play();
         }
-
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
@@ -147,5 +150,11 @@ public class P_Movement : MonoBehaviour
             CrouchSFX.pitch = 0.9f;
             CrouchSFX.Play();
         }
+    }
+
+    void SetObjectGrabbed()
+    {
+        if(ObjectGrabbed != null){GameObject.Find("Grab").GetComponent<Interactible>();}
+        else{ObjectGrabbed = null;}
     }
 }
