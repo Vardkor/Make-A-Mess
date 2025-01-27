@@ -237,7 +237,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.3
+    m_Value: 0.25
   xMultiplier:
     m_OverrideState: 0
     m_Value: 1
@@ -265,7 +265,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.109
+    m_Value: 0.026
 --- !u!114 &7230689300611821521
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -310,10 +310,10 @@ MonoBehaviour:
     m_Value: 1
   resolution:
     m_OverrideState: 1
-    m_Value: 1000
+    m_Value: 800
   resolutionPreset:
     m_OverrideState: 1
-    m_Value: 600
+    m_Value: 1
   preserveAspectRatio:
     m_OverrideState: 0
     m_Value: 0
