@@ -18,7 +18,8 @@ public class Interactible : MonoBehaviour
     private Transform trsPlayerGuizmo;
 
     //Float\\
-    private float forcelancer = 10f;
+    private float forcelancer = 5f;
+    private float forcelancerClick = 25f;
     private float forcebreak = 20f;
     private float forcebreaklaunch = 50f;
     private float grabetime = 5.0f;
@@ -33,6 +34,7 @@ public class Interactible : MonoBehaviour
     private bool CanBeBreak = false;
     private bool Launched;
     private bool AttackBreak = false;
+    private bool ClickLaunchOn = false;
 
     //Section Attack Event\\
 
@@ -74,8 +76,15 @@ public class Interactible : MonoBehaviour
     //Temporaire
     public bool CollectibleCollected = false;
     
-    
+    //Scale\\
     private Vector3 InitialeScale;
+
+    //Launch Object Clic Long\\
+
+    private float ClickLaunch = 1.5f;
+    private float clickTimeLauch = 0f;
+
+
 
 
     public void Interact(Transform trsPlayerGuizmo = null)
@@ -114,6 +123,8 @@ public class Interactible : MonoBehaviour
         trsPlayerGuizmo = GameObject.Find("Grab")?.transform;
 
         if (trsPlayerGuizmo == null){Debug.LogError("trsPlayerGuizmo is not assigned. Ensure the GameObject 'PlayerGuizmo' exists in the scene."); return;}
+
+        //AudioManager.Instance.PlaySoundByIndex(soundIndex = 7);
     }
 
     public void ResetScale(){transform.localScale = InitialeScale; Debug.Log("Reset Scale");} // Pour reset la scale quand on s'accroupit
@@ -150,7 +161,7 @@ public class Interactible : MonoBehaviour
                 }
                 if(!SpecialObject)
                 {
-                    LaunchObject();
+                    //LaunchObject();
                 }
             }
 
@@ -159,7 +170,37 @@ public class Interactible : MonoBehaviour
                 CollectibleCollected = true;
                 DestroyObject();
             }
+
         }
+
+        if(Grabed)
+        {   
+            if(Input.GetMouseButtonDown(0))
+            {
+                clickTimeLauch = Time.time;
+                ClickLaunchOn = true;
+            }
+            
+            if(Input.GetMouseButton(0))
+            {  
+                if(ClickLaunchOn)
+                {
+                    float clickDuration  = Time.time - clickTimeLauch;
+                    if(clickDuration >= ClickLaunch)
+                    {
+                        forcelancer = forcelancerClick;
+                        LaunchObject();
+                        ClickLaunchOn = true;  
+                    }
+                    else if(!ClickLaunchOn)
+                    {
+                        forcelancer = 5f;
+                        LaunchObject();
+                    }
+                }
+            }
+        }
+
         if (Grabed == true && trsPlayerGuizmo != null)
         {
             LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
@@ -167,13 +208,7 @@ public class Interactible : MonoBehaviour
     }
     private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo)
     {
-        /*GrabItemSound.pitch = 1f;
-        GrabItemSound.Play();*/
-        /*AudioManager.Instance.PlaySoundByIndex(soundIndex = 7);
-
-        if (objectToGrab == null){Debug.LogError("objectToGrab is null!");return;}
-
-        if (trsPlayerGuizmo == null){Debug.LogError("trsPlayerGuizmo is null!");return;}*/
+        //AudioManager.Instance.PlaySoundByIndex(7);
 
         ScorringManager scorringManagerInstance = trsPlayerGuizmo.GetComponentInChildren<ScorringManager>();
         if (scorringManagerInstance != null)
