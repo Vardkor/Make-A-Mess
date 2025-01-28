@@ -6,6 +6,7 @@ using TMPro;
 public class Interaction2 : MonoBehaviour
 {
     public Transform trsPlayerGuizmo;
+    public Transform trsPlayerSpecial;
 
     public GameObject go;
 
@@ -38,8 +39,17 @@ public class Interaction2 : MonoBehaviour
 
                 if(Input.GetKeyDown(KeyCode.E))
                 {
-                    hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerGuizmo);
-                    GrabUI.SetActive(false);
+                    if(InteractibleScript.SpecialObject)
+                    {
+                        Debug.Log("Special Objet");
+                        hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerSpecial);
+                        GrabUI.SetActive(false); 
+                    }
+                    else
+                    {
+                        hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerGuizmo);
+                        GrabUI.SetActive(false); 
+                    }
                 }
             }
             else

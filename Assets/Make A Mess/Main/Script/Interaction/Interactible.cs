@@ -16,6 +16,7 @@ public class Interactible : MonoBehaviour
     private Transform grabbedObject;
     private Transform launchedObject;
     private Transform trsPlayerGuizmo;
+    private Transform trsPlayerSpecial;
 
     //Float\\
     private float forcelancer = 5f;
@@ -34,7 +35,6 @@ public class Interactible : MonoBehaviour
     private bool CanBeBreak = false;
     private bool Launched;
     private bool AttackBreak = false;
-    private bool ClickLaunchOn = false;
 
     //Section Attack Event\\
 
@@ -81,8 +81,9 @@ public class Interactible : MonoBehaviour
 
     //Launch Object Clic Long\\
 
-    private float ClickLaunch = 1.5f;
-    private float clickTimeLauch = 0f;
+    private float MaxForce = 25f;
+    private float ChargeRate = 8f;
+    private bool IsCharging = false;
 
 
 
@@ -92,10 +93,6 @@ public class Interactible : MonoBehaviour
         switch(itemType)
         {
             case eItemtype.Objet:
-            case eItemtype.Extincteur:
-            case eItemtype.Briquet:
-            case eItemtype.PDB:
-            case eItemtype.Hache:
             case eItemtype.ObjectCassable:
                 GrabObject(transform, trsPlayerGuizmo);
             break;
@@ -106,6 +103,13 @@ public class Interactible : MonoBehaviour
 
             case eItemtype.Collectible:
                 DestroyObject();
+            break;
+
+            case eItemtype.Extincteur:
+            case eItemtype.Briquet:
+            case eItemtype.PDB:
+            case eItemtype.Hache:
+                GrabObjectSpecial(transform, trsPlayerSpecial);
             break;
         }
 
@@ -177,27 +181,20 @@ public class Interactible : MonoBehaviour
         {   
             if(Input.GetMouseButtonDown(0))
             {
-                clickTimeLauch = Time.time;
-                ClickLaunchOn = true;
+                IsCharging = true;
+                forcelancer = 5f;
             }
             
-            if(Input.GetMouseButton(0))
+            if(Input.GetMouseButton(0) && IsCharging)
             {  
-                if(ClickLaunchOn)
-                {
-                    float clickDuration  = Time.time - clickTimeLauch;
-                    if(clickDuration >= ClickLaunch)
-                    {
-                        forcelancer = forcelancerClick;
-                        LaunchObject();
-                        ClickLaunchOn = true;  
-                    }
-                    else if(!ClickLaunchOn)
-                    {
-                        forcelancer = 5f;
-                        LaunchObject();
-                    }
-                }
+                forcelancer += ChargeRate * Time.deltaTime;
+                forcelancer = Mathf.Clamp(forcelancer, 0f, MaxForce);
+            }
+
+            if((Input.GetMouseButtonUp(0)) && IsCharging)
+            {
+                LaunchObject();
+                IsCharging = false;
             }
         }
 
@@ -242,6 +239,43 @@ public class Interactible : MonoBehaviour
         LeanTween.rotate(grabbedObject.gameObject, trsPlayerGuizmo.rotation.eulerAngles, durationGrabObjectMoov);
     }
 
+    private void GrabObjectSpecial(Transform objectToGrab, Transform trsPlayerSpecial)
+    {
+        //AudioManager.Instance.PlaySoundByIndex(7);
+        if(SpecialObject)
+        {         
+            ScorringManager scorringManagerInstance = trsPlayerSpecial.GetComponentInChildren<ScorringManager>();
+            if (scorringManagerInstance != null)
+            {
+                scorringManager = scorringManagerInstance;
+                ScoreManagerGo = true;
+            }
+
+            grabbedObject = objectToGrab;
+            Grabed = true;
+
+            grabbedObject.SetParent(trsPlayerSpecial);
+
+            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
+
+            if (itemType == eItemtype.ObjectCassable)
+            {
+                bObjectCassable = true;
+            }
+            if (itemType == eItemtype.PDB)
+            {
+                SpecialObject = true;
+            }
+
+            // Animation de l'objet
+            LeanTween.move(grabbedObject.gameObject, trsPlayerSpecial.position, durationGrabObjectMoov);
+            LeanTween.rotate(grabbedObject.gameObject, trsPlayerSpecial.rotation.eulerAngles, durationGrabObjectMoov);
+        }
+    }
 
     private void DestroyObject()
     {
