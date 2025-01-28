@@ -49,7 +49,7 @@ public class BoutonScript : MonoBehaviour
 
     void BoutonTutoEvent()
     {
-        Debug.Log("Bouton Tuto");
+        Debug.Log("Turno Off Light Tuto");
     }
 
     void BoutonBorisEvent()
