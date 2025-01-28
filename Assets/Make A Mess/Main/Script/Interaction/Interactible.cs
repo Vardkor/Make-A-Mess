@@ -88,13 +88,17 @@ public class Interactible : MonoBehaviour
 
 
 
-    public void Interact(Transform trsPlayerGuizmo = null)
+    public void Interact(Transform trsPlayerGuizmo = null, Transform trsPlayerSpecial = null)
     {
         switch(itemType)
         {
+            case eItemtype.Extincteur:
+            case eItemtype.Briquet:
+            case eItemtype.PDB:
+            case eItemtype.Hache:
             case eItemtype.Objet:
             case eItemtype.ObjectCassable:
-                GrabObject(transform, trsPlayerGuizmo);
+                GrabObject(transform, trsPlayerGuizmo, trsPlayerSpecial);
             break;
 
             case eItemtype.ObjetTirrable:
@@ -103,13 +107,6 @@ public class Interactible : MonoBehaviour
 
             case eItemtype.Collectible:
                 DestroyObject();
-            break;
-
-            case eItemtype.Extincteur:
-            case eItemtype.Briquet:
-            case eItemtype.PDB:
-            case eItemtype.Hache:
-                GrabObjectSpecial(transform, trsPlayerSpecial);
             break;
         }
 
@@ -203,57 +200,15 @@ public class Interactible : MonoBehaviour
             LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
         }
     }
-    private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo)
+    private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo, Transform trsPlayerSpecial)
     {
         //AudioManager.Instance.PlaySoundByIndex(7);
-
-        ScorringManager scorringManagerInstance = trsPlayerGuizmo.GetComponentInChildren<ScorringManager>();
-        if (scorringManagerInstance != null)
+        if(SpecialObject == true)
         {
-            scorringManager = scorringManagerInstance;
-            ScoreManagerGo = true;
-        }
-
-        grabbedObject = objectToGrab;
-        Grabed = true;
-
-        grabbedObject.SetParent(trsPlayerGuizmo);
-
-        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-        }
-
-        if (itemType == eItemtype.ObjectCassable)
-        {
-            bObjectCassable = true;
-        }
-        if (itemType == eItemtype.PDB)
-        {
-            SpecialObject = true;
-        }
-
-        // Animation de l'objet
-        LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
-        LeanTween.rotate(grabbedObject.gameObject, trsPlayerGuizmo.rotation.eulerAngles, durationGrabObjectMoov);
-    }
-
-    private void GrabObjectSpecial(Transform objectToGrab, Transform trsPlayerSpecial)
-    {
-        //AudioManager.Instance.PlaySoundByIndex(7);
-        if(SpecialObject)
-        {         
-            ScorringManager scorringManagerInstance = trsPlayerSpecial.GetComponentInChildren<ScorringManager>();
-            if (scorringManagerInstance != null)
-            {
-                scorringManager = scorringManagerInstance;
-                ScoreManagerGo = true;
-            }
-
+            Debug.Log("Oue1");
             grabbedObject = objectToGrab;
             Grabed = true;
-
+            
             grabbedObject.SetParent(trsPlayerSpecial);
 
             Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
@@ -275,7 +230,43 @@ public class Interactible : MonoBehaviour
             LeanTween.move(grabbedObject.gameObject, trsPlayerSpecial.position, durationGrabObjectMoov);
             LeanTween.rotate(grabbedObject.gameObject, trsPlayerSpecial.rotation.eulerAngles, durationGrabObjectMoov);
         }
+        else if (!SpecialObject)
+        {
+            Debug.Log("Oue");
+            ScorringManager scorringManagerInstance = trsPlayerGuizmo.GetComponentInChildren<ScorringManager>();
+            if (scorringManagerInstance != null)
+            {
+                scorringManager = scorringManagerInstance;
+                ScoreManagerGo = true;
+            }
+
+            grabbedObject = objectToGrab;
+            Grabed = true;
+
+            grabbedObject.SetParent(trsPlayerGuizmo);
+
+            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
+
+            if (itemType == eItemtype.ObjectCassable)
+            {
+                bObjectCassable = true;
+            }
+            if (itemType == eItemtype.PDB)
+            {
+                SpecialObject = true;
+            }
+
+            // Animation de l'objet
+            LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
+            LeanTween.rotate(grabbedObject.gameObject, trsPlayerGuizmo.rotation.eulerAngles, durationGrabObjectMoov);
+        }
     }
+
+
 
     private void DestroyObject()
     {

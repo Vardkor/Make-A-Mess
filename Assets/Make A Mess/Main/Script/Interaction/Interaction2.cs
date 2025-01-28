@@ -39,17 +39,8 @@ public class Interaction2 : MonoBehaviour
 
                 if(Input.GetKeyDown(KeyCode.E))
                 {
-                    if(InteractibleScript.SpecialObject)
-                    {
-                        Debug.Log("Special Objet");
-                        hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerSpecial);
-                        GrabUI.SetActive(false); 
-                    }
-                    else
-                    {
-                        hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerGuizmo);
-                        GrabUI.SetActive(false); 
-                    }
+                    hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerSpecial, trsPlayerGuizmo);
+                    GrabUI.SetActive(false); 
                 }
             }
             else
@@ -81,7 +72,6 @@ public class Interaction2 : MonoBehaviour
                     HitUI.SetActive(false);
                 }
             }
-
         }
         else 
         {
