@@ -133,13 +133,13 @@ MonoBehaviour:
     m_Value: 0
   endFadeDistance:
     m_OverrideState: 0
-    m_Value: 1000
+    m_Value: 100
   sensitivityDepth:
     m_OverrideState: 1
     m_Value: 1
   sensitivityNormals:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.25
   lumThreshold:
     m_OverrideState: 0
     m_Value: 0.01
