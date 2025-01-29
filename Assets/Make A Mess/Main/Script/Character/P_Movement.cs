@@ -31,7 +31,7 @@ public class P_Movement : MonoBehaviour
     public AudioSource CrouchSFX;
 
     private Vector3 crouchScale = new Vector3(1, 0.2f, 1);
-    private Vector3 PlayerScale = new Vector3(1, 0.653995f, 1);
+    private Vector3 PlayerScale = new Vector3(1, 1f, 1);
 
     private Interactible ObjectGrabbed;
     private Vector3 grabbedObjectOriginalScale;

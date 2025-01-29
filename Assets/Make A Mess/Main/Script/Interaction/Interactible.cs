@@ -20,19 +20,17 @@ public class Interactible : MonoBehaviour
 
     //Float\\
     private float forcelancer = 0f;
-    //private float forcelancerClick = 25f;
     private float forcebreak = 20f;
-    private float forcebreaklaunch = 50f;
+    private float forcebreaklaunch = 100f;
     private float grabetime = 5.0f;
 
     private float durationGrabObjectMoov = 0.07f;
 
     //Bool\\
-
+    [Header("Boolean")]
     public bool Grabed;
     public bool SpecialObject;
     public bool bObjectCassable;
-    //private bool CanBeBreak = false;
     private bool Launched;
     private bool AttackBreak = false;
 
@@ -124,9 +122,6 @@ public class Interactible : MonoBehaviour
 
         trsPlayerGuizmo = GameObject.Find("Grab")?.transform;
 
-        if (trsPlayerGuizmo == null){Debug.LogError("trsPlayerGuizmo is not assigned. Ensure the GameObject 'PlayerGuizmo' exists in the scene."); return;}
-
-        //AudioManager.Instance.PlaySoundByIndex(soundIndex = 7);
     }
 
     public void ResetScale(){transform.localScale = InitialeScale; Debug.Log("Reset Scale");} // Pour reset la scale quand on s'accroupit
@@ -135,14 +130,6 @@ public class Interactible : MonoBehaviour
 
     public void Update()
     {
-        /*if(Isbreak)
-        {
-            Score();
-        }*/
-        /*if(Input.GetKeyDown(KeyCode.E) && Grabed)
-        {
-            ReleaseObject();
-        }*/
         if(!Grabed)
         {
             if(Input.GetMouseButton(0))
@@ -192,8 +179,7 @@ public class Interactible : MonoBehaviour
 
             if(Input.GetKeyUp(KeyCode.E) && IsCharging)
             {
-                Debug.Log(forcelancer);
-                if(forcelancer < 0.1f)
+                if(forcelancer < 0.5f)
                 {
                     ReleaseObject();
                 }
@@ -206,18 +192,11 @@ public class Interactible : MonoBehaviour
                 IsCharging = false;
             }
         }
-
-        if (Grabed == true && trsPlayerGuizmo != null)
-        {
-            //LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
-        }
     }
     private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo, Transform trsPlayerSpecial)
     {
-        //AudioManager.Instance.PlaySoundByIndex(7);
         if(SpecialObject == true)
         {
-            Debug.Log("Oue1");
             grabbedObject = objectToGrab;
             Grabed = true;
             
@@ -244,8 +223,6 @@ public class Interactible : MonoBehaviour
         }
         else if (!SpecialObject)
         {
-            Debug.Log("Oue");
-
             grabbedObject = objectToGrab;
             Grabed = true;
 
@@ -256,11 +233,6 @@ public class Interactible : MonoBehaviour
             {
                 rb.isKinematic = true;
             }
-
-            /*if (itemType == eItemtype.ObjectCassable)
-            {
-                bObjectCassable = true;
-            }*/
             if (itemType == eItemtype.PDB)
             {
                 SpecialObject = true;
@@ -323,7 +295,6 @@ public class Interactible : MonoBehaviour
 
     public void AttackCast()
     {
-        //SpecialObject = true;
         canAttack = false;
         Attacking = true;
         AttackRayCast();
@@ -366,8 +337,6 @@ public class Interactible : MonoBehaviour
 
     public void HitTarget(GameObject hitObject)
     {
-        //AttackBreak = true;
-        Debug.Log("HitTarget : " + hitObject.name);
         hitObject.GetComponent<Interactible>().Break();
 
         hitSound.pitch = 1;
@@ -427,11 +396,8 @@ public class Interactible : MonoBehaviour
 
     void Break()
     {
-        Debug.Log("Break : " + gameObject.name);
-
         if (bObjectCassable)
         {
-            Debug.Log("Can be break : " + gameObject.name);
             if(!Isbreak)
             {
                 if(transform.childCount > 0)
@@ -457,33 +423,7 @@ public class Interactible : MonoBehaviour
                     Score();
 
                     gameObject.SetActive(false);
-                }    
-                /*else if (launchedObject.childCount > 0)
-                {
-                    Transform child = launchedObject.GetChild(0);
-
-                    List<Transform> allChildren = GetAllChildren(child);
-
-                    foreach (Transform grandChild in allChildren)
-                    {
-                        Rigidbody rb = grandChild.GetComponent<Rigidbody>();
-                        if (rb != null)
-                        {
-                            rb.AddForce(launchedObject.transform.forward * forcebreaklaunch, ForceMode.Impulse);
-                            rb.isKinematic = false;
-                        }
-                    }
-                    child.SetParent(null);
-                    child.position = launchedObject.position;
-                    child.rotation = launchedObject.rotation;
-                    launchedObject.gameObject.SetActive(false);
-                    Isbreak = true;
-
-                    if(Isbreak && ScoreManagerGo)
-                    {
-                        Score();
-                    }
-                }*/
+                }
             }
         }
     }
@@ -496,7 +436,6 @@ public class Interactible : MonoBehaviour
             {
                 if(!Isbreak)
                 {
-                    /*hitObject = collision.gameObject;*/
                     Break();
                 }
             }   
@@ -520,7 +459,6 @@ public class Interactible : MonoBehaviour
 
     public void Score()
     {
-        //Debug.Log("Score à ajouter : " + scorePerObject);
         Camera.main.GetComponent<ScorringManager>().AddScore(scorePerObject);
     }
 }
