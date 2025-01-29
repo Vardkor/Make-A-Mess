@@ -39,7 +39,7 @@ public class Interaction2 : MonoBehaviour
 
                 if(Input.GetKeyDown(KeyCode.E))
                 {
-                    hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerSpecial, trsPlayerGuizmo);
+                    hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerGuizmo, trsPlayerSpecial);
                     GrabUI.SetActive(false); 
                 }
             }

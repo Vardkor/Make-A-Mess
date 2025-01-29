@@ -19,8 +19,8 @@ public class Interactible : MonoBehaviour
     private Transform trsPlayerSpecial;
 
     //Float\\
-    private float forcelancer = 5f;
-    private float forcelancerClick = 25f;
+    private float forcelancer = 0f;
+    //private float forcelancerClick = 25f;
     private float forcebreak = 20f;
     private float forcebreaklaunch = 50f;
     private float grabetime = 5.0f;
@@ -32,7 +32,7 @@ public class Interactible : MonoBehaviour
     public bool Grabed;
     public bool SpecialObject;
     public bool bObjectCassable;
-    private bool CanBeBreak = false;
+    //private bool CanBeBreak = false;
     private bool Launched;
     private bool AttackBreak = false;
 
@@ -45,12 +45,14 @@ public class Interactible : MonoBehaviour
     public LayerMask attackLayer;
 
     //public GameObject hitEffect;
+    [Header("Audio Sources")]
     public AudioSource hitSound;
     private AudioSource AttackSwing;
     //public Animator AnimationAttackPDB;
 
     //public AudioSource GrabItemSound;
     public AudioSource ThrowItemSound;
+    public AudioClip sfxDestruction;
 
     public int soundIndex;
     public string ThrowItemSFX;
@@ -70,7 +72,6 @@ public class Interactible : MonoBehaviour
     public int scorePerObject = 0;
     private bool UpdateScore = false;
     private TextMeshProUGUI scoreObjectScore;
-    private ScorringManager scorringManager;
     private bool ScoreManagerGo = false;
 
     //Temporaire
@@ -134,70 +135,81 @@ public class Interactible : MonoBehaviour
 
     public void Update()
     {
-        if(Isbreak)
+        /*if(Isbreak)
         {
             Score();
-        }
-        if(Input.GetKeyDown(KeyCode.E) && Grabed)
+        }*/
+        /*if(Input.GetKeyDown(KeyCode.E) && Grabed)
         {
             ReleaseObject();
+        }*/
+        if(!Grabed)
+        {
+            if(Input.GetMouseButton(0))
+            {
+                if(itemType == eItemtype.Collectible && CollectibleCollected == false)
+                {
+                    CollectibleCollected = true;
+                    DestroyObject();
+                }
+            }
         }
         
-        if(Input.GetMouseButton(0))
-        {
-            if(Grabed)
-            {
-                if(itemType == eItemtype.Extincteur)
-                {
-                    Debug.Log("OUE");
-                }
-
-                if (itemType == eItemtype.PDB && canAttack)
-                {
-                    AttackItem();
-                }
-                if(itemType == eItemtype.Briquet)
-                {
-                    Debug.Log("Oue");
-                }
-                if(!SpecialObject)
-                {
-                    //LaunchObject();
-                }
-            }
-
-            if(itemType == eItemtype.Collectible && CollectibleCollected == false)
-            {
-                CollectibleCollected = true;
-                DestroyObject();
-            }
-
-        }
 
         if(Grabed)
         {   
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButton(0))
+            {
+                    if(itemType == eItemtype.Extincteur)
+                    {
+                        Debug.Log("OUE");
+                    }
+
+                    if (itemType == eItemtype.PDB && canAttack)
+                    {
+                        AttackCast();
+                    }
+                    if(itemType == eItemtype.Briquet)
+                    {
+                        Debug.Log("Oue");
+                    }
+                    if(!SpecialObject)
+                    {
+                        //LaunchObject();
+                    }
+            }
+
+            if(Input.GetKeyDown(KeyCode.E))
             {
                 IsCharging = true;
-                forcelancer = 5f;
             }
             
-            if(Input.GetMouseButton(0) && IsCharging)
+            if(Input.GetKeyDown(KeyCode.E) && IsCharging)
             {  
                 forcelancer += ChargeRate * Time.deltaTime;
                 forcelancer = Mathf.Clamp(forcelancer, 0f, MaxForce);
             }
 
-            if((Input.GetMouseButtonUp(0)) && IsCharging)
+            if(Input.GetKeyUp(KeyCode.E) && IsCharging)
             {
-                LaunchObject();
+                Debug.Log(forcelancer);
+                if(forcelancer < 0.1f)
+                {
+                    ReleaseObject();
+                }
+                else
+                {
+                    forcelancer += 5f;
+                    LaunchObject();
+                }
+
                 IsCharging = false;
             }
         }
 
         if (Grabed == true && trsPlayerGuizmo != null)
         {
-            LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
+            //LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
         }
     }
     private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo, Transform trsPlayerSpecial)
@@ -233,12 +245,6 @@ public class Interactible : MonoBehaviour
         else if (!SpecialObject)
         {
             Debug.Log("Oue");
-            ScorringManager scorringManagerInstance = trsPlayerGuizmo.GetComponentInChildren<ScorringManager>();
-            if (scorringManagerInstance != null)
-            {
-                scorringManager = scorringManagerInstance;
-                ScoreManagerGo = true;
-            }
 
             grabbedObject = objectToGrab;
             Grabed = true;
@@ -251,10 +257,10 @@ public class Interactible : MonoBehaviour
                 rb.isKinematic = true;
             }
 
-            if (itemType == eItemtype.ObjectCassable)
+            /*if (itemType == eItemtype.ObjectCassable)
             {
                 bObjectCassable = true;
-            }
+            }*/
             if (itemType == eItemtype.PDB)
             {
                 SpecialObject = true;
@@ -304,11 +310,6 @@ public class Interactible : MonoBehaviour
 
         Launched = true;
 
-        if (itemType == eItemtype.ObjectCassable && bObjectCassable && Launched)
-        {
-            CanBeBreak = true;
-        }
-
         launchedObject = grabbedObject;
 
         ThrowItemSound.Play();
@@ -320,9 +321,9 @@ public class Interactible : MonoBehaviour
 
     //---[Object Specials]---\\
 
-    public void AttackItem()
+    public void AttackCast()
     {
-        SpecialObject = true;
+        //SpecialObject = true;
         canAttack = false;
         Attacking = true;
         AttackRayCast();
@@ -334,43 +335,40 @@ public class Interactible : MonoBehaviour
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
         {
             GameObject hitObject = hit.collider.gameObject;
+            Debug.Log(hitObject.name);
 
             if(hitObject.layer == LayerMask.NameToLayer("BreakableObject"))
             {
                 HitTarget(hitObject);
+                
                 AttackAnimation();
             }
             else
             {
-                AttackSound();
-                canAttack = false;
-                Attacking = true;
-                AttackAnimation();
-                Invoke(nameof(ResetAttack), attackcooldown);
+                MissedAttack();
             }
         }
         else
         {
-            AttackSound();
-            canAttack = false;
-            Attacking = true;
-            AttackAnimation();
-            Invoke(nameof(ResetAttack), attackcooldown);
+            MissedAttack();
         }
     }
-    void ResetAttack()
+
+    void MissedAttack()
     {
-        Isbreak = false;
-        canAttack = true;
-        Attacking = false;
+        AttackSound();
+        canAttack = false;
+        Attacking = true;
+        AttackAnimation();
+        Invoke(nameof(ResetAttack), attackcooldown);
     }
+
 
     public void HitTarget(GameObject hitObject)
     {
-        CanBeBreak = true;
-        AttackBreak = true;
-
-        BreakObject(hitObject);
+        //AttackBreak = true;
+        Debug.Log("HitTarget : " + hitObject.name);
+        hitObject.GetComponent<Interactible>().Break();
 
         hitSound.pitch = 1;
         hitSound.Play();
@@ -381,6 +379,13 @@ public class Interactible : MonoBehaviour
         canAttack = false;
         Attacking = true;
         Invoke(nameof(ResetAttack), attackcooldown);
+    }
+
+    void ResetAttack()
+    {
+        //Isbreak = false;
+        canAttack = true;
+        Attacking = false;
     }
 
     //---[SFX de l'attaque]---\\
@@ -420,15 +425,18 @@ public class Interactible : MonoBehaviour
         }
     }
 
-    void BreakObject(GameObject hitObject)
+    void Break()
     {
-        if (CanBeBreak)
+        Debug.Log("Break : " + gameObject.name);
+
+        if (bObjectCassable)
         {
-            if(!Isbreak || AttackBreak)
+            Debug.Log("Can be break : " + gameObject.name);
+            if(!Isbreak)
             {
-                if(hitObject.transform.childCount > 0)
+                if(transform.childCount > 0)
                 {
-                    Transform child = hitObject.transform.GetChild(0);
+                    Transform child = transform.GetChild(0);
 
                     List<Transform> allChildren = GetAllChildren(child);
 
@@ -442,19 +450,15 @@ public class Interactible : MonoBehaviour
                         }
                     }
                     child.SetParent(null);
-                    child.position = hitObject.transform.position;
-                    child.rotation = hitObject.transform.rotation;
-                    hitObject.gameObject.SetActive(false);
+                    child.position = transform.position;
+                    child.rotation = transform.rotation;
+                    
                     Isbreak = true;
-                    AttackBreak = false;
+                    Score();
 
-                    if(Isbreak && ScoreManagerGo)
-                    {
-                        Score();
-                        ResetAttack();
-                    }
+                    gameObject.SetActive(false);
                 }    
-                else if (launchedObject.childCount > 0)
+                /*else if (launchedObject.childCount > 0)
                 {
                     Transform child = launchedObject.GetChild(0);
 
@@ -478,9 +482,8 @@ public class Interactible : MonoBehaviour
                     if(Isbreak && ScoreManagerGo)
                     {
                         Score();
-                        ResetAttack();
                     }
-                }
+                }*/
             }
         }
     }
@@ -489,12 +492,12 @@ public class Interactible : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Grab") || collision.gameObject.CompareTag("Player"))
         {
-            if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true && CanBeBreak == true)
+            if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true)
             {
                 if(!Isbreak)
                 {
-                    hitObject = collision.gameObject;
-                    BreakObject(hitObject);
+                    /*hitObject = collision.gameObject;*/
+                    Break();
                 }
             }   
         }
@@ -518,6 +521,6 @@ public class Interactible : MonoBehaviour
     public void Score()
     {
         //Debug.Log("Score à ajouter : " + scorePerObject);
-        scorringManager.AddScore(scorePerObject);
+        Camera.main.GetComponent<ScorringManager>().AddScore(scorePerObject);
     }
 }
