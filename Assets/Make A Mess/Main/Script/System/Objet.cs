@@ -64,7 +64,7 @@ public class Objet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("flechettes"))
+        /*if(other.CompareTag("flechettes"))
         {
            Rigidbody rb = other.GetComponent<Rigidbody>();
            rb.isKinematic = true;
@@ -90,7 +90,7 @@ public class Objet : MonoBehaviour
         else
         {
             collisionEnter = true;
-        } 
+        }*/
     }
 
     void OnTriggerExit(Collider other)
