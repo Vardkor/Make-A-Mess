@@ -80,6 +80,12 @@ public class SPhoneManager : MonoBehaviour
                 Destroy(currentCube);
             }
             currentCube = Instantiate(PcPrefab, SpawnPoint.position, SpawnPoint.rotation);
+
+            Rigidbody rb = currentCube.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddForce(Camera.main.transform.forward * 15f, ForceMode.Impulse);
+            }
         }
         else
         {

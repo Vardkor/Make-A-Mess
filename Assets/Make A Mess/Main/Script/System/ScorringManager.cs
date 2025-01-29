@@ -17,7 +17,6 @@ public class ScorringManager : MonoBehaviour
 
     public void AddScore(int scoreToAdd)
     {
-        Debug.Log($"Ajout du score : {scoreToAdd}. Score actuel : {CurrentScore}");
         CurrentScore += scoreToAdd;
         UpdateScoreText();
         SFXCling.pitch = Random.Range(0.9f,1.1f); 

@@ -43,17 +43,20 @@ public class Interactible : MonoBehaviour
     public LayerMask attackLayer;
 
     //public GameObject hitEffect;
+
     [Header("Audio Sources")]
     public AudioSource hitSound;
     private AudioSource AttackSwing;
-    //public Animator AnimationAttackPDB;
-
-    //public AudioSource GrabItemSound;
     public AudioSource ThrowItemSound;
     public AudioClip sfxDestruction;
-
     public int soundIndex;
+    //public AudioSource GrabItemSound;
     public string ThrowItemSFX;
+
+    [Header("Animation Uniquement pour les attacks")]
+    public Animator_Script animatorscript;
+
+    [Header("Autres")]
 
     //Section Break Object Event\\
     private bool impactDetected = false;
@@ -166,30 +169,27 @@ public class Interactible : MonoBehaviour
                     }
             }
 
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetMouseButtonDown(0))
             {
+                forcelancer = 5f;
                 IsCharging = true;
             }
             
-            if(Input.GetKeyDown(KeyCode.E) && IsCharging)
+            if(Input.GetMouseButton(0) && IsCharging)
             {  
                 forcelancer += ChargeRate * Time.deltaTime;
                 forcelancer = Mathf.Clamp(forcelancer, 0f, MaxForce);
             }
 
-            if(Input.GetKeyUp(KeyCode.E) && IsCharging)
+            if(Input.GetMouseButtonUp(0) && IsCharging)
             {
-                if(forcelancer < 0.5f)
-                {
-                    ReleaseObject();
-                }
-                else
-                {
-                    forcelancer += 5f;
-                    LaunchObject();
-                }
-
+                LaunchObject();
                 IsCharging = false;
+            }
+
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                ReleaseObject();
             }
         }
     }
@@ -298,7 +298,6 @@ public class Interactible : MonoBehaviour
         canAttack = false;
         Attacking = true;
         AttackRayCast();
-        //AttackAnimation();
     }
 
     void AttackRayCast()
@@ -373,25 +372,15 @@ public class Interactible : MonoBehaviour
 
     void AttackAnimation()
     {
-        if(Attacking == true)
+        animatorscript.startanim = true;
+        /*if(Attacking == true)
         {
-            /*if(AnimationAttackPDB !=null )
+            if(AnimationAttackPDB !=null)
             {
-                AnimationAttackPDB.SetTrigger("Attack");
-            }*/
-
-            Debug.Log("Anim Attack");
-            /*Quaternion initialRotation = transform.rotation;
-
-
-            LeanTween.rotate(transform.gameObject, transform.rotation.eulerAngles + rotationAngle, duration)
-                .setEase(LeanTweenType.easeInOutSine)
-                .setOnComplete(() =>
-                {
-                    LeanTween.rotate(transform.gameObject, initialRotation.eulerAngles, duration)
-                    .setEase(LeanTweenType.easeInOutSine);
-                });*/
-        }
+                AnimationAttackPDB.SetTrigger("TriggerAttack");
+                Debug.Log("Anim Attack");
+            }
+        }*/
     }
 
     void Break()
