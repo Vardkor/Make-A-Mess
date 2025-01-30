@@ -10,13 +10,13 @@ public class ScorringManager : MonoBehaviour
     public Animator animator;
     public int CurrentScore = 0;
 
-    //Multilier\\
+    //Multiplier\\
 
     private int multiplier = 1;
     private int multiplierBase = 1;
     private float multiplierResetTime = 3f;
     
-    //Multilier Timer\\
+    //Multiplier Timer\\
 
     private float multiplierTimer = 5f;
     private float multiplierDuration = 5f;

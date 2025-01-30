@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour
     
     public void Start()
     {
-        StartTimer = true;
+        StartTimer = false;
     }
     
     void Update()
@@ -46,42 +46,36 @@ public class Timer : MonoBehaviour
             if(minutes == 8 && seconds == 0)
             {
                 Message2.SetActive(true);
-                Message1.SetActive(false);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 6 && seconds == 0)
             {
                 Message3.SetActive(true);
-                Message2.SetActive(false);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 3 && seconds == 0)
             {
                 Message4.SetActive(true);
-                Message3.SetActive(false);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 1 && seconds == 30)
             {
                 Message5.SetActive(true);
-                Message4.SetActive(false);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 1 && seconds == 00)
             {
                 Message6.SetActive(true);
-                Message5.SetActive(false);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 0 && seconds == 45)
             {
                 Message7.SetActive(true);
-                Message6.SetActive(false);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
@@ -97,5 +91,10 @@ public class Timer : MonoBehaviour
     public void TimeExit()
     {
         scriptobjet.TimeExit = true;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        StartTimer = true;
     }
 }
