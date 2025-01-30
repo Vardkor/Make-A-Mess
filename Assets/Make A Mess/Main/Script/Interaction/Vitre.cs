@@ -9,10 +9,6 @@ public class Vitre : MonoBehaviour
     BoxCollider bc;
     //[SerializeField] Scorring scorring;
 
-    public bool casser = false;
-    public bool pascasser = false;
-    public bool vitrebreak = false;
-
 
     private void Awake()
     {
@@ -25,7 +21,6 @@ public class Vitre : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Break();
-        casser = true;
     }
 
     private void Break()
@@ -33,7 +28,11 @@ public class Vitre : MonoBehaviour
         vitrepascasser.SetActive(false);
         vitrecasser.SetActive(true);
         bc.enabled = false;
-        vitrebreak = true;
-        //scorring.UpdateScore();
+
+    }
+
+    public void Score()
+    {
+        //Camera.main.GetComponent<ScorringManager>().AddScore(scorePerObject);
     }
 }    

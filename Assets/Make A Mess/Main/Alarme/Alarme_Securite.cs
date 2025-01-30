@@ -16,7 +16,7 @@ public class Alarme_Securite : MonoBehaviour
     {
         bool vitreCassée = false;
 
-        foreach (Vitre vitre in vitres)
+        /*foreach (Vitre vitre in vitres)
         {
             if (vitre.vitrebreak) 
             {
@@ -37,7 +37,7 @@ public class Alarme_Securite : MonoBehaviour
             {
                 Alarme.Stop();
             }
-        }
+        }*/
     }
 
     void OnTriggerEnter(Collider other)
