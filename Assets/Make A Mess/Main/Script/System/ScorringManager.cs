@@ -20,22 +20,22 @@ public class ScorringManager : MonoBehaviour
 
     private float multiplierTimer = 0f;
     private float multiplierDuration = 5f;
+    private int multiplierScore = 0;
 
     void Start()
     {
-        UpdateScoreText();
+        UpdateText();
     }
 
     void Update()
     {
-        Debug.Log("Multipliers" + multiplier);
-
         if(multiplier > 1f)
         {
             multiplierTimer -= Time.deltaTime;
             if(multiplierTimer <= 0f)
             {
                 multiplier = multiplierBase;
+                Debug.Log("Le multipliers" + multiplier);
             }
         }
     }
@@ -43,14 +43,14 @@ public class ScorringManager : MonoBehaviour
 
     public void AddScore(int scoreToAdd)
     {
-        //scoreToAdd *= multiplier;
-        UpdateScore();
-        ActiveMultipliers();
+        scoreToAdd *= multiplier = multiplierScore;
+        UpdateScore(scoreToAdd);
+        //ActiveMultipliers();
     }
 
-    private void UpdateScore()
+    private void UpdateScore(int scoreToAdd)
     {
-        CurrentScore += scoreToAdd;
+        CurrentScore += multiplierScore;
         UpdateText();
         SFXCling.pitch = Random.Range(0.9f,1.1f); 
         SFXCling.Play();
@@ -61,10 +61,5 @@ public class ScorringManager : MonoBehaviour
         {
             scoreText.text = CurrentScore + "$";
         }
-    }
-
-    private void ActiveMultipliers()
-    {
-
     }
 }
