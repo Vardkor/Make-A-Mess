@@ -15,6 +15,10 @@ TagManager:
   - Wall
   - Bouton
   - Pcprefabtag
+  - flechettes
+  - BombePeinture
+  - ballegolf
+  - Vitre
   layers:
   - Default
   - TransparentFX
@@ -27,7 +31,7 @@ TagManager:
   - Wall
   - Object
   - BreakableObject
-  - 
+  - Vitre
   - 
   - 
   - 

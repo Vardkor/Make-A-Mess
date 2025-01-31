@@ -169,27 +169,30 @@ public class Interactible : MonoBehaviour
                     }
             }
 
-            if(Input.GetMouseButtonDown(0))
+            if(!SpecialObject)
             {
-                forcelancer = 5f;
-                IsCharging = true;
-            }
-            
-            if(Input.GetMouseButton(0) && IsCharging)
-            {  
-                forcelancer += ChargeRate * Time.deltaTime;
-                forcelancer = Mathf.Clamp(forcelancer, 0f, MaxForce);
-            }
+                if(Input.GetMouseButtonDown(0))
+                {
+                    forcelancer = 5f;
+                    IsCharging = true;
+                }
+                
+                if(Input.GetMouseButton(0) && IsCharging)
+                {  
+                    forcelancer += ChargeRate * Time.deltaTime;
+                    forcelancer = Mathf.Clamp(forcelancer, 0f, MaxForce);
+                }
 
-            if(Input.GetMouseButtonUp(0) && IsCharging)
-            {
-                LaunchObject();
-                IsCharging = false;
-            }
+                if(Input.GetMouseButtonUp(0) && IsCharging)
+                {
+                    LaunchObject();
+                    IsCharging = false;
+                }
 
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                ReleaseObject();
+                if(Input.GetKeyDown(KeyCode.E))
+                {
+                    ReleaseObject();
+                }
             }
         }
     }
@@ -372,7 +375,7 @@ public class Interactible : MonoBehaviour
 
     void AttackAnimation()
     {
-        animatorscript.startanim = true;
+        //animatorscript.startanim = true;
         /*if(Attacking == true)
         {
             if(AnimationAttackPDB !=null)
@@ -419,15 +422,21 @@ public class Interactible : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Grab") || collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Grab") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Vitre"))
         {
             if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true)
             {
                 if(!Isbreak)
                 {
                     Break();
+                    if(collision.gameObject.GetComponent<Interactible>()!= null)
+                    {
+                        collision.gameObject.GetComponent<Interactible>().forcebreak = 5f;
+                        collision.gameObject.GetComponent<Interactible>().Break();
+                        collision.gameObject.GetComponent<Interactible>().forcebreak = 20f;
+                    }
                 }
-            }   
+            }
         }
     }
 
