@@ -20,7 +20,8 @@ public class SPhoneManager : MonoBehaviour
 
     void Start()
     {
-        PauseMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -31,18 +32,11 @@ public class SPhoneManager : MonoBehaviour
             else{Menu();}
         }
     }
-    void LateUpdate()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape) && OpenUI==false)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-    }
 
     public void Resume()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         Time.timeScale = 1f;
         PauseMenu.SetActive(false);
@@ -57,6 +51,7 @@ public class SPhoneManager : MonoBehaviour
     public void Menu()
     {
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         Time.timeScale = 0f;
         PauseMenu.SetActive(true);
