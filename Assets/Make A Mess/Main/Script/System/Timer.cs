@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     [SerializeField] public AudioSource Notif;
     [SerializeField] public AudioSource soundTimer;
     [SerializeField] Objet scriptobjet;
+    [SerializeField] BoxCollider boxColliderStart;
     public bool StartTimer;
 
     public GameObject Message1;
@@ -84,8 +85,10 @@ public class Timer : MonoBehaviour
 
     public void StartingTimer()
     {
-        StartTimer = true;
-        soundTimer.Play();
+        if(StartTimer && CompareTag("Player"))
+        {
+            soundTimer.Play();
+        }
     }
 
     public void TimeExit()

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Interactible : MonoBehaviour
 {
-    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable, ObjetTirrable, Collectible};
+    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable, ObjetTirrable, Collectible, Vitre};
     public eItemtype itemType;
 
     public enum eTypeFlame {Inflamable, NoInflamable};
@@ -150,23 +150,19 @@ public class Interactible : MonoBehaviour
         {   
             if(Input.GetMouseButton(0))
             {
-                    if(itemType == eItemtype.Extincteur)
-                    {
-                        Debug.Log("OUE");
-                    }
+                if(itemType == eItemtype.Extincteur)
+                {
+                    Debug.Log("OUE");
+                }
 
-                    if (itemType == eItemtype.PDB && canAttack)
-                    {
-                        AttackCast();
-                    }
-                    if(itemType == eItemtype.Briquet)
-                    {
-                        Debug.Log("Oue");
-                    }
-                    if(!SpecialObject)
-                    {
-                        //LaunchObject();
-                    }
+                if (itemType == eItemtype.PDB && canAttack)
+                {
+                    AttackCast();
+                }
+                if(itemType == eItemtype.Briquet)
+                {
+                    Debug.Log("Oue");
+                }
             }
 
             if(!SpecialObject)
@@ -354,7 +350,6 @@ public class Interactible : MonoBehaviour
 
     void ResetAttack()
     {
-        //Isbreak = false;
         canAttack = true;
         Attacking = false;
     }
@@ -434,6 +429,10 @@ public class Interactible : MonoBehaviour
                         collision.gameObject.GetComponent<Interactible>().forcebreak = 5f;
                         collision.gameObject.GetComponent<Interactible>().Break();
                         collision.gameObject.GetComponent<Interactible>().forcebreak = 20f;
+                    }
+                    else if(itemType == eItemtype.Vitre)
+                    {
+                        Debug.Log("Vitre casser");
                     }
                 }
             }
