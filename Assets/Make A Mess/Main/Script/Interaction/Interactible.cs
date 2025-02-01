@@ -46,12 +46,10 @@ public class Interactible : MonoBehaviour
 
     [Header("Audio Sources")]
     public AudioSource hitSound;
-    private AudioSource AttackSwing;
+    public AudioSource AttackSwing;
     public AudioSource ThrowItemSound;
     public AudioClip sfxDestruction;
-    public int soundIndex;
-    //public AudioSource GrabItemSound;
-    public string ThrowItemSFX;
+    public AudioSource GrabItemSound;
 
     [Header("Animation Uniquement pour les attacks")]
     public Animator_Script animatorscript;
@@ -351,7 +349,6 @@ public class Interactible : MonoBehaviour
     {
         if(Attacking == true && canAttack == false)
         {
-            AttackSwing = grabbedObject.GetComponent<AudioSource>();
             AttackSwing.pitch = Random.Range(0.9f, 1.1f);
             AttackSwing.Play();
         }
