@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
 public class Interaction2 : MonoBehaviour
 {
     public Transform trsPlayerGuizmo;
@@ -14,71 +15,52 @@ public class Interaction2 : MonoBehaviour
 
     public Interactible InteractibleScript;
 
+
+
+
+
     public void Update()
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position, transform.forward, out hit, 6f))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 6f))
         {
-            if(hit.transform.gameObject.tag == "Grab")
+            if (hit.transform.CompareTag("Grab"))
             {
-                ActiveGrabUI();
-                if(Input.GetKeyDown(KeyCode.E))
+                Interactible interactible = hit.collider.gameObject.GetComponent<Interactible>();
+
+                if (interactible != null) 
                 {
-                    hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerGuizmo, trsPlayerSpecial);
+                    if (interactible.SpecialObject) 
+                    {
+                        // Affiche GrabUI si c'est un objet spécial
+                        GrabUI.SetActive(true);
+                        HitUI.SetActive(false);
+                    } 
+                    else
+                    {
+                        // Affiche HitUI si c'est un objet normal
+                        GrabUI.SetActive(false);
+                        HitUI.SetActive(true);
+                    }
+                }
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
                     GrabUI.SetActive(false);
                 }
             }
             else
             {
-                DesactivUI();
-            }
-            
-            if(hit.transform.gameObject.tag == "Bouton")
-            {
-                if(Input.GetKeyDown(KeyCode.E))
-                {
-                    hit.collider.gameObject.GetComponent<BoutonScript>().Bouton();
-                }
-            }
-
-            if(hit.transform.gameObject.tag == "Pcprefabtag")
-            {
-                HitUI.SetActive(true);
-                if(Input.GetMouseButton(0))
-                {
-                    Destroy(hit.transform.gameObject);
-                    HitUI.SetActive(false);
-                }
+                GrabUI.SetActive(false);
+                HitUI.SetActive(false);
             }
         }
-        else 
+        else
         {
-            DesactivUI();
+            GrabUI.SetActive(false);
+            HitUI.SetActive(false);
         }
-
-        if(InteractibleScript.Grabed == true)
-        {
-            Debug.Log("Grabed");
-        }
-    }
-
-
-    public void ActiveHitUI()
-    {
-        HitUI.SetActive(true);
-        GrabUI.SetActive(false);
-    }
-
-    public void ActiveGrabUI()
-    {
-        GrabUI.SetActive(true);
-        HitUI.SetActive(false);
-    }
-
-    public void DesactivUI()
-    {
-        GrabUI.SetActive(false);
-        HitUI.SetActive(false);
     }
 }

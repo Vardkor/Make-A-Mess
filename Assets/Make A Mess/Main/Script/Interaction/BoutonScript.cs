@@ -7,7 +7,8 @@ public class BoutonScript : MonoBehaviour
     public enum eItemtype {BoutonClim, BoutonDinosaure, BoutonTuto, BoutonBoris};
     public eItemtype itemType;
 
-    //Bouton Dinosaure\\
+    public Light LightTutorial;
+    private bool LightTutorialEnabled = true;
     
 
     public void Bouton()
@@ -49,7 +50,16 @@ public class BoutonScript : MonoBehaviour
 
     void BoutonTutoEvent()
     {
-        Debug.Log("Turno Off Light Tuto");
+        if(!LightTutorialEnabled)
+        {
+            LightTutorial.intensity = 1153.4f;
+            LightTutorialEnabled = true;
+        }
+        else
+        {
+            LightTutorial.intensity = 0f;
+            LightTutorialEnabled = false;
+        }
     }
 
     void BoutonBorisEvent()

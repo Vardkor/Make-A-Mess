@@ -175,11 +175,11 @@ public class Interactible : MonoBehaviour
                     LaunchObject();
                     IsCharging = false;
                 }
+            }
 
-                if(Input.GetKeyDown(KeyCode.E))
-                {
-                    ReleaseObject();
-                }
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                ReleaseObject();
             }
         }
     }
@@ -417,7 +417,7 @@ public class Interactible : MonoBehaviour
                     Break();
                     if(collision.gameObject.GetComponent<Interactible>()!= null)
                     {
-                        collision.gameObject.GetComponent<Interactible>().forcebreak = 5f;
+                        collision.gameObject.GetComponent<Interactible>().forcebreak = 2f;
                         collision.gameObject.GetComponent<Interactible>().Break();
                         collision.gameObject.GetComponent<Interactible>().forcebreak = 20f;
                     }
