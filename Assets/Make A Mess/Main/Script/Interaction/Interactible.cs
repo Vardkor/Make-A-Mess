@@ -121,16 +121,7 @@ public class Interactible : MonoBehaviour
         Isbreak = false;
         CollectibleCollected = false;
 
-        InitialeScale = transform.localScale;
-
-        trsPlayerGuizmo = GameObject.Find("Grab")?.transform;
-
     }
-
-    public void ResetScale(){transform.localScale = InitialeScale; Debug.Log("Reset Scale");} // Pour reset la scale quand on s'accroupit
-
-    void LateUpdate(){transform.localScale = InitialeScale;} // Reset la scale après avoir lâché l'objet
-
     public void Update()
     {
         if(!Grabed)

@@ -5,6 +5,8 @@ using UnityEngine;
 public class P_Movement : MonoBehaviour
 {
     public CharacterController controller;
+    public Transform cameraTransform;
+    public Transform playerCamera;
 
     public float jumpheight = 2f;
     public float gravity = -20f;
@@ -27,18 +29,18 @@ public class P_Movement : MonoBehaviour
     public ParticleSystem jumpPraticles;
     public ParticleSystem ReboundPraticles;
     public AudioSource JumpSFX;
-
     public AudioSource CrouchSFX;
 
-    private Vector3 crouchScale = new Vector3(1, 0.2f, 1);
-    private Vector3 PlayerScale = new Vector3(1, 1f, 1);
-
-    private Interactible ObjectGrabbed;
-    private Vector3 grabbedObjectOriginalScale;
+    private float standingHeight;
+    private float crouchingHeight = 1f;
+    private Vector3 cameraStandingPosition;
+    private Vector3 cameraCrouchOffset = new Vector3(0, -0.5f, 0);
 
     void Start()
     {
         currentSpeed = speed;
+        standingHeight = controller.height;
+        cameraStandingPosition = playerCamera.localPosition;
     }
 
 
@@ -54,22 +56,7 @@ public class P_Movement : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.C))
         {
-            if(ObjectGrabbed != null){ObjectGrabbed.ResetScale();}
-            SetObjectGrabbed();
             Crouch();
-            transform.localScale = crouchScale;
-            transform.position = new Vector3 (transform.position.x, transform.position.y -0.5f,transform.position.z) * Time.deltaTime;
-            PlayCrouchSound();
-        }
-        if(Input.GetKeyUp(KeyCode.C))
-        {
-            if(ObjectGrabbed != null){ObjectGrabbed.ResetScale();}
-            SetObjectGrabbed();
-            transform.localScale = PlayerScale;
-            transform.position = new Vector3 (transform.position.x, transform.position.y +0.5f,transform.position.z) * Time.deltaTime;
-            currentSpeed = speed;
-            Crouching = false;
-            PlayCrouchSound();
         }
 
         if(Input.GetKey(KeyCode.LeftShift))
@@ -134,8 +121,33 @@ public class P_Movement : MonoBehaviour
 
     public void Crouch()
     {
-        Crouching = true;
-        AsCrouched = true;
+        if(!Crouching)
+        {
+            Crouching = true;
+            AsCrouched = true;
+
+            controller.height = crouchingHeight;
+            cameraTransform.localPosition = cameraStandingPosition + cameraCrouchOffset;
+
+            PlayCrouchSound();
+        }
+        else
+        {
+            Crouching = false;
+
+            controller.height = standingHeight;
+            cameraTransform.localPosition = cameraStandingPosition;
+            PlayCrouchSound(); 
+        }
+
+    }
+
+    public void StandUp()
+    {
+        Crouching = false;
+        controller.height = standingHeight;
+        playerCamera.localPosition = cameraStandingPosition;
+        PlayCrouchSound();
     }
 
     void PlayCrouchSound()
@@ -150,11 +162,5 @@ public class P_Movement : MonoBehaviour
             CrouchSFX.pitch = 0.9f;
             CrouchSFX.Play();
         }
-    }
-
-    void SetObjectGrabbed()
-    {
-        if(ObjectGrabbed != null){GameObject.Find("Grab").GetComponent<Interactible>();}
-        else{ObjectGrabbed = null;}
     }
 }

@@ -8,8 +8,6 @@ public class Interaction2 : MonoBehaviour
     public Transform trsPlayerGuizmo;
     public Transform trsPlayerSpecial;
 
-    public GameObject go;
-
     public GameObject GrabUI;
 
     public GameObject HitUI;
@@ -24,19 +22,7 @@ public class Interaction2 : MonoBehaviour
         {
             if(hit.transform.gameObject.tag == "Grab")
             {
-                go = hit.transform.gameObject;
-                go.GetComponent<Outline>().enabled = true;
-
-                if(InteractibleScript.SpecialObject == false)
-                {
-                    GrabUI.SetActive(true);
-                    HitUI.SetActive(false);
-                }
-                if(InteractibleScript.SpecialObject == true)
-                {
-                    HitUI.SetActive(true);
-                }
-
+                ActiveGrabUI();
                 if(Input.GetKeyDown(KeyCode.E))
                 {
                     hit.collider.gameObject.GetComponent<Interactible>().Interact(trsPlayerGuizmo, trsPlayerSpecial);
@@ -45,14 +31,7 @@ public class Interaction2 : MonoBehaviour
             }
             else
             {
-                GrabUI.SetActive(false);
-                HitUI.SetActive(false);
-
-                if(go != null)
-                {
-                    go.GetComponent<Outline>().enabled = false;
-                    go = null;
-                }
+                DesactivUI();
             }
             
             if(hit.transform.gameObject.tag == "Bouton")
@@ -75,14 +54,31 @@ public class Interaction2 : MonoBehaviour
         }
         else 
         {
-            GrabUI.SetActive(false);
-            HitUI.SetActive(false);
-
-            if(go != null)
-            {
-                go.GetComponent<Outline>().enabled = false;
-                go = null;
-            }
+            DesactivUI();
         }
+
+        if(InteractibleScript.Grabed == true)
+        {
+            Debug.Log("Grabed");
+        }
+    }
+
+
+    public void ActiveHitUI()
+    {
+        HitUI.SetActive(true);
+        GrabUI.SetActive(false);
+    }
+
+    public void ActiveGrabUI()
+    {
+        GrabUI.SetActive(true);
+        HitUI.SetActive(false);
+    }
+
+    public void DesactivUI()
+    {
+        GrabUI.SetActive(false);
+        HitUI.SetActive(false);
     }
 }
