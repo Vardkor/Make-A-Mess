@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class MainMenuCursor : MonoBehaviour
+{
+    public GameObject _CursorManager;
+    [SerializeField] private Texture2D cursorTexture;
+    [SerializeField] private Texture2D cursorHoverTexture;
+    public AudioSource ClicSong;
+
+
+    public void Start()
+    {
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+    }
+
+    void Update()
+    {
+        if(Input.GetMouseButton(0))
+        {
+            _CursorManager.SetActive(true);
+            ClicSong.pitch = Random.Range(0.9f, 1.1f);
+            ClicSong.Play();
+        }
+    }
+
+    public void SwitchCursor(){Cursor.SetCursor(cursorHoverTexture, Vector2.zero, CursorMode.Auto);}
+}
