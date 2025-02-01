@@ -31,13 +31,11 @@ public class Interaction2 : MonoBehaviour
                 {
                     if (interactible.SpecialObject) 
                     {
-                        // Affiche GrabUI si c'est un objet spécial
                         GrabUI.SetActive(true);
                         HitUI.SetActive(false);
                     } 
                     else
                     {
-                        // Affiche HitUI si c'est un objet normal
                         GrabUI.SetActive(false);
                         HitUI.SetActive(true);
                     }
@@ -58,6 +56,11 @@ public class Interaction2 : MonoBehaviour
             if(hit.transform.gameObject.tag == "Bouton")
             {
                 if(Input.GetKeyDown(KeyCode.E)){hit.collider.gameObject.GetComponent<BoutonScript>().Bouton();}
+            }
+            
+            if(hit.transform.gameObject.tag == "Pcprefabtag")
+            {
+                if(Input.GetMouseButtonDown(0)){Destroy(hit.collider.gameObject);}
             }
 
             else

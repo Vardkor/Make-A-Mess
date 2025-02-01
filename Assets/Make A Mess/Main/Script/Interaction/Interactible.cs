@@ -188,7 +188,9 @@ public class Interactible : MonoBehaviour
             grabbedObject = objectToGrab;
             Grabed = true;
             
-            grabbedObject.SetParent(trsPlayerSpecial);
+            Vector3 originalScale = grabbedObject.lossyScale;
+            grabbedObject.SetParent(trsPlayerSpecial, true);
+            grabbedObject.localScale = originalScale;
 
             Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
             if (rb != null)
@@ -214,7 +216,9 @@ public class Interactible : MonoBehaviour
             grabbedObject = objectToGrab;
             Grabed = true;
 
-            grabbedObject.SetParent(trsPlayerGuizmo);
+            Vector3 originalScale = grabbedObject.lossyScale;
+            grabbedObject.SetParent(trsPlayerGuizmo, true);
+            grabbedObject.localScale = originalScale; 
 
             Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
             if (rb != null)
@@ -255,7 +259,6 @@ public class Interactible : MonoBehaviour
             grabbedObject.SetParent(null);
             grabbedObject = null;
             Grabed = false;
-            SpecialObject = false;
         }
     }
     
@@ -416,7 +419,7 @@ public class Interactible : MonoBehaviour
                     {
                         collision.gameObject.GetComponent<Interactible>().forcebreak = 2f;
                         collision.gameObject.GetComponent<Interactible>().Break();
-                        collision.gameObject.GetComponent<Interactible>().forcebreak = 20f;
+                        //collision.gameObject.GetComponent<Interactible>().forcebreak = 20f;
                     }
                     else if(itemType == eItemtype.Vitre)
                     {
