@@ -52,10 +52,10 @@ public class Interaction2 : MonoBehaviour
 
             else if(hit.transform.CompareTag("Bouton"))
             {
-                ActiveUI(HitUI);
+                ActiveUI(GrabUI);
                 uiActivated = true;
 
-                if(Input.GetMouseButton(0))
+                if(Input.GetKeyDown(KeyCode.E))
                 {hit.collider.gameObject.GetComponent<BoutonScript>().Bouton();}
             }
             
