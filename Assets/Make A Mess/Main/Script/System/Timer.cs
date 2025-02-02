@@ -8,10 +8,11 @@ public class Timer : MonoBehaviour
     [SerializeField] TextMeshProUGUI timer;
     [SerializeField] float remainingTime;
     [SerializeField] public AudioSource Notif;
-    [SerializeField] public AudioSource soundTimer;
+    [SerializeField] public AudioSource MainMusic;
     [SerializeField] Objet scriptobjet;
     [SerializeField] BoxCollider boxColliderStart;
     public bool StartTimer;
+    public bool HasPlay;
 
     public GameObject Message1;
     public GameObject Message2;
@@ -85,9 +86,9 @@ public class Timer : MonoBehaviour
 
     public void StartingTimer()
     {
-        if(StartTimer && CompareTag("Player"))
+        if(StartTimer)
         {
-            soundTimer.Play();
+            MainMusic.Play();
         }
     }
 
@@ -98,6 +99,11 @@ public class Timer : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        StartTimer = true;
+        if(!HasPlay && other.CompareTag("Player"))
+        {
+            StartTimer = true;
+            HasPlay = true;
+            StartingTimer();
+        }
     }
 }

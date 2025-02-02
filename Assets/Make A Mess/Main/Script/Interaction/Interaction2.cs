@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 
 public class Interaction2 : MonoBehaviour
@@ -9,9 +10,9 @@ public class Interaction2 : MonoBehaviour
     public Transform trsPlayerGuizmo;
     public Transform trsPlayerSpecial;
 
-    public GameObject GrabUI;
+    public Image GrabUI;
 
-    public GameObject HitUI;
+    public Image HitUI;
 
     public Interactible InteractibleScript;
 
@@ -27,31 +28,25 @@ public class Interaction2 : MonoBehaviour
             {
                 Interactible interactible = hit.collider.gameObject.GetComponent<Interactible>();
 
-                if (interactible != null) 
+                if(interactible != null)
                 {
-                    if (interactible.SpecialObject) 
+                    GrabUI.enabled = true;
+                    if (Input.GetKeyDown(KeyCode.E))
                     {
-                        GrabUI.SetActive(true);
-                        HitUI.SetActive(false);
-                    } 
-                    else
+                        interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
+                    }
+                    if (interactible.SpecialObject == false)
                     {
-                        GrabUI.SetActive(false);
-                        HitUI.SetActive(true);
+                        HitUI.enabled = true;
+                        Debug.Log("Special Object");
                     }
                 }
-
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
-                    GrabUI.SetActive(false);
-                }
+            }
             else
             {
-                GrabUI.SetActive(false);
-                HitUI.SetActive(false);
+                GrabUI.enabled = false;
+                HitUI.enabled = false;  
             }
-        }
 
             if(hit.transform.gameObject.tag == "Bouton")
             {
@@ -61,12 +56,6 @@ public class Interaction2 : MonoBehaviour
             if(hit.transform.gameObject.tag == "Pcprefabtag")
             {
                 if(Input.GetMouseButtonDown(0)){Destroy(hit.collider.gameObject);}
-            }
-
-            else
-            {
-                GrabUI.SetActive(false);
-                HitUI.SetActive(false);
             }
         }
     }
