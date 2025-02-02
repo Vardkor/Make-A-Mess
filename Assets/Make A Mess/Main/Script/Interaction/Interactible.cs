@@ -29,7 +29,7 @@ public class Interactible : MonoBehaviour
     //Bool\\
     [Header("Boolean")]
     public bool Grabed;
-    public bool SpecialObject;
+    public bool SpecialObject = false;
     public bool bObjectCassable;
     private bool Launched;
     private bool AttackBreak = false;
@@ -48,7 +48,7 @@ public class Interactible : MonoBehaviour
     public AudioSource hitSound;
     public AudioSource AttackSwing;
     public AudioSource ThrowItemSound;
-    public AudioClip sfxDestruction;
+    //public AudioClip sfxDestruction;
     public AudioSource GrabItemSound;
 
     [Header("Animation Uniquement pour les attacks")]
@@ -183,42 +183,15 @@ public class Interactible : MonoBehaviour
     }
     private void GrabObject(Transform objectToGrab, Transform trsPlayerGuizmo, Transform trsPlayerSpecial)
     {
-        if(SpecialObject == true)
+        if (!SpecialObject)
         {
             grabbedObject = objectToGrab;
-            Grabed = true;
-            
-            Vector3 originalScale = grabbedObject.lossyScale;
-            grabbedObject.SetParent(trsPlayerSpecial, true);
-            grabbedObject.localScale = originalScale;
-
-            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.isKinematic = true;
-            }
-
-            if (itemType == eItemtype.ObjectCassable)
-            {
-                bObjectCassable = true;
-            }
-            if (itemType == eItemtype.PDB)
-            {
-                SpecialObject = true;
-            }
-
-            // Animation de l'objet
-            LeanTween.move(grabbedObject.gameObject, trsPlayerSpecial.position, durationGrabObjectMoov);
-            LeanTween.rotate(grabbedObject.gameObject, trsPlayerSpecial.rotation.eulerAngles, durationGrabObjectMoov);
-        }
-        else if (!SpecialObject)
-        {
-            grabbedObject = objectToGrab;
-            Grabed = true;
+            StartCoroutine(GrabOnTime());
+            SpecialObject = false;
 
             Vector3 originalScale = grabbedObject.lossyScale;
             grabbedObject.SetParent(trsPlayerGuizmo, true);
-            grabbedObject.localScale = originalScale; 
+            grabbedObject.localScale = originalScale;
 
             Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
             if (rb != null)
@@ -234,14 +207,44 @@ public class Interactible : MonoBehaviour
             LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
             LeanTween.rotate(grabbedObject.gameObject, trsPlayerGuizmo.rotation.eulerAngles, durationGrabObjectMoov);
         }
+        else
+        {
+            grabbedObject = objectToGrab;
+            StartCoroutine(GrabOnTime());
+            SpecialObject = true;
+            
+            Vector3 originalScale = grabbedObject.lossyScale;
+            grabbedObject.SetParent(trsPlayerSpecial, true);
+            grabbedObject.localScale = originalScale;
+
+            Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
+
+            if (itemType == eItemtype.ObjectCassable)
+            {
+                bObjectCassable = true;
+            }
+
+            // Animation de l'objet
+            LeanTween.move(grabbedObject.gameObject, trsPlayerSpecial.position, durationGrabObjectMoov);
+            LeanTween.rotate(grabbedObject.gameObject, trsPlayerSpecial.rotation.eulerAngles, durationGrabObjectMoov);
+        }
     }
 
-
-
+    public IEnumerator GrabOnTime()
+    {
+        yield return new WaitForSeconds(durationGrabObjectMoov);
+        Grabed = true;
+    }
+    
     private void DestroyObject()
     {
         Destroy(this.gameObject);
     }
+    
 
     private void ReleaseObject()
     {

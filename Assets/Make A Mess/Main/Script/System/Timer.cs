@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timer;
-    [SerializeField] float remainingTime;
+    [SerializeField] float remainingTime = 300;
     [SerializeField] public AudioSource Notif;
     [SerializeField] public AudioSource MainMusic;
     [SerializeField] Objet scriptobjet;
     [SerializeField] BoxCollider boxColliderStart;
+    [SerializeField] private GameObject GameOverScreen;
+    [SerializeField] private GameObject GameWinScreen;
+
     public bool StartTimer;
     public bool HasPlay;
+    public bool PlayerExitMusee = false;
+    private bool gameHasEnded = false;
 
     public GameObject Message1;
     public GameObject Message2;
@@ -26,6 +32,7 @@ public class Timer : MonoBehaviour
     public void Start()
     {
         StartTimer = false;
+        gameHasEnded = false;
     }
     
     void Update()
@@ -39,19 +46,19 @@ public class Timer : MonoBehaviour
             timer.text = string.Format("{0:00}:{1:00}", minutes, seconds/*, centiseconds*/);
 
             
-            if(minutes == 9 && seconds == 30)
+            if(minutes == 5 && seconds == 0)
             {
                 Message1.SetActive(true);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
-            if(minutes == 8 && seconds == 0)
+            if(minutes == 4 && seconds == 30)
             {
                 Message2.SetActive(true);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
-            if(minutes == 6 && seconds == 0)
+            if(minutes == 4 && seconds == 0)
             {
                 Message3.SetActive(true);
                 NotifUIPC.SetActive(true);
@@ -69,7 +76,7 @@ public class Timer : MonoBehaviour
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
-            if(minutes == 1 && seconds == 00)
+            if(minutes == 1 && seconds == 0)
             {
                 Message6.SetActive(true);
                 NotifUIPC.SetActive(true);
@@ -81,6 +88,15 @@ public class Timer : MonoBehaviour
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
+            if(minutes == 0 && seconds == 0)
+            {
+                GameOverEvent();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space) && gameHasEnded)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -95,6 +111,13 @@ public class Timer : MonoBehaviour
     public void TimeExit()
     {
         scriptobjet.TimeExit = true;
+    }
+
+    void GameOverEvent()
+    {
+        if(!PlayerExitMusee)
+        { gameHasEnded = true; GameOverScreen.SetActive(true); }
+        else { gameHasEnded = true; GameWinScreen.SetActive(true); }
     }
 
     void OnTriggerEnter(Collider other)

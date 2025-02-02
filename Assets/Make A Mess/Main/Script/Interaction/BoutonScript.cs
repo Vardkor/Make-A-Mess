@@ -48,7 +48,7 @@ public class BoutonScript : MonoBehaviour
         Debug.Log("DinosaureExplose");
     }
 
-    void BoutonTutoEvent()
+    public void BoutonTutoEvent()
     {
         if(!LightTutorialEnabled)
         {

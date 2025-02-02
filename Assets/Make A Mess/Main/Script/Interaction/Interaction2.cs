@@ -7,16 +7,13 @@ using UnityEngine.UI;
 
 public class Interaction2 : MonoBehaviour
 {
-    public Transform trsPlayerGuizmo;
-    public Transform trsPlayerSpecial;
+    [SerializeField] private Transform trsPlayerGuizmo;
+    [SerializeField] private Transform trsPlayerSpecial;
 
     public Image GrabUI;
-
     public Image HitUI;
 
-    public Interactible InteractibleScript;
-
-
+    private Image currentUI;
 
     public void Update()
     {
@@ -24,39 +21,76 @@ public class Interaction2 : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, 6f))
         {
+            bool uiActivated = false;
+            
             if (hit.transform.CompareTag("Grab"))
             {
                 Interactible interactible = hit.collider.gameObject.GetComponent<Interactible>();
 
                 if(interactible != null)
                 {
-                    GrabUI.enabled = true;
+                    ActiveUI(interactible.SpecialObject ? HitUI : GrabUI);
+                    uiActivated = true;
+
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
-                    }
-                    if (interactible.SpecialObject == false)
-                    {
-                        HitUI.enabled = true;
-                        Debug.Log("Special Object");
+                        if(interactible.SpecialObject==false)
+                        {
+                            interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
+                        }
+                        else if (interactible.SpecialObject==true)
+                        {
+                            interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
+                            
+                            Debug.Log("Clic Gauche");
+                            ActiveUI(HitUI);
+                            uiActivated = true;
+                        }
                     }
                 }
             }
-            else
-            {
-                GrabUI.enabled = false;
-                HitUI.enabled = false;  
-            }
 
-            if(hit.transform.gameObject.tag == "Bouton")
+            else if(hit.transform.CompareTag("Bouton"))
             {
-                if(Input.GetKeyDown(KeyCode.E)){hit.collider.gameObject.GetComponent<BoutonScript>().Bouton();}
+                ActiveUI(HitUI);
+                uiActivated = true;
+
+                if(Input.GetMouseButton(0))
+                {hit.collider.gameObject.GetComponent<BoutonScript>().Bouton();}
             }
             
-            if(hit.transform.gameObject.tag == "Pcprefabtag")
+            else if(hit.transform.gameObject.tag == "Pcprefabtag")
             {
-                if(Input.GetMouseButtonDown(0)){Destroy(hit.collider.gameObject);}
+                ActiveUI(HitUI);
+                uiActivated = true;
+
+                if(Input.GetMouseButton(0)){Destroy(hit.collider.gameObject);}
             }
+
+            if(!uiActivated) {DesactivateCurrentUI();}
+        }
+    }
+
+    void ActiveUI(Image ui)
+    {
+        if (currentUI != null && currentUI != ui)
+        {
+            currentUI.enabled = false;
+        }
+
+        if (ui != null)
+        {
+            ui.enabled = true;
+            currentUI = ui;
+        }
+    }
+
+    void DesactivateCurrentUI()
+    {
+        if (currentUI != null)
+        {
+            currentUI.enabled = false;
+            currentUI = null;
         }
     }
 }
