@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Interactible : MonoBehaviour
 {
-    public enum eItemtype { Objet, Extincteur, Briquet, PDB, Hache, ObjectCassable, ObjetTirrable, Collectible, Vitre};
+    public enum eItemtype { Objet, Extincteur, Briquet, PDB, ObjectCassable, ObjetTirrable, Collectible, Vitre};
     public eItemtype itemType;
 
     public enum eTypeFlame {Inflamable, NoInflamable};
@@ -36,7 +36,7 @@ public class Interactible : MonoBehaviour
 
     //Section Attack Event\\
 
-    private float attackcooldown = 1f;
+    private float attackcooldown = 0.5f;
     private float attackDistance = 5f;
     public bool canAttack = true;
     public bool Attacking = false;
@@ -95,7 +95,6 @@ public class Interactible : MonoBehaviour
             case eItemtype.Extincteur:
             case eItemtype.Briquet:
             case eItemtype.PDB:
-            case eItemtype.Hache:
             case eItemtype.Objet:
             case eItemtype.ObjectCassable:
                 GrabObject(transform, trsPlayerGuizmo, trsPlayerSpecial);
@@ -393,7 +392,7 @@ public class Interactible : MonoBehaviour
                         if (rb != null)
                         {
                             rb.isKinematic = false;
-                            rb.AddForce(Camera.main.transform.forward * forcebreak, ForceMode.Impulse);
+                            //rb.AddForce(Camera.main.transform.forward * forcebreak, ForceMode.Impulse);
                         }
                     }
                     child.SetParent(null);
@@ -413,7 +412,7 @@ public class Interactible : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Grab") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Vitre"))
         {
-            if(itemType == eItemtype.ObjectCassable && bObjectCassable == true && Launched == true)
+            if(itemType == eItemtype.ObjectCassable && bObjectCassable && Launched || itemType == eItemtype.Vitre)
             {
                 if(!Isbreak)
                 {
@@ -422,11 +421,7 @@ public class Interactible : MonoBehaviour
                     {
                         collision.gameObject.GetComponent<Interactible>().forcebreak = 2f;
                         collision.gameObject.GetComponent<Interactible>().Break();
-                        //collision.gameObject.GetComponent<Interactible>().forcebreak = 20f;
-                    }
-                    else if(itemType == eItemtype.Vitre)
-                    {
-                        Debug.Log("Vitre casser");
+                        collision.gameObject.GetComponent<Interactible>().forcebreak = 20f;
                     }
                 }
             }
