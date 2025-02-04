@@ -188,6 +188,9 @@ public class Interactible : MonoBehaviour
             StartCoroutine(GrabOnTime());
             SpecialObject = false;
 
+            GrabItemSound.pitch = 1f;
+            GrabItemSound.Play();
+
             Vector3 originalScale = grabbedObject.lossyScale;
             grabbedObject.SetParent(trsPlayerGuizmo, true);
             grabbedObject.localScale = originalScale;
@@ -211,6 +214,9 @@ public class Interactible : MonoBehaviour
             grabbedObject = objectToGrab;
             StartCoroutine(GrabOnTime());
             SpecialObject = true;
+
+            GrabItemSound.pitch = 1f;
+            GrabItemSound.Play();
             
             Vector3 originalScale = grabbedObject.lossyScale;
             grabbedObject.SetParent(trsPlayerSpecial, true);
@@ -255,8 +261,8 @@ public class Interactible : MonoBehaviour
                 rb.isKinematic = false;
             }
 
-            /*GrabItemSound.pitch = 0.9f;
-            GrabItemSound.Play();*/
+            GrabItemSound.pitch = 0.9f;
+            GrabItemSound.Play();
 
             grabbedObject.SetParent(null);
             grabbedObject = null;
