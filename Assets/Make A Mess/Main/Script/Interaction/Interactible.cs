@@ -277,7 +277,7 @@ public class Interactible : MonoBehaviour
 
         launchedObject = grabbedObject;
 
-        ThrowItemSound.Play();
+        if(ThrowItemSound != null) ThrowItemSound.Play();
 
         grabbedObject.SetParent(null);
         grabbedObject = null;
@@ -424,6 +424,21 @@ public class Interactible : MonoBehaviour
                         collision.gameObject.GetComponent<Interactible>().forcebreak = 20f;
                     }
                 }
+            }
+        }
+
+        if(collision.gameObject.CompareTag("Ground"))
+        {
+            if(itemType == eItemtype.ObjectCassable && bObjectCassable)
+            {
+                if(GetComponent<Rigidbody>() != null && GetComponent<Rigidbody>().velocity.sqrMagnitude > 0.1f)
+                {
+                    if(!Isbreak)
+                    {
+                        Break();
+                    }
+                }
+                
             }
         }
     }
