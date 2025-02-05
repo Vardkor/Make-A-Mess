@@ -423,17 +423,17 @@ public class Interactible : MonoBehaviour
                 if(!Isbreak)
                 {
                     Break();
-                    if(collision.gameObject.GetComponent<Interactible>()!= null)
+                    /*if(collision.gameObject.GetComponent<Interactible>()!= null)
                     {
                         collision.gameObject.GetComponent<Interactible>().forcebreak = 2f;
                         collision.gameObject.GetComponent<Interactible>().Break();
                         collision.gameObject.GetComponent<Interactible>().forcebreak = 20f;
-                    }
+                    }*/
                 }
             }
         }
 
-        if(collision.gameObject.CompareTag("Ground"))
+        if(collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Vitre"))
         {
             if(itemType == eItemtype.ObjectCassable && bObjectCassable)
             {
