@@ -10,10 +10,10 @@ public class Interaction2 : MonoBehaviour
     [SerializeField] private Transform trsPlayerGuizmo;
     [SerializeField] private Transform trsPlayerSpecial;
 
-    public Image GrabUI;
-    public Image HitUI;
+    public GameObject GrabUI;
+    public GameObject PressButton;
 
-    private Image currentUI;
+    private GameObject currentUI;
 
     public void Update()
     {
@@ -29,30 +29,19 @@ public class Interaction2 : MonoBehaviour
 
                 if(interactible != null)
                 {
-                    ActiveUI(interactible.SpecialObject ? HitUI : GrabUI);
+                    ActiveUI(GrabUI);
                     uiActivated = true;
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        if(interactible.SpecialObject==false)
-                        {
-                            interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
-                        }
-                        else if (interactible.SpecialObject==true)
-                        {
-                            interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
-                            
-                            Debug.Log("Clic Gauche");
-                            ActiveUI(HitUI);
-                            uiActivated = true;
-                        }
+                        interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
                     }
                 }
             }
 
             else if(hit.transform.CompareTag("Bouton"))
             {
-                ActiveUI(GrabUI);
+                ActiveUI(PressButton);
                 uiActivated = true;
 
                 if(Input.GetKeyDown(KeyCode.E))
@@ -61,26 +50,26 @@ public class Interaction2 : MonoBehaviour
             
             else if(hit.transform.gameObject.tag == "Pcprefabtag")
             {
-                ActiveUI(HitUI);
+                ActiveUI(GrabUI);
                 uiActivated = true;
 
-                if(Input.GetMouseButton(0)){Destroy(hit.collider.gameObject);}
+                if(Input.GetKeyDown(KeyCode.E)){Destroy(hit.collider.gameObject);}
             }
 
             if(!uiActivated) {DesactivateCurrentUI();}
         }
     }
 
-    void ActiveUI(Image ui)
+    void ActiveUI(GameObject ui)
     {
         if (currentUI != null && currentUI != ui)
         {
-            currentUI.enabled = false;
+            currentUI.SetActive(false);
         }
 
         if (ui != null)
         {
-            ui.enabled = true;
+            ui.SetActive(true);
             currentUI = ui;
         }
     }
@@ -89,7 +78,7 @@ public class Interaction2 : MonoBehaviour
     {
         if (currentUI != null)
         {
-            currentUI.enabled = false;
+            currentUI.SetActive(false);
             currentUI = null;
         }
     }

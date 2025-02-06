@@ -1,27 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CrouchBox : MonoBehaviour
 {
-    public Image CrouchImage;
+    public GameObject ImageToSee;
     
     public void Start()
     {
-        CrouchImage.enabled = false; // Désactive l'image au départ
+        ImageToSee.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            CrouchImage.enabled = true; 
+            ImageToSee.SetActive(true);
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        CrouchImage.enabled = false;
+        ImageToSee.SetActive(false);
     }
 }

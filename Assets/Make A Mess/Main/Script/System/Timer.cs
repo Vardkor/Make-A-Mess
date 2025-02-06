@@ -42,23 +42,23 @@ public class Timer : MonoBehaviour
             remainingTime -= Time.deltaTime;
             int minutes = Mathf.FloorToInt(remainingTime / 60);
             int seconds = Mathf.FloorToInt(remainingTime % 60);
-            //int centiseconds = Mathf.FloorToInt((remainingTime - Mathf.Floor(remainingTime)) * 100);
-            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds/*, centiseconds*/);
+            int centiseconds = Mathf.FloorToInt((remainingTime - Mathf.Floor(remainingTime)) * 100);
+            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds, centiseconds);
 
             
-            if(minutes == 5 && seconds == 0)
+            if(minutes == 4 && seconds == 30)
             {
                 Message1.SetActive(true);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
-            if(minutes == 4 && seconds == 30)
+            if(minutes == 4 && seconds == 0)
             {
                 Message2.SetActive(true);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
-            if(minutes == 4 && seconds == 0)
+            if(minutes == 3 && seconds == 30)
             {
                 Message3.SetActive(true);
                 NotifUIPC.SetActive(true);
@@ -126,7 +126,7 @@ public class Timer : MonoBehaviour
         {
             StartTimer = true;
             HasPlay = true;
-            StartingTimer();
+            StartingTimer(); 
         }
     }
 }
