@@ -7,22 +7,29 @@ using TMPro;
 public class ScorringManager : MonoBehaviour
 {
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text comboText;
+    [SerializeField] TMP_Text scoreBonusText;
     [SerializeField] AudioSource SFXCling;
     public Animator animator;
     public int CurrentScore = 0;
     public int progress = 0;
-    [SerializeField] Slider sliderscore;
+    [SerializeField] Slider sliderscombo;
+    public GameObject slidersBarcombo;
+    public GameObject GOscoreBonusText;
 
-    public float comboResetTime = 3f; // Temps max pour enchaîner un combo
-    private float comboTimer; // Timer du combo
-    private int comboCount = 0; // Niveau du combo
-    private int basePoints = 100; // Points de base par objet
-    private int[] comboMultipliers = { 1, 3, 5, 7, 10 }; // Multiplicateurs de points
+    public float comboResetTime = 3f;
+    public float comboTimer;
+    private int comboCount = 0;
+    private int basePoints = 100;
+    private int[] comboMultipliers = { 0, 1, 3, 5, 7, 10 };
 
     void Start()
     {
+        sliderscombo.maxValue = comboResetTime;
+        sliderscombo.value = 0;
         UpdateText();
         UpdateSlider();
+        UpdateComboText();
     }
 
     void Update()
@@ -30,6 +37,8 @@ public class ScorringManager : MonoBehaviour
         if (comboCount > 0)
         {
             comboTimer -= Time.deltaTime;
+            UpdateSlider();
+
             if (comboTimer <= 0)
             {
                 ResetCombo();
@@ -45,9 +54,12 @@ public class ScorringManager : MonoBehaviour
 
     private void UpdateScore(int scoreToAdd)
     {
-        CurrentScore += scoreToAdd;
+        int targetScore = CurrentScore + scoreToAdd;
+        StartCoroutine(AnimateScoreIncrease(targetScore, 0.5f));
+
         UpdateText();
-        UpdateSlider(); // Met à jour le slider
+        UpdateSlider();
+
         SFXCling.pitch = Random.Range(0.9f, 1.1f);
         SFXCling.Play();
     }
@@ -62,23 +74,72 @@ public class ScorringManager : MonoBehaviour
 
     private void UpdateSlider()
     {
-        if (sliderscore != null)
+        if (sliderscombo != null)
         {
-            sliderscore.value = CurrentScore; // MAJ la valeur du slider avec le score
+            sliderscombo.value = comboTimer;
+            slidersBarcombo.SetActive(true);
         }
+        else
+        {slidersBarcombo.SetActive(false);}
+    }
+
+    private void UpdateComboText()
+    {
+        if (comboText != null)
+        {
+            if (comboCount > 0)
+                comboText.text = "x" + comboCount + "!";
+            else
+                comboText.text = "";
+        }
+
     }
 
     public void AddComboPoints()
     {
         comboTimer = comboResetTime;
-        comboCount = Mathf.Clamp(comboCount + 1, 0, comboMultipliers.Length - 1);
-        int pointsGained = basePoints * comboMultipliers[comboCount];
+        comboCount++;
+        int multiplierIndex = Mathf.Min(comboCount, comboMultipliers.Length - 1);
+        int pointsGained = basePoints * comboMultipliers[multiplierIndex];
         CurrentScore += pointsGained;
-        UpdateSlider(); // Met à jour le slider après ajout des points
+
+        if(scoreBonusText != null)
+        {
+            if(comboCount > 0)
+            {
+                scoreBonusText.text = "+" + pointsGained + "$";
+                GOscoreBonusText.SetActive(true);
+            }   
+            else{GOscoreBonusText.SetActive(false);}
+        }
+        else{scoreBonusText.text = ""; GOscoreBonusText.SetActive(false);}
+
+        UpdateSlider();
+        UpdateComboText();
     }
 
     void ResetCombo()
     {
         comboCount = 0;
+        UpdateComboText();
+        slidersBarcombo.SetActive(false);
+        GOscoreBonusText.SetActive(false);
+    }
+
+    IEnumerator AnimateScoreIncrease(int targetScore, float duration)
+    {
+        int startScore = CurrentScore;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            CurrentScore = (int)Mathf.Lerp(startScore, targetScore, elapsed / duration);
+            UpdateText();
+            yield return null;
+        }
+
+        CurrentScore = targetScore;
+        UpdateText();
     }
 }

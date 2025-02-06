@@ -684,8 +684,10 @@ MonoBehaviour:
   animatorscript: {fileID: 0}
   hitObject: {fileID: 0}
   CurrentScore: 0
-  scorePerObject: 0
+  scorePerObject: 50
   CollectibleCollected: 0
+  HitUI: {fileID: 0}
+  ThrowUI: {fileID: 0}
 --- !u!65 &5487013817523675049
 BoxCollider:
   m_ObjectHideFlags: 0
