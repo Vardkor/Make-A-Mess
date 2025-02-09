@@ -23,6 +23,7 @@ public class PeeEffectScript : MonoBehaviour
             else
             {
                 Peeing = true;
+                PeeParticle.Stop();
             }
         }
     }

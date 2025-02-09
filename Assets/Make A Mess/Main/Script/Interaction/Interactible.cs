@@ -314,29 +314,59 @@ public class Interactible : MonoBehaviour
         AttackRayCast();
     }
 
-    void AttackRayCast()
+void AttackRayCast()
+{
+    Vector3 origin = Camera.main.transform.position;
+    Vector3 forward = Camera.main.transform.forward;
+
+    Vector3[] offsets = {
+        Vector3.zero,
+        Camera.main.transform.right * 0.5f,
+        -Camera.main.transform.right * 0.5f,
+        Camera.main.transform.up * 0.5f
+    };
+
+    bool hasHit = false;
+
+    foreach (Vector3 offset in offsets)
     {
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+        Vector3 rayOrigin = origin + offset;
+
+        if (Physics.Raycast(rayOrigin, forward, out RaycastHit hit, attackDistance, attackLayer))
         {
             GameObject hitObject = hit.collider.gameObject;
-            Debug.Log(hitObject.name);
 
-            if(hitObject.layer == LayerMask.NameToLayer("BreakableObject"))
+            Rigidbody rb = hitObject.GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                rb.AddForce(forward * forcebreak, ForceMode.Impulse);
+            }
+
+            if (hitObject.layer == LayerMask.NameToLayer("BreakableObject"))
             {
                 HitTarget(hitObject);
-                
-                AttackAnimation();
+                hasHit = true;
             }
-            else
-            {
-                MissedAttack();
-            }
+
+            Debug.DrawRay(rayOrigin, forward * attackDistance, Color.red, 0.2f);
         }
         else
         {
-            MissedAttack();
+            Debug.DrawRay(rayOrigin, forward * attackDistance, Color.blue, 0.2f);
         }
     }
+
+    if (hasHit)
+    {
+        AttackAnimation();
+    }
+    else
+    {
+        MissedAttack();
+    }
+}
+
 
     void MissedAttack()
     {
@@ -413,7 +443,6 @@ public class Interactible : MonoBehaviour
                         if (rb != null)
                         {
                             rb.isKinematic = false;
-                            //rb.AddForce(Camera.main.transform.forward * forcebreak, ForceMode.Impulse);
                         }
                     }
                     child.SetParent(null);

@@ -43,7 +43,7 @@ public class Timer : MonoBehaviour
             int minutes = Mathf.FloorToInt(remainingTime / 60);
             int seconds = Mathf.FloorToInt(remainingTime % 60);
             int centiseconds = Mathf.FloorToInt((remainingTime - Mathf.Floor(remainingTime)) * 100);
-            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds, centiseconds);
+            timer.text = string.Format("{0:00}:{1:00}:{0:00}", minutes, seconds, centiseconds);
 
             
             if(minutes == 4 && seconds == 30)
