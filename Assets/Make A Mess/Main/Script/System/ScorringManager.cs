@@ -92,7 +92,6 @@ public class ScorringManager : MonoBehaviour
             else
                 comboText.text = "";
         }
-
     }
 
     public void AddComboPoints()

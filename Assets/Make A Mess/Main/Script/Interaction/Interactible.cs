@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Interactible : MonoBehaviour
@@ -44,13 +45,6 @@ public class Interactible : MonoBehaviour
 
     //public GameObject hitEffect;
 
-    [Header("Audio Sources")]
-    public AudioSource hitSound;
-    public AudioSource AttackSwing;
-    public AudioSource ThrowItemSound;
-    //public AudioClip sfxDestruction;
-    public AudioSource GrabItemSound;
-
     [Header("Animation Uniquement pour les attacks")]
     public Animator_Script animatorscript;
 
@@ -82,13 +76,15 @@ public class Interactible : MonoBehaviour
     //Launch Object Clic Long\\
 
     private float MaxForce = 25f;
-    private float ChargeRate = 8f;
+    private float ChargeRate = 3f;
     private bool IsCharging = false;
 
-    public GameObject HitUI;
-    public GameObject ThrowUI;
+    public GameObject HitUI = null;
+    public GameObject ThrowUI = null;
 
     private bool uiActivated = false;
+
+    private Slider sliderLancer;
 
 
     public void Interact(Transform trsPlayerGuizmo = null, Transform trsPlayerSpecial = null)
@@ -117,11 +113,22 @@ public class Interactible : MonoBehaviour
     void Start()
     {
         scoreObjectScore = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
+
+        GameObject sliderObj = GameObject.Find("SliderLancer");
+        if (sliderObj != null)
+        {
+            sliderLancer = sliderObj.GetComponent<Slider>();
+        }
+
         canAttack = true;
         Isbreak = false;
         CollectibleCollected = false;
 
+        AudioManager audio = AudioManager.Instance;
+
+        UpdateSlider();
     }
+
     public void Update()
     {
         if(!Grabed)
@@ -168,6 +175,7 @@ public class Interactible : MonoBehaviour
                 {  
                     forcelancer += ChargeRate * Time.deltaTime;
                     forcelancer = Mathf.Clamp(forcelancer, 0f, MaxForce);
+                    UpdateSlider();
                 }
 
                 if(Input.GetMouseButtonUp(0) && IsCharging)
@@ -191,8 +199,8 @@ public class Interactible : MonoBehaviour
             StartCoroutine(GrabOnTime());
             SpecialObject = false;
 
-            GrabItemSound.pitch = 1f;
-            GrabItemSound.Play();
+            AudioManager.Instance.GrabItemSound.pitch = 1f;
+            AudioManager.Instance.GrabItemSound.Play();
 
             Vector3 originalScale = grabbedObject.lossyScale;
             grabbedObject.SetParent(trsPlayerGuizmo, true);
@@ -207,9 +215,9 @@ public class Interactible : MonoBehaviour
             {
                 SpecialObject = true;
             }
-            
-            ThrowUI.SetActive(true);
-            uiActivated = true;
+
+            if(ThrowUI != null){ThrowUI.SetActive(true);uiActivated = true;}
+
 
             // Animation de l'objet
             LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
@@ -221,8 +229,8 @@ public class Interactible : MonoBehaviour
             StartCoroutine(GrabOnTime());
             SpecialObject = true;
 
-            GrabItemSound.pitch = 1f;
-            GrabItemSound.Play();
+            AudioManager.Instance.GrabItemSound.pitch = 1f;
+            AudioManager.Instance.GrabItemSound.Play();
             
             Vector3 originalScale = grabbedObject.lossyScale;
             grabbedObject.SetParent(trsPlayerSpecial, true);
@@ -239,8 +247,7 @@ public class Interactible : MonoBehaviour
                 bObjectCassable = true;
             }
 
-            HitUI.SetActive(true);
-            uiActivated = true;
+            if(HitUI != null){HitUI.SetActive(true);uiActivated = true;}
 
             // Animation de l'objet
             LeanTween.move(grabbedObject.gameObject, trsPlayerSpecial.position, durationGrabObjectMoov);
@@ -270,8 +277,8 @@ public class Interactible : MonoBehaviour
                 rb.isKinematic = false;
             }
 
-            GrabItemSound.pitch = 0.9f;
-            GrabItemSound.Play();
+            AudioManager.Instance.GrabItemSound.pitch = 0.9f;
+            AudioManager.Instance.GrabItemSound.Play();
 
             grabbedObject.SetParent(null);
             grabbedObject = null;
@@ -295,7 +302,7 @@ public class Interactible : MonoBehaviour
 
         launchedObject = grabbedObject;
 
-        if(ThrowItemSound != null) ThrowItemSound.Play();
+        AudioManager.Instance.ThrowItemSound.Play();
 
         grabbedObject.SetParent(null);
         grabbedObject = null;
@@ -382,8 +389,8 @@ void AttackRayCast()
     {
         hitObject.GetComponent<Interactible>().Break();
 
-        hitSound.pitch = 1;
-        hitSound.Play();
+        AudioManager.Instance.HitSound.pitch = Random.Range(0.9f,1.1f);
+        AudioManager.Instance.HitSound.Play();
 
         /*GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
         Destroy(GO, 20);*/ //POUR LE COUP SUR LE MUR COMME SUR VALO\\
@@ -405,8 +412,8 @@ void AttackRayCast()
     {
         if(Attacking == true && canAttack == false)
         {
-            AttackSwing.pitch = Random.Range(0.9f, 1.1f);
-            AttackSwing.Play();
+            AudioManager.Instance.AttackSwingSound.pitch = Random.Range(0.9f,1.1f);
+            AudioManager.Instance.AttackSwingSound.Play();
         }
     }
 
@@ -433,6 +440,7 @@ void AttackRayCast()
             {
                 if(transform.childCount > 0)
                 {
+                    FindObjectOfType<DestructionPriceManagers>().AddNewPrice(scorePerObject);
                     Transform child = transform.GetChild(0);
 
                     List<Transform> allChildren = GetAllChildren(child);
@@ -515,12 +523,26 @@ void AttackRayCast()
 
     void DesactivateCurrentUI()
     {
-        if(HitUI != null || ThrowUI != null)
+        if(HitUI != null)
         {
             HitUI.SetActive(false);
             HitUI = null;
+        }
+        if(ThrowUI != null)
+        {
             ThrowUI.SetActive(false);
             ThrowUI = null;
         }
+    }
+
+    private void UpdateSlider()
+    {
+        if (sliderLancer != null)
+        {
+            sliderLancer.value = forcelancer;
+            sliderLancer.gameObject.SetActive(true);
+        }
+        else
+        {sliderLancer.gameObject.SetActive(false);}
     }
 }

@@ -45,7 +45,6 @@ public class Timer : MonoBehaviour
     public GameObject IGMessage6;
     public GameObject IGMessage7;
 
-    private GameObject currentMessage;
     private GameObject currentIGMessage;
 
     public GameObject NotifUIPC;
@@ -71,49 +70,49 @@ public class Timer : MonoBehaviour
             
             if(minutes == 9 && seconds == 50)
             {
-                ActiveUI(Message1);
+                Message1.SetActive(true);
                 ActiveInGameUI(IGMessage1);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 4 && seconds == 0)
             {
-                ActiveUI(Message2);
+                Message2.SetActive(true);
                 ActiveInGameUI(IGMessage2);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 3 && seconds == 30)
             {
-                ActiveUI(Message3);
+                Message3.SetActive(true);
                 ActiveInGameUI(IGMessage3);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 3 && seconds == 0)
             {
-                ActiveUI(Message4);
+                Message4.SetActive(true);
                 ActiveInGameUI(IGMessage4);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 1 && seconds == 30)
             {
-                ActiveUI(Message5);
+                Message5.SetActive(true);
                 ActiveInGameUI(IGMessage5);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 1 && seconds == 0)
             {
-                ActiveUI(Message6);
+                Message6.SetActive(true);
                 ActiveInGameUI(IGMessage6);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
             }
             if(minutes == 0 && seconds == 45)
             {
-                ActiveUI(Message7);
+                Message7.SetActive(true);
                 ActiveInGameUI(IGMessage7);
                 NotifUIPC.SetActive(true);
                 Notif.Play();
@@ -168,20 +167,6 @@ public class Timer : MonoBehaviour
         }
     }
 
-    void ActiveUI(GameObject ui)
-    {
-        if (currentMessage != null && currentMessage != ui)
-        {
-            currentMessage.SetActive(false);
-        }
-
-        if (ui != null)
-        {
-            ui.SetActive(true);
-            currentMessage = ui;
-        }
-    }
-
     void ActiveInGameUI(GameObject IGui)
     {
         if (currentIGMessage != null && currentIGMessage != IGui)
@@ -200,11 +185,11 @@ public class Timer : MonoBehaviour
 
     void DesactivateCurrentUI()
     {
-        if (currentMessage != null)
+        /*if (currentMessage != null)
         {
             currentMessage.SetActive(false);
             currentMessage = null;
-        }
+        }*/
 
         if(currentIGMessage != null)
         {
