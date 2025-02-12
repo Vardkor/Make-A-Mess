@@ -76,7 +76,7 @@ public class Interactible : MonoBehaviour
     //Launch Object Clic Long\\
 
     private float MaxForce = 25f;
-    private float ChargeRate = 14f;
+    private float ChargeRate = 17f;
     private bool IsCharging = false;
 
     public GameObject HitUI = null;
@@ -116,10 +116,11 @@ public class Interactible : MonoBehaviour
     {
         scoreObjectScore = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
 
-        GameObject sliderObj = GameObject.Find("SliderBarLancer");
+        GameObject sliderObj = GameObject.Find("SliderLancer");
         if (sliderObj != null)
         {
             sliderLancer = sliderObj.GetComponent<Slider>();
+            sliderLancer.gameObject.SetActive(false);
         }
 
         canAttack = true;
@@ -132,8 +133,6 @@ public class Interactible : MonoBehaviour
         {
             attackAnimator = GetComponentInChildren<Animator>();
         }
-
-
         UpdateSlider();
     }
 
@@ -177,6 +176,7 @@ public class Interactible : MonoBehaviour
                 {
                     forcelancer = 5f;
                     IsCharging = true;
+                    UpdateSlider();
                 }
                 
                 if(Input.GetMouseButton(0) && IsCharging)
@@ -190,6 +190,7 @@ public class Interactible : MonoBehaviour
                 {
                     LaunchObject();
                     IsCharging = false;
+                    UpdateSlider();
                 }
             }
 
@@ -549,10 +550,12 @@ void AttackRayCast()
     {
         if (sliderLancer != null)
         {
-            sliderLancer.value = forcelancer;
-            sliderLancer.gameObject.SetActive(true);
+            if(IsCharging)
+            {
+                sliderLancer.gameObject.SetActive(true);
+                sliderLancer.value = forcelancer;
+            }
+            else{sliderLancer.gameObject.SetActive(false);}
         }
-        else
-        {sliderLancer.gameObject.SetActive(false);}
     }
 }
