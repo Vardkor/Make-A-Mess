@@ -76,7 +76,7 @@ public class Interactible : MonoBehaviour
     //Launch Object Clic Long\\
 
     private float MaxForce = 25f;
-    private float ChargeRate = 3f;
+    private float ChargeRate = 14f;
     private bool IsCharging = false;
 
     public GameObject HitUI = null;
@@ -116,7 +116,7 @@ public class Interactible : MonoBehaviour
     {
         scoreObjectScore = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
 
-        GameObject sliderObj = GameObject.Find("SliderLancer");
+        GameObject sliderObj = GameObject.Find("SliderBarLancer");
         if (sliderObj != null)
         {
             sliderLancer = sliderObj.GetComponent<Slider>();
@@ -439,7 +439,7 @@ void AttackRayCast()
     IEnumerator ResetAttackBool()
     {
         yield return new WaitForSeconds(attackcooldown);
-        attackAnimator.SetBool("IsAttacking", false);
+        attackAnimator.SetBool("Attacking", false);
     }
 
     void Break()
