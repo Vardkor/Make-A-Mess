@@ -86,6 +86,8 @@ public class Interactible : MonoBehaviour
 
     private Slider sliderLancer;
 
+    public Animator attackAnimator;
+
 
     public void Interact(Transform trsPlayerGuizmo = null, Transform trsPlayerSpecial = null)
     {
@@ -125,6 +127,12 @@ public class Interactible : MonoBehaviour
         CollectibleCollected = false;
 
         AudioManager audio = AudioManager.Instance;
+
+        if (attackAnimator == null)
+        {
+            attackAnimator = GetComponentInChildren<Animator>();
+        }
+
 
         UpdateSlider();
     }
@@ -421,15 +429,17 @@ void AttackRayCast()
 
     void AttackAnimation()
     {
-        //animatorscript.startanim = true;
-        /*if(Attacking == true)
+        if (attackAnimator != null)
         {
-            if(AnimationAttackPDB !=null)
-            {
-                AnimationAttackPDB.SetTrigger("TriggerAttack");
-                Debug.Log("Anim Attack");
-            }
-        }*/
+            attackAnimator.SetBool("Attacking",true);
+            StartCoroutine(ResetAttackBool());
+        }
+    }
+
+    IEnumerator ResetAttackBool()
+    {
+        yield return new WaitForSeconds(attackcooldown);
+        attackAnimator.SetBool("IsAttacking", false);
     }
 
     void Break()
