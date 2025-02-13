@@ -49,10 +49,6 @@ public class Interactible : MonoBehaviour
     private bool Isbreak = false;
     public GameObject hitObject;
 
-    //Anim Attack\\
-    //private Vector3 rotationAngle = new Vector3(90, 0, 0);
-    //private float duration = 0.5f;
-
     //Section Score\\
 
     public int CurrentScore = 0;
@@ -79,6 +75,8 @@ public class Interactible : MonoBehaviour
     private bool uiActivated = false;
 
     private Slider sliderLancer;
+
+    //public AudioSource DestructionSFX;
 
 
     public void Interact(Transform trsPlayerGuizmo = null, Transform trsPlayerSpecial = null)
@@ -113,6 +111,8 @@ public class Interactible : MonoBehaviour
         {
             sliderLancer = sliderObj.GetComponent<Slider>();
             sliderLancer.gameObject.SetActive(false);
+            sliderLancer.value = 0;
+            Debug.Log("Slider trouvé");
         }
 
         canAttack = true;
@@ -120,7 +120,6 @@ public class Interactible : MonoBehaviour
         CollectibleCollected = false;
 
         AudioManager audio = AudioManager.Instance;
-        UpdateSlider();
     }
 
     public void Update()
@@ -163,6 +162,8 @@ public class Interactible : MonoBehaviour
                 {
                     forcelancer = 5f;
                     IsCharging = true;
+                    sliderLancer.gameObject.SetActive(true);
+                    Debug.Log("Slider activé");
                     UpdateSlider();
                 }
                 
@@ -177,6 +178,7 @@ public class Interactible : MonoBehaviour
                 {
                     LaunchObject();
                     IsCharging = false;
+                    sliderLancer.gameObject.SetActive(false);
                     UpdateSlider();
                 }
             }
@@ -421,8 +423,6 @@ void AttackRayCast()
     {
         Attacking = true;
 
-        FindObjectOfType<P_Camera>().StartShake();
-
         Vector3 startRotation = new Vector3(0, 0, 0);
         Vector3 endRotation = new Vector3(20, 60, 25);
 
@@ -432,7 +432,7 @@ void AttackRayCast()
             .setEaseOutQuad()
             .setOnComplete(() =>
             {
-                LeanTween.rotateLocal(gameObject, startRotation, 0.2f)
+                LeanTween.rotateLocal(gameObject, startRotation, 0.3f)
                     .setEaseInQuad()
                     .setOnComplete(() => Attacking = false);
             });
@@ -446,6 +446,10 @@ void AttackRayCast()
             {
                 if(transform.childCount > 0)
                 {
+                    //DestructionSFX.pitch = Random.Range(0.9f,1.1f);
+                    //DestructionSFX.Play();
+
+                    FindObjectOfType<P_Camera>().StartShake();
                     FindObjectOfType<DestructionPriceManagers>().AddNewPrice(scorePerObject);
                     Transform child = transform.GetChild(0);
 
@@ -480,13 +484,10 @@ void AttackRayCast()
             {
                 if(!Isbreak)
                 {
+                    //DestructionSFX.pitch = Random.Range(0.9f,1.1f);
+                    //DestructionSFX.Play();
+                    FindObjectOfType<P_Camera>().StartShake();
                     Break();
-                    /*if(collision.gameObject.GetComponent<Interactible>()!= null)
-                    {
-                        collision.gameObject.GetComponent<Interactible>().forcebreak = 2f;
-                        collision.gameObject.GetComponent<Interactible>().Break();
-                        collision.gameObject.GetComponent<Interactible>().forcebreak = 20f;
-                    }*/
                 }
             }
         }
@@ -499,6 +500,8 @@ void AttackRayCast()
                 {
                     if(!Isbreak)
                     {
+                        //DestructionSFX.pitch = Random.Range(0.9f,1.1f);
+                        //DestructionSFX.Play();
                         Break();
                     }
                 }
