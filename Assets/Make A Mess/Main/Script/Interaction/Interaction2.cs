@@ -29,13 +29,21 @@ public class Interaction2 : MonoBehaviour
 
                 if(interactible != null)
                 {
-                    ActiveUI(GrabUI);
-                    uiActivated = true;
-
+                    if(interactible.Grabed==false)
+                    {
+                        ActiveUI(GrabUI);
+                        uiActivated = true;
+                    }
+                    if(interactible.Grabed==true)
+                    {
+                        DesactivateCurrentUI();
+                        uiActivated = false;
+                    }
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
                     }
+                    else{ActiveUI(GrabUI); uiActivated = true;}
                 }
             }
 

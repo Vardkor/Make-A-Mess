@@ -14,6 +14,10 @@ public class P_Camera : MonoBehaviour
 
     public Camera playerCamera;
 
+    public Transform cameraTransform;
+    public float shakeDuration = 0.2f;
+    public float shakeMagnitude = 0.3f;
+
     public AudioSource SprintSFX;
 
     private float m_FieldOfView;
@@ -55,5 +59,28 @@ public class P_Camera : MonoBehaviour
     public void SetMouse(float newSensitivity)
     {
         mouseSensity = newSensitivity;
+    }
+
+    public void StartShake()
+    {
+        StartCoroutine(Shake());
+    }
+
+    IEnumerator Shake()
+    {
+        Vector3 originalPosition = cameraTransform.localPosition;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < shakeDuration)
+        {
+            float x = Random.Range(-0.5f, 0.5f) * shakeMagnitude;
+            float y = Random.Range(-0.5f, 0.5f) * shakeMagnitude;
+
+            cameraTransform.localPosition = originalPosition + new Vector3(x, y, 0);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        cameraTransform.localPosition = originalPosition;
     }
 }

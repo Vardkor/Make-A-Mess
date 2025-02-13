@@ -10,9 +10,6 @@ public class Interactible : MonoBehaviour
     public enum eItemtype { Objet, Extincteur, Briquet, PDB, ObjectCassable, ObjetTirrable, Collectible, Vitre};
     public eItemtype itemType;
 
-    public enum eTypeFlame {Inflamable, NoInflamable};
-    public eTypeFlame itemflame;
-
     //Grab\\
     private Transform grabbedObject;
     private Transform launchedObject;
@@ -44,9 +41,6 @@ public class Interactible : MonoBehaviour
     public LayerMask attackLayer;
 
     //public GameObject hitEffect;
-
-    [Header("Animation Uniquement pour les attacks")]
-    public Animator_Script animatorscript;
 
     [Header("Autres")]
 
@@ -85,8 +79,6 @@ public class Interactible : MonoBehaviour
     private bool uiActivated = false;
 
     private Slider sliderLancer;
-
-    public Animator attackAnimator;
 
 
     public void Interact(Transform trsPlayerGuizmo = null, Transform trsPlayerSpecial = null)
@@ -128,11 +120,6 @@ public class Interactible : MonoBehaviour
         CollectibleCollected = false;
 
         AudioManager audio = AudioManager.Instance;
-
-        if (attackAnimator == null)
-        {
-            attackAnimator = GetComponentInChildren<Animator>();
-        }
         UpdateSlider();
     }
 
@@ -204,6 +191,7 @@ public class Interactible : MonoBehaviour
     {
         if (!SpecialObject)
         {
+            Grabed = true;
             grabbedObject = objectToGrab;
             StartCoroutine(GrabOnTime());
             SpecialObject = false;
@@ -234,6 +222,7 @@ public class Interactible : MonoBehaviour
         }
         else
         {
+            Grabed = true;
             grabbedObject = objectToGrab;
             StartCoroutine(GrabOnTime());
             SpecialObject = true;
@@ -430,17 +419,23 @@ void AttackRayCast()
 
     void AttackAnimation()
     {
-        if (attackAnimator != null)
-        {
-            attackAnimator.SetBool("Attacking",true);
-            StartCoroutine(ResetAttackBool());
-        }
-    }
+        Attacking = true;
 
-    IEnumerator ResetAttackBool()
-    {
-        yield return new WaitForSeconds(attackcooldown);
-        attackAnimator.SetBool("Attacking", false);
+        FindObjectOfType<P_Camera>().StartShake();
+
+        Vector3 startRotation = new Vector3(0, 0, 0);
+        Vector3 endRotation = new Vector3(20, 60, 25);
+
+        transform.localRotation = Quaternion.Euler(startRotation);
+
+        LeanTween.rotateLocal(gameObject, endRotation, 0.1f)
+            .setEaseOutQuad()
+            .setOnComplete(() =>
+            {
+                LeanTween.rotateLocal(gameObject, startRotation, 0.2f)
+                    .setEaseInQuad()
+                    .setOnComplete(() => Attacking = false);
+            });
     }
 
     void Break()
