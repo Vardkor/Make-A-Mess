@@ -118,6 +118,7 @@ public class Interactible : MonoBehaviour
         canAttack = true;
         Isbreak = false;
         CollectibleCollected = false;
+        Grabed = false;
 
         AudioManager audio = AudioManager.Instance;
     }
@@ -257,8 +258,8 @@ public class Interactible : MonoBehaviour
 
     public IEnumerator GrabOnTime()
     {
-        yield return new WaitForSeconds(durationGrabObjectMoov);
         Grabed = true;
+        yield return new WaitForSeconds(durationGrabObjectMoov);
     }
     
     private void DestroyObject()
