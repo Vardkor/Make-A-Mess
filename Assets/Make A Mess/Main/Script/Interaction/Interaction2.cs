@@ -48,6 +48,11 @@ public class Interaction2 : MonoBehaviour
                 }
                 else{ActiveUI(GrabUI); uiActivated = true;}
             }
+            /*else if(interactible.itemType == Interactible.eItemtype.PDB)
+            {
+                Debug.Log("PDB"); ERREUR AU LANCEMENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            }*/
+
 
             else if(hit.transform.CompareTag("Bouton"))
             {
