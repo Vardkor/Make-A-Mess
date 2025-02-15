@@ -15,7 +15,7 @@ public class Interaction2 : MonoBehaviour
 
     private GameObject currentUI;
 
-    private Interactible currentInteractible;
+    public bool hasGrabbedObject = false;
 
     public void Update()
     {
@@ -24,35 +24,31 @@ public class Interaction2 : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, 6f))
         {
             bool uiActivated = false;
-            Interactible interactible = hit.collider.gameObject.GetComponentInParent<Interactible>();
-            
-            if (interactible != null && hit.transform.CompareTag("Grab"))
-            {
-                if(currentInteractible != interactible)
-                {
-                    currentInteractible = interactible;
-                }
-                if(!currentInteractible.Grabed)
-                {
-                    ActiveUI(GrabUI);
-                    uiActivated = true;
-                }
-                else
-                {
-                    DesactivateCurrentUI();
-                    uiActivated = false;
-                }
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    currentInteractible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
-                }
-                else{ActiveUI(GrabUI); uiActivated = true;}
-            }
-            /*else if(interactible.itemType == Interactible.eItemtype.PDB)
-            {
-                Debug.Log("PDB"); ERREUR AU LANCEMENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            }*/
 
+            Interactible interactible = hit.collider.gameObject.GetComponent<Interactible>();
+
+            if (hit.transform.CompareTag("Grab") && !hasGrabbedObject)
+            {
+                ActiveUI(GrabUI);
+                uiActivated = true;
+
+                if(Input.GetKeyDown(KeyCode.E))
+                {
+                    interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
+                }
+            }
+            
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                hasGrabbedObject = true;
+                DesactivateCurrentUI();
+            }
+            else if (hasGrabbedObject && Input.GetKeyDown(KeyCode.E))
+            {
+                hasGrabbedObject = false;
+                ActiveUI(GrabUI);
+                uiActivated = true;
+            }
 
             else if(hit.transform.CompareTag("Bouton"))
             {
@@ -71,7 +67,7 @@ public class Interaction2 : MonoBehaviour
                 if(Input.GetKeyDown(KeyCode.E)){Destroy(hit.collider.gameObject);}
             }
 
-            if(!uiActivated) {DesactivateCurrentUI(); currentInteractible = null;}
+            else {DesactivateCurrentUI(); uiActivated = false;}
         }
     }
 
