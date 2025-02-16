@@ -56,9 +56,6 @@ public class Interactible : MonoBehaviour
     private bool UpdateScore = false;
     private TextMeshProUGUI scoreObjectScore;
     private bool ScoreManagerGo = false;
-
-    //Temporaire
-    public bool CollectibleCollected = false;
     
     //Scale\\
     private Vector3 InitialeScale;
@@ -75,6 +72,8 @@ public class Interactible : MonoBehaviour
     private bool uiActivated = false;
 
     private Slider sliderLancer;
+
+    public ParticleSystem CollectItemParticles;
 
     //public AudioSource DestructionSFX;
 
@@ -117,7 +116,6 @@ public class Interactible : MonoBehaviour
 
         canAttack = true;
         Isbreak = false;
-        CollectibleCollected = false;
         Grabed = false;
 
         AudioManager audio = AudioManager.Instance;
@@ -127,12 +125,16 @@ public class Interactible : MonoBehaviour
     {
         if(!Grabed)
         {
-            if(Input.GetMouseButton(0))
+            if(Input.GetKeyDown(KeyCode.E))
             {
-                if(itemType == eItemtype.Collectible && CollectibleCollected == false)
+                if(itemType == eItemtype.Collectible)
                 {
-                    CollectibleCollected = true;
                     DestroyObject();
+                    if(CollectItemParticles != null)
+                    {
+                        //AudioManager.Instance.CollectSound.Play();
+                        CollectItemParticles.Play();
+                    }
                 }
             }
         }
@@ -268,7 +270,7 @@ public class Interactible : MonoBehaviour
     }
     
 
-    private void ReleaseObject()
+    public void ReleaseObject()
     {
         if (grabbedObject != null)
         {

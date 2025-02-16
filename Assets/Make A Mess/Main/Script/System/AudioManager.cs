@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource Unlock_LockSound;
     public AudioSource AttackSwingSound;
     public AudioSource MainMusic;
+    public AudioSource CollectSound;
 
     void Start()
     {

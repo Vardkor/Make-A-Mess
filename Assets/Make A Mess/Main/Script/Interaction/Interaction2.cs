@@ -15,7 +15,7 @@ public class Interaction2 : MonoBehaviour
 
     private GameObject currentUI;
 
-    public bool hasGrabbedObject = false;
+    private Interactible currentInteractible;
 
     public void Update()
     {
@@ -27,27 +27,31 @@ public class Interaction2 : MonoBehaviour
 
             Interactible interactible = hit.collider.gameObject.GetComponent<Interactible>();
 
-            if (hit.transform.CompareTag("Grab") && !hasGrabbedObject)
+            if (hit.transform.CompareTag("Grab"))
             {
-                ActiveUI(GrabUI);
-                uiActivated = true;
-
-                if(Input.GetKeyDown(KeyCode.E))
+                if (!interactible.Grabed || (interactible.Grabed && interactible == currentInteractible))
                 {
-                    hasGrabbedObject = !hasGrabbedObject;
-                    
-                    if(hasGrabbedObject)
+                    ActiveUI(GrabUI);
+                    uiActivated = true;
+
+                    if(Input.GetKeyDown(KeyCode.E))
                     {
-                        interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
-                        Debug.Log("E");
-                        DesactivateCurrentUI();
-                        uiActivated = false;
-                    }
-                    else if(!hasGrabbedObject)
-                    {
-                        Debug.Log("E 2");
-                        ActiveUI(GrabUI);
-                        uiActivated = true;
+                        if(interactible.Grabed)
+                        {
+                            currentInteractible = interactible;
+                            interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
+                            DesactivateCurrentUI();
+                            uiActivated = false;
+                            Debug.Log("E");
+                        }
+                        else
+                        {
+                            currentInteractible.ReleaseObject();
+                            currentInteractible = null;
+                            ActiveUI(GrabUI);
+                            uiActivated = true;
+                            Debug.Log("E 2");
+                        }
                     }
                 }
             }
