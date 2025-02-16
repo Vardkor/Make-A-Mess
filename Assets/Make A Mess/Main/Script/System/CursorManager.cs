@@ -30,17 +30,6 @@ public class CursorManager : MonoBehaviour
             }
         }
     }
-    /*void LateUpdate()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape) && PauseMenu.OpenUI == true)
-        {
-            _CursorManager.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else{Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;}
-    }*/
 
     public void SwitchCursor(){Cursor.SetCursor(cursorHoverTexture, Vector2.zero, CursorMode.Auto);}
 }

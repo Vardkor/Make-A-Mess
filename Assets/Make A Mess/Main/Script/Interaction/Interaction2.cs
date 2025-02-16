@@ -34,20 +34,22 @@ public class Interaction2 : MonoBehaviour
 
                 if(Input.GetKeyDown(KeyCode.E))
                 {
-                    interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
+                    hasGrabbedObject = !hasGrabbedObject;
+                    
+                    if(hasGrabbedObject)
+                    {
+                        interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
+                        Debug.Log("E");
+                        DesactivateCurrentUI();
+                        uiActivated = false;
+                    }
+                    else if(!hasGrabbedObject)
+                    {
+                        Debug.Log("E 2");
+                        ActiveUI(GrabUI);
+                        uiActivated = true;
+                    }
                 }
-            }
-            
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                hasGrabbedObject = true;
-                DesactivateCurrentUI();
-            }
-            else if (hasGrabbedObject && Input.GetKeyDown(KeyCode.E))
-            {
-                hasGrabbedObject = false;
-                ActiveUI(GrabUI);
-                uiActivated = true;
             }
 
             else if(hit.transform.CompareTag("Bouton"))
