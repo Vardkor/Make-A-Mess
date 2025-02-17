@@ -66,9 +66,6 @@ public class Interactible : MonoBehaviour
     private float ChargeRate = 17f;
     private bool IsCharging = false;
 
-    public GameObject HitUI = null;
-    public GameObject ThrowUI = null;
-
     private bool uiActivated = false;
 
     private Slider sliderLancer;
@@ -218,8 +215,6 @@ public class Interactible : MonoBehaviour
                 SpecialObject = true;
             }
 
-            if(ThrowUI != null){ThrowUI.SetActive(true);uiActivated = true;}
-
 
             // Animation de l'objet
             LeanTween.move(grabbedObject.gameObject, trsPlayerGuizmo.position, durationGrabObjectMoov);
@@ -249,8 +244,6 @@ public class Interactible : MonoBehaviour
             {
                 bObjectCassable = true;
             }
-
-            if(HitUI != null){HitUI.SetActive(true);uiActivated = true;}
 
             // Animation de l'objet
             LeanTween.move(grabbedObject.gameObject, trsPlayerSpecial.position, durationGrabObjectMoov);
@@ -286,9 +279,6 @@ public class Interactible : MonoBehaviour
             grabbedObject.SetParent(null);
             grabbedObject = null;
             Grabed = false;
-
-            DesactivateCurrentUI();
-            uiActivated = false;
         }
     }
     
@@ -310,9 +300,6 @@ public class Interactible : MonoBehaviour
         grabbedObject.SetParent(null);
         grabbedObject = null;
         Grabed = false;
-
-        DesactivateCurrentUI();
-        uiActivated = false;
     }
 
     //---[Object Specials]---\\
@@ -531,20 +518,6 @@ void AttackRayCast()
     public void Score()
     {
         Camera.main.GetComponent<ScorringManager>().AddScore(scorePerObject);
-    }
-
-    void DesactivateCurrentUI()
-    {
-        if(HitUI != null)
-        {
-            HitUI.SetActive(false);
-            HitUI = null;
-        }
-        if(ThrowUI != null)
-        {
-            ThrowUI.SetActive(false);
-            ThrowUI = null;
-        }
     }
 
     private void UpdateSlider()

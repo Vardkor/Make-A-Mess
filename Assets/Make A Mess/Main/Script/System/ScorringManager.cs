@@ -9,6 +9,7 @@ public class ScorringManager : MonoBehaviour
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text comboText;
     [SerializeField] TMP_Text scoreBonusText;
+    [SerializeField] TMP_Text ScoreTextFB;
     [SerializeField] AudioSource SFXCling;
     public Animator animator;
     public int CurrentScore = 0;
@@ -16,6 +17,9 @@ public class ScorringManager : MonoBehaviour
     [SerializeField] Slider sliderscombo;
     public GameObject slidersBarcombo;
     public GameObject GOscoreBonusText;
+
+    public GameObject GOScoreText;
+    private float Textduration = 3f;
 
     public float comboResetTime = 3f;
     public float comboTimer;
@@ -56,6 +60,14 @@ public class ScorringManager : MonoBehaviour
     {
         int targetScore = CurrentScore + scoreToAdd;
         StartCoroutine(AnimateScoreIncrease(targetScore, 0.5f));
+
+        if(ScoreTextFB != null)
+        {
+            ScoreTextFB.text = scoreToAdd + "$ !";
+            GOScoreText.SetActive(true);
+            CancelInvoke(nameof(DesactivateCurrentUI));
+            Invoke(nameof(DesactivateCurrentUI), Textduration);
+        }
 
         UpdateText();
         UpdateSlider();
@@ -140,5 +152,14 @@ public class ScorringManager : MonoBehaviour
 
         CurrentScore = targetScore;
         UpdateText();
+    }
+
+    void DesactivateCurrentUI()
+    {
+        if(GOScoreText != null)
+        {
+            GOScoreText.SetActive(false);
+            GOScoreText = null;
+        }
     }
 }

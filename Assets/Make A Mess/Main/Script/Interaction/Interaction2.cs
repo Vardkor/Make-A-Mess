@@ -34,12 +34,7 @@ public class Interaction2 : MonoBehaviour
 
                 if(Input.GetKeyDown(KeyCode.E))
                 {
-                    
-                    if(hasGrabbedObject)
-                        interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
-
-                    else
-                        hasGrabbedObject = false;
+                    interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
                 }
 
                 if(uiActivated && !hasGrabbedObject)
