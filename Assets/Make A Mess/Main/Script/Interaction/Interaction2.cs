@@ -15,7 +15,10 @@ public class Interaction2 : MonoBehaviour
 
     private GameObject currentUI;
 
-    private Interactible currentInteractible;
+    private bool uiActivated = false;
+    public bool hasGrabbedObject = false;
+
+    //private Interactible currentInteractible;
 
     public void Update()
     {
@@ -23,37 +26,28 @@ public class Interaction2 : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, 6f))
         {
-            bool uiActivated = false;
-
             Interactible interactible = hit.collider.gameObject.GetComponent<Interactible>();
 
             if (hit.transform.CompareTag("Grab"))
             {
-                if (!interactible.Grabed || (interactible.Grabed && interactible == currentInteractible))
+                uiActivated = true;
+
+                if(Input.GetKeyDown(KeyCode.E))
+                {
+                    
+                    if(hasGrabbedObject)
+                        interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
+
+                    else
+                        hasGrabbedObject = false;
+                }
+
+                if(uiActivated && !hasGrabbedObject)
                 {
                     ActiveUI(GrabUI);
-                    uiActivated = true;
-
-                    if(Input.GetKeyDown(KeyCode.E))
-                    {
-                        if(interactible.Grabed)
-                        {
-                            currentInteractible = interactible;
-                            interactible.Interact(trsPlayerGuizmo, trsPlayerSpecial);
-                            DesactivateCurrentUI();
-                            uiActivated = false;
-                            Debug.Log("E");
-                        }
-                        else
-                        {
-                            currentInteractible.ReleaseObject();
-                            currentInteractible = null;
-                            ActiveUI(GrabUI);
-                            uiActivated = true;
-                            Debug.Log("E 2");
-                        }
-                    }
                 }
+                else
+                { DesactivateCurrentUI(); uiActivated = false; }
             }
 
             else if(hit.transform.CompareTag("Bouton"))
@@ -74,6 +68,11 @@ public class Interaction2 : MonoBehaviour
             }
 
             else {DesactivateCurrentUI(); uiActivated = false;}
+        }
+        if(hasGrabbedObject)
+        {
+            DesactivateCurrentUI();
+            uiActivated = false;
         }
     }
 
