@@ -127,11 +127,6 @@ public class Interactible : MonoBehaviour
                 if(itemType == eItemtype.Collectible)
                 {
                     DestroyObject();
-                    if(CollectItemParticles != null)
-                    {
-                        //AudioManager.Instance.CollectSound.Play();
-                        CollectItemParticles.Play();
-                    }
                 }
             }
         }
@@ -259,7 +254,12 @@ public class Interactible : MonoBehaviour
     
     private void DestroyObject()
     {
-        Destroy(this.gameObject);
+        if(CollectItemParticles != null)
+        {
+            CollectItemParticles.Play();
+        }
+        //AudioManager.Instance.CollectSound.Play();
+        Destroy(gameObject);
     }
     
 
