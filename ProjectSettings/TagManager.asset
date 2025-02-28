@@ -19,6 +19,17 @@ TagManager:
   - BombePeinture
   - ballegolf
   - Vitre
+  - Extincteur
+  - briquet
+  - PDB
+  - Speakers
+  - Plante3
+  - hache
+  - Plante1
+  - Alarme
+  - dynamite
+  - Plante2
+  - EndDoor
   layers:
   - Default
   - TransparentFX

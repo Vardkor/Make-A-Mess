@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Interactible : MonoBehaviour
 {
-    public enum eItemtype { Objet, Extincteur, Briquet, PDB, ObjectCassable, ObjetTirrable, Collectible, Vitre};
+    public enum eItemtype { Objet, Extincteur, Briquet, PDB, ObjectCassable, ObjetTirrable, Collectible, Vitre, EndDoor};
     public eItemtype itemType;
 
     //Grab\\
@@ -71,6 +71,7 @@ public class Interactible : MonoBehaviour
     private Slider sliderLancer;
 
     public ParticleSystem CollectItemParticles;
+    public bool ExitMusee = false;
 
     //public AudioSource DestructionSFX;
 
@@ -93,6 +94,10 @@ public class Interactible : MonoBehaviour
 
             case eItemtype.Collectible:
                 DestroyObject();
+            break;
+
+            case eItemtype.EndDoor:
+                EndGame();
             break;
         }
 
@@ -127,6 +132,10 @@ public class Interactible : MonoBehaviour
                 if(itemType == eItemtype.Collectible)
                 {
                     DestroyObject();
+                }
+                if(itemType == eItemtype.EndDoor)
+                {
+                    EndGame();
                 }
             }
         }
@@ -258,10 +267,15 @@ public class Interactible : MonoBehaviour
         {
             CollectItemParticles.Play();
         }
-        //AudioManager.Instance.CollectSound.Play();
+        AudioManager.Instance.GrabItemSound.pitch = 0.9f;
+        AudioManager.Instance.GrabItemSound.Play();
         Destroy(gameObject);
     }
-    
+
+    public void EndGame()
+    {
+        ExitMusee = true;
+    }
 
     public void ReleaseObject()
     {

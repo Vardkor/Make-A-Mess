@@ -12,6 +12,7 @@ public class Interaction2 : MonoBehaviour
 
     public GameObject GrabUI;
     public GameObject PressButton;
+    public GameObject ExitDoorButton;
 
     private GameObject currentUI;
 
@@ -43,6 +44,15 @@ public class Interaction2 : MonoBehaviour
                 }
                 else
                 { DesactivateCurrentUI(); uiActivated = false; }
+            }
+            
+            else if(hit.transform.CompareTag("EndDoor"))
+            {
+                ActiveUI(ExitDoorButton);
+                uiActivated = true;
+
+                if(Input.GetKeyDown(KeyCode.E))
+                {hit.collider.gameObject.GetComponent<Interactible>().EndGame();}
             }
 
             else if(hit.transform.CompareTag("Bouton"))

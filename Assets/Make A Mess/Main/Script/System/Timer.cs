@@ -22,7 +22,6 @@ public class Timer : MonoBehaviour
 
     public bool StartTimer;
     public bool HasPlay;
-    public bool PlayerExitMusee = false;
     private bool gameHasEnded = false;
 
     private float duration = 6f;
@@ -48,6 +47,8 @@ public class Timer : MonoBehaviour
     private GameObject currentIGMessage;
 
     public GameObject NotifUIPC;
+
+    [SerializeField] private Interactible interactScript;
     
     public void Start()
     {
@@ -144,9 +145,14 @@ public class Timer : MonoBehaviour
 
     void GameOverEvent()
     {
-        if(!PlayerExitMusee)
-        { gameHasEnded = true; GameOverScreen.SetActive(true); }
-        else { gameHasEnded = true; GameWinScreen.SetActive(true); }
+        if(interactScript.ExitMusee == false)
+        { gameHasEnded = true; GameOverScreen.SetActive(true); Time.timeScale = 0f;}
+    }
+
+    void GameWinEvent()
+    {
+        if(interactScript.ExitMusee == true)
+        { gameHasEnded = true; GameWinScreen.SetActive(true); Time.timeScale = 0f;}
     }
 
     void OnTriggerEnter(Collider other)
