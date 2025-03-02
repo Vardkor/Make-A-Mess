@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BoutonScript : MonoBehaviour
 {
-    public enum eItemtype {BoutonClim, BoutonDinosaure, BoutonTuto, BoutonBoris};
+    public enum eItemtype {BoutonClim, BoutonDinosaure, BoutonTuto, BoutonBoris, BoutonAsenceur};
     public eItemtype itemType;
 
-    public Light LightTutorial;
+    public Ascenseur ascenceurscript;
+    public Light[] LightTutorials;
     private bool LightTutorialEnabled = true;
-    
 
     public void Bouton()
     {
@@ -17,53 +17,65 @@ public class BoutonScript : MonoBehaviour
         {
             case eItemtype.BoutonClim:
                 BoutonClimEvent();
-            break;
+                break;
 
             case eItemtype.BoutonDinosaure:
                 BoutonDinosaureEvent();
-            break;
+                break;
 
             case eItemtype.BoutonTuto:
                 BoutonTutoEvent();
-            break;
-            
+                break;
+
             case eItemtype.BoutonBoris:
                 BoutonBorisEvent();
-            break;
+                break;
+            case eItemtype.BoutonAsenceur:
+                Asenceur();
+                break;
         }
     }
 
     void Update()
     {
-
+        
     }
 
     void BoutonClimEvent()
     {
-        Debug.Log("ClimeAugmentée");
+        Debug.Log("Clime Augmentée");
     }
 
     void BoutonDinosaureEvent()
     {
-        Debug.Log("DinosaureExplose");
+        Debug.Log("Dinosaure Explose");
     }
 
     public void BoutonTutoEvent()
     {
-        if(!LightTutorialEnabled)
+        LightTutorialEnabled = !LightTutorialEnabled;
+
+        foreach (Light light in LightTutorials)
         {
-            LightTutorial.intensity = 1153.4f;
-            LightTutorialEnabled = true;
-        }
-        else
-        {
-            LightTutorial.intensity = 0f;
-            LightTutorialEnabled = false;
+            if (light != null)
+            {
+                light.intensity = LightTutorialEnabled ? 5000f : 0f;
+            }
         }
     }
 
     void BoutonBorisEvent()
     {
         Debug.Log("C'est soirée DISCO");
+    }
+
+    void Asenceur()
+    {
+        ascenceurscript.AppuyerBouton();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Asenceur();
     }
 }
