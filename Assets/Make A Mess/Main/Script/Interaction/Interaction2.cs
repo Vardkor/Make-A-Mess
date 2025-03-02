@@ -50,9 +50,11 @@ public class Interaction2 : MonoBehaviour
             {
                 ActiveUI(ExitDoorButton);
                 uiActivated = true;
-
+                
                 if(Input.GetKeyDown(KeyCode.E))
-                {hit.collider.gameObject.GetComponent<Interactible>().EndGame();}
+                {
+                    hit.collider.gameObject.GetComponent<Interactible>().EndGame();
+                }
             }
 
             else if(hit.transform.CompareTag("Bouton"))

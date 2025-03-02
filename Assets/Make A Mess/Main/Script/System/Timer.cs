@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
     [SerializeField] BoxCollider boxColliderStart;
     [SerializeField] private GameObject GameOverScreen;
     [SerializeField] private GameObject GameWinScreen;
+    [SerializeField] private TextMeshProUGUI winScoreText;
 
     private float maxTime = 600f;
     public float remainingTime;
@@ -124,6 +125,8 @@ public class Timer : MonoBehaviour
             }
         }
 
+        GameWinEvent();
+
         if(Input.GetKeyDown(KeyCode.Space) && gameHasEnded)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -152,7 +155,16 @@ public class Timer : MonoBehaviour
     void GameWinEvent()
     {
         if(interactScript.ExitMusee == true)
-        { gameHasEnded = true; GameWinScreen.SetActive(true); Time.timeScale = 0f;}
+        { 
+            Debug.Log("GameWin Event");
+            gameHasEnded = true; GameWinScreen.SetActive(true); Time.timeScale = 0f;
+            int currentScore = Camera.main.GetComponent<ScorringManager>().CurrentScore; 
+
+        if (winScoreText != null)
+        {
+            winScoreText.text = "Your Score: " + currentScore;
+        }
+        }
     }
 
     void OnTriggerEnter(Collider other)

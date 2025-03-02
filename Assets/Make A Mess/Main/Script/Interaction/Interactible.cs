@@ -133,10 +133,6 @@ public class Interactible : MonoBehaviour
                 {
                     DestroyObject();
                 }
-                if(itemType == eItemtype.EndDoor)
-                {
-                    EndGame();
-                }
             }
         }
         

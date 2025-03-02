@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class ExplodeTRex : MonoBehaviour
 {
-    public Rigidbody[] tRexBones; // Liste des morceaux du T-Rex
-    public float explosionForce = 500f; // Force de l'explosion
-    public float explosionRadius = 5f; // Rayon de l'explosion
+    public Rigidbody[] tRexBones;
+    public float explosionForce = 500f;
+    public float explosionRadius = 5f;
+    public int scoreExplosion = 20000;
     private bool isPlayerNear = false;
     private bool hasExploded = false;
 
@@ -23,6 +24,7 @@ public class ExplodeTRex : MonoBehaviour
         {
             hasExploded = true;
             TriggerExplosion();
+            AddScoreToMainCamera();
         }
     }
 
@@ -33,6 +35,19 @@ public class ExplodeTRex : MonoBehaviour
             bone.isKinematic = false;
             bone.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             bone.useGravity = true;
+        }
+    }
+
+    void AddScoreToMainCamera()
+    {
+        Camera mainCamera = Camera.main;
+        if (mainCamera != null)
+        {
+            ScorringManager scoreManager = mainCamera.GetComponent<ScorringManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.AddScore(scoreExplosion);
+            }
         }
     }
 
