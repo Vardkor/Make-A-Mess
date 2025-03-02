@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1707514646018673306}
   - component: {fileID: 7977683565221170659}
   - component: {fileID: 5909952223301185268}
+  - component: {fileID: 1995472173996961388}
   m_Layer: 0
   m_Name: Cylinder.006_cell.001
   m_TagString: Untagged
@@ -111,6 +112,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1995472173996961388
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748080303927869044}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.015582818, y: 0.0073709916, z: 0.015984094}
+  m_Center: {x: -0.0008833078, y: -0.0022252607, z: 0.0004966798}
 --- !u!1 &2112688731475005087
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +145,7 @@ GameObject:
   - component: {fileID: 5593010422784298818}
   - component: {fileID: 3797510606323198783}
   - component: {fileID: 3298337304596448527}
+  - component: {fileID: 3864406722330532134}
   m_Layer: 0
   m_Name: Cylinder.006_cell.003
   m_TagString: Untagged
@@ -222,6 +245,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3864406722330532134
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112688731475005087}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.015018728, y: 0.008570027, z: 0.01816751}
+  m_Center: {x: -0.0020117052, y: 0.0007699936, z: 0.00031815897}
 --- !u!1 &2119524444552262470
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +301,7 @@ Transform:
   m_Children:
   - {fileID: 5656410769494028091}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3815914623283818914
 MeshFilter:
@@ -343,7 +387,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 4
-  itemflame: 0
   Grabed: 0
   SpecialObject: 0
   bObjectCassable: 1
@@ -352,15 +395,11 @@ MonoBehaviour:
   attackLayer:
     serializedVersion: 2
     m_Bits: 0
-  hitSound: {fileID: 0}
-  AttackSwing: {fileID: 0}
-  ThrowItemSound: {fileID: 0}
-  GrabItemSound: {fileID: 0}
-  animatorscript: {fileID: 0}
   hitObject: {fileID: 0}
   CurrentScore: 0
   scorePerObject: 0
-  CollectibleCollected: 0
+  CollectItemParticles: {fileID: 0}
+  ExitMusee: 0
 --- !u!54 &4882670461196053652
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -436,6 +475,7 @@ GameObject:
   - component: {fileID: 991032053364299631}
   - component: {fileID: 3949919697659047024}
   - component: {fileID: 5719573643596618855}
+  - component: {fileID: 3899282630473652494}
   m_Layer: 0
   m_Name: Cylinder.006_cell.002
   m_TagString: Untagged
@@ -535,6 +575,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3899282630473652494
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6823366257128704675}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.012597815, y: 0.007962587, z: 0.013232681}
+  m_Center: {x: -0.0009713499, y: 0.000064795386, z: 0.0025313837}
 --- !u!1 &6834110733818549173
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +608,7 @@ GameObject:
   - component: {fileID: 827947346039333528}
   - component: {fileID: 4063330780362973132}
   - component: {fileID: 1930078106607543570}
+  - component: {fileID: 6163520723888923546}
   m_Layer: 0
   m_Name: Cylinder.006_cell
   m_TagString: Untagged
@@ -646,6 +708,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6163520723888923546
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6834110733818549173}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.017243128, y: 0.008669108, z: 0.029346962}
+  m_Center: {x: 0.00055960054, y: 0.000016293958, z: 0.001240183}
 --- !u!1 &9216575885168033230
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +741,7 @@ GameObject:
   - component: {fileID: 8059406896642175655}
   - component: {fileID: 5923096515871309067}
   - component: {fileID: 5927889666595608181}
+  - component: {fileID: 6782698041237043917}
   m_Layer: 0
   m_Name: Cylinder.006_cell.004
   m_TagString: Untagged
@@ -757,3 +841,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6782698041237043917
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9216575885168033230}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0075516105, y: 0.006136217, z: 0.005453006}
+  m_Center: {x: 0.00011074124, y: -0.00024395768, z: 0.00016900657}

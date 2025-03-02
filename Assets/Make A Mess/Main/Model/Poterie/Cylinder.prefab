@@ -603,7 +603,7 @@ Transform:
   m_Children:
   - {fileID: 6707951183442020433}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2397295375340240201
 MeshFilter:
@@ -668,7 +668,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 4
-  itemflame: 0
   Grabed: 0
   SpecialObject: 0
   bObjectCassable: 1
@@ -677,17 +676,11 @@ MonoBehaviour:
   attackLayer:
     serializedVersion: 2
     m_Bits: 0
-  hitSound: {fileID: 0}
-  AttackSwing: {fileID: 0}
-  ThrowItemSound: {fileID: 0}
-  GrabItemSound: {fileID: 0}
-  animatorscript: {fileID: 0}
   hitObject: {fileID: 0}
   CurrentScore: 0
   scorePerObject: 50
-  CollectibleCollected: 0
-  HitUI: {fileID: 0}
-  ThrowUI: {fileID: 0}
+  CollectItemParticles: {fileID: 0}
+  ExitMusee: 0
 --- !u!65 &5487013817523675049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -718,7 +711,7 @@ Rigidbody:
   m_GameObject: {fileID: 6421648109565444949}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 0.2
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
