@@ -73,6 +73,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plot Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9518dd81a49b8cf4780c03d66c8a1dee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9518dd81a49b8cf4780c03d66c8a1dee,
+        type: 3}
+      propertyPath: m_TagString
+      value: Grab
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -85,6 +95,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6837315881564233194}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9518dd81a49b8cf4780c03d66c8a1dee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1280266177255894208}
   m_SourcePrefab: {fileID: 100100000, guid: 9518dd81a49b8cf4780c03d66c8a1dee, type: 3}
 --- !u!1 &6208111341626884231 stripped
 GameObject:
@@ -140,3 +154,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1280266177255894208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6208111341626884231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed7f9d1a3a0ed9498d826e6c65bae5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 0
+  Grabed: 0
+  SpecialObject: 0
+  bObjectCassable: 0
+  canAttack: 1
+  Attacking: 0
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  hitObject: {fileID: 0}
+  CurrentScore: 0
+  scorePerObject: 0
+  CollectItemParticles: {fileID: 0}
+  ExitMusee: 0
