@@ -28,12 +28,22 @@ public class Interactible : MonoBehaviour
     [Header("Boolean")]
     public bool Grabed;
     public bool SpecialObject = false;
+    public bool ForFlame = false;
     public bool bObjectCassable;
     private bool Launched;
     private bool AttackBreak = false;
 
-    //Section Attack Event\\
+    [Header("Fire")]
 
+    public GameObject firePrefab;
+    public bool isBurning = false;
+
+    public int poolSize = 10;
+    private Queue<GameObject> firePool = new Queue<GameObject>();
+
+
+
+    //Section Attack Event\\
     private float attackcooldown = 0.5f;
     private float attackDistance = 5f;
     public bool canAttack = true;
@@ -113,7 +123,6 @@ public class Interactible : MonoBehaviour
             sliderLancer = sliderObj.GetComponent<Slider>();
             sliderLancer.gameObject.SetActive(false);
             sliderLancer.value = 0;
-            Debug.Log("Slider trouvé");
         }
 
         canAttack = true;
@@ -121,6 +130,14 @@ public class Interactible : MonoBehaviour
         Grabed = false;
 
         AudioManager audio = AudioManager.Instance;
+
+        // Initialisation du pool FIRE 
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject fire = Instantiate(firePrefab);
+            fire.SetActive(false);
+            firePool.Enqueue(fire);
+        }
     }
 
     public void Update()
@@ -152,7 +169,7 @@ public class Interactible : MonoBehaviour
                 }
                 if(itemType == eItemtype.Briquet)
                 {
-                    Debug.Log("Oue");
+                    AttackBriquet();
                 }
             }
 
@@ -542,4 +559,104 @@ void AttackRayCast()
             else{sliderLancer.gameObject.SetActive(false);}
         }
     }
+
+
+    public void AttackBriquet()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Interactible interactible = hit.collider.GetComponent<Interactible>();
+
+            if (interactible != null && interactible.ForFlame && !interactible.isBurning)
+            {
+                interactible.isBurning = true;
+                interactible.StartFire(hit.point, interactible.transform); // Passe la position du Raycast et l'objet parent
+            }
+        }
+    }
+
+
+    public void StartFire(Vector3 hitPosition, Transform parentTransform)
+    {
+        GameObject fireInstance = FirePoolManager.Instance.GetFire();
+        
+        if (fireInstance != null)
+        {
+            fireInstance.transform.position = hitPosition; // Position exacte du Raycast
+            fireInstance.transform.rotation = Quaternion.identity;
+            fireInstance.transform.SetParent(parentTransform); // Devient un enfant de l'objet touché
+            fireInstance.transform.localScale = Vector3.zero; // Démarre à une taille nulle
+
+            StartCoroutine(GrowFire(fireInstance)); // Lance l'animation d'agrandissement
+            StartCoroutine(ExtinguishFire(fireInstance)); // Commence le compte à rebours pour éteindre
+            StartCoroutine(SpreadFire(parentTransform)); // Lance la propagation après un délai
+        }
+    }
+
+
+
+
+    public void StopFire(GameObject fire)
+    {
+        fire.SetActive(false);
+        firePool.Enqueue(fire);
+    }
+
+    private IEnumerator SpreadFire(Transform originObject)
+    {
+        yield return new WaitForSeconds(3f);
+
+        Collider[] nearbyObjects = Physics.OverlapSphere(originObject.position, 3f); // RAYON DE RECHERCHE POUR LA PROPAGATION DU FEUX
+        foreach (Collider col in nearbyObjects)
+        {
+            Interactible interactible = col.GetComponent<Interactible>();
+            if (interactible != null && !interactible.isBurning && interactible.ForFlame)
+            {
+                interactible.isBurning = true;
+                interactible.StartFire(interactible.transform.position, interactible.transform);
+            }
+        }
+    }
+
+
+    private IEnumerator ExtinguishFire(GameObject fire)
+    {
+        float duration = 13f;
+        float elapsed = 0f;
+        Vector3 initialScale = fire.transform.localScale;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float scaleMultiplier = Mathf.Lerp(1f, 0f, elapsed / duration);
+            fire.transform.localScale = initialScale * scaleMultiplier;
+            yield return null;
+        }
+
+        StopFire(fire);
+    }
+
+   private IEnumerator GrowFire(GameObject fire)
+    {
+        float duration = 2f;
+        float elapsedTime = 0f;
+        Vector3 initialScale = Vector3.zero;
+        Vector3 finalScale = new Vector3(30f, 30f, 30f);
+
+        fire.transform.localScale = initialScale;
+        fire.SetActive(true); 
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / duration;
+            fire.transform.localScale = Vector3.Lerp(initialScale, finalScale, progress);
+            yield return null;
+        }
+
+        fire.transform.localScale = finalScale; 
+    }
+
+
 }
