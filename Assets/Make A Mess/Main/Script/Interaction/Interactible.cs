@@ -131,6 +131,8 @@ public class Interactible : MonoBehaviour
 
         AudioManager audio = AudioManager.Instance;
 
+        firePrefab = GameObject.Find("FirePrefab");
+
         // Initialisation du pool FIRE 
         for (int i = 0; i < poolSize; i++)
         {
@@ -571,7 +573,7 @@ void AttackRayCast()
             if (interactible != null && interactible.ForFlame && !interactible.isBurning)
             {
                 interactible.isBurning = true;
-                interactible.StartFire(hit.point, interactible.transform); // Passe la position du Raycast et l'objet parent
+                interactible.StartFire(hit.point, interactible.transform);
             }
         }
     }
@@ -583,14 +585,15 @@ void AttackRayCast()
         
         if (fireInstance != null)
         {
-            fireInstance.transform.position = hitPosition; // Position exacte du Raycast
+            fireInstance.transform.position = hitPosition;
             fireInstance.transform.rotation = Quaternion.identity;
-            fireInstance.transform.SetParent(parentTransform); // Devient un enfant de l'objet touché
-            fireInstance.transform.localScale = Vector3.zero; // Démarre à une taille nulle
+            fireInstance.transform.SetParent(parentTransform);
+            fireInstance.transform.localScale = Vector3.zero;
 
-            StartCoroutine(GrowFire(fireInstance)); // Lance l'animation d'agrandissement
-            StartCoroutine(ExtinguishFire(fireInstance)); // Commence le compte à rebours pour éteindre
-            StartCoroutine(SpreadFire(parentTransform)); // Lance la propagation après un délai
+            StartCoroutine(GrowFire(fireInstance));
+            StartCoroutine(ExtinguishFire(fireInstance));
+            StartCoroutine(SpreadFire(parentTransform));
+            StartCoroutine(AddScoreOverTime(fireInstance));
         }
     }
 
@@ -658,5 +661,14 @@ void AttackRayCast()
         fire.transform.localScale = finalScale; 
     }
 
-
+    private IEnumerator AddScoreOverTime(GameObject fire)
+    {
+        ScorringManager scoreManager = Camera.main.GetComponent<ScorringManager>();
+        
+        while (fire.activeSelf)
+        {
+            scoreManager.AddScore(1);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
 }

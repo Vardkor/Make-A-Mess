@@ -7,7 +7,6 @@ public class Vitre : MonoBehaviour
     [SerializeField] GameObject vitrepascasser;
     [SerializeField] GameObject vitrecasser;
     BoxCollider bc;
-    //[SerializeField] Scorring scorring;
 
 
     private void Awake()
@@ -29,10 +28,5 @@ public class Vitre : MonoBehaviour
         vitrecasser.SetActive(true);
         bc.enabled = false;
 
-    }
-
-    public void Score()
-    {
-        //Camera.main.GetComponent<ScorringManager>().AddScore(scorePerObject);
     }
 }    
