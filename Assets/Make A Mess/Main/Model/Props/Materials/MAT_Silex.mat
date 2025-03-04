@@ -120,7 +120,7 @@ Material:
     - _Parallax: 0.005
     - _PureShadowColor: 0
     - _QueueOffset: 0
-    - _Ramp0: 0
+    - _Ramp0: 0.55
     - _Ramp1: 0.5
     - _RampSmoothness: 0.005
     - _RampTriple: 0
@@ -145,7 +145,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
+    - _BaseColor: {r: 0.21698111, g: 0.21595761, b: 0.21595761, a: 1}
     - _Color: {r: 0.6698113, g: 0.4082789, b: 0.022116425, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
