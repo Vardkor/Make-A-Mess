@@ -162,7 +162,7 @@ public class Timer : MonoBehaviour
 
         if (winScoreText != null)
         {
-            winScoreText.text = "Your Score: " + currentScore;
+            winScoreText.text = "Your Score: " + currentScore + "$";
         }
         }
     }

@@ -833,7 +833,7 @@ Transform:
   m_Children:
   - {fileID: 3794611721732434246}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 77.695}
 --- !u!33 &936724148005187108
 MeshFilter:
@@ -925,24 +925,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 4
-  itemflame: 0
   Grabed: 0
   SpecialObject: 0
+  ForFlame: 0
   bObjectCassable: 1
+  firePrefab: {fileID: 0}
+  isBurning: 0
+  poolSize: 10
   canAttack: 1
   Attacking: 0
   attackLayer:
     serializedVersion: 2
     m_Bits: 0
-  hitSound: {fileID: 0}
-  AttackSwing: {fileID: 0}
-  ThrowItemSound: {fileID: 0}
-  GrabItemSound: {fileID: 0}
-  animatorscript: {fileID: 0}
   hitObject: {fileID: 0}
   CurrentScore: 0
-  scorePerObject: 50
-  CollectibleCollected: 0
+  scorePerObject: 150
+  CollectItemParticles: {fileID: 0}
+  ExitMusee: 0
 --- !u!65 &5676658595557652998
 BoxCollider:
   m_ObjectHideFlags: 0

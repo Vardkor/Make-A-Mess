@@ -3003,24 +3003,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 8
-  itemflame: 0
   Grabed: 0
   SpecialObject: 0
+  ForFlame: 0
   bObjectCassable: 1
+  firePrefab: {fileID: 0}
+  isBurning: 0
+  poolSize: 10
   canAttack: 1
   Attacking: 0
   attackLayer:
     serializedVersion: 2
     m_Bits: 0
-  hitSound: {fileID: 0}
-  AttackSwing: {fileID: 0}
-  ThrowItemSound: {fileID: 0}
-  GrabItemSound: {fileID: 0}
-  animatorscript: {fileID: 0}
   hitObject: {fileID: 0}
   CurrentScore: 0
-  scorePerObject: 20
-  CollectibleCollected: 0
+  scorePerObject: 50
+  CollectItemParticles: {fileID: 0}
+  ExitMusee: 0
 --- !u!1 &2283147569068285377
 GameObject:
   m_ObjectHideFlags: 0
@@ -5374,24 +5373,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 8
-  itemflame: 0
   Grabed: 0
   SpecialObject: 0
+  ForFlame: 0
   bObjectCassable: 1
+  firePrefab: {fileID: 0}
+  isBurning: 0
+  poolSize: 10
   canAttack: 1
   Attacking: 0
   attackLayer:
     serializedVersion: 2
     m_Bits: 0
-  hitSound: {fileID: 0}
-  AttackSwing: {fileID: 0}
-  ThrowItemSound: {fileID: 0}
-  GrabItemSound: {fileID: 0}
-  animatorscript: {fileID: 0}
   hitObject: {fileID: 0}
   CurrentScore: 0
-  scorePerObject: 20
-  CollectibleCollected: 0
+  scorePerObject: 50
+  CollectItemParticles: {fileID: 0}
+  ExitMusee: 0
 --- !u!1 &4604404047926936610
 GameObject:
   m_ObjectHideFlags: 0
@@ -6177,24 +6175,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 8
-  itemflame: 0
   Grabed: 0
   SpecialObject: 0
+  ForFlame: 0
   bObjectCassable: 1
+  firePrefab: {fileID: 0}
+  isBurning: 0
+  poolSize: 10
   canAttack: 1
   Attacking: 0
   attackLayer:
     serializedVersion: 2
     m_Bits: 0
-  hitSound: {fileID: 0}
-  AttackSwing: {fileID: 0}
-  ThrowItemSound: {fileID: 0}
-  GrabItemSound: {fileID: 0}
-  animatorscript: {fileID: 0}
   hitObject: {fileID: 0}
   CurrentScore: 0
-  scorePerObject: 20
-  CollectibleCollected: 0
+  scorePerObject: 50
+  CollectItemParticles: {fileID: 0}
+  ExitMusee: 0
 --- !u!1 &5077143213826617512
 GameObject:
   m_ObjectHideFlags: 0
@@ -9247,24 +9244,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 8
-  itemflame: 0
   Grabed: 0
   SpecialObject: 0
+  ForFlame: 0
   bObjectCassable: 1
+  firePrefab: {fileID: 0}
+  isBurning: 0
+  poolSize: 10
   canAttack: 1
   Attacking: 0
   attackLayer:
     serializedVersion: 2
     m_Bits: 0
-  hitSound: {fileID: 0}
-  AttackSwing: {fileID: 0}
-  ThrowItemSound: {fileID: 0}
-  GrabItemSound: {fileID: 0}
-  animatorscript: {fileID: 0}
   hitObject: {fileID: 0}
   CurrentScore: 0
-  scorePerObject: 20
-  CollectibleCollected: 0
+  scorePerObject: 50
+  CollectItemParticles: {fileID: 0}
+  ExitMusee: 0
 --- !u!1 &7856872426688279606
 GameObject:
   m_ObjectHideFlags: 0
@@ -9385,24 +9381,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 8
-  itemflame: 0
   Grabed: 0
   SpecialObject: 0
+  ForFlame: 0
   bObjectCassable: 1
+  firePrefab: {fileID: 0}
+  isBurning: 0
+  poolSize: 10
   canAttack: 1
   Attacking: 0
   attackLayer:
     serializedVersion: 2
     m_Bits: 0
-  hitSound: {fileID: 0}
-  AttackSwing: {fileID: 0}
-  ThrowItemSound: {fileID: 0}
-  GrabItemSound: {fileID: 0}
-  animatorscript: {fileID: 0}
   hitObject: {fileID: 0}
   CurrentScore: 0
-  scorePerObject: 20
-  CollectibleCollected: 0
+  scorePerObject: 50
+  CollectItemParticles: {fileID: 0}
+  ExitMusee: 0
 --- !u!1 &7885954765361995097
 GameObject:
   m_ObjectHideFlags: 0
