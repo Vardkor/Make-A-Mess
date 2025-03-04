@@ -1,34 +1,49 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuPC : MonoBehaviour
 {
     [SerializeField] GameObject PauseMenu;
     [SerializeField] GameObject NotifUIPC;
-
-    //public GameObject NotifPc;
+    [SerializeField] GameObject LoadingScreen;
+    [SerializeField] Slider LoadingBar;
 
     public AudioSource OpenPcSFX;
     public AudioSource PhockSFXSong;
-
-    public bool OpenUI=false;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-    }
-    void Update()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        LoadingScreen.SetActive(false);
     }
 
     public void Resume()
     {
-        SceneManager.LoadScene("Level");
+        StartCoroutine(LoadLevel());
+    }
+
+    IEnumerator LoadLevel()
+    {
+        LoadingScreen.SetActive(true);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Level");
+        operation.allowSceneActivation = false;
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            LoadingBar.value = progress;
+
+            if (operation.progress >= 0.9f)
+            {
+                yield return new WaitForSeconds(1f);
+                operation.allowSceneActivation = true;
+            }
+            yield return null;
+        }
     }
 
     public void PhockSong()

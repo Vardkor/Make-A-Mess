@@ -670,7 +670,11 @@ MonoBehaviour:
   itemType: 4
   Grabed: 0
   SpecialObject: 0
+  ForFlame: 0
   bObjectCassable: 1
+  firePrefab: {fileID: 0}
+  isBurning: 0
+  poolSize: 10
   canAttack: 1
   Attacking: 0
   attackLayer:
@@ -678,7 +682,7 @@ MonoBehaviour:
     m_Bits: 0
   hitObject: {fileID: 0}
   CurrentScore: 0
-  scorePerObject: 50
+  scorePerObject: 1002
   CollectItemParticles: {fileID: 0}
   ExitMusee: 0
 --- !u!65 &5487013817523675049

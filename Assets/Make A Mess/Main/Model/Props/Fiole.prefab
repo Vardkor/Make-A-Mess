@@ -549,7 +549,7 @@ MonoBehaviour:
     m_Bits: 0
   hitObject: {fileID: 0}
   CurrentScore: 0
-  scorePerObject: 0
+  scorePerObject: 590
   CollectItemParticles: {fileID: 0}
   ExitMusee: 0
 --- !u!65 &6905551979829915957
